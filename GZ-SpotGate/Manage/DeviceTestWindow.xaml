@@ -1,0 +1,58 @@
+﻿<Window x:Class="GZ_SpotGate.Manage.DeviceTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:GZ_SpotGate.Manage"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="设备测试"
+        Width="700"
+        Height="400"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="24" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Label Content="串口：" />
+                <ComboBox Name="cmbPort" Width="100" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Label Content="设备类型：" />
+                <ComboBox Name="cmbType" Width="100">
+                    <ComboBoxItem Content="二维码" IsSelected="True" />
+                    <ComboBoxItem Content="身份证" />
+                    <ComboBoxItem Content="IC卡" />
+                    <ComboBoxItem Content="门票识别码" />
+                </ComboBox>
+            </StackPanel>
+
+            <Button Grid.Column="2"
+                    Width="80"
+                    VerticalAlignment="Center"
+                    Click="Button_Click"
+                    Content="打开" />
+        </Grid>
+
+    </Grid>
+</Window>

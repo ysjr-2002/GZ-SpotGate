@@ -33,21 +33,27 @@ namespace GZ_SpotGate.Core
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = contentBuffer.Length;
 
-            var requestStream = await request.GetRequestStreamAsync();
-
-            await requestStream.WriteAsync(contentBuffer, 0, contentBuffer.Length);
-            requestStream.Close();
-
-            var response = await request.GetResponseAsync();
-            var responseStr = "";
-            using (var responseStream = response.GetResponseStream())
+            try
             {
-                using (var reader = new System.IO.StreamReader(responseStream, Encoding.UTF8))
+                var requestStream = await request.GetRequestStreamAsync();
+                await requestStream.WriteAsync(contentBuffer, 0, contentBuffer.Length);
+                requestStream.Close();
+
+                var response = await request.GetResponseAsync();
+                var responseStr = "";
+                using (var responseStream = response.GetResponseStream())
                 {
-                    responseStr = await reader.ReadToEndAsync();
+                    using (var reader = new System.IO.StreamReader(responseStream, Encoding.UTF8))
+                    {
+                        responseStr = await reader.ReadToEndAsync();
+                    }
                 }
+                return responseStr;
             }
-            return responseStr;
+            catch (Exception)
+            {
+                return string.Empty;
+            }
         }
     }
 }

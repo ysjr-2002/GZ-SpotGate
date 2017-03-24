@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GZ_SpotGate.Manage;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,11 @@ namespace GZ_SpotGate
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var window = new DeviceTestWindow();
+            window.ShowDialog();
+            base.OnStartup(e);
+        }
     }
 }

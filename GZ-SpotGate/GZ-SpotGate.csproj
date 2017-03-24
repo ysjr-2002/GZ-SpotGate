@@ -56,6 +56,12 @@
     </ApplicationDefinition>
     <Compile Include="Core\Util.cs" />
     <Compile Include="Core\WebRequest.cs" />
+    <Compile Include="Manage\ChannelWindow.xaml.cs">
+      <DependentUpon>ChannelWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\DeviceTestWindow.xaml.cs">
+      <DependentUpon>DeviceTestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XmlParser\Define.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -69,6 +75,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Manage\ChannelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manage\DeviceTestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -99,7 +113,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="XMLFile1.xml" />
+    <Folder Include="CommServer\" />
+    <Folder Include="Device\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

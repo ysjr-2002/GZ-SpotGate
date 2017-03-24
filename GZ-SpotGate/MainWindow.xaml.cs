@@ -31,6 +31,11 @@ namespace GZ_SpotGate
         {
             var request = new Request();
             var content = await request.CheckIn(XmlParser.CheckIntype.BarCode, "123456");
+            if (string.IsNullOrEmpty(content))
+            {
+                MessageBox.Show("获取数据失败");
+                return;
+            }
             Define.Parse(content);
         }
     }
