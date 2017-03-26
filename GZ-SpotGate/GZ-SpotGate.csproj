@@ -54,8 +54,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\ChannelController.cs" />
+    <Compile Include="Core\ComServer.cs" />
+    <Compile Include="Core\Config.cs" />
+    <Compile Include="Core\DataEventArgs.cs" />
+    <Compile Include="Core\MainController.cs" />
     <Compile Include="Core\Util.cs" />
     <Compile Include="Core\WebRequest.cs" />
+    <Compile Include="Core\FaceSocket.cs" />
     <Compile Include="Manage\ChannelWindow.xaml.cs">
       <DependentUpon>ChannelWindow.xaml</DependentUpon>
     </Compile>

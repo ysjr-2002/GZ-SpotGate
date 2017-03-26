@@ -22,7 +22,7 @@ namespace GZ_SpotGate.Core
 
         public static byte[] ToData(this string content)
         {
-            return System.Text.Encoding.UTF8.GetBytes(content);
+            return Encoding.UTF8.GetBytes(content);
         }
     }
 }

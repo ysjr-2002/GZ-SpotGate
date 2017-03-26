@@ -47,7 +47,8 @@
                 </ComboBox>
             </StackPanel>
 
-            <Button Grid.Column="2"
+            <Button Name="btnOpen"
+                    Grid.Column="2"
                     Width="80"
                     VerticalAlignment="Center"
                     Click="Button_Click"

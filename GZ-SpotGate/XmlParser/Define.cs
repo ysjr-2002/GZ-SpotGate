@@ -35,6 +35,7 @@ namespace GZ_SpotGate.XmlParser
         BarCode = 1,
         ID = 2,
         IC = 3,
-        Ticket = 4
+        Ticket = 4,
+        Face = 5
     }
 }
