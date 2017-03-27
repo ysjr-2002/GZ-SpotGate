@@ -2,6 +2,7 @@
 using GZ_SpotGate.XmlParser;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,34 @@ namespace GZ_SpotGate
                 return;
             }
             Define.Parse(content);
+        }
+
+        private async void Test()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            await test();
+            Debug.WriteLine("hz:are you ok?");
+            btnawait.Content = "execute ok";
+            List<string> list = new List<string>();
+            list.AsParallel();
+        }
+
+        private Task test()
+        {
+            //Task.Factory.StartNew(() =>
+            //{
+            //    Debug.WriteLine("hz:write");
+            //});
+            var task = new Task(() =>
+            {
+                Debug.WriteLine("hz:execute");
+            });
+            return task;
+        }
+
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            Test();
         }
     }
 }

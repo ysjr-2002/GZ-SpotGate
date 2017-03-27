@@ -11,12 +11,17 @@
         mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0"
                 Click="Button_Click"
                 Content="request" />
+
+        <Button Name="btnawait"
+                Grid.Row="1"
+                Click="Button1_Click"
+                Content="await" />
     </Grid>
 </Window>
