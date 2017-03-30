@@ -66,6 +66,7 @@
     <Compile Include="Core\DataEventArgs.cs" />
     <Compile Include="Core\FaceRecognized.cs" />
     <Compile Include="Core\MainController.cs" />
+    <Compile Include="Core\MegviiGate.cs" />
     <Compile Include="Core\RecognizeState.cs" />
     <Compile Include="Core\Util.cs" />
     <Compile Include="Core\WebRequest.cs" />
