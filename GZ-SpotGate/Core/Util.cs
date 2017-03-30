@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace GZ_SpotGate.Core
 {
@@ -23,6 +24,13 @@ namespace GZ_SpotGate.Core
         public static byte[] ToData(this string content)
         {
             return Encoding.UTF8.GetBytes(content);
+        }
+
+        public static T Deserlizer<T>(this string content)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var entity = serializer.Deserialize<T>(content);
+            return entity;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,9 +64,40 @@ namespace GZ_SpotGate
             return task;
         }
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
+        private async void Button1_Click(object sender, RoutedEventArgs e)
         {
-            Test();
+            var task1 = Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine("task1");
+            });
+
+            var task2 = Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine("task2");
+            });
+
+            var task3 = Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(5000);
+                Console.WriteLine("task3");
+            });
+            //Task.WaitAll(task1, task2, task3);
+            await Task.WhenAll(task1, task2, task3);
+            Console.WriteLine("task over");
+        }
+
+        private ComServer server = null;
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {
+            server = new ComServer(9876);
+            server.Start();
+        }
+
+        private void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            server.Stop();
         }
     }
 }

@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -44,6 +45,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -55,10 +60,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\ChannelController.cs" />
+    <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ComServer.cs" />
     <Compile Include="Core\Config.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
+    <Compile Include="Core\FaceRecognized.cs" />
     <Compile Include="Core\MainController.cs" />
+    <Compile Include="Core\RecognizeState.cs" />
     <Compile Include="Core\Util.cs" />
     <Compile Include="Core\WebRequest.cs" />
     <Compile Include="Core\FaceSocket.cs" />
@@ -109,6 +117,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="document\接口.docx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,6 +130,9 @@
   <ItemGroup>
     <Folder Include="CommServer\" />
     <Folder Include="Device\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="document\remark.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

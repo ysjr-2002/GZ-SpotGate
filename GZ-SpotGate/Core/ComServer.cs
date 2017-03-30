@@ -12,10 +12,7 @@ namespace GZ_SpotGate.Core
     class ComServer
     {
         private int port = 0;
-        private bool isRunning = true;
         private UdpClient server = null;
-        private Thread workThread = null;
-        private IPEndPoint remoteEndPoint = null;
         public event EventHandler<DataEventArgs> OnMessageInComming;
 
         public ComServer(int port)
@@ -26,50 +23,32 @@ namespace GZ_SpotGate.Core
 
         public void Start()
         {
-            workThread = new Thread(Listen);
-            workThread.Start();
-            //LogHelper.Info("启动通讯服务->" + port);
+            server.BeginReceive(EndReceive, null);
         }
 
-        private void Listen()
+        private void EndReceive(IAsyncResult ir)
         {
-            while (isRunning)
+            var udp = ir.AsyncState as UdpClient;
+            IPEndPoint epSender = null;
+            if (server.Client != null)
             {
-                try
-                {
-                    var buffer = server.Receive(ref remoteEndPoint);
-                    var remoteIp = remoteEndPoint.Address.ToString();
-                    var data = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-                    ThreadPool.QueueUserWorkItem((s) =>
-                    {
-                        if (OnMessageInComming != null)
-                        {
-                            OnMessageInComming(this,
-                            new DataEventArgs
-                            {
-                                Ip = remoteIp,
-                                IsHeart = data.Length < 10,
-                                IsQrcode = data.Length > 10,
-                                Data = data
-                            });
-                        }
-                    });
-                }
-                catch
-                {
-                }
+                byte[] data = server.EndReceive(ir, ref epSender);
+                var txt = Encoding.UTF8.GetString(data);
+                Console.WriteLine("data coming->" + txt + " " + epSender + " " + Thread.CurrentThread.IsThreadPoolThread + " " + Thread.CurrentThread.ManagedThreadId);
+                server.BeginReceive(EndReceive, server);
+            }
+            else
+            {
+                Console.WriteLine("udp close");
             }
         }
 
         public void Stop()
         {
-            isRunning = false;
             if (server != null)
             {
                 server.Close();
             }
-            workThread?.Abort();
-            workThread = null;
         }
     }
 }
