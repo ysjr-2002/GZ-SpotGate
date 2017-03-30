@@ -24,9 +24,17 @@ namespace GZ_SpotGate
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainController _main = null;
         public MainWindow()
         {
             InitializeComponent();
+            _main = new MainController();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            _main.Start();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)

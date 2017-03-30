@@ -18,10 +18,24 @@ namespace GZ_SpotGate.Core
             _server = new ComServer(LISTEN_PORT);
             _server.OnMessageInComming += _server_OnMessageInComming;
             _server.Start();
+
+            ChannelController c = new ChannelController();
+            _channels.Add(c);
+
+            c.Init(new ChannelModel
+            {
+                FaceInIp = "192.168.1.116",
+                FaceInCameraIp = "192.168.1.116",
+
+                FaceOutIp = "192.168.1.116",
+                FaceOutCameraIp = "192.168.1.116",
+            });
         }
 
-        private void InitChannels()
+        private List<ChannelModel> GetChannelModels()
         {
+            List<ChannelModel> list = new List<ChannelModel>();
+            return list;
         }
 
         private void _server_OnMessageInComming(object sender, DataEventArgs e)

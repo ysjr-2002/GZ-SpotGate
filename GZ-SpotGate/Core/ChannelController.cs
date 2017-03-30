@@ -12,10 +12,7 @@ namespace GZ_SpotGate.Core
     /// </summary>
     class ChannelController
     {
-        private string InGateIp;
-        private string outGateIp;
-        private string InComIp;
-        private string OutComIp;
+        private ChannelModel _model = null;
 
         private FaceSocket _inFaceSocket = null;
         private FaceSocket _outFaceSocket = null;
@@ -24,14 +21,14 @@ namespace GZ_SpotGate.Core
 
         private IntentType _intentType = IntentType.In;
 
-        public async void Init()
+        public async void Init(ChannelModel model)
         {
             _request = new Request();
 
-            _inFaceSocket = new FaceSocket("", "", FaceIn);
+            _inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
             await _inFaceSocket.Connect();
 
-            _outFaceSocket = new FaceSocket("", "", FaceOut);
+            _outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
             await _outFaceSocket.Connect();
         }
 
@@ -56,12 +53,12 @@ namespace GZ_SpotGate.Core
 
         public bool ContainIp(string ip)
         {
-            if (InComIp == ip)
+            if (_model.ComInIp == ip)
             {
                 _intentType = IntentType.In;
                 return true;
             }
-            else if (OutComIp == ip)
+            else if (_model.ComOutIp == ip)
             {
                 _intentType = IntentType.Out;
                 return true;
