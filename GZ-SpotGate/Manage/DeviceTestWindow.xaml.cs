@@ -58,16 +58,28 @@ namespace GZ_SpotGate.Manage
 
         private void OpenPort()
         {
-            _port = new SerialPort(cmbPort.Text, 9600, Parity.None, 8, StopBits.None);
+            _port = new SerialPort(cmbPort.Text, 115200, Parity.None, 8, StopBits.One);
             try
             {
                 _port.Open();
                 _open = true;
+
+                Task.Run(() => { Read(); });
             }
             catch
             {
                 MessageBox.Show("串口打开失败");
                 _open = false;
+            }
+        }
+
+        private void Read()
+        {
+            while (true)
+            {
+                byte[] data = new byte[256];
+                var len = _port.Read(data, 0, data.Length);
+                var str = "";
             }
         }
 

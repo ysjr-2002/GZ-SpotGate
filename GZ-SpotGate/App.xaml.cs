@@ -16,7 +16,7 @@ namespace GZ_SpotGate
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var window = new MainWindow();
+            var window = new DeviceTestWindow();
             window.ShowDialog();
             base.OnStartup(e);
         }
