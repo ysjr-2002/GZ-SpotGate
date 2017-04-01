@@ -75,6 +75,9 @@
     <Compile Include="Core\Util.cs" />
     <Compile Include="Core\Request.cs" />
     <Compile Include="Core\FaceSocket.cs" />
+    <Compile Include="Manage\ChannelNew.xaml.cs">
+      <DependentUpon>ChannelNew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manage\ChannelWindow.xaml.cs">
       <DependentUpon>ChannelWindow.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Manage\ChannelNew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manage\ChannelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,7 +128,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="document\接口.docx" />
+    <None Include="Document\接口.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -137,7 +144,7 @@
     <Folder Include="Device\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="document\remark.txt" />
+    <Resource Include="Document\remark.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="log4.config">

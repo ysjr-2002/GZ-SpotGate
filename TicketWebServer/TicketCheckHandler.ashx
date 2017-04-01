@@ -4,10 +4,10 @@ using System;
 using System.Web;
 using System.Text;
 using System.IO;
+using System.Drawing;
 
 public class TicketCheckHandler : IHttpHandler
 {
-
     public void ProcessRequest(HttpContext context)
     {
         var request = context.Request;
@@ -22,8 +22,18 @@ public class TicketCheckHandler : IHttpHandler
             }
         }
 
-        var sign = request["sign"];
-        var method = request["method"];
+        var sign = request["api_key"];
+        var method = request["api_secret"];
+        var files = request.Files;
+
+
+        if (files.Count > 0)
+        {
+            var na = files.AllKeys[0];
+            var ct = files[0].ContentType;
+            var fn = files[0].FileName;
+            files[0].SaveAs("c:\\client.jpg");
+        }
 
         var responseStr = "<message>"
                    + "<errcode>3100</errcode>"

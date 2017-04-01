@@ -32,10 +32,21 @@ namespace GZ_SpotGate.XmlParser
 
     enum CheckIntype : int
     {
+        /// <summary>
+        /// 二维码
+        /// </summary>
         BarCode = 1,
+        /// <summary>
+        /// 身份证
+        /// </summary>
         ID = 2,
+        /// <summary>
+        /// IC卡(内部人员使用)
+        /// </summary>
         IC = 3,
-        Ticket = 4,
-        Face = 5
+        /// <summary>
+        /// 人脸
+        /// </summary>
+        Face = 4
     }
 }

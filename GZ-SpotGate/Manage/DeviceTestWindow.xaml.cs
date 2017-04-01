@@ -121,5 +121,11 @@ namespace GZ_SpotGate.Manage
         {
 
         }
+
+        private void Write(byte[] data)
+        {
+            _port.Write(string.Empty);
+            _port.Write(data, 0, data.Length);
+        }
     }
 }
