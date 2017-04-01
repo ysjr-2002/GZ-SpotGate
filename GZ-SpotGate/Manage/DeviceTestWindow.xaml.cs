@@ -73,16 +73,6 @@ namespace GZ_SpotGate.Manage
             }
         }
 
-        private void Read()
-        {
-            while (true)
-            {
-                byte[] data = new byte[256];
-                var len = _port.Read(data, 0, data.Length);
-                var str = "";
-            }
-        }
-
         private void ClosePort()
         {
             _running = false;
@@ -138,6 +128,82 @@ namespace GZ_SpotGate.Manage
         {
             _port.Write(string.Empty);
             _port.Write(data, 0, data.Length);
+        }
+
+
+        private void Test()
+        {
+            var data = new byte[] { 0x55, 0xAA, 0x21, 0x01, 0x00, 0x00 };
+            var sum = getSumCheck(data);
+            var sumHex = sum.ToString("X2");
+        }
+
+        private void btnOpenSerial_Click(object sender, RoutedEventArgs e)
+        {
+            Test();
+            return;
+
+            _port = new SerialPort(cmbPort.Text, 115200, Parity.None, 8, StopBits.One);
+            try
+            {
+                _port.Open();
+                _open = true;
+                Task.Run(() => { Read(); });
+            }
+            catch
+            {
+                MessageBox.Show("串口打开失败");
+                _open = false;
+            }
+        }
+
+        private void Read()
+        {
+            while (true)
+            {
+                byte[] data = new byte[256];
+                var len = _port.Read(data, 0, data.Length);
+                var str = "";
+            }
+        }
+
+        private byte getSumCheck(byte[] data)
+        {
+            byte sum = 0;
+            for (int i = 0; i < data.Length; i++)
+            {
+                sum = (byte)(sum ^ data[i]);
+            }
+            return sum;
+        }
+
+        private byte[] prefix = new byte[] { 0xAA, 0xAA, 0xAA, 0x96, 0x69 };
+        private bool FindID()
+        {
+            var len = new byte[] { 0x05, 0x00 };
+            var cmd = new byte[] { 0x20, 0x01 };
+
+            var data = new List<byte>();
+            data.AddRange(len);
+            data.AddRange(cmd);
+
+            var sum = getSumCheck(data.ToArray());
+
+            var total = new List<byte>();
+            total.AddRange(prefix);
+            total.AddRange(data);
+            total.Add(sum);
+
+            _port.Write(total.ToArray(), 0, total.Count);
+
+            //_port.Read();
+
+            return true;
+        }
+
+        private void SelectID()
+        {
+
         }
     }
 }

@@ -27,13 +27,10 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-
-
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <Label Content="中控身份证-&gt;" />
@@ -61,10 +58,9 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
@@ -87,7 +83,7 @@
                     Grid.Column="2"
                     Width="80"
                     VerticalAlignment="Center"
-                    Click="Button_Click"
+                    Click="btnOpenSerial_Click"
                     Content="打开" />
         </Grid>
 
