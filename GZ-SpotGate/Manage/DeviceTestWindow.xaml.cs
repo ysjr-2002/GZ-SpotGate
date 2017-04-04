@@ -1,8 +1,14 @@
-﻿using System;
+﻿using BJ_Benz.Code;
+using GZ_SpotGate.Core;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,9 +27,7 @@ namespace GZ_SpotGate.Manage
     public partial class DeviceTestWindow : Window
     {
         private int _dType = 0;
-        private SerialPort _port = null;
-        private bool _open = false;
-        private bool _running = false;
+
         public DeviceTestWindow()
         {
             InitializeComponent();
@@ -34,8 +38,10 @@ namespace GZ_SpotGate.Manage
         {
             var ports = SerialPort.GetPortNames();
             cmbPort.ItemsSource = ports;
-            cmbPort.SelectedIndex = 0;
+            cmbPort.SelectedIndex = 1;
         }
+
+        private IReader reader = null;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,41 +49,27 @@ namespace GZ_SpotGate.Manage
             {
                 return;
             }
-            _dType = cmbType.SelectedIndex;
-            if (!_open)
+
+            if (cmbType.SelectedIndex < 3)
             {
-                OpenPort();
-                btnOpen.Content = "关闭";
+                reader = new WGReader();
             }
             else
             {
-                ClosePort();
-                btnOpen.Content = "打开";
+                reader = new ZKIDReader();
             }
-        }
-
-        private void OpenPort()
-        {
-            _port = new SerialPort(cmbPort.Text, 115200, Parity.None, 8, StopBits.One);
+            reader.SetCallback(OnGetIDNO);
+            var _open = reader.OpenPort(cmbPort.Text);
             try
             {
-                _port.Open();
                 _open = true;
-
-                Task.Run(() => { Read(); });
+                btnOpen.IsEnabled = false;
             }
             catch
             {
                 MessageBox.Show("串口打开失败");
                 _open = false;
             }
-        }
-
-        private void ClosePort()
-        {
-            _running = false;
-            _port.Close();
-            _port = null;
         }
 
         private void ReadPort()
@@ -124,86 +116,12 @@ namespace GZ_SpotGate.Manage
 
         }
 
-        private void Write(byte[] data)
+        private void OnGetIDNO(string no)
         {
-            _port.Write(string.Empty);
-            _port.Write(data, 0, data.Length);
-        }
-
-
-        private void Test()
-        {
-            var data = new byte[] { 0x55, 0xAA, 0x21, 0x01, 0x00, 0x00 };
-            var sum = getSumCheck(data);
-            var sumHex = sum.ToString("X2");
-        }
-
-        private void btnOpenSerial_Click(object sender, RoutedEventArgs e)
-        {
-            Test();
-            return;
-
-            _port = new SerialPort(cmbPort.Text, 115200, Parity.None, 8, StopBits.One);
-            try
+            this.Dispatcher.Invoke(() =>
             {
-                _port.Open();
-                _open = true;
-                Task.Run(() => { Read(); });
-            }
-            catch
-            {
-                MessageBox.Show("串口打开失败");
-                _open = false;
-            }
-        }
-
-        private void Read()
-        {
-            while (true)
-            {
-                byte[] data = new byte[256];
-                var len = _port.Read(data, 0, data.Length);
-                var str = "";
-            }
-        }
-
-        private byte getSumCheck(byte[] data)
-        {
-            byte sum = 0;
-            for (int i = 0; i < data.Length; i++)
-            {
-                sum = (byte)(sum ^ data[i]);
-            }
-            return sum;
-        }
-
-        private byte[] prefix = new byte[] { 0xAA, 0xAA, 0xAA, 0x96, 0x69 };
-        private bool FindID()
-        {
-            var len = new byte[] { 0x05, 0x00 };
-            var cmd = new byte[] { 0x20, 0x01 };
-
-            var data = new List<byte>();
-            data.AddRange(len);
-            data.AddRange(cmd);
-
-            var sum = getSumCheck(data.ToArray());
-
-            var total = new List<byte>();
-            total.AddRange(prefix);
-            total.AddRange(data);
-            total.Add(sum);
-
-            _port.Write(total.ToArray(), 0, total.Count);
-
-            //_port.Read();
-
-            return true;
-        }
-
-        private void SelectID()
-        {
-
+                lblContent.Content = no;
+            });
         }
     }
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--自定义标题-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <TextView
+            android:text="..."
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/settingTextView"
+            android:gravity="center_horizontal|center_vertical"
+            android:clickable="true"
+            android:paddingRight="12dp" />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvWelcome"
+                    android:layout_weight="2"
+                    android:textSize="60sp"
+                    android:textColor="@color/face"
+                    android:gravity="center_horizontal|center_vertical" />
+                <TextView
+                    android:text="17:00:00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvTime"
+                    android:textColor="@color/face"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    android:paddingTop="48dp"
+                    android:textSize="48sp" />
+                <TextView
+                    android:textColor="@color/face"
+                    android:text="奥比岛技术有限公司-人脸可视化-V1.0.0.0"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView3"
+                    android:gravity="right" />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/alter"
+                android:background="@drawable/popupbg"
+                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+                <ImageView
+                    android:id="@+id/faceImage"
+                    android:layout_marginTop="48dp"
+                    android:layout_width="360dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center_horizontal" />
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:id="@+id/tvWecomeEmp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/face"
+                    android:textSize="32sp" />
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:id="@+id/tvName"
+                    android:textColor="@color/face"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="12dp"
+                    android:textSize="64sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

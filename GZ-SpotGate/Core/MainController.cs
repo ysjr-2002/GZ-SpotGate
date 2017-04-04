@@ -1,4 +1,6 @@
-﻿using GZ_SpotGate.XmlParser;
+﻿using GZ_SpotGate.Tcp;
+using GZ_SpotGate.WS;
+using GZ_SpotGate.XmlParser;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -17,28 +19,35 @@ namespace GZ_SpotGate.Core
     /// </summary>
     class MainController
     {
-        private ComServer _server = null;
-        private const int LISTEN_PORT = 9876;
+        private readonly ILog log = LogManager.GetLogger("MainController");
+        private readonly int UDP_COM_SERVER_PORT = 0;
+        private readonly int TCP_COM_SERVER_PORT = 0;
+        private readonly int WEB_SERVER_PORT = 0;
+
+        private UdpComServer _udpServer = null;
+        private TcpComServer _tcpServer = null;
+        private WebServer _webServer = null;
         private List<ChannelController> _channels = new List<ChannelController>();
 
-        private ILog log = null;
         public MainController()
         {
-            var name = this.GetType().FullName;
-            log = log4net.LogManager.GetLogger(name);
+            UDP_COM_SERVER_PORT = ConfigProfile.Current.UdpComListenPort;
+            TCP_COM_SERVER_PORT = ConfigProfile.Current.TcpComListenPort;
+            WEB_SERVER_PORT = ConfigProfile.Current.WebSocketListenPort;
         }
 
         public async void Start()
         {
-            log.Debug("debug");
-            log.Info("MainController start");
-            log.Warn("warn");
-            log.Error("error");
-            log.Fatal("fatal");
+            _udpServer = new UdpComServer(UDP_COM_SERVER_PORT);
+            _udpServer.OnMessageInComming += ComServer_OnMessageInComming;
+            _udpServer.Start();
 
-            _server = new ComServer(LISTEN_PORT);
-            _server.OnMessageInComming += _server_OnMessageInComming;
-            _server.Start();
+            _tcpServer = new TcpComServer(TCP_COM_SERVER_PORT);
+            _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
+            _tcpServer.Start();
+
+            _webServer = new WebServer(WEB_SERVER_PORT);
+            _webServer.Start();
 
             ChannelController c = new ChannelController();
             _channels.Add(c);
@@ -59,7 +68,7 @@ namespace GZ_SpotGate.Core
             return list;
         }
 
-        private void _server_OnMessageInComming(object sender, DataEventArgs e)
+        private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
         {
             var epSendIp = e.Ip;
             ChannelController channlController = null;
@@ -73,12 +82,21 @@ namespace GZ_SpotGate.Core
             }
 
             if (channlController != null)
-                Task.Run(() => channlController.Work(CheckIntype.IC, e.Data));
+            {
+                CheckIntype inType = CheckIntype.BarCode;
+                if (e.QRData)
+                    inType = CheckIntype.BarCode;
+                if (e.ICData)
+                    inType = CheckIntype.IC;
+                Task.Run(() => channlController.Work(inType, e.Data));
+            }
         }
 
         public void Dispose()
         {
-            _server.Stop();
+            _udpServer.Stop();
+            _tcpServer.Stop();
+            _webServer.Stop();
             foreach (var channel in _channels)
             {
                 channel.Stop();

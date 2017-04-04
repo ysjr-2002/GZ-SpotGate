@@ -96,10 +96,10 @@ namespace GZ_SpotGate
             Console.WriteLine("task over");
         }
 
-        private ComServer server = null;
+        private UdpComServer server = null;
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            server = new ComServer(9876);
+            server = new UdpComServer(9876);
             server.Start();
         }
 

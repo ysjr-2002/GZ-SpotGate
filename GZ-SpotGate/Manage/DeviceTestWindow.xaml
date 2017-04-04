@@ -21,7 +21,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -33,7 +32,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Label Content="中控身份证-&gt;" />
+                <Label Content="" />
                 <Label Content="串口：" />
                 <ComboBox Name="cmbPort" Width="100" />
             </StackPanel>
@@ -42,9 +41,9 @@
                 <Label Content="设备类型：" />
                 <ComboBox Name="cmbType" Width="100">
                     <ComboBoxItem Content="二维码" IsSelected="True" />
-                    <ComboBoxItem Content="身份证" />
                     <ComboBoxItem Content="IC卡" />
                     <ComboBoxItem Content="门票识别码" />
+                    <ComboBoxItem Content="身份证" />
                 </ComboBox>
             </StackPanel>
 
@@ -56,36 +55,11 @@
                     Content="打开" />
         </Grid>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Label Content="未名身份证-&gt;" />
-                <Label Content="串口：" />
-                <ComboBox Name="cmbPort1" Width="100" />
-            </StackPanel>
-
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Label Content="设备类型：" />
-                <ComboBox Name="cmbType1" Width="100">
-                    <ComboBoxItem Content="二维码" IsSelected="True" />
-                    <ComboBoxItem Content="身份证" />
-                    <ComboBoxItem Content="IC卡" />
-                    <ComboBoxItem Content="门票识别码" />
-                </ComboBox>
-            </StackPanel>
-
-            <Button Name="btnOpen1"
-                    Grid.Column="2"
-                    Width="80"
-                    VerticalAlignment="Center"
-                    Click="btnOpenSerial_Click"
-                    Content="打开" />
-        </Grid>
+        <Label Name="lblContent"
+               Grid.Row="1"
+               HorizontalContentAlignment="Center"
+               FontSize="30"
+               FontWeight="Bold" />
 
     </Grid>
 </Window>

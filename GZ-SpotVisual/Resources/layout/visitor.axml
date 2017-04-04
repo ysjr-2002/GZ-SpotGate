@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#242424"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FaceVisual.ImageViewPlus
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/faceImage"
+        android:layout_marginTop="24dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWecomeEmp"
+        android:textSize="24sp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="48dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvName"
+        android:textSize="48sp"
+        android:gravity="center_horizontal" />
+</LinearLayout>

@@ -1,4 +1,6 @@
-﻿using GZ_SpotGate.XmlParser;
+﻿using GZ_SpotGate.Face;
+using GZ_SpotGate.WS;
+using GZ_SpotGate.XmlParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,8 @@ namespace GZ_SpotGate.Core
 
         private IntentType _intentType = IntentType.In;
 
+        private WebServer _ws;
+
         public async void Init(ChannelModel model)
         {
             _request = new Request();
@@ -38,10 +42,12 @@ namespace GZ_SpotGate.Core
             if (_intentType == IntentType.In)
             {
                 //进入
+                _ws.Pass(_model.AndroidInIp, null);
             }
             else
             {
                 //离开
+                _ws.Pass(_model.AndroidOutIp, null);
             }
         }
 
@@ -53,16 +59,16 @@ namespace GZ_SpotGate.Core
 
         public bool ContainIp(string ip)
         {
-            if (_model.ComInIp == ip)
-            {
-                _intentType = IntentType.In;
-                return true;
-            }
-            else if (_model.ComOutIp == ip)
-            {
-                _intentType = IntentType.Out;
-                return true;
-            }
+            //if (_model.ComServerIp == ip)
+            //{
+            //    _intentType = IntentType.In;
+            //    return true;
+            //}
+            //else if (_model.ComOutIp == ip)
+            //{
+            //    _intentType = IntentType.Out;
+            //    return true;
+            //}
             return false;
         }
 

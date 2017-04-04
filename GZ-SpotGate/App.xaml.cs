@@ -1,9 +1,11 @@
-﻿using GZ_SpotGate.Manage;
+﻿using GZ_SpotGate.Core;
+using GZ_SpotGate.Manage;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -16,6 +18,8 @@ namespace GZ_SpotGate
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            ConfigProfile.Current.ReadConfig();
+
             var window = new DeviceTestWindow();
             window.ShowDialog();
             base.OnStartup(e);

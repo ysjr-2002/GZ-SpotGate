@@ -39,7 +39,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,16 +67,21 @@
     </ApplicationDefinition>
     <Compile Include="Core\ChannelController.cs" />
     <Compile Include="Core\ChannelModel.cs" />
-    <Compile Include="Core\ComServer.cs" />
-    <Compile Include="Core\Config.cs" />
+    <Compile Include="Core\ConfigProfile.cs" />
+    <Compile Include="Core\UdpComServer.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
-    <Compile Include="Core\FaceRecognized.cs" />
+    <Compile Include="Face\FaceRecognized.cs" />
+    <Compile Include="Core\IReader.cs" />
     <Compile Include="Core\MainController.cs" />
     <Compile Include="Core\MegviiGate.cs" />
     <Compile Include="Core\RecognizeState.cs" />
+    <Compile Include="Tcp\TcpConnection.cs" />
+    <Compile Include="Tcp\TcpComServer.cs" />
+    <Compile Include="Core\ZKIDReader.cs" />
     <Compile Include="Core\Util.cs" />
     <Compile Include="Core\Request.cs" />
-    <Compile Include="Core\FaceSocket.cs" />
+    <Compile Include="Face\FaceSocket.cs" />
+    <Compile Include="Core\WGReader.cs" />
     <Compile Include="Manage\ChannelNew.xaml.cs">
       <DependentUpon>ChannelNew.xaml</DependentUpon>
     </Compile>
@@ -84,6 +91,10 @@
     <Compile Include="Manage\DeviceTestWindow.xaml.cs">
       <DependentUpon>DeviceTestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tcp\TcpIDConnection.cs" />
+    <Compile Include="WS\AndroidBehavior.cs" />
+    <Compile Include="WS\AndroidMessage.cs" />
+    <Compile Include="WS\WebServer.cs" />
     <Compile Include="XmlParser\Define.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -128,7 +139,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Document\GA467-2013 居民身份证验证安全控制模块接口技术规范.pdf" />
     <None Include="Document\接口.docx" />
+    <None Include="Document\设备连接说明.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

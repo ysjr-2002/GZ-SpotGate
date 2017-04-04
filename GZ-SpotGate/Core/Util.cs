@@ -26,6 +26,13 @@ namespace GZ_SpotGate.Core
             return Encoding.UTF8.GetBytes(content);
         }
 
+        public static string toJson(object obj)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var json = js.Serialize(obj);
+            return json;
+        }
+
         public static T Deserlizer<T>(this string content)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();

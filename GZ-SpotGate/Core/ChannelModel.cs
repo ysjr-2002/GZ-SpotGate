@@ -8,9 +8,19 @@ namespace GZ_SpotGate.Core
 {
     class ChannelModel
     {
-        public string ComInIp { get; set; }
+        public string ComServerIp { get; set; }
 
-        public string ComOutIp { get; set; }
+        public byte InQRAdd { get; set; }
+
+        public byte InIDAdd { get; set; }
+
+        public byte OutQRAdd { get; set; }
+
+        public byte OutIDAdd { get; set; }
+
+        public string AndroidInIp { get; set; }
+
+        public string AndroidOutIp { get; set; }
 
         public string FaceInIp { get; set; }
 

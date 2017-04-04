@@ -1,11 +1,12 @@
-﻿using System;
+﻿using GZ_SpotGate.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebSocketSharp;
 
-namespace GZ_SpotGate.Core
+namespace GZ_SpotGate.Face
 {
     class FaceSocket
     {

@@ -10,9 +10,13 @@ namespace GZ_SpotGate.Core
     {
         public string Ip { get; set; }
 
-        public bool IsHeart { get; set; }
+        public bool ICData { get; set; }
 
-        public bool IsQrcode { get; set; }
+        public bool QRData { get; set; }
+
+        public bool IDData { get; set; }
+
+        public string Name { get; set; }
 
         public string Data { get; set; }
     }
