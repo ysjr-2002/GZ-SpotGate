@@ -24,6 +24,7 @@ namespace GZ_SpotGate.Core
         private IntentType _intentType = IntentType.In;
 
         private WebServer _ws;
+        private MegviiGate _megvii;
 
         public async void Init(ChannelModel model)
         {
@@ -84,6 +85,11 @@ namespace GZ_SpotGate.Core
             _intentType = IntentType.Out;
             var code = face.person.job_number;
             Work(CheckIntype.Face, code);
+        }
+
+        public void OpenGate()
+        {
+
         }
 
         public enum IntentType

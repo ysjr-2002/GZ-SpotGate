@@ -29,5 +29,7 @@ namespace GZ_SpotGate.Core
         public string FaceInCameraIp { get; set; }
 
         public string FaceOutCameraIp { get; set; }
+
+        public string MegviiIP { get; set; }
     }
 }
