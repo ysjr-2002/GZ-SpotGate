@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Threading;
+using Java.Net;
 
 namespace GZ_SpotVisual
 {
@@ -19,6 +20,7 @@ namespace GZ_SpotVisual
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             System.Threading.Tasks.Task.Factory.StartNew(new Action(() =>
             {
                 this.RunOnUiThread(new Action(() =>

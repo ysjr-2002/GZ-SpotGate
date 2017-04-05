@@ -1,5 +1,5 @@
 ﻿using BJ_Benz.Code;
-using GZ_SpotGate.Core;
+using GZ_SpotGate.Udp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -122,6 +122,20 @@ namespace GZ_SpotGate.Manage
             {
                 lblContent.Content = no;
             });
+        }
+
+        private void btnOpen1_Click(object sender, RoutedEventArgs e)
+        {
+            MegviiGate gate = new MegviiGate();
+            gate.In(txtIp.Text);
+            gate.Dispose();
+        }
+
+        private void btnOpen2_Click(object sender, RoutedEventArgs e)
+        {
+            MegviiGate gate = new MegviiGate();
+            gate.Out(txtIp.Text);
+            gate.Dispose();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Http;
 using GZ_SpotGate.XmlParser;
 
-namespace GZ_SpotGate.Core
+namespace GZ_SpotGate.Udp
 {
     class Request
     {

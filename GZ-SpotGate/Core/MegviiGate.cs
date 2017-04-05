@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Core
+namespace GZ_SpotGate.Udp
 {
     class MegviiGate
     {

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Core
+namespace GZ_SpotGate.Udp
 {
     /// <summary>
     /// DEBUG

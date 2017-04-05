@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Core
+namespace GZ_SpotGate.Udp
 {
     class UdpComServer
     {
@@ -34,21 +34,27 @@ namespace GZ_SpotGate.Core
 
         private void EndReceive(IAsyncResult ir)
         {
-            IPEndPoint epSender = null;
-            if (_server.Client != null)
+            try
             {
-                byte[] recBuffer = _server.EndReceive(ir, ref epSender);
-                BeginReceive();
-
-                var code = Encoding.UTF8.GetString(recBuffer);
-                DataEventArgs args = new DataEventArgs
+                IPEndPoint epSender = null;
+                if (_server.Client != null)
                 {
-                    Ip = epSender.Address.ToString(),
-                    Data = code
-                };
-                OnMessageInComming?.Invoke(null, args);
+                    byte[] recBuffer = _server.EndReceive(ir, ref epSender);
+                    BeginReceive();
+
+                    var code = Encoding.UTF8.GetString(recBuffer);
+                    DataEventArgs args = new DataEventArgs
+                    {
+                        Ip = epSender.Address.ToString(),
+                        Data = code
+                    };
+                    OnMessageInComming?.Invoke(null, args);
+                }
+                else
+                {
+                }
             }
-            else
+            catch (Exception)
             {
             }
         }

@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Core;
+﻿using GZ_SpotGate.Udp;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;

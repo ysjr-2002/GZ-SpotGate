@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Core;
+﻿using GZ_SpotGate.Udp;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -14,8 +14,9 @@ namespace GZ_SpotGate.WS
     {
         private int _port = 0;
         private WebSocketServer wssv = null;
-        private Dictionary<string, AndroidBehavior> androidClients = new Dictionary<string, AndroidBehavior>();
         private static readonly ILog log = LogManager.GetLogger("WebServer");
+
+        private const string SERVICE_PATH = "/android";
 
         public WebServer(int port)
         {
@@ -25,7 +26,7 @@ namespace GZ_SpotGate.WS
         public void Start()
         {
             wssv = new WebSocketServer(_port);
-            wssv.AddWebSocketService<AndroidBehavior>("/android", InitAndroid);
+            wssv.AddWebSocketService<AndroidBehavior>(SERVICE_PATH, InitAndroid);
             wssv.Start();
             if (wssv.IsListening)
             {
@@ -42,23 +43,25 @@ namespace GZ_SpotGate.WS
         private AndroidBehavior InitAndroid()
         {
             AndroidBehavior chat = new AndroidBehavior();
-            var ip = chat.Context.UserEndPoint.Address.ToString();
-            if (androidClients.ContainsKey(ip))
-                androidClients[ip] = chat;
-            else
-                androidClients.Add(ip, chat);
-
-            Debug("接收到客户端连接->" + ip);
+            Debug("接收到客户端连接->");
             return chat;
         }
 
         public void Pass(string androidClient, AndroidMessage message)
         {
-            if (androidClients.ContainsKey(androidClient))
+            WebSocketServiceHost host = null;
+            if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
             {
-                var json = Util.toJson(message);
-                androidClients[androidClient].Context.WebSocket.Send(json);
-                Debug("发送到Android客户端->" + androidClient);
+                foreach (var sID in host.Sessions.ActiveIDs)
+                {
+                    var userIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
+                    if (userIp == androidClient)
+                    {
+                        var json = Util.toJson(message);
+                        host.Sessions[sID].Context.WebSocket.Send(json);
+                        break;
+                    }
+                }
             }
         }
 
@@ -70,10 +73,6 @@ namespace GZ_SpotGate.WS
         public void Stop()
         {
             wssv?.Stop();
-            foreach (var item in androidClients)
-            {
-                item.Value.Context.WebSocket.Close();
-            }
         }
     }
 }

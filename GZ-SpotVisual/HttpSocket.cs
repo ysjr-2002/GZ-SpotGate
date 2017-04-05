@@ -27,6 +27,10 @@ namespace GZ_SpotVisual
             _activity = activity;
         }
 
+        public HttpSocket()
+        {
+        }
+
         public Task Connect(string koalaIp, string cameraIp)
         {
             return Task.Factory.StartNew(() =>
@@ -36,6 +40,7 @@ namespace GZ_SpotVisual
                 //var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?", cameraIp);
                 var rtspUrl = string.Format("rtsp://admin:admin123456@{0}/live1.sdp", cameraIp);
                 var url = string.Concat(wsUrl, "?url=", rtspUrl.UrlEncode());
+                url = "ws://192.168.1.116:4649/Echo?name=android";
                 socket = new WebSocket(url);
                 socket.OnOpen += Socket_OnOpen;
                 socket.OnError += Socket_OnError;
@@ -60,8 +65,9 @@ namespace GZ_SpotVisual
         {
             if (e.IsText)
             {
-                var entity = JsonConvert.DeserializeObject<AndroidMessage>(e.Data);
-                callback?.Invoke(entity);
+                Console.WriteLine(e.Data);
+                //var entity = JsonConvert.DeserializeObject<AndroidMessage>(e.Data);
+                //callback?.Invoke(entity);
             }
         }
 
@@ -80,6 +86,7 @@ namespace GZ_SpotVisual
         private void Socket_OnOpen(object sender, EventArgs e)
         {
             Dialog("WebSocket connect ok");
+            socket.Send("my name is android");
         }
 
         private void Dialog(string msg)

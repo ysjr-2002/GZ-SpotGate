@@ -21,6 +21,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -55,8 +56,28 @@
                     Content="打开" />
         </Grid>
 
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="继电器地址:" />
+            <TextBox Name="txtIp"
+                     Width="100"
+                     Height="24"
+                     VerticalContentAlignment="Center"
+                     Text="192.168.1.1" />
+            <Button Name="btnOpen1"
+                    Width="80"
+                    Height="24"
+                    Margin="5,5"
+                    Click="btnOpen1_Click"
+                    Content="开闸(进)" />
+            <Button Name="btnOpen2"
+                    Width="80"
+                    Height="24"
+                    Click="btnOpen2_Click"
+                    Content="开闸(出)" />
+        </StackPanel>
+
         <Label Name="lblContent"
-               Grid.Row="1"
+               Grid.Row="2"
                HorizontalContentAlignment="Center"
                FontSize="30"
                FontWeight="Bold" />

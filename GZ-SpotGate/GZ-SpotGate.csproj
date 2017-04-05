@@ -68,7 +68,7 @@
     <Compile Include="Core\ChannelController.cs" />
     <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ConfigProfile.cs" />
-    <Compile Include="Core\UdpComServer.cs" />
+    <Compile Include="Udp\UdpComServer.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
     <Compile Include="Face\FaceRecognized.cs" />
     <Compile Include="Core\IReader.cs" />
@@ -153,7 +153,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CommServer\" />
     <Folder Include="Device\" />
   </ItemGroup>
   <ItemGroup>

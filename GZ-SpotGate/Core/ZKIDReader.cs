@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Core
+namespace GZ_SpotGate.Udp
 {
     class ZKIDReader : IReader
     {
