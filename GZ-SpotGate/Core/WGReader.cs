@@ -41,7 +41,8 @@ namespace BJ_Benz.Code
                 byte b = 0;
                 try
                 {
-                    while ((b = (byte)_serialPort.ReadByte()) > 0)
+                    b = (byte)_serialPort.ReadByte();
+                    while (b > 0)
                     {
                         if (b == 13)
                         {

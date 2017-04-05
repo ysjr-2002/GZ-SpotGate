@@ -15,7 +15,7 @@ namespace GZ_SpotGate.Tcp
         private int _port = 0;
         private bool _stop = false;
         private TcpListener _tcpListener = null;
-        private Dictionary<string, TcpConnection> clientCollection = new Dictionary<string, TcpConnection>();
+        private Dictionary<string, TcpIDConnection> clientCollection = new Dictionary<string, TcpIDConnection>();
         public event EventHandler<DataEventArgs> OnMessageInComming;
 
         private static ILog log = LogManager.GetLogger("TcpComServer");
@@ -35,8 +35,9 @@ namespace GZ_SpotGate.Tcp
                 {
                     var tcpClient = await _tcpListener.AcceptTcpClientAsync();
                     var remoteAddress = ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address.ToString();
-                    TcpConnection tcpConnection = new TcpConnection(remoteAddress, tcpClient);
-                    tcpConnection.Work(AcceptData);
+                    TcpIDConnection tcpConnection = new TcpIDConnection(remoteAddress, tcpClient);
+                    tcpConnection.SetCallback(AcceptData);
+                    tcpConnection.Start();
                     clientCollection.Add(remoteAddress, tcpConnection);
                 }
                 catch (Exception ex)

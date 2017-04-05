@@ -137,5 +137,34 @@ namespace GZ_SpotGate.Manage
             gate.Out(txtIp.Text);
             gate.Dispose();
         }
+
+        private void btnOpenX_Click(object sender, RoutedEventArgs e)
+        {
+            Tcp.TcpComServer tcp = new Tcp.TcpComServer(9871);
+            tcp.OnMessageInComming += Tcp_OnMessageInComming;
+            tcp.Start();
+        }
+
+        private void Tcp_OnMessageInComming(object sender, DataEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                if( e.IDData)
+                {
+                    lblContent.Content = e.Data;
+                }
+            });
+        }
+
+        private void btnOpenU_Click(object sender, RoutedEventArgs e)
+        {
+            Udp.UdpComServer udp = new Udp.UdpComServer(9870);
+            udp.OnMessageInComming += Udp_OnMessageInComming;
+            udp.Start();
+        }
+
+        private void Udp_OnMessageInComming(object sender, DataEventArgs e)
+        {
+        }
     }
 }

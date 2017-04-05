@@ -30,6 +30,8 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
@@ -54,6 +56,20 @@
                     VerticalAlignment="Center"
                     Click="Button_Click"
                     Content="打开" />
+
+            <Button Name="btnOpenX"
+                    Grid.Column="3"
+                    Width="80"
+                    VerticalAlignment="Center"
+                    Click="btnOpenX_Click"
+                    Content="tcp服务器" />
+
+            <Button Name="btnOpenU"
+                    Grid.Column="4"
+                    Width="80"
+                    VerticalAlignment="Center"
+                    Click="btnOpenU_Click"
+                    Content="udp服务器" />
         </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -79,6 +95,7 @@
         <Label Name="lblContent"
                Grid.Row="2"
                HorizontalContentAlignment="Center"
+               Background="Red"
                FontSize="30"
                FontWeight="Bold" />
 

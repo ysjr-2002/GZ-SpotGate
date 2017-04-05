@@ -13,6 +13,7 @@ namespace GZ_SpotGate.Tcp
     class TcpIDConnection
     {
         private string _ip = "";
+        private bool _stop = false;
         private Thread _thread = null;
         private NetworkStream _nws = null;
         private Action<DataEventArgs> _callback;
@@ -32,6 +33,14 @@ namespace GZ_SpotGate.Tcp
             _thread.Start();
         }
 
+        public void Stop()
+        {
+            _stop = true;
+            _nws?.Close();
+            _thread.Join(1000);
+            _thread = null;
+        }
+
         public void SetCallback(Action<DataEventArgs> callback)
         {
             _callback = callback;
@@ -39,7 +48,7 @@ namespace GZ_SpotGate.Tcp
 
         private void Work()
         {
-            while (true)
+            while (!_stop)
             {
                 var find = FindID();
                 if (find)

@@ -16,13 +16,16 @@ namespace GZ_SpotVisual
             base.OnCreate(bundle);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.FaceMain);
+
+            var a = RequestedOrientation;
+            RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            HttpSocket hs = new HttpSocket(this);
-            hs.Connect("", "");
+            //HttpSocket hs = new HttpSocket(this);
+            //hs.Connect("", "");
         }
     }
 }
