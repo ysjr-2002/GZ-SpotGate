@@ -10,32 +10,54 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGate.Tcp
 {
-    class TcpIDConnection
+    internal class TcpIDConnection : ITcpConnection
     {
-        private string _ip = "";
-        private bool _stop = false;
+        private string _ipAddress = "";
+        private bool _running = false;
         private Thread _thread = null;
+        private TcpClient _tcp = null;
         private NetworkStream _nws = null;
         private Action<DataEventArgs> _callback;
 
         private const int CHECK_INTERVAL = 100;
         private static readonly byte[] prefix = new byte[] { 0xAA, 0xAA, 0xAA, 0x96, 0x69 };
 
-        public TcpIDConnection(string ip, TcpClient tcp)
+        public TcpClient Tcp
         {
-            _ip = ip;
+            get
+            {
+                return _tcp;
+            }
+        }
+
+        public bool Running
+        {
+            get
+            {
+                return _running;
+            }
+        }
+
+        public TcpIDConnection(string ipAddress, TcpClient tcp)
+        {
+            _ipAddress = ipAddress;
+            _tcp = tcp;
             _nws = tcp.GetStream();
         }
 
         public void Start()
         {
+            if (_running)
+                return;
+
+            _running = true;
             _thread = new Thread(Work);
             _thread.Start();
         }
 
         public void Stop()
         {
-            _stop = true;
+            _running = false;
             _nws?.Close();
             _thread.Join(1000);
             _thread = null;
@@ -48,7 +70,7 @@ namespace GZ_SpotGate.Tcp
 
         private void Work()
         {
-            while (!_stop)
+            while (_running)
             {
                 var find = FindID();
                 if (find)
@@ -87,36 +109,44 @@ namespace GZ_SpotGate.Tcp
             package.AddRange(prefix);
             package.AddRange(data);
             package.Add(xor);
-            _nws.Write(package.ToArray(), 0, package.Count);
 
-            byte b1 = (byte)_nws.ReadByte();
-            byte b2 = (byte)_nws.ReadByte();
-            byte b3 = (byte)_nws.ReadByte();
-            byte b4 = (byte)_nws.ReadByte();
-            byte b5 = (byte)_nws.ReadByte();
-
-            byte b6 = (byte)_nws.ReadByte();
-            byte b7 = (byte)_nws.ReadByte();
-
-            var i = 0;
-            List<byte> recBuffer = new List<byte>();
-            while (i < b7)
+            try
             {
-                byte b = (byte)_nws.ReadByte();
-                recBuffer.Add(b);
-                i++;
-            }
+                _nws.Write(package.ToArray(), 0, package.Count);
 
-            if (recBuffer[2] == 0x9f)
-            {
-                return true;
+                byte b1 = (byte)_nws.ReadByte();
+                byte b2 = (byte)_nws.ReadByte();
+                byte b3 = (byte)_nws.ReadByte();
+                byte b4 = (byte)_nws.ReadByte();
+                byte b5 = (byte)_nws.ReadByte();
+
+                byte b6 = (byte)_nws.ReadByte();
+                byte b7 = (byte)_nws.ReadByte();
+
+                var i = 0;
+                List<byte> recBuffer = new List<byte>();
+                while (i < b7)
+                {
+                    byte b = (byte)_nws.ReadByte();
+                    recBuffer.Add(b);
+                    i++;
+                }
+
+                if (recBuffer[2] == 0x9f)
+                {
+                    return true;
+                }
+                else if (recBuffer[2] == 0x80)
+                {
+                    //寻找身份证失败
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else if (recBuffer[2] == 0x80)
-            {
-                //寻找身份证失败
-                return false;
-            }
-            else
+            catch (Exception)
             {
                 return false;
             }
@@ -229,7 +259,7 @@ namespace GZ_SpotGate.Tcp
                     {
                         Name = "",
                         Data = idno,
-                        Ip = _ip,
+                        Ip = _ipAddress,
                         IDData = true
                     };
                     _callback?.BeginInvoke(args, null, null);

@@ -10,13 +10,9 @@ namespace GZ_SpotGate.Udp
     {
         public string ComServerIp { get; set; }
 
-        public byte InQRAdd { get; set; }
+        public int InQRAdd { get; set; }
 
-        public byte InIDAdd { get; set; }
-
-        public byte OutQRAdd { get; set; }
-
-        public byte OutIDAdd { get; set; }
+        public int OutQRAdd { get; set; }
 
         public string AndroidInIp { get; set; }
 

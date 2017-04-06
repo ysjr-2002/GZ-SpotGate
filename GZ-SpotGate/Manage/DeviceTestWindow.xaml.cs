@@ -143,6 +143,7 @@ namespace GZ_SpotGate.Manage
             Tcp.TcpComServer tcp = new Tcp.TcpComServer(9871);
             tcp.OnMessageInComming += Tcp_OnMessageInComming;
             tcp.Start();
+            btnOpenX.IsEnabled = false;
         }
 
         private void Tcp_OnMessageInComming(object sender, DataEventArgs e)

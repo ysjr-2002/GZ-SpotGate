@@ -1,4 +1,5 @@
 ﻿using GZ_SpotGate.Udp;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +10,50 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGate.Tcp
 {
-    class TcpConnection
+    class TcpConnection : ITcpConnection
     {
         private string _ipAddress = "";
+        private TcpClient _tcp = null;
+        private bool _running = false;
         private NetworkStream _nws = null;
         private byte[] _buffer = new byte[1024];
         private Action<DataEventArgs> _callback;
 
-        public TcpConnection(string ip, TcpClient tcp)
+        private static readonly ILog log = LogManager.GetLogger("TcpConnection");
+
+        public TcpClient Tcp
         {
-            _ipAddress = ip;
+            get
+            {
+                return _tcp;
+            }
+        }
+
+        public bool Running
+        {
+            get
+            {
+                return _running;
+            }
+        }
+
+        public TcpConnection(string ipAddress, TcpClient tcp)
+        {
+            _ipAddress = ipAddress;
+            _tcp = tcp;
             _nws = tcp.GetStream();
         }
 
-        public void Work(Action<DataEventArgs> callback)
+        public void SetCallback(Action<DataEventArgs> callback)
         {
             _callback = callback;
+        }
+
+        public void Start()
+        {
+            if (_running)
+                return;
+
             BeginRead();
         }
 
@@ -39,22 +68,38 @@ namespace GZ_SpotGate.Tcp
             try
             {
                 len = _nws.EndRead(ir);
+                if (len == 0)
+                {
+                    Stop();
+                    return;
+                }
                 var code = Encoding.UTF8.GetString(_buffer, 0, len);
                 var data = new DataEventArgs
                 {
                     Ip = _ipAddress,
                     Data = code,
                 };
+                Console.WriteLine("data->" + code);
+                if (code == "hello")
+                {
+                    Stop();
+                    return;
+                }
+                BeginRead();
                 _callback.BeginInvoke(data, null, null);
             }
-            catch
+            catch (Exception ex)
             {
+                log.Debug("连接关闭->" + ex.Message);
             }
         }
 
         public void Stop()
         {
+            _running = false;
             _nws.Close();
+            _tcp.Close();
+            _tcp = null;
         }
     }
 }

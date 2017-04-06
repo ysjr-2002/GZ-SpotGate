@@ -40,6 +40,7 @@ namespace GZ_SpotGate.Udp
                 if (_server.Client != null)
                 {
                     byte[] recBuffer = _server.EndReceive(ir, ref epSender);
+                    Console.WriteLine(epSender.Address.ToString() + ":" + epSender.Port);
                     BeginReceive();
 
                     var code = Encoding.UTF8.GetString(recBuffer);

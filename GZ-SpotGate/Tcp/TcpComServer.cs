@@ -15,7 +15,7 @@ namespace GZ_SpotGate.Tcp
         private int _port = 0;
         private bool _stop = false;
         private TcpListener _tcpListener = null;
-        private Dictionary<string, TcpIDConnection> clientCollection = new Dictionary<string, TcpIDConnection>();
+        private Dictionary<string, ITcpConnection> clientCollection = new Dictionary<string, ITcpConnection>();
         public event EventHandler<DataEventArgs> OnMessageInComming;
 
         private static ILog log = LogManager.GetLogger("TcpComServer");
@@ -34,11 +34,40 @@ namespace GZ_SpotGate.Tcp
                 try
                 {
                     var tcpClient = await _tcpListener.AcceptTcpClientAsync();
-                    var remoteAddress = ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address.ToString();
-                    TcpIDConnection tcpConnection = new TcpIDConnection(remoteAddress, tcpClient);
-                    tcpConnection.SetCallback(AcceptData);
-                    tcpConnection.Start();
-                    clientCollection.Add(remoteAddress, tcpConnection);
+                    var ep = (IPEndPoint)tcpClient.Client.RemoteEndPoint;
+                    var ra = ep.Address.ToString();
+                    var rp = ep.Port;
+
+                    ITcpConnection connection = null;
+                    if (rp == 1001)
+                    {
+                        connection = new TcpConnection(ra, tcpClient);
+                    }
+                    else if (rp == 1002)
+                    {
+                        connection = new TcpIDConnection(ra, tcpClient);
+                    }
+                    else if (rp == 1003)
+                    {
+                        connection = new TcpConnection(ra, tcpClient);
+                    }
+                    else if (rp == 1004)
+                    {
+                        connection = new TcpIDConnection(ra, tcpClient);
+                    }
+
+                    var key = ep.ToString();
+                    Console.WriteLine("来了一个" + key);
+                    if (clientCollection.ContainsKey(key))
+                    {
+                        var old = clientCollection[key];
+                        old.Stop();
+                        clientCollection.Remove(key);
+                    }
+
+                    connection.SetCallback(AcceptData);
+                    connection.Start();
+                    clientCollection.Add(key, connection);
                 }
                 catch (Exception ex)
                 {

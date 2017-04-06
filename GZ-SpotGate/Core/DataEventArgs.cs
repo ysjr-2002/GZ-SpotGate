@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGate.Udp
 {
-    class DataEventArgs : EventArgs
+   internal class DataEventArgs : EventArgs
     {
         public string Ip { get; set; }
 

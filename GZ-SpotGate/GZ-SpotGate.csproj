@@ -68,6 +68,7 @@
     <Compile Include="Core\ChannelController.cs" />
     <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ConfigProfile.cs" />
+    <Compile Include="Tcp\ITcpConnection.cs" />
     <Compile Include="Udp\UdpComServer.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
     <Compile Include="Face\FaceRecognized.cs" />
@@ -140,6 +141,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Document\GA467-2013 居民身份证验证安全控制模块接口技术规范.pdf" />
+    <None Include="Document\人脸接口说明.docx" />
     <None Include="Document\接口.docx" />
     <None Include="Document\设备连接说明.docx" />
     <None Include="packages.config" />
@@ -162,6 +164,9 @@
     <None Include="log4.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Document\face-api.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
