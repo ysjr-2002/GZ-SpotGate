@@ -1,0 +1,1535 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>版本更新历史</title>
+
+</head>
+<body>
+<h1>版本更新历史</h1>
+
+<ul>
+<li>API版本：1.2.4</li>
+<li>服务器端版本：1.5</li>
+<li><p>本地主机版本：2.6</p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.3</td>
+<td>修改描述</td>
+<td>gender 性别{0: 未知, 1: 男, 2: 女}</td>
+</tr>
+</tbody>
+</table>
+</li>
+
+<li>API版本：1.2.3</li>
+<li>服务器端版本：1.5</li>
+<li><p>本地主机版本：2.6</p>
+
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11.1</td>
+<td>修改描述</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>API版本：1.2.2</li>
+<li>服务器端版本：1.5</li>
+<li><p>本地主机版本：2.6</p>
+
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9.1</td>
+<td>修改，并标记为过时的(Deprecated)</td>
+<td>socketio的transport只能用websocket类型，不可以用polling</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>API版本：1.2.1</li>
+<li>服务器端版本：1.5</li>
+<li><p>本地主机版本：2.6</p>
+
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.2</td>
+<td>修改</td>
+<td>增加分页参数</td>
+</tr>
+<tr>
+<td>2.7</td>
+<td>修改</td>
+<td>返回值增加quality等</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>API版本：1.2</li>
+<li>服务器端版本：1.5</li>
+<li><p>本地主机版本：2.6</p>
+
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.1 1比N识别</td>
+<td>修改</td>
+<td>返回值里增加了"screen"数据</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>API版本：1.1</li>
+<li>服务器端版本：1.4.2</li>
+<li><p>本地主机版本：2.5</p>
+
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文档格式</td>
+<td>整理</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+
+
+<h1>目录</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="4" style="background-color : #eee;">一、服务器端API</th>
+        </tr>
+         <tr style="background-color : #eee">
+            <td>功能</td>
+            <td>方法</td>
+            <td>接口url</td>
+            <td>接口作用</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href='#0'>0. 错误处理</a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>            
+        <tr>
+            <td><a href='#1'>1. 登录</href></td>
+            <td>POST</td>
+            <td><a href='#1.1'>/auth/login</td>
+            <td>1.1 登录</td>
+        </tr>
+       
+        <tr>
+        <td rowspan="7"><a href='#2'>2. 底库管理</td>
+            <td>POST</td>
+            <td><a href='#2.3'>/subject</td>
+            <td>2.3 创建用户</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td><a href='#2.4'>/subject/[id]</td>
+            <td>2.4 获取用户信息</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td><a href='#2.5'>/subject/[id]</td>
+            <td>2.5 更新用户信息</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td><a href='#2.6'>/subject/[id]</td>
+            <td>2.6 删除用户</td>
+        </tr>
+        <tr>        
+            <td>POST</td>
+            <td><a href='#2.7'>/subject/photo</td>
+            <td>2.7上传识别照片</td>
+        </tr>
+    </tbody>
+    
+    <thead>
+        <tr>
+            <th colspan="4" style="background-color : #eee;">附录</th>
+        </tr>
+        <tr>
+            <th colspan="4"><a href='#ZH3'>三、模型定义</th>
+        </tr>
+        <tr>
+            <th colspan="4"><a href='#ZH4'>四、错误码定义</th>
+        </tr>
+        <tr>
+            <th colspan="4"><a href='#ZH5'>五、分页信息定义</th>
+        </tr>
+    </thead>
+</table>
+
+
+
+
+<table>
+
+</table>
+
+
+
+
+<table>
+
+</table>
+
+
+<ul>
+<li><h4>标识符说明</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 概念</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">code</td>
+<td align="left">0表示正常，其他参考<a href='#27'>错误码定义</td>
+</tr>
+<tr>
+<td align="left">id</td>
+<td align="left"> 数据库索引</td>
+</tr>
+<tr>
+<td align="left">subject</td>
+<td align="left">识别对象：员工，访客</td>
+</tr>
+<tr>
+<td align="left">avatar</td>
+<td align="left">subject显示的头像</td>
+</tr>
+<tr>
+<td align="left">photo</td>
+<td align="left"> subject上传的识别照片</td>
+</tr>
+<tr>
+<td align="left">box</td>
+<td align="left">主机盒子</td>
+</tr>
+<tr>
+<td align="left">network_switch</td>
+<td align="left">网络开关</td>
+</tr>
+<tr>
+<td align="left">screen</td>
+<td align="left">一路识别相机</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><h4>注意</h4>
+
+<p>服务器API地址为： https://v2.koalacam.net<br>
+离线版API地址为： http://主机ip <br>
+<code>此文档内接口除特别说明外，传入参数均为JSON格式（另外需要注意Content-Type需要为 application/json）,请自行转换格式</code></p></li>
+</ul>
+
+
+<p><br>
+<br></p>
+
+<h1>一、服务器端API</h1>
+
+<hr />
+
+<h1><span id="0"/> 0. 错误处理</h1>
+
+<ul>
+<li><h4>未登录</h4>
+
+<p>如果没有调用登录接口，在调用别的接口时会返回HTTP 302重定向，用这个来判断是否登录</p></li>
+<li><h4>没权限</h4>
+
+<p>如果登录的账户没有调用某个接口的权限，在调用这个接口时会返回HTTP 302重定向</p></li>
+</ul>
+
+
+<hr />
+
+<h1><span id="1"/> 1. 登录</h1>
+
+<h2><span id="1.1"/> 1.1 登录</h2>
+
+<ul>
+<li><h4>URL:</h4>
+
+<p>/auth/login</p></li>
+<li><h4>Method:</h4>
+
+<p>POST</p></li>
+<li><h4>描述：</h4>
+
+<p>登录并获取cookie，<code>后面所有的接口都需要在请求时带入此cookie</code></p></li>
+<li><h4>参数：</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 参数 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 必选 </th>
+<th align="left"> 描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> username </td>
+<td align="left"> str </td>
+<td align="left"> √ </td>
+<td align="left"> 邮箱 </td>
+</tr>
+<tr>
+<td align="left"> password </td>
+<td align="left"> str </td>
+<td align="left"> √ </td>
+<td align="left"> 密码 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><code>此接口需要 设置user-agent为 "Koala Admin" , 否则不能登录成功</code></p></li>
+<li><h4>返回值说明：</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 字段 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> avatar </td>
+<td align="left"> str </td>
+<td align="left"> 头像地址 </td>
+</tr>
+<tr>
+<td align="left"> company_id </td>
+<td align="left"> int </td>
+<td align="left"> 公司ID </td>
+</tr>
+<tr>
+<td align="left"> password_reseted </td>
+<td align="left"> bool </td>
+<td align="left"> 是否保存密码 </td>
+</tr>
+<tr>
+<td align="left"> role_id </td>
+<td align="left"> int </td>
+<td align="left"> 账号类型, 1:root, 2:管理员, 3:普通用户</td>
+</tr>
+<tr>
+<td align="left"> username </td>
+<td align="left"> str </td>
+<td align="left"> 用户名 </td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><h4>返回JSON：</h4>
+
+<pre><code>{
+"code": 0,
+"data": {
+  "avatar": null,
+  "company_id": 1,
+  "id": 2,
+  "password_reseted": true,
+  "role_id": 2,
+  "username": "user@megvii.com"
+},
+"page": {}
+}
+</code></pre></li>
+</ul>
+
+
+<hr />
+
+<h1><span id="2"/> 2. 底库管理</h1>
+
+<h2><span id="2.3"/> 2.3 创建用户</h2>
+
+<ul>
+<li><h5>URL:</h5>
+
+<p>/subject</p></li>
+<li><h5>Method:</h5>
+
+<p>POST</p></li>
+<li><h5>描述：</h5>
+
+<p>创建一个新用户</p></li>
+<li><h5><span id="2.3para">参数:</span>（<code>如果subject_type不等于0，必须要指定start_time，end_time</code>)</h5>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 参数 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 默认值 </th>
+<th align="left"> 必选 </th>
+<th align="left"> 描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">  start_time </td>
+<td align="left"> int </td>
+<td align="left"> 0 </td>
+<td align="left">  </td>
+<td align="left"> 来访时间</td>
+</tr>
+<tr>
+<td align="left"> end_time </td>
+<td align="left"> int </td>
+<td align="left"> 0 </td>
+<td align="left">  </td>
+<td align="left"> 离开时间</td>
+</tr>
+<tr>
+<td align="left"> purpose </td>
+<td align="left"> int </td>
+<td align="left"> 0 </td>
+<td align="left">  </td>
+<td align="left"> 来访目的</td>
+</tr>
+<tr>
+<td align="left"> birthday </td>
+<td align="left"> int </td>
+<td align="left"> 0 </td>
+<td align="left">  </td>
+<td align="left"> 生日</td>
+</tr>
+<tr>
+<td align="left"> entry_date </td>
+<td align="left"> int </td>
+<td align="left"> 0 </td>
+<td align="left">  </td>
+<td align="left"> 入职时间</td>
+</tr>
+<tr>
+<td align="left"> photo_ids </td>
+<td align="left"> array </td>
+<td align="left"> [] </td>
+<td align="left">  </td>
+<td align="left"> 识别头像列表（<a href='#2.7'>通过接口2.7上传识别头像</a>）</td>
+</tr>
+<tr>
+<td align="left"> gender </td>
+<td align="left"> int </td>
+<td align="left"> 男 </td>
+<td align="left"> </td>
+<td align="left">  性别{0: 未知, 1: 男, 2: 女} </td>
+</tr>
+<tr>
+<td align="left"> email </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 邮箱 </td>
+</tr>
+<tr>
+<td align="left"> phone </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 手机 </td>
+</tr>
+<tr>
+<td align="left"> avatar </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 头像（ <a href='#3.1'>通过接口3.1上传头像）</a></td>
+</tr>
+<tr>
+<td align="left"> department </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 部门 </td>
+</tr>
+<tr>
+<td align="left"> title </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 职位 </td>
+</tr>
+<tr>
+<td align="left"> description </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 签名 </td>
+</tr>
+<tr>
+<td align="left"> interviewee </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 受访人 </td>
+</tr>
+<tr>
+<td align="left"> come_from </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 来访单位 </td>
+</tr>
+<tr>
+<td align="left"> job_number </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 工号 </td>
+</tr>
+<tr>
+<td align="left"> remark </td>
+<td align="left"> str </td>
+<td align="left"> 空 </td>
+<td align="left">  </td>
+<td align="left"> 备注 </td>
+</tr>
+<tr>
+<td align="left"> subject_type </td>
+<td align="left"> int </td>
+<td align="left">  </td>
+<td align="left"> √ </td>
+<td align="left"> 用户类型 {0:员工, 1:访客, 2: VIP访客} </td>
+</tr>
+<tr>
+<td align="left"> name </td>
+<td align="left"> str </td>
+<td align="left">  </td>
+<td align="left"> √ </td>
+<td align="left"> 姓名 </td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><h4>返回值说明：</h4>
+
+<p>创建的subject信息</p></li>
+<li><h4>返回JSON：</h4>
+
+<p><a href='#2.4json'>同2.4. 获取用户信息接口</a></p></li>
+</ul>
+
+
+<h2><span id="2.4"/> 2.4 获取用户信息</h2>
+
+<ul>
+<li><h4>URL:</h4>
+
+<p>/subject/[id]</p></li>
+<li><h4>Method:</h4>
+
+<p>GET</p></li>
+<li><h4>描述：</h4>
+
+<p>获取单个subject信息</p></li>
+<li><h4>参数：</h4>
+
+<p>无</p></li>
+<li><h4><span id="2.4return">返回值说明：</span></h4>
+
+<p>返回的是data字段是一个subject对象，subject字段含义可以参考<a href="#subject_model">subject模型定义</a></p></li>
+<li><h4><span id="2.4json">返回JSON：</span></h4>
+
+<pre><code>{
+"code": 0,
+"data": {
+  "avatar": "",
+  "birthday": null,
+  "come_from": "",
+  "company_id": 2,
+  "department": "\u6280\u672f\u90e8",
+  "description": "\u68a6\u60f3\uff0c\u5c31\u662f\u8fd9\u4e48\u4efb\u6027\uff01",
+  "email": "xyz@sina.com",
+  "end_time": null,
+  "entry_date": null,
+  "gender": 1,
+  "id": 19633,
+  "interviewee": "",
+  "job_number": "104",
+  "name": "\u8d75\u516d",
+  "password_reseted": false,
+  "phone": "13788890284",
+  "photos": [],
+  "purpose": 0,
+  "remark": "\u6211\u662f\u540e\u7aef",
+  "start_time": null,
+  "subject_type": 0,
+  "title": "\u5de5\u7a0b\u5e08",
+  "visit_notify": false
+},
+}
+</code></pre></li>
+</ul>
+
+
+<h2><span id="2.5"/> 2.5 更新用户信息</h2>
+
+<ul>
+<li><h4>URL:</h4>
+
+<p>/subject/[id]</p></li>
+<li><h4>Method:</h4>
+
+<p>PUT</p></li>
+<li><h4>描述：</h4>
+
+<p>对用户的部分字段进行更新</p></li>
+<li><h4>参数：</h4>
+
+<p><a href='#2.3para'>同2.3. 创建用户</a></p></li>
+<li><h4>返回值说明：</h4>
+
+<p>修改后的的subject信息</p></li>
+<li><h4>返回JSON：</h4>
+
+<p><a href='#2.4json'>同2.4 获取用户信息接口</a></p></li>
+</ul>
+
+
+<h2><span id="2.6"/> 2.6 删除用户</h2>
+
+<ul>
+<li><h4>URL:</h4>
+
+<p>/subject/[id]</p></li>
+<li><h4>Method:</h4>
+
+<p>DELETE</p></li>
+<li><h4>描述：</h4>
+
+<p>删除用户</p></li>
+<li><h4>参数：</h4>
+
+<p>无</p></li>
+<li><h4>返回值说明：</h4>
+
+<p>无</p></li>
+<li><h4>返回JSON：</h4>
+
+<p>无</p></li>
+</ul>
+
+
+<h2><span id="2.7"/> 2.7 上传识别底库</h2>
+
+<ul>
+<li><h4>URL:</h4>
+
+<p>/subject/photo</p></li>
+<li><h4>Method:</h4>
+
+<p>POST</p></li>
+<li><h4>描述：</h4>
+
+<p>个人识别照片上传</p></li>
+<li><h4>参数：</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 参数 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 必选 </th>
+<th align="left"> 描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> photo </td>
+<td align="left"> file </td>
+<td align="left"> √ </td>
+<td align="left"> 识别照片 </td>
+</tr>
+<tr>
+<td align="left"> subject_id </td>
+<td align="left"> int </td>
+<td align="left">  </td>
+<td align="left"> 若传入此参数，则在图片上传成功的同时更新用户的识别照片。否则需要手动将返回的id (返回值中的563) 放入<a href='#2.3'>接口2.3</a>，<a href='#2.5'>接口2.5</a>中的photo_ids参数里，实现更新此用户的识别头像 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><code>注意：此接口格式为 multipart/form-data 格式</code></p></li>
+<li><h4>返回值：</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 字段 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> id </td>
+<td align="left"> int </td>
+<td align="left"> 图片的id </td>
+</tr>
+<tr>
+<td align="left"> company_id </td>
+<td align="left"> int </td>
+<td align="left"> 公司ID </td>
+</tr>
+<tr>
+<td align="left"> subject_id </td>
+<td align="left"> int </td>
+<td align="left"> 数据库索引，如果为null表示照片没有绑定subject </td>
+</tr>
+<tr>
+<td align="left"> url </td>
+<td align="left"> str </td>
+<td align="left"> 识别照片地址 </td>
+</tr>
+<tr>
+<td align="left"> quality </td>
+<td align="left"> float </td>
+<td align="left"> 人脸质量 </td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><h4>返回JSON：</h4>
+
+<pre><code>{
+  "code": 0,
+  "data": {
+      "company_id": 2,
+      "id": 563,
+      "subject_id": null,
+      "url": "/static/upload/photo/2015-10-22/78d86cadaad1e1a8f43c87ae3adeafb560e96ee3.jpg"
+  },
+  "page": {}
+}
+</code></pre></li>
+</ul>
+
+
+<hr />
+
+<h1><span id="3"/> 3. 用户头像</h1>
+
+<h2><span id="3.1"/> 3.1 上传头像</h2>
+
+<ul>
+<li><h4>URL:</h4>
+
+<p>/subject/avatar</p></li>
+<li><h4>Method:</h4>
+
+<p>POST</p></li>
+<li><h4>描述：</h4>
+
+<p>上传个人头像</p></li>
+<li><h4>参数：</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 参数 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 必选 </th>
+<th align="left"> 描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> avatar </td>
+<td align="left"> file </td>
+<td align="left"> √ </td>
+<td align="left"> 识别照片 </td>
+</tr>
+<tr>
+<td align="left"> subject_id </td>
+<td align="left"> int </td>
+<td align="left">  </td>
+<td align="left"> 若传入此参数，则在图片上传成功的同时更新subject_id用户头像，否则需要手动将返回的 url, 设置为<a href='#2.3'>接口2.3</a>，<a href='#2.5'>接口2.5</a>中的avatar参数里，实现更新此用户的识别头像 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><code>注意：此接口格式为 multipart/form-data 格式</code></p></li>
+<li><h4>返回值：</h4>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 字段 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> url </td>
+<td align="left"> str </td>
+<td align="left"> 识别头像地址 </td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><h4>返回JSON：</h4>
+
+<pre><code>{
+    "code": 0,
+    "data": {
+        "url": "/static/upload/photo/2015-10-22/78d86cadaad1e1a8f43c87ae3adeafb560e96ee3.jpg"
+    },
+    "page": {}
+}
+</code></pre></li>
+</ul>
+
+
+<h1>三、<span id="ZH3"> 模型定义 </span></h1>
+
+<hr />
+
+<p><span id="subject_model"></p>
+
+<h5>底库对象subject，即用户和访客</h5>
+
+<p></span></p>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 属性 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 说明 </th>
+<th align="left"> 备注 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">subject_type</td>
+<td align="left">int</td>
+<td align="left">用户类型</td>
+<td align="left">0:员工, 1:访客, 2: VIP访客</td>
+</tr>
+<tr>
+<td align="left">email</td>
+<td align="left">string</td>
+<td align="left">邮箱</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">password_reseted</td>
+<td align="left">bool</td>
+<td align="left">是否重置过密码</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">name</td>
+<td align="left">string</td>
+<td align="left">姓名</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">pinyin</td>
+<td align="left">string</td>
+<td align="left">姓名的拼音</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">gender</td>
+<td align="left">int</td>
+<td align="left">性别</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">phone</td>
+<td align="left">str</td>
+<td align="left">电话</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">avatar</td>
+<td align="left">str</td>
+<td align="left">头像地址</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">department</td>
+<td align="left">str</td>
+<td align="left">部门</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">title</td>
+<td align="left">str</td>
+<td align="left">职位</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left">str</td>
+<td align="left">签名</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">job_number</td>
+<td align="left">str</td>
+<td align="left">工号</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">remark</td>
+<td align="left">str</td>
+<td align="left">备注</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">birthday</td>
+<td align="left">int</td>
+<td align="left">生日</td>
+<td align="left">时间戳</td>
+</tr>
+<tr>
+<td align="left">entry_date </td>
+<td align="left">int</td>
+<td align="left">入职时间</td>
+<td align="left">时间戳</td>
+</tr>
+<tr>
+<td align="left">photos</td>
+<td align="left">list </td>
+<td align="left"> 识别照片列表</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">purpose</td>
+<td align="left">int</td>
+<td align="left">(访客属性) 来访目的</td>
+<td align="left">   0: 其他, 1: 面试, 2: 商务, 3: 亲友, 4: 快递送货</td>
+</tr>
+<tr>
+<td align="left">interviewee</td>
+<td align="left">   str </td>
+<td align="left">(访客属性) 受访人</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">come_from</td>
+<td align="left"> str</td>
+<td align="left">    (访客属性) 来访单位</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">start_time </td>
+<td align="left">int</td>
+<td align="left">   (访客属性) 预定来访时间</td>
+<td align="left">  时间戳</td>
+</tr>
+<tr>
+<td align="left">end_time   </td>
+<td align="left">int</td>
+<td align="left">   (访客属性) 预定离开时间   </td>
+<td align="left">时间戳</td>
+</tr>
+<tr>
+<td align="left">visit_notify</td>
+<td align="left">  bool</td>
+<td align="left">   (访客属性) 来访是否发APP消息推送</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<p><span id="photo_model"></p>
+
+<h5>识别照片photo</h5>
+
+<p></span></p>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 属性 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">subject_id</td>
+<td align="left">int</td>
+<td align="left">subject ID</td>
+</tr>
+<tr>
+<td align="left">company_id</td>
+<td align="left">int</td>
+<td align="left">公司ID</td>
+</tr>
+<tr>
+<td align="left">url</td>
+<td align="left">str</td>
+<td align="left">照片存储地址</td>
+</tr>
+<tr>
+<td align="left">quality</td>
+<td align="left">float</td>
+<td align="left">照片质量</td>
+</tr>
+<tr>
+<td align="left">version</td>
+<td align="left">int</td>
+<td align="left">识别算法版本</td>
+</tr>
+<tr>
+<td align="left">feature</td>
+<td align="left">str</td>
+<td align="left">识别算法抽取出来的特征值</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><span id="screen_model"></p>
+
+<h5>门禁信息screen，即一路识别相机</h5>
+
+<p></span></p>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 属性 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 说明 </th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">type</td>
+<td align="left">int</td>
+<td align="left"> 类型</td>
+<td align="left">1:摄像头, 2:门禁Pad, 3:前台Pad</td>
+</tr>
+<tr>
+<td align="left">box_address</td>
+<td align="left">str</td>
+<td align="left">相机关联的主机ip地址</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">box_heartbeat</td>
+<td align="left">int</td>
+<td align="left">主机心跳时间戳</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">box_status</td>
+<td align="left">str</td>
+<td align="left">服务器与主机连接状态</td>
+<td align="left">‘1’表示较长没有收到主机心跳消息，'0'正常</td>
+</tr>
+<tr>
+<td align="left">camera_address</td>
+<td align="left">str</td>
+<td align="left">相机ip地址</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">camera_position</td>
+<td align="left">str</td>
+<td align="left">相机位置描述</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">camera_status</td>
+<td align="left">str</td>
+<td align="left">服务器与相机连接状态</td>
+<td align="left">‘0’表示连接正常</td>
+</tr>
+<tr>
+<td align="left">network_switcher</td>
+<td align="left">str</td>
+<td align="left">网络开关ip地址</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">network_switcher_status</td>
+<td align="left">str</td>
+<td align="left">网络开关连接状态</td>
+<td align="left">‘0’表示连接正常</td>
+</tr>
+<tr>
+<td align="left">allow_all_subjects</td>
+<td align="left">bool</td>
+<td align="left">是否允许所有人进入</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">allow_visitor  </td>
+<td align="left">bool</td>
+<td align="left">是否允许访客进入</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br><br></p>
+
+<h2>四、<span id="ZH4">错误码定义</span></h2>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th align="left"> 错误码</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1000</td>
+<td align="left">未知错误</td>
+</tr>
+<tr>
+<td align="left">1001</td>
+<td align="left">请求方法不允许</td>
+</tr>
+<tr>
+<td align="left">1002</td>
+<td align="left">参数错误</td>
+</tr>
+<tr>
+<td align="left">1003</td>
+<td align="left">数据库错误</td>
+</tr>
+<tr>
+<td align="left">1004</td>
+<td align="left">操作不允许</td>
+</tr>
+<tr>
+<td align="left">1005</td>
+<td align="left">网络错误</td>
+</tr>
+<tr>
+<td align="left">1006</td>
+<td align="left">无效主题</td>
+</tr>
+<tr>
+<td align="left">1007</td>
+<td align="left">密码需要更改</td>
+</tr>
+<tr>
+<td align="left">1008</td>
+<td align="left">二次验证错误</td>
+</tr>
+<tr>
+<td align="left">2000</td>
+<td align="left">用户不存在</td>
+</tr>
+<tr>
+<td align="left">2001</td>
+<td align="left">Group 不存在</td>
+</tr>
+<tr>
+<td align="left">2002</td>
+<td align="left">Group 已存在</td>
+</tr>
+<tr>
+<td align="left">2003</td>
+<td align="left">相机不存在</td>
+</tr>
+<tr>
+<td align="left">2004</td>
+<td align="left">Core 不存在</td>
+</tr>
+<tr>
+<td align="left">2005</td>
+<td align="left">用户不存在</td>
+</tr>
+<tr>
+<td align="left">2006</td>
+<td align="left">照片不存在</td>
+</tr>
+<tr>
+<td align="left">2007</td>
+<td align="left">主机不存在</td>
+</tr>
+<tr>
+<td align="left">2008</td>
+<td align="left">屏幕不存在</td>
+</tr>
+<tr>
+<td align="left">2009</td>
+<td align="left">公司不存在</td>
+</tr>
+<tr>
+<td align="left">2010</td>
+<td align="left">历史记录不存在</td>
+</tr>
+<tr>
+<td align="left">2011</td>
+<td align="left">用户名已存在</td>
+</tr>
+<tr>
+<td align="left">2012</td>
+<td align="left">公司已存在</td>
+</tr>
+<tr>
+<td align="left">2013</td>
+<td align="left">设备不存在,请刷新</td>
+</tr>
+<tr>
+<td align="left">20011</td>
+<td align="left">主机已经存在</td>
+</tr>
+<tr>
+<td align="left">20012</td>
+<td align="left">主机已绑定</td>
+</tr>
+<tr>
+<td align="left">20013</td>
+<td align="left">主机未绑定</td>
+</tr>
+<tr>
+<td align="left">20014</td>
+<td align="left">主机与用户公司不符</td>
+</tr>
+<tr>
+<td align="left">20110</td>
+<td align="left">姓名已存在</td>
+</tr>
+<tr>
+<td align="left">20120</td>
+<td align="left">照片已满</td>
+</tr>
+<tr>
+<td align="left">20150</td>
+<td align="left">邮箱已存在</td>
+</tr>
+<tr>
+<td align="left">20160</td>
+<td align="left">权限不足</td>
+</tr>
+<tr>
+<td align="left">20130</td>
+<td align="left">Excel 包含错误</td>
+</tr>
+<tr>
+<td align="left">20140</td>
+<td align="left">文件不存在</td>
+</tr>
+<tr>
+<td align="left">3000</td>
+<td align="left">密码不正确</td>
+</tr>
+<tr>
+<td align="left">3001</td>
+<td align="left">验证码不正确</td>
+</tr>
+<tr>
+<td align="left">3002</td>
+<td align="left">两次密码不一致</td>
+</tr>
+<tr>
+<td align="left">3003</td>
+<td align="left">请登录</td>
+</tr>
+<tr>
+<td align="left">4001</td>
+<td align="left">获取天气信息失败</td>
+</tr>
+<tr>
+<td align="left">5000</td>
+<td align="left">未检测到人脸</td>
+</tr>
+<tr>
+<td align="left">5004</td>
+<td align="left">人脸质量太低</td>
+</tr>
+<tr>
+<td align="left">5001</td>
+<td align="left">摄像头配置不正确</td>
+</tr>
+<tr>
+<td align="left">5002</td>
+<td align="left">不是有效的 JSON 格式</td>
+</tr>
+<tr>
+<td align="left">5003</td>
+<td align="left">名称已存在</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br><br></p>
+
+<h2>五、<span id="ZH5">分页信息定义</span></h2>
+
+<h5>如果某条API有分页的功能，那么返回值中的page项会有内容：</h5>
+
+<table>
+<thead>
+<tr>
+<th align="left"> 属性 </th>
+<th align="left"> 类型 </th>
+<th align="left"> 说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"> count </td>
+<td align="left"> int </td>
+<td align="left"> 数据总条数 </td>
+</tr>
+<tr>
+<td align="left"> current </td>
+<td align="left"> int </td>
+<td align="left"> 返回的是第几页（从1开始计数） </td>
+</tr>
+<tr>
+<td align="left"> size </td>
+<td align="left"> int </td>
+<td align="left"> 每页多少条数据 </td>
+</tr>
+<tr>
+<td align="left"> count </td>
+<td align="left"> int </td>
+<td align="left"> 总页数 </td>
+</tr>
+</tbody>
+</table>
+
+
+<pre><code>{
+    "page":{
+        "count": 757,
+        "current": 1,
+        "size": 10,
+        "total": 76
+    }
+}
+</code></pre>
+</body>
+</html>
