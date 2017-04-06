@@ -1,5 +1,6 @@
 ﻿using BJ_Benz.Code;
 using GZ_SpotGate.Udp;
+using GZ_SpotGate.WS;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -138,19 +139,23 @@ namespace GZ_SpotGate.Manage
             gate.Dispose();
         }
 
+        private WebServer ws = null;
+        private Tcp.TcpComServer tcpServer = null;
         private void btnOpenX_Click(object sender, RoutedEventArgs e)
         {
-            Tcp.TcpComServer tcp = new Tcp.TcpComServer(9871);
-            tcp.OnMessageInComming += Tcp_OnMessageInComming;
-            tcp.Start();
-            btnOpenX.IsEnabled = false;
+            //tcpServer = new Tcp.TcpComServer(9871);
+            //tcpServer.OnMessageInComming += Tcp_OnMessageInComming;
+            //tcpServer.Start();
+            //btnOpenX.IsEnabled = false;
+            ws = new WebServer(ConfigProfile.Current.WebSocketListenPort);
+            ws.Start();
         }
 
         private void Tcp_OnMessageInComming(object sender, DataEventArgs e)
         {
             this.Dispatcher.Invoke(() =>
             {
-                if( e.IDData)
+                if (e.IDData)
                 {
                     lblContent.Content = e.Data;
                 }
@@ -159,13 +164,19 @@ namespace GZ_SpotGate.Manage
 
         private void btnOpenU_Click(object sender, RoutedEventArgs e)
         {
-            Udp.UdpComServer udp = new Udp.UdpComServer(9870);
-            udp.OnMessageInComming += Udp_OnMessageInComming;
-            udp.Start();
-        }
+            //Udp.UdpComServer udp = new Udp.UdpComServer(9870);
+            //udp.OnMessageInComming += Udp_OnMessageInComming;
+            //udp.Start();
+            //tcpServer.Stop();
+            //btnOpenX.IsEnabled = true;
 
-        private void Udp_OnMessageInComming(object sender, DataEventArgs e)
-        {
+            AndroidMessage am = new AndroidMessage
+            {
+                Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-05/a856505e44ebc1652de0d3700ea26e542a590373.jpg",
+                CheckInType = XmlParser.CheckIntype.Face,
+                Name = "yang"
+            };
+            ws.Pass("192.168.0.4", am);
         }
     }
 }

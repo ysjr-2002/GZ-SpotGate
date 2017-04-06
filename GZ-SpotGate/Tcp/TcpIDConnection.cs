@@ -1,7 +1,9 @@
 ﻿using GZ_SpotGate.Udp;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,7 +14,6 @@ namespace GZ_SpotGate.Tcp
 {
     internal class TcpIDConnection : ITcpConnection
     {
-        private string _ipAddress = "";
         private bool _running = false;
         private Thread _thread = null;
         private TcpClient _tcp = null;
@@ -21,6 +22,8 @@ namespace GZ_SpotGate.Tcp
 
         private const int CHECK_INTERVAL = 100;
         private static readonly byte[] prefix = new byte[] { 0xAA, 0xAA, 0xAA, 0x96, 0x69 };
+
+        private static ILog log = LogManager.GetLogger("TcpIDConnection");
 
         public TcpClient Tcp
         {
@@ -38,9 +41,11 @@ namespace GZ_SpotGate.Tcp
             }
         }
 
-        public TcpIDConnection(string ipAddress, TcpClient tcp)
+        private IPEndPoint _ipEndPoint;
+
+        public TcpIDConnection(IPEndPoint endPoint, TcpClient tcp)
         {
-            _ipAddress = ipAddress;
+            _ipEndPoint = endPoint;
             _tcp = tcp;
             _nws = tcp.GetStream();
         }
@@ -59,7 +64,7 @@ namespace GZ_SpotGate.Tcp
         {
             _running = false;
             _nws?.Close();
-            _thread.Join(1000);
+            Thread.Sleep(200);
             _thread = null;
         }
 
@@ -259,7 +264,7 @@ namespace GZ_SpotGate.Tcp
                     {
                         Name = "",
                         Data = idno,
-                        Ip = _ipAddress,
+                        IPEndPoint = _ipEndPoint,
                         IDData = true
                     };
                     _callback?.BeginInvoke(args, null, null);

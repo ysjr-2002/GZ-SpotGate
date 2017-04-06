@@ -37,7 +37,6 @@ namespace GZ_SpotGate.Udp
         public void ReadConfig()
         {
             CheckInServerUrl = GetKey("checkInServerUrl");
-            UdpComListenPort = Int32.Parse(GetKey("udpComListenPort"));
             TcpComListenPort = Int32.Parse(GetKey("tcpComListenPort"));
             WebSocketListenPort = Int32.Parse(GetKey("webSocketListenPort"));
         }

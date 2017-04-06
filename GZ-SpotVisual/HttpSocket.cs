@@ -17,7 +17,7 @@ namespace GZ_SpotVisual
 {
     class HttpSocket
     {
-        private string koalaIp = "";
+        private string serverIp = "";
         private WebSocket socket = null;
         private Action<AndroidMessage> callback = null;
 
@@ -31,16 +31,11 @@ namespace GZ_SpotVisual
         {
         }
 
-        public Task Connect(string koalaIp, string cameraIp)
+        public Task Connect(string serverIp)
         {
             return Task.Factory.StartNew(() =>
             {
-                this.koalaIp = koalaIp;
-                var wsUrl = string.Format("ws://{0}:9000", koalaIp);
-                //var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?", cameraIp);
-                var rtspUrl = string.Format("rtsp://admin:admin123456@{0}/live1.sdp", cameraIp);
-                var url = string.Concat(wsUrl, "?url=", rtspUrl.UrlEncode());
-                url = "ws://192.168.1.116:4649/Echo?name=android";
+               var url = "ws://"+ serverIp + ":9872/android";
                 socket = new WebSocket(url);
                 socket.OnOpen += Socket_OnOpen;
                 socket.OnError += Socket_OnError;
@@ -66,27 +61,26 @@ namespace GZ_SpotVisual
             if (e.IsText)
             {
                 Console.WriteLine(e.Data);
-                //var entity = JsonConvert.DeserializeObject<AndroidMessage>(e.Data);
-                //callback?.Invoke(entity);
+                var entity = JsonConvert.DeserializeObject<AndroidMessage>(e.Data);
+                callback?.Invoke(entity);
             }
         }
 
         private void Socket_OnError(object sender, ErrorEventArgs e)
         {
-            Config.Log(koalaIp + " Websocket error");
+            //Config.Log(koalaIp + " Websocket error");
             Dialog("WebSocket connection error");
         }
 
         private void Socket_OnClose(object sender, CloseEventArgs e)
         {
-            Config.Log(koalaIp + " Websocket close");
+            //Config.Log(koalaIp + " Websocket close");
             Dialog("WebSocket connection close");
         }
 
         private void Socket_OnOpen(object sender, EventArgs e)
         {
             Dialog("WebSocket connect ok");
-            socket.Send("my name is android");
         }
 
         private void Dialog(string msg)

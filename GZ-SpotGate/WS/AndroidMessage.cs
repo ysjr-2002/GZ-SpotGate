@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GZ_SpotGate.XmlParser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace GZ_SpotGate.WS
 {
     class AndroidMessage
     {
-        public string ActionType { get; set; }
+        public CheckIntype CheckInType { get; set; }
 
         public string Message { get; set; }
 

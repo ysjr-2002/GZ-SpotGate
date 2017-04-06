@@ -3,6 +3,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -12,14 +13,16 @@ namespace GZ_SpotGate.Tcp
 {
     class TcpConnection : ITcpConnection
     {
-        private string _ipAddress = "";
         private TcpClient _tcp = null;
         private bool _running = false;
         private NetworkStream _nws = null;
+        private IPEndPoint _ipEndPoint = null;
         private byte[] _buffer = new byte[1024];
         private Action<DataEventArgs> _callback;
-
         private static readonly ILog log = LogManager.GetLogger("TcpConnection");
+
+        private const string qr_prefiex = "";
+        private const string ic_prefiex = "";
 
         public TcpClient Tcp
         {
@@ -37,9 +40,9 @@ namespace GZ_SpotGate.Tcp
             }
         }
 
-        public TcpConnection(string ipAddress, TcpClient tcp)
+        public TcpConnection(IPEndPoint endPoint, TcpClient tcp)
         {
-            _ipAddress = ipAddress;
+            _ipEndPoint = endPoint;
             _tcp = tcp;
             _nws = tcp.GetStream();
         }
@@ -76,21 +79,15 @@ namespace GZ_SpotGate.Tcp
                 var code = Encoding.UTF8.GetString(_buffer, 0, len);
                 var data = new DataEventArgs
                 {
-                    Ip = _ipAddress,
+                    IPEndPoint = _ipEndPoint,
                     Data = code,
                 };
-                Console.WriteLine("data->" + code);
-                if (code == "hello")
-                {
-                    Stop();
-                    return;
-                }
                 BeginRead();
                 _callback.BeginInvoke(data, null, null);
             }
             catch (Exception ex)
             {
-                log.Debug("连接关闭->" + ex.Message);
+                log.Debug("连接关闭");
             }
         }
 

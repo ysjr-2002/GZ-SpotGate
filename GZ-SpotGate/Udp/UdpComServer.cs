@@ -46,7 +46,6 @@ namespace GZ_SpotGate.Udp
                     var code = Encoding.UTF8.GetString(recBuffer);
                     DataEventArgs args = new DataEventArgs
                     {
-                        Ip = epSender.Address.ToString(),
                         Data = code
                     };
                     OnMessageInComming?.Invoke(null, args);

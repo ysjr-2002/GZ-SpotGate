@@ -40,13 +40,14 @@ namespace GZ_SpotGate
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var request = new Request();
-            var content = await request.CheckIn(XmlParser.CheckIntype.BarCode, "123456");
+            var content = await request.CheckIn(CheckIntype.BarCode, "123456");
             if (string.IsNullOrEmpty(content))
             {
                 MessageBox.Show("获取数据失败");
                 return;
             }
-            Define.Parse(content);
+            string code, message, datetime, nums;
+            Define.Parse(content, out code, out message, out datetime, out nums);
         }
 
         private async void Test()

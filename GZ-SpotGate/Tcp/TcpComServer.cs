@@ -41,19 +41,19 @@ namespace GZ_SpotGate.Tcp
                     ITcpConnection connection = null;
                     if (rp == 1001)
                     {
-                        connection = new TcpConnection(ra, tcpClient);
+                        connection = new TcpConnection(ep, tcpClient);
                     }
                     else if (rp == 1002)
                     {
-                        connection = new TcpIDConnection(ra, tcpClient);
+                        connection = new TcpIDConnection(ep, tcpClient);
                     }
                     else if (rp == 1003)
                     {
-                        connection = new TcpConnection(ra, tcpClient);
+                        connection = new TcpConnection(ep, tcpClient);
                     }
                     else if (rp == 1004)
                     {
-                        connection = new TcpIDConnection(ra, tcpClient);
+                        connection = new TcpIDConnection(ep, tcpClient);
                     }
 
                     var key = ep.ToString();

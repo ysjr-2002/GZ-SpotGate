@@ -17,16 +17,16 @@ namespace GZ_SpotGate.XmlParser
             return content;
         }
 
-        public static void Parse(string xml)
+        public static void Parse(string xml, out string code, out string message, out string datetime, out string nums)
         {
             xml = "<?xml version='1.0' encoding='utf-8' ?>" + xml;
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 
-            var code = doc.SelectSingleNode("message/errorcode");
-            var message = doc.SelectSingleNode("message/errmessage");
-            var datetime = doc.SelectSingleNode("message/datetime");
-            var nums = doc.SelectSingleNode("message/nums");
+            code = doc.SelectSingleNode("message/errorcode")?.InnerText;
+            message = doc.SelectSingleNode("message/errmessage")?.InnerText;
+            datetime = doc.SelectSingleNode("message/datetime")?.InnerText;
+            nums = doc.SelectSingleNode("message/nums")?.InnerText;
         }
     }
 

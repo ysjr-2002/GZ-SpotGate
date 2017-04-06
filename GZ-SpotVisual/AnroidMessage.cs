@@ -14,12 +14,32 @@ namespace GZ_SpotVisual
 {
     class AndroidMessage
     {
-        public string ActionType { get; set; }
+        public CheckIntype CheckInType { get; set; }
 
         public string Message { get; set; }
 
         public string Name { get; set; }
 
         public string Avatar { get; set; }
+    }
+
+    enum CheckIntype : int
+    {
+        /// <summary>
+        /// 二维码
+        /// </summary>
+        BarCode = 1,
+        /// <summary>
+        /// 身份证
+        /// </summary>
+        ID = 2,
+        /// <summary>
+        /// IC卡(内部人员使用)
+        /// </summary>
+        IC = 3,
+        /// <summary>
+        /// 人脸
+        /// </summary>
+        Face = 4
     }
 }
