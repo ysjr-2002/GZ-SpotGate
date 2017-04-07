@@ -9,31 +9,5 @@
         Height="350"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-
-        <Button Grid.Row="0"
-                Click="Button_Click"
-                Content="request" />
-
-        <Button Name="btnawait"
-                Grid.Row="1"
-                Click="Button1_Click"
-                Content="await" />
-
-        <Button Name="btnServer"
-                Grid.Row="2"
-                Click="Button2_Click"
-                Content="Start Server" />
-
-        <Button Name="btnStop"
-                Grid.Row="3"
-                Click="Button3_Click"
-                Content="Stop Server" />
-    </Grid>
+    <Grid />
 </Window>

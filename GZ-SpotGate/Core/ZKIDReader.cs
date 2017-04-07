@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     class ZKIDReader : IReader
     {
@@ -107,7 +107,7 @@ namespace GZ_SpotGate.Udp
                 i++;
             }
 
-            if (list[2] == 0x9f)
+            if (list?[2] == 0x9f)
             {
                 return true;
             }

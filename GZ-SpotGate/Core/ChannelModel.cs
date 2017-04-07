@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     class ChannelModel
     {
@@ -15,6 +15,8 @@ namespace GZ_SpotGate.Udp
         public const int OutReaderPort = 1003;
 
         public const int OutIDReaderPort = 1004;
+
+        public string No { get; set; }
         /// <summary>
         /// 串口服务器Ip
         /// </summary>

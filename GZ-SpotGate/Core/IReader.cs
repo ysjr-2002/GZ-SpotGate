@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     public interface IReader
     {

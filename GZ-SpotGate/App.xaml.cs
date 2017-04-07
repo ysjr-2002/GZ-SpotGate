@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Udp;
+﻿using GZ_SpotGate.Core;
 using GZ_SpotGate.Manage;
 using System;
 using System.Collections.Generic;
@@ -22,9 +22,13 @@ namespace GZ_SpotGate
         protected override void OnStartup(StartupEventArgs e)
         {
             ConfigProfile.Current.ReadConfig();
-            var window = new DeviceTestWindow();
-            window.ShowDialog();
+            Channels.Load();
+            //var window = new MainWindow();
+            //window.ShowDialog();
             base.OnStartup(e);
+
+            //MainController mc = new MainController();
+            //mc.Start();
         }
     }
 }

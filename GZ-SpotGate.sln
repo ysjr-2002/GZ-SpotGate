@@ -23,31 +23,58 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TicketWebServer", "TicketWe
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "12840"
+		SlnRelativePath = "TicketWebServer\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZ-SpotVisual", "GZ-SpotVisual\GZ-SpotVisual.csproj", "{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceAPI", "FaceAPI\FaceAPI.csproj", "{A3DDFA5A-D48F-48B7-814B-5B768570E811}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|x86.ActiveCfg = Debug|x86
+		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|x86.Build.0 = Debug|x86
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Release|x86.ActiveCfg = Release|x86
+		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Release|x86.Build.0 = Release|x86
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|x86.Build.0 = Debug|Any CPU
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Release|x86.ActiveCfg = Debug|Any CPU
+		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Release|x86.Build.0 = Debug|Any CPU
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|x86.ActiveCfg = Debug|x86
+		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|x86.Build.0 = Debug|x86
+		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|x86.Deploy.0 = Debug|x86
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|x86.ActiveCfg = Release|x86
+		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|x86.Build.0 = Release|x86
+		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|x86.Deploy.0 = Release|x86
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|x86.ActiveCfg = Debug|x86
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|x86.Build.0 = Debug|x86
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Release|x86.ActiveCfg = Release|x86
+		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

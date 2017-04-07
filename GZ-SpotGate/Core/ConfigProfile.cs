@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     class ConfigProfile
     {
@@ -46,12 +46,12 @@ namespace GZ_SpotGate.Udp
             if (ConfigurationManager.AppSettings.AllKeys.Contains(key))
             {
                 var val = ConfigurationManager.AppSettings[key];
-                log.Debug(string.Format("参数[{0}]={1}", key, val));
+                log.Debug(string.Format("[{0}]={1}", key, val));
                 return val;
             }
             else
             {
-                log.Debug(string.Format("参数[{0}]不存在", key));
+                log.Debug(string.Format("[{0}]项不存在", key));
                 return string.Empty;
             }
         }

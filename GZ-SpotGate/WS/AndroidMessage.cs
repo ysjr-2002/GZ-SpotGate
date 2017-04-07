@@ -9,7 +9,9 @@ namespace GZ_SpotGate.WS
 {
     class AndroidMessage
     {
-        public CheckIntype CheckInType { get; set; }
+        public IDType CheckInType { get; set; }
+
+        public bool Result { get; set; }
 
         public string Message { get; set; }
 

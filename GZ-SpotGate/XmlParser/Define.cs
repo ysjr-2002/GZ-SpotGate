@@ -10,27 +10,31 @@ namespace GZ_SpotGate.XmlParser
     class Define
     {
         private const string checkin_template = "<checkin><uniqueid>{0}</uniqueid><idtype>{1}</idtype></checkin>";
-        public static string GetCheckInContent(CheckIntype type, string code)
+
+        public static string GetCheckInXmlContent(IDType type, string uniqueId)
         {
             var idtype = (int)type;
-            var content = string.Format(checkin_template, code, idtype);
+            var content = string.Format(checkin_template, uniqueId, idtype);
             return content;
         }
 
-        public static void Parse(string xml, out string code, out string message, out string datetime, out string nums)
+        public static void ParseXmlContent(string xml, out string uniqueId, out string message, out string datetime, out string nums)
         {
             xml = "<?xml version='1.0' encoding='utf-8' ?>" + xml;
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 
-            code = doc.SelectSingleNode("message/errorcode")?.InnerText;
+            uniqueId = doc.SelectSingleNode("message/errorcode")?.InnerText;
             message = doc.SelectSingleNode("message/errmessage")?.InnerText;
             datetime = doc.SelectSingleNode("message/datetime")?.InnerText;
             nums = doc.SelectSingleNode("message/nums")?.InnerText;
         }
     }
 
-    enum CheckIntype : int
+    /// <summary>
+    /// 号码类型
+    /// </summary>
+    enum IDType : int
     {
         /// <summary>
         /// 二维码

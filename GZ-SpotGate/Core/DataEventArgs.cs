@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     internal class DataEventArgs : EventArgs
     {

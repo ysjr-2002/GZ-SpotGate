@@ -2,28 +2,31 @@
 <channels>
   <!--通道1-->
   <channel>
-    <comserverip></comserverip>
-    <androidInip></androidInip>
-    <androidOutip></androidOutip>
-    <faceInip></faceInip>
-    <faceOutip></faceOutip>
-    <faceInCameraip></faceInCameraip>
-    <faceOutCameraip></faceOutCameraip>
-    <megviiip></megviiip>
+    <no>1</no>
+    <comserverip>192.168.1.61</comserverip>
+    <androidInip>192.168.1.20</androidInip>
+    <androidOutip>192.168.1.21</androidOutip>
+    <faceInip>192.168.1.22</faceInip>
+    <faceOutip>192.168.1.22</faceOutip>
+    <faceInCameraip>192.168.1.23</faceInCameraip>
+    <faceOutCameraip>192.168.1.23</faceOutCameraip>
+    <megviiip>192.168.1.25</megviiip>
   </channel>
   <!--通道2-->
   <channel>
-    <comserverip></comserverip>
-    <androidInip></androidInip>
-    <androidOutip></androidOutip>
-    <faceInip></faceInip>
-    <faceOutip></faceOutip>
-    <faceInCameraip></faceInCameraip>
-    <faceOutCameraip></faceOutCameraip>
-    <megviiip></megviiip>
+    <no>2</no>
+    <comserverip>192.168.1.61</comserverip>
+    <androidInip>192.168.1.20</androidInip>
+    <androidOutip>192.168.1.21</androidOutip>
+    <faceInip>192.168.1.22</faceInip>
+    <faceOutip>192.168.1.22</faceOutip>
+    <faceInCameraip>192.168.1.23</faceInCameraip>
+    <faceOutCameraip>192.168.1.23</faceOutCameraip>
+    <megviiip>192.168.1.25</megviiip>
   </channel>
   <!--通道3-->
   <channel>
+    <no>3</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -35,6 +38,7 @@
   </channel>
   <!--通道4-->
   <channel>
+    <no>4</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -46,6 +50,7 @@
   </channel>
   <!--通道5-->
   <channel>
+    <no>5</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -57,6 +62,7 @@
   </channel>
   <!--通道6-->
   <channel>
+    <no>6</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -68,6 +74,7 @@
   </channel>
   <!--通道7-->
   <channel>
+    <no>7</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -79,6 +86,7 @@
   </channel>
   <!--通道8-->
   <channel>
+    <no>8</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -90,6 +98,7 @@
   </channel>
   <!--通道9-->
   <channel>
+    <no>9</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -101,6 +110,7 @@
   </channel>
   <!--通道10-->
   <channel>
+    <no>10</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
@@ -112,6 +122,7 @@
   </channel>
   <!--通道11-->
   <channel>
+    <no>11</no>
     <comserverip></comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>

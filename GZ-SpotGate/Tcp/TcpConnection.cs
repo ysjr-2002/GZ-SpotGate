@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Udp;
+﻿using GZ_SpotGate.Core;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGate.Tcp
 {
+    /// <summary>
+    /// 二合一设备连接
+    /// </summary>
     class TcpConnection : ITcpConnection
     {
         private TcpClient _tcp = null;
@@ -21,8 +24,8 @@ namespace GZ_SpotGate.Tcp
         private Action<DataEventArgs> _callback;
         private static readonly ILog log = LogManager.GetLogger("TcpConnection");
 
-        private const string qr_prefiex = "";
-        private const string ic_prefiex = "";
+        private const string qr_prefiex = "qr";
+        private const string ic_prefiex = "ic";
 
         public TcpClient Tcp
         {

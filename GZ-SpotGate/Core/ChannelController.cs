@@ -1,13 +1,14 @@
 ﻿using GZ_SpotGate.Face;
 using GZ_SpotGate.WS;
 using GZ_SpotGate.XmlParser;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     /// <summary>
     /// 通道控制器
@@ -18,49 +19,60 @@ namespace GZ_SpotGate.Udp
         private FaceSocket _inFaceSocket = null;
         private FaceSocket _outFaceSocket = null;
 
-        private Request _request = null;
-        private WebServer _ws;
+        private WebSocketServer _ws;
         private MegviiGate _megvii;
+        private Request _request = null;
 
-        public async void Init(ChannelModel model, WebServer ws, MegviiGate megvii)
+        private static readonly ILog log = LogManager.GetLogger("ChannelController");
+
+        public async Task<bool> Init(ChannelModel model, WebSocketServer ws, MegviiGate megvii)
         {
             _ws = ws;
+            _model = model;
             _megvii = megvii;
             _request = new Request();
 
             _inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            await _inFaceSocket.Connect();
+            var connect1 = await _inFaceSocket.Connect();
 
             _outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            await _outFaceSocket.Connect();
+            var connect2 = await _outFaceSocket.Connect();
+
+            if (connect1 && connect2)
+                return true;
+            else
+            {
+                log.DebugFormat("初始化失败->{0}", _model.No);
+                return false;
+            }
         }
 
         public async void Work(DataEventArgs args)
         {
             IntentType intentType = IntentType.In;
-            CheckIntype checkInType = CheckIntype.IC;
+            IDType checkInType = IDType.IC;
 
             if (ChannelModel.InReaderPort == args.IPEndPoint.Port || ChannelModel.InIDReaderPort == args.IPEndPoint.Port)
                 intentType = IntentType.In;
             else
                 intentType = IntentType.Out;
 
-            if (args.ICData)
-                checkInType = CheckIntype.IC;
-            if (args.IDData)
-                checkInType = CheckIntype.ID;
             if (args.QRData)
-                checkInType = CheckIntype.BarCode;
+                checkInType = IDType.BarCode;
+            if (args.IDData)
+                checkInType = IDType.ID;
+            if (args.ICData)
+                checkInType = IDType.IC;
 
             await Check(intentType, checkInType, args.Data);
         }
 
-        private async Task Check(IntentType intentType, CheckIntype checkInType, string uniqueId, string name = "", string avatar = "")
+        private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
             var content = await _request.CheckIn(checkInType, uniqueId);
 
             string code, errmessage, datetime, nums;
-            Define.Parse(content, out code, out errmessage, out datetime, out nums);
+            Define.ParseXmlContent(content, out code, out errmessage, out datetime, out nums);
 
             AndroidMessage am = new AndroidMessage()
             {
@@ -101,13 +113,13 @@ namespace GZ_SpotGate.Udp
         private async void FaceIn(FaceRecognized face)
         {
             var code = face.person.job_number;
-            await Check(IntentType.In, CheckIntype.Face, code);
+            await Check(IntentType.In, IDType.Face, code);
         }
 
         private async void FaceOut(FaceRecognized face)
         {
             var code = face.person.job_number;
-            await Check(IntentType.Out, CheckIntype.Face, code);
+            await Check(IntentType.Out, IDType.Face, code);
         }
 
         /// <summary>

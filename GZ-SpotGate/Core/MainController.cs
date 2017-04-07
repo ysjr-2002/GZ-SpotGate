@@ -1,4 +1,5 @@
-﻿using GZ_SpotGate.Tcp;
+﻿using GZ_SpotGate.Core;
+using GZ_SpotGate.Tcp;
 using GZ_SpotGate.WS;
 using GZ_SpotGate.XmlParser;
 using log4net;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     /// <summary>
     /// DEBUG
@@ -23,8 +24,10 @@ namespace GZ_SpotGate.Udp
         private readonly int TCP_COM_SERVER_PORT = 0;
         private readonly int WEB_SERVER_PORT = 0;
 
+        private MegviiGate _megvii = null;
+        private WebSocketServer _webServer = null;
         private TcpComServer _tcpServer = null;
-        private WebServer _webServer = null;
+
         private List<ChannelController> _channels = new List<ChannelController>();
 
         public MainController()
@@ -39,19 +42,17 @@ namespace GZ_SpotGate.Udp
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
             _tcpServer.Start();
 
-            _webServer = new WebServer(WEB_SERVER_PORT);
+            _webServer = new WebSocketServer(WEB_SERVER_PORT);
             _webServer.Start();
 
-            ChannelController c = new ChannelController();
-            _channels.Add(c);
+            _megvii = new MegviiGate();
 
-            //c.Init(new ChannelModel
-            //{
-            //    FaceInIp = "192.168.1.110",
-            //    FaceInCameraIp = "192.168.1.116",
-            //    FaceOutIp = "192.168.1.111",
-            //    FaceOutCameraIp = "192.168.1.116",
-            //});
+            foreach (var c in Channels.ChannelList)
+            {
+                ChannelController cc = new ChannelController();
+                await cc.Init(c, _webServer, _megvii);
+                _channels.Add(cc);
+            }
         }
 
         private List<ChannelModel> GetChannelModels()

@@ -7,24 +7,24 @@ using System.Net;
 using System.Net.Http;
 using GZ_SpotGate.XmlParser;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     class Request
     {
-        public async Task<string> CheckIn(CheckIntype type, string code)
+        public async Task<string> CheckIn(IDType type, string code)
         {
             var content = await doRequest(type, code);
             return content;
         }
 
-        private async Task<string> doRequest(CheckIntype type, string code)
+        private async Task<string> doRequest(IDType type, string code)
         {
             var url = "http://localhost:12840/TicketCheckHandler.ashx";
             var dict = new Dictionary<string, string>();
             dict.Add("sign", "1");
             dict.Add("method", "ticketcheckinface");
 
-            var content = Define.GetCheckInContent(type, code);
+            var content = Define.GetCheckInXmlContent(type, code);
             var contentBuffer = content.ToData();
 
             url = string.Concat(url, "?", dict.LinkUrl());

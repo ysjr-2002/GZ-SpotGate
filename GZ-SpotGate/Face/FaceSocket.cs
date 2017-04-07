@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Udp;
+﻿using GZ_SpotGate.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace GZ_SpotGate.Face
     {
         private string _koalaIp = "";
         private string _cameraIp = "";
-
+        private bool _open = false;
         private WebSocket _socket = null;
         private Action<FaceRecognized> _callback = null;
         public FaceSocket(string koalaIp, string cameraIp, Action<FaceRecognized> callback)
@@ -22,15 +22,13 @@ namespace GZ_SpotGate.Face
             _callback = callback;
         }
 
-        public Task Connect()
+        public Task<bool> Connect()
         {
             return Task.Factory.StartNew(() =>
             {
                 var wsUrl = string.Format("ws://{0}:9000", _koalaIp);
-                //var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?", cameraIp);
-                var rtspUrl = string.Format("rtsp://admin:admin123456@{0}/live1.sdp", _cameraIp);
+                var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?", _cameraIp);
                 var url = string.Concat(wsUrl, "?url=", rtspUrl.UrlEncode());
-
                 _socket = new WebSocket(wsUrl);
                 _socket.OnOpen += _socket_OnOpen;
                 _socket.OnError += _socket_OnError;
@@ -38,6 +36,7 @@ namespace GZ_SpotGate.Face
                 _socket.OnMessage += _socket_OnMessage;
                 _socket.EmitOnPing = true;
                 _socket.Connect();
+                return _open;
             });
         }
 
@@ -55,16 +54,19 @@ namespace GZ_SpotGate.Face
 
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
+
         }
 
         private void _socket_OnError(object sender, ErrorEventArgs e)
         {
-            Dispose();
-            Connect();
+            _open = false;
+            //Dispose();
+            //Connect();
         }
 
         private void _socket_OnOpen(object sender, EventArgs e)
         {
+            _open = true;
         }
 
         private void Dispose()

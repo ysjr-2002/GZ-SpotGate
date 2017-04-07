@@ -13,7 +13,7 @@ namespace GZ_SpotGate.WS
         private Action<string> action;
 
         public AndroidBehavior()
-        {
+        {                        
         }
 
         public AndroidBehavior(Action<string> action)

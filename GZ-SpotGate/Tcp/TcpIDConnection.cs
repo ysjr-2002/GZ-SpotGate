@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Udp;
+﻿using GZ_SpotGate.Core;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGate.Tcp
 {
+    /// <summary>
+    /// 身份证阅读器连接
+    /// </summary>
     internal class TcpIDConnection : ITcpConnection
     {
         private bool _running = false;

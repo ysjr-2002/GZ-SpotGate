@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Udp;
+﻿using GZ_SpotGate.Core;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -66,7 +66,6 @@ namespace BJ_Benz.Code
 
         private void Log(string log, params string[] p)
         {
-            //LogHelper.Info(log, p);
         }
 
         public bool ClosePort()

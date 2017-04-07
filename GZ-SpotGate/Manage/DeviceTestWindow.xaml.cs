@@ -1,5 +1,5 @@
 ﻿using BJ_Benz.Code;
-using GZ_SpotGate.Udp;
+using GZ_SpotGate.Core;
 using GZ_SpotGate.WS;
 using System;
 using System.Collections.Generic;
@@ -28,6 +28,7 @@ namespace GZ_SpotGate.Manage
     public partial class DeviceTestWindow : Window
     {
         private int _dType = 0;
+        private IReader reader = null;
 
         public DeviceTestWindow()
         {
@@ -39,10 +40,8 @@ namespace GZ_SpotGate.Manage
         {
             var ports = SerialPort.GetPortNames();
             cmbPort.ItemsSource = ports;
-            cmbPort.SelectedIndex = 1;
+            cmbPort.SelectedIndex = 0;
         }
-
-        private IReader reader = null;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -139,7 +138,7 @@ namespace GZ_SpotGate.Manage
             gate.Dispose();
         }
 
-        private WebServer ws = null;
+        private WebSocketServer ws = null;
         private Tcp.TcpComServer tcpServer = null;
         private void btnOpenX_Click(object sender, RoutedEventArgs e)
         {
@@ -147,7 +146,7 @@ namespace GZ_SpotGate.Manage
             //tcpServer.OnMessageInComming += Tcp_OnMessageInComming;
             //tcpServer.Start();
             //btnOpenX.IsEnabled = false;
-            ws = new WebServer(ConfigProfile.Current.WebSocketListenPort);
+            ws = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
             ws.Start();
         }
 
@@ -173,7 +172,7 @@ namespace GZ_SpotGate.Manage
             AndroidMessage am = new AndroidMessage
             {
                 Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-05/a856505e44ebc1652de0d3700ea26e542a590373.jpg",
-                CheckInType = XmlParser.CheckIntype.Face,
+                CheckInType = XmlParser.IDType.Face,
                 Name = "yang"
             };
             ws.Pass("192.168.0.4", am);

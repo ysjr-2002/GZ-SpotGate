@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     class UdpComServer
     {
@@ -40,9 +40,7 @@ namespace GZ_SpotGate.Udp
                 if (_server.Client != null)
                 {
                     byte[] recBuffer = _server.EndReceive(ir, ref epSender);
-                    Console.WriteLine(epSender.Address.ToString() + ":" + epSender.Port);
                     BeginReceive();
-
                     var code = Encoding.UTF8.GetString(recBuffer);
                     DataEventArgs args = new DataEventArgs
                     {

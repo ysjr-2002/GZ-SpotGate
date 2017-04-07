@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace GZ_SpotGate.Udp
+namespace GZ_SpotGate.Core
 {
     static class Util
     {

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{27408243-3AAB-4B40-B492-A61ADBCEB2F1}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GZ_SpotGate</RootNamespace>
     <AssemblyName>GZ-SpotGate</AssemblyName>
@@ -32,6 +32,29 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -68,7 +91,7 @@
     <Compile Include="Core\ChannelController.cs" />
     <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ConfigProfile.cs" />
-    <Compile Include="Core\XmlFeed.cs" />
+    <Compile Include="Core\Channels.cs" />
     <Compile Include="Tcp\ITcpConnection.cs" />
     <Compile Include="Udp\UdpComServer.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
@@ -96,7 +119,7 @@
     <Compile Include="Tcp\TcpIDConnection.cs" />
     <Compile Include="WS\AndroidBehavior.cs" />
     <Compile Include="WS\AndroidMessage.cs" />
-    <Compile Include="WS\WebServer.cs" />
+    <Compile Include="WS\WebSocketServer.cs" />
     <Compile Include="XmlParser\Define.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -167,7 +190,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="channels.xml" />
+    <None Include="channels.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Document\face-api.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Udp;
+﻿using GZ_SpotGate.Core;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGate.Tcp
 {
+    /// <summary>
+    /// 串口服务器，接收11条通道的串口连接
+    /// </summary>
     class TcpComServer
     {
         private int _port = 0;
@@ -57,7 +60,7 @@ namespace GZ_SpotGate.Tcp
                     }
 
                     var key = ep.ToString();
-                    Console.WriteLine("来了一个" + key);
+                    log.Debug("");
                     if (clientCollection.ContainsKey(key))
                     {
                         var old = clientCollection[key];

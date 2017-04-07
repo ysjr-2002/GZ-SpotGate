@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.Udp;
+﻿using GZ_SpotGate.Core;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -10,29 +10,31 @@ using WebSocketSharp.Server;
 
 namespace GZ_SpotGate.WS
 {
-    class WebServer
+    /// <summary>
+    /// Websocket服务，接收android平台的连接
+    /// </summary>
+    class WebSocketServer
     {
         private int _port = 0;
-        private WebSocketServer wssv = null;
+        private WebSocketSharp.Server.WebSocketServer wssv = null;
         private static readonly ILog log = LogManager.GetLogger("WebServer");
 
         private const string SERVICE_PATH = "/android";
 
-        public WebServer(int port)
+        public WebSocketServer(int port)
         {
             _port = port;
         }
 
         public void Start()
         {
-            wssv = new WebSocketServer(_port);
+            wssv = new WebSocketSharp.Server.WebSocketServer(_port);
+            wssv.Log.Level = WebSocketSharp.LogLevel.Fatal;
             wssv.AddWebSocketService<AndroidBehavior>(SERVICE_PATH, InitAndroid);
             wssv.Start();
             if (wssv.IsListening)
             {
-                Debug("Web server start");
-                var log = string.Format("Listening on port {0}, and providing WebSocket services:", wssv.Port.ToString());
-                Debug(log);
+                Debug("Web server start,port->" + wssv.Port);
                 foreach (var path in wssv.WebSocketServices.Paths)
                 {
                     Debug(path);
@@ -43,7 +45,6 @@ namespace GZ_SpotGate.WS
         private AndroidBehavior InitAndroid()
         {
             AndroidBehavior chat = new AndroidBehavior();
-            Debug("接收到客户端连接->");
             return chat;
         }
 
