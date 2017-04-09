@@ -16,6 +16,7 @@ namespace GZ_SpotGate.Core
         private const string COMMAND_CLOSE = "off1";
 
         private UdpClient socket = null;
+        private static object async = new object();
 
         public MegviiGate()
         {
@@ -36,8 +37,11 @@ namespace GZ_SpotGate.Core
 
         private void Send(string gateIp, byte[] buffer)
         {
-            var ep = new IPEndPoint(IPAddress.Parse(gateIp), PORT);
-            socket.Send(buffer, buffer.Length, ep);
+            lock (async)
+            {
+                var ep = new IPEndPoint(IPAddress.Parse(gateIp), PORT);
+                socket.Send(buffer, buffer.Length, ep);
+            }
         }
 
         private byte[] GetOpenPackage(string command)

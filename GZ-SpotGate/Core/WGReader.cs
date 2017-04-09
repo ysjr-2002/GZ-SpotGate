@@ -13,7 +13,7 @@ namespace BJ_Benz.Code
     {
         private bool _stop = false;
         private SerialPort _serialPort = null;
-        private List<byte> _barcodeList = new List<byte>();
+
         private Action<string> _callback;
         private const int baudRate = 9600;
 
@@ -38,22 +38,32 @@ namespace BJ_Benz.Code
         {
             while (!_stop)
             {
-                byte b = 0;
                 try
                 {
-                    b = (byte)_serialPort.ReadByte();
-                    while (b > 0)
+                    byte b = 0;
+                    List<byte> buffer = new List<byte>();
+                    while ((b = (byte)_serialPort.ReadByte()) > 0)
                     {
                         if (b == 13)
                         {
-                            var barcode = Encoding.UTF8.GetString(_barcodeList.ToArray());
-                            _callback?.BeginInvoke(barcode, null, null);
-                            Console.WriteLine(barcode);
-                            _barcodeList.Clear();
+                            var array = buffer.ToArray();
+                            var len = buffer.Count;
+                            var code = "";
+                            var prefix = Encoding.UTF8.GetString(array, 0, 2);
+                            if (prefix == "qr")
+                            {
+                                code = Encoding.UTF8.GetString(array, 2, len - 2);
+                            }
+                            else
+                            {
+                                code = BitConverter.ToInt32(array, 2).ToString();
+                            }
+                            _callback?.BeginInvoke(code, null, null);
+                            buffer.Clear();
                         }
                         else
                         {
-                            _barcodeList.Add(b);
+                            buffer.Add(b);
                         }
                     }
                 }
@@ -66,6 +76,7 @@ namespace BJ_Benz.Code
 
         private void Log(string log, params string[] p)
         {
+            Console.WriteLine(log);
         }
 
         public bool ClosePort()

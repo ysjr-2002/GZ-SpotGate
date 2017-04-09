@@ -3,26 +3,34 @@
   <!--通道1-->
   <channel>
     <no>1</no>
-    <comserverip>192.168.1.61</comserverip>
+    <!--串口服务器-->
+    <comserverip>192.168.1.100</comserverip>
+    <!--入平板-->
     <androidInip>192.168.1.20</androidInip>
+    <!--出平板-->
     <androidOutip>192.168.1.21</androidOutip>
+    <!--入人脸服务器-->
     <faceInip>192.168.1.22</faceInip>
+    <!--出人脸服务器-->
     <faceOutip>192.168.1.22</faceOutip>
+    <!--入摄像机-->
     <faceInCameraip>192.168.1.23</faceInCameraip>
+    <!--出摄像机-->
     <faceOutCameraip>192.168.1.23</faceOutCameraip>
+    <!--继电器-->
     <megviiip>192.168.1.25</megviiip>
   </channel>
   <!--通道2-->
   <channel>
     <no>2</no>
-    <comserverip>192.168.1.61</comserverip>
-    <androidInip>192.168.1.20</androidInip>
-    <androidOutip>192.168.1.21</androidOutip>
-    <faceInip>192.168.1.22</faceInip>
-    <faceOutip>192.168.1.22</faceOutip>
-    <faceInCameraip>192.168.1.23</faceInCameraip>
-    <faceOutCameraip>192.168.1.23</faceOutCameraip>
-    <megviiip>192.168.1.25</megviiip>
+    <comserverip></comserverip>
+    <androidInip></androidInip>
+    <androidOutip></androidOutip>
+    <faceInip></faceInip>
+    <faceOutip></faceOutip>
+    <faceInCameraip></faceInCameraip>
+    <faceOutCameraip></faceOutCameraip>
+    <megviiip></megviiip>
   </channel>
   <!--通道3-->
   <channel>

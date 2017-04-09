@@ -33,6 +33,11 @@ namespace GZ_SpotGate.Core
             return json;
         }
 
+        public static string HMS(this DateTime dt)
+        {
+            return dt.ToString("HH:mm:ss");
+        }
+
         public static T Deserlizer<T>(this string content)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();

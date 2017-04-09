@@ -60,7 +60,7 @@ namespace GZ_SpotGate.Tcp
                     }
 
                     var key = ep.ToString();
-                    log.Debug("");
+                    log.Debug(key);
                     if (clientCollection.ContainsKey(key))
                     {
                         var old = clientCollection[key];

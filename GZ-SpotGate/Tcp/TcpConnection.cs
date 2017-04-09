@@ -20,8 +20,8 @@ namespace GZ_SpotGate.Tcp
         private bool _running = false;
         private NetworkStream _nws = null;
         private IPEndPoint _ipEndPoint = null;
-        private byte[] _buffer = new byte[1024];
         private Action<DataEventArgs> _callback;
+        private Thread _thread = null;
         private static readonly ILog log = LogManager.GetLogger("TcpConnection");
 
         private const string qr_prefiex = "qr";
@@ -60,37 +60,67 @@ namespace GZ_SpotGate.Tcp
             if (_running)
                 return;
 
-            BeginRead();
+            _running = true;
+            _thread = new Thread(BeginRead);
+            _thread.Start();
         }
 
         private void BeginRead()
         {
-            _nws.BeginRead(_buffer, 0, _buffer.Length, EndReceive, null);
-        }
-
-        private void EndReceive(IAsyncResult ir)
-        {
-            var len = 0;
-            try
+            while (_running)
             {
-                len = _nws.EndRead(ir);
-                if (len == 0)
+                try
                 {
-                    Stop();
-                    return;
+                    byte b = 0;
+                    List<byte> buffer = new List<byte>();
+                    while ((b = (byte)_nws.ReadByte()) > 0)
+                    {
+                        if (b == 13)
+                        {
+                            var array = buffer.ToArray();
+                            var len = buffer.Count;
+                            var code = "";
+                            var prefix = Encoding.UTF8.GetString(array, 0, 2);
+                            var ic = false;
+                            var qr = false;
+                            if (prefix == qr_prefiex)
+                            {
+                                //二维码数据
+                                qr = true;
+                                ic = false;
+                                code = Encoding.UTF8.GetString(array, 2, len - 2);
+                            }
+                            else if(  prefix == ic_prefiex)
+                            {
+                                //IC卡
+                                qr = false;
+                                ic = true;
+                                code = BitConverter.ToInt32(array, 2).ToString();
+                            }
+                            else
+                            {
+                                break;
+                            }
+                            var data = new DataEventArgs
+                            {
+                                IPEndPoint = _ipEndPoint,
+                                Data = code,
+                                ICData = ic,
+                                QRData = qr
+                            };
+                            _callback?.BeginInvoke(data, null, null);
+                            buffer.Clear();
+                        }
+                        else
+                        {
+                            buffer.Add(b);
+                        }
+                    }
                 }
-                var code = Encoding.UTF8.GetString(_buffer, 0, len);
-                var data = new DataEventArgs
+                catch (Exception ex)
                 {
-                    IPEndPoint = _ipEndPoint,
-                    Data = code,
-                };
-                BeginRead();
-                _callback.BeginInvoke(data, null, null);
-            }
-            catch (Exception ex)
-            {
-                log.Debug("连接关闭");
+
+                }
             }
         }
 
@@ -99,6 +129,8 @@ namespace GZ_SpotGate.Tcp
             _running = false;
             _nws.Close();
             _tcp.Close();
+            _thread.Join(100);
+            _thread = null;
             _tcp = null;
         }
     }

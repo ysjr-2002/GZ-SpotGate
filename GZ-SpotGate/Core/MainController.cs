@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace GZ_SpotGate.Core
 {
@@ -30,8 +31,11 @@ namespace GZ_SpotGate.Core
 
         private List<ChannelController> _channels = new List<ChannelController>();
 
-        public MainController()
+        private TextBox _output;
+
+        public MainController(TextBox output)
         {
+            _output = output;
             TCP_COM_SERVER_PORT = ConfigProfile.Current.TcpComListenPort;
             WEB_SERVER_PORT = ConfigProfile.Current.WebSocketListenPort;
         }
@@ -49,7 +53,7 @@ namespace GZ_SpotGate.Core
 
             foreach (var c in Channels.ChannelList)
             {
-                ChannelController cc = new ChannelController();
+                ChannelController cc = new ChannelController(_output);
                 await cc.Init(c, _webServer, _megvii);
                 _channels.Add(cc);
             }

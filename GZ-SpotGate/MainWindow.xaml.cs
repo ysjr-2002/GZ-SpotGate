@@ -32,7 +32,8 @@ namespace GZ_SpotGate
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
+            MainController mc = new MainController(txtConsole);
+            mc.Start();
         }
     }
 }

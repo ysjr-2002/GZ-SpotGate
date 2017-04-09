@@ -23,12 +23,9 @@ namespace GZ_SpotGate
         {
             ConfigProfile.Current.ReadConfig();
             Channels.Load();
-            //var window = new MainWindow();
-            //window.ShowDialog();
+            var window = new DeviceTestWindow();
+            window.ShowDialog();
             base.OnStartup(e);
-
-            //MainController mc = new MainController();
-            //mc.Start();
         }
     }
 }
