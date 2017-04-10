@@ -17,6 +17,12 @@
         <Style TargetType="ComboBox">
             <Setter Property="Height" Value="24" />
         </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -52,8 +58,6 @@
 
             <Button Name="btnOpen"
                     Grid.Column="2"
-                    Width="80"
-                    Margin="0,10"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Click="Button_Click"
@@ -61,16 +65,11 @@
 
             <Button Name="btnOpenX"
                     Grid.Column="3"
-                    Width="80"
-                    Margin="5"
-                    VerticalAlignment="Center"
                     Click="btnOpenX_Click"
                     Content="tcp服务器" />
 
             <Button Name="btnOpenU"
                     Grid.Column="4"
-                    Width="80"
-                    VerticalAlignment="Center"
                     Click="btnOpenU_Click"
                     Content="停止服务器" />
         </Grid>
@@ -83,16 +82,15 @@
                      VerticalContentAlignment="Center"
                      Text="192.168.1.1" />
             <Button Name="btnOpen1"
-                    Width="80"
-                    Height="24"
-                    Margin="5,5"
                     Click="btnOpen1_Click"
                     Content="开闸(进)" />
             <Button Name="btnOpen2"
-                    Width="80"
-                    Height="24"
                     Click="btnOpen2_Click"
                     Content="开闸(出)" />
+
+            <Button Name="btnVerify"
+                    Click="btnOpen3_Click"
+                    Content="验证" />
         </StackPanel>
 
         <Label Name="lblContent"

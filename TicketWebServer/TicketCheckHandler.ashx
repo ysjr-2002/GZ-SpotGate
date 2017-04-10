@@ -5,7 +5,7 @@ using System.Web;
 using System.Text;
 using System.IO;
 using System.Drawing;
-
+using System.Web.Script;
 public class TicketCheckHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
@@ -19,30 +19,14 @@ public class TicketCheckHandler : IHttpHandler
             using (var reader = new StreamReader(stream, Encoding.UTF8))
             {
                 var content = reader.ReadToEnd();
+                System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+                var obj = js.Deserialize(content, typeof(requestParam));
             }
         }
 
-        var sign = request["api_key"];
-        var method = request["api_secret"];
-        var files = request.Files;
 
-
-        if (files.Count > 0)
-        {
-            var na = files.AllKeys[0];
-            var ct = files[0].ContentType;
-            var fn = files[0].FileName;
-            files[0].SaveAs("c:\\client.jpg");
-        }
-
-        var responseStr = "<message>"
-                   + "<errcode>3100</errcode>"
-                  + "<errmessage>验票完成</errmessage>"
-                  + "<datetime>2017-4-5</datetime>"
-                  + "<nums>1</nums>"
-                  + "</message>";
-
-        response.ContentType = "text/plain";
+        var responseStr = "";
+        response.ContentType = "application/json";
         response.ContentEncoding = Encoding.UTF8;
         response.Write(responseStr);
     }
@@ -54,5 +38,17 @@ public class TicketCheckHandler : IHttpHandler
             return false;
         }
     }
-
 }
+
+//public class requestParam
+//{
+//    public requestParam()
+//    {
+//        doorip = "172.21.4.31";
+//        barcode = "2017041000018";
+//        type = "P";
+//    }
+//    public string doorip { get; set; }
+//    public string barcode { get; set; }
+//    public string type { get; set; }
+//}

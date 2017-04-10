@@ -21,7 +21,7 @@ namespace GZ_SpotGate.Core
             return url;
         }
 
-        public static byte[] ToData(this string content)
+        public static byte[] ToBuffer(this string content)
         {
             return Encoding.UTF8.GetBytes(content);
         }

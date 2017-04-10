@@ -19,20 +19,17 @@ namespace GZ_SpotGate.Core
 
         private async Task<string> doRequest(IDType type, string code)
         {
-            var url = "http://localhost:12840/TicketCheckHandler.ashx";
-            var dict = new Dictionary<string, string>();
-            dict.Add("sign", "1");
-            dict.Add("method", "ticketcheckinface");
+            var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=ticketface";
+            //var url = "http://localhost:12840/TicketCheckHandler.ashx";
 
-            var content = Define.GetCheckInXmlContent(type, code);
-            var contentBuffer = content.ToData();
+            requestParam rp = new requestParam();
+            var json = Util.toJson(rp);
 
-            url = string.Concat(url, "?", dict.LinkUrl());
+            var contentBuffer = json.ToBuffer();
             WebRequest request = WebRequest.Create(url);
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = "application/json";
             request.ContentLength = contentBuffer.Length;
-
             try
             {
                 var requestStream = await request.GetRequestStreamAsync();
@@ -55,5 +52,38 @@ namespace GZ_SpotGate.Core
                 return string.Empty;
             }
         }
+    }
+
+    public class requestParam
+    {
+        public requestParam()
+        {
+            doorip = "172.21.4.31";
+            barcode = "2017041000018";
+            type = "P";
+        }
+
+        public string doorip { get; set; }
+
+        public string barcode { get; set; }
+
+        public string type { get; set; }
+    }
+
+    public class FeedBack
+    {
+        public string code { get; set; }
+
+        public string message { get; set; }
+
+        public string sound { get; set; }
+
+        public string personCount { get; set; }
+
+        public string personOnceCount { get; set; }
+
+        public string direction { get; set; }
+
+        public string contentType { get; set; }
     }
 }

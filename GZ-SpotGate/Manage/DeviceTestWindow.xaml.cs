@@ -158,11 +158,11 @@ namespace GZ_SpotGate.Manage
                 {
                     lblContent.Content = e.Data;
                 }
-                if( e.ICData)
+                if (e.ICData)
                 {
                     lblContent.Content = e.Data;
                 }
-                if( e.QRData)
+                if (e.QRData)
                 {
                     lblContent.Content = e.Data;
                 }
@@ -184,6 +184,16 @@ namespace GZ_SpotGate.Manage
             //    Name = "yang"
             //};
             //ws.Pass("192.168.0.4", am);
+        }
+
+        private async void btnOpen3_Click(object sender, RoutedEventArgs e)
+        {
+            var request = new Request();
+            var c = await request.CheckIn(XmlParser.IDType.Face, "");
+            var json = c.Deserlizer<FeedBack>();
+            if (json.code == "100")
+            {
+            }
         }
     }
 }

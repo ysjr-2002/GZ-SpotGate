@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
 using System.IO;
-using GZ_SpotGate.Core;
 
 namespace GZ_SpotGate
 {
