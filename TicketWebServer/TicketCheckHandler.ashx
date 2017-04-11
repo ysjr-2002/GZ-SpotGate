@@ -15,6 +15,10 @@ public class TicketCheckHandler : IHttpHandler
 
         if (request.ContentLength > 0)
         {
+            var a = context.Request.Form["doorip"];
+            var b = context.Request["doorip"];
+            var c = context.Request["barcode"];
+            var t = context.Request["type"];
             var stream = request.InputStream;
             using (var reader = new StreamReader(stream, Encoding.UTF8))
             {
@@ -23,7 +27,6 @@ public class TicketCheckHandler : IHttpHandler
                 var obj = js.Deserialize(content, typeof(requestParam));
             }
         }
-
 
         var responseStr = "";
         response.ContentType = "application/json";

@@ -1,4 +1,4 @@
-﻿using GZ_SpotGate.XmlParser;
+﻿using GZ_SpotGate.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

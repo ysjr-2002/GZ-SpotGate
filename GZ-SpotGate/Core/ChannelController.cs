@@ -1,6 +1,6 @@
 ﻿using GZ_SpotGate.Face;
+using GZ_SpotGate.Model;
 using GZ_SpotGate.WS;
-using GZ_SpotGate.XmlParser;
 using log4net;
 using System;
 using System.Collections.Generic;

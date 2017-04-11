@@ -1,5 +1,6 @@
 ﻿using BJ_Benz.Code;
 using GZ_SpotGate.Core;
+using GZ_SpotGate.Model;
 using GZ_SpotGate.WS;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,9 @@ namespace GZ_SpotGate.Manage
             var ports = SerialPort.GetPortNames();
             cmbPort.ItemsSource = ports;
             cmbPort.SelectedIndex = 0;
+
+            cmbPort1.ItemsSource = ports;
+            cmbPort1.SelectedIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -124,18 +128,18 @@ namespace GZ_SpotGate.Manage
             });
         }
 
+        GateReader gr = new GateReader();
         private void btnOpen1_Click(object sender, RoutedEventArgs e)
         {
-            MegviiGate gate = new MegviiGate();
-            gate.In(txtIp.Text);
-            gate.Dispose();
+            if (!gr.OpenPort(cmbPort1.Text))
+            {
+                MessageBox.Show("打开失败！");
+            }
         }
 
         private void btnOpen2_Click(object sender, RoutedEventArgs e)
         {
-            MegviiGate gate = new MegviiGate();
-            gate.Out(txtIp.Text);
-            gate.Dispose();
+
         }
 
         private WebSocketServer ws = null;
@@ -186,14 +190,69 @@ namespace GZ_SpotGate.Manage
             //ws.Pass("192.168.0.4", am);
         }
 
-        private async void btnOpen3_Click(object sender, RoutedEventArgs e)
+        private void btnEnter_Click(object sender, RoutedEventArgs e)
+        {
+            gr.EnterOpen();
+        }
+
+        private void btnEnterHold_click(object sender, RoutedEventArgs e)
+        {
+            gr.EnterOpen(1);
+        }
+
+        private void btnEnterClose_click(object sender, RoutedEventArgs e)
+        {
+            gr.EnterClose();
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            gr.ExitOpen();
+        }
+
+        private void btnExitHold_click(object sender, RoutedEventArgs e)
+        {
+            gr.ExitOpen(4);
+        }
+
+        private void btnExitClose_click(object sender, RoutedEventArgs e)
+        {
+            gr.EnterClose();
+        }
+
+        private async void btnCheck_Click(object sender, RoutedEventArgs e)
         {
             var request = new Request();
-            var c = await request.CheckIn(XmlParser.IDType.Face, "");
+            var c = await request.CheckIn("172.21.4.31", IDType.Face, "2017041000003");
             var json = c.Deserlizer<FeedBack>();
-            if (json.code == "100")
+            if (json?.code != 100)
             {
+                MessageBox.Show("异常->" + json?.code);
             }
+            else
+            {
+                MessageBox.Show("验证成功");
+            }
+        }
+
+        private async void btnPersonCalc_Click(object sender, RoutedEventArgs e)
+        {
+            var request = new Request();
+            var c = await request.Calc("172.21.4.31");
+            var json = c.Deserlizer<FeedBack>();
+            if (json?.code != 100)
+            {
+                MessageBox.Show("异常->" + json?.code);
+            }
+            else
+            {
+                MessageBox.Show("上报成功");
+            }
+        }
+
+        private void btnAsk_click(object sender, RoutedEventArgs e)
+        {
+            gr.AskGateState();
         }
     }
 }

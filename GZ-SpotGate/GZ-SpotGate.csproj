@@ -92,7 +92,11 @@
     <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ConfigProfile.cs" />
     <Compile Include="Core\Channels.cs" />
+    <Compile Include="Core\GateReader.cs" />
+    <Compile Include="Model\FeedBack.cs" />
+    <Compile Include="Model\IDType.cs" />
     <Compile Include="Tcp\ITcpConnection.cs" />
+    <Compile Include="Tcp\TcpGateConnection.cs" />
     <Compile Include="Udp\UdpComServer.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
     <Compile Include="Face\FaceRecognized.cs" />
@@ -120,7 +124,6 @@
     <Compile Include="WS\AndroidBehavior.cs" />
     <Compile Include="WS\AndroidMessage.cs" />
     <Compile Include="WS\WebSocketServer.cs" />
-    <Compile Include="XmlParser\Define.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -165,9 +168,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Document\GA467-2013 居民身份证验证安全控制模块接口技术规范.pdf" />
+    <None Include="Document\三辊闸485协议17.04.10.pdf" />
     <None Include="Document\人脸接口说明.docx" />
     <None Include="Document\接口.docx" />
     <None Include="Document\设备连接说明.docx" />
+    <None Include="Document\通讯协议 V3.2_CN.doc" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

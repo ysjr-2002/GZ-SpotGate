@@ -1,5 +1,4 @@
 ﻿using GZ_SpotGate.Core;
-using GZ_SpotGate.XmlParser;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

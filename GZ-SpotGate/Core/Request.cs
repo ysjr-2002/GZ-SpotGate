@@ -5,30 +5,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
-using GZ_SpotGate.XmlParser;
+using GZ_SpotGate.Model;
+using log4net;
 
 namespace GZ_SpotGate.Core
 {
     class Request
     {
-        public async Task<string> CheckIn(IDType type, string code)
+        private ILog log = LogManager.GetLogger("Request");
+
+        public async Task<string> CheckIn(string doorIp, IDType type, string code)
         {
-            var content = await doRequest(type, code);
+            var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=ticketface";
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("doorip", doorIp);
+            dict.Add("barcode", code);
+            dict.Add("type", getTypeName(type));
+            var postData = dict.LinkUrl();
+            var content = await doRequest(url, postData);
             return content;
         }
 
-        private async Task<string> doRequest(IDType type, string code)
+        public async Task<string> Calc(string doorIp, string code = "900", string direction = "Z")
         {
-            var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=ticketface";
-            //var url = "http://localhost:12840/TicketCheckHandler.ashx";
+            var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=calccount";
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("doorip", doorIp);
+            dict.Add("code", code);
+            dict.Add("direction", direction);
+            var postData = dict.LinkUrl();
+            var content = await doRequest(url, postData);
+            return content;
+        }
 
-            requestParam rp = new requestParam();
-            var json = Util.toJson(rp);
-
-            var contentBuffer = json.ToBuffer();
+        private async Task<string> doRequest(string url, string postData)
+        {
+            var contentBuffer = postData.ToBuffer();
             WebRequest request = WebRequest.Create(url);
             request.Method = "POST";
-            request.ContentType = "application/json";
+            request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = contentBuffer.Length;
             try
             {
@@ -47,43 +62,27 @@ namespace GZ_SpotGate.Core
                 }
                 return responseStr;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Fatal("请求服务异常->" + ex.Message);
                 return string.Empty;
             }
         }
-    }
 
-    public class requestParam
-    {
-        public requestParam()
+        static string getTypeName(IDType type)
         {
-            doorip = "172.21.4.31";
-            barcode = "2017041000018";
-            type = "P";
+            if (type == IDType.BarCode)
+                return "T";
+            else if (type == IDType.IC)
+                return "";
+            else if (type == IDType.Face)
+                return "P";
+            else
+                return "I";
         }
-
-        public string doorip { get; set; }
-
-        public string barcode { get; set; }
-
-        public string type { get; set; }
     }
 
-    public class FeedBack
-    {
-        public string code { get; set; }
 
-        public string message { get; set; }
 
-        public string sound { get; set; }
 
-        public string personCount { get; set; }
-
-        public string personOnceCount { get; set; }
-
-        public string direction { get; set; }
-
-        public string contentType { get; set; }
-    }
 }
