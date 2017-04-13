@@ -49,7 +49,7 @@ namespace FaceAPI
             }
         }
 
-        public static HttpWebRequest PostImage(string url, string boundary)
+        private static HttpWebRequest PostImage(string url, string boundary)
         {
             HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(url);
             wr.ContentType = "multipart/form-data; boundary=" + boundary;
@@ -117,7 +117,6 @@ namespace FaceAPI
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var jsonData = js.Serialize(instance);
-            //jsonData = HttpUtility.UrlEncode(jsonData);
             var data = jsonData.ToUTF8();
             WebRequest request = WebRequest.Create(url);
             request.ContentType = "application/json";
