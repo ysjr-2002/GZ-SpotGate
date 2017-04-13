@@ -45,6 +45,7 @@ namespace GZ_SpotGate.Tcp
 
         public void SetCallback(Action<DataEventArgs> act)
         {
+
         }
 
         public void Start()
