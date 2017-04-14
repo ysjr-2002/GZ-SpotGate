@@ -35,7 +35,7 @@ namespace GZ_SpotGate.Face
                 _socket.OnClose += _socket_OnClose;
                 _socket.OnMessage += _socket_OnMessage;
                 _socket.EmitOnPing = true;
-                _socket.Connect();
+                //_socket.Connect();
                 return _open;
             });
         }
@@ -54,14 +54,11 @@ namespace GZ_SpotGate.Face
 
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
-
         }
 
         private void _socket_OnError(object sender, ErrorEventArgs e)
         {
             _open = false;
-            //Dispose();
-            //Connect();
         }
 
         private void _socket_OnOpen(object sender, EventArgs e)

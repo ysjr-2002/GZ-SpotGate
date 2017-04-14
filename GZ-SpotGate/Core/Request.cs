@@ -14,7 +14,7 @@ namespace GZ_SpotGate.Core
     {
         private ILog log = LogManager.GetLogger("Request");
 
-        public async Task<string> CheckIn(string doorIp, IDType type, string code)
+        public async Task<FeedBack> CheckIn(string doorIp, IDType type, string code)
         {
             var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=ticketface";
             Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -23,7 +23,8 @@ namespace GZ_SpotGate.Core
             dict.Add("type", getTypeName(type));
             var postData = dict.LinkUrl();
             var content = await doRequest(url, postData);
-            return content;
+            var feedback = content.Deserlizer<FeedBack>();
+            return feedback;
         }
 
         public async Task<string> Calc(string doorIp, string code = "900", string direction = "Z")
@@ -81,8 +82,4 @@ namespace GZ_SpotGate.Core
                 return "I";
         }
     }
-
-
-
-
 }

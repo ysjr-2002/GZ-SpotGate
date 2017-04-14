@@ -24,7 +24,6 @@ namespace GZ_SpotGate.Core
         private readonly int TCP_COM_SERVER_PORT = 0;
         private readonly int WEB_SERVER_PORT = 0;
 
-        private MegviiGate _megvii = null;
         private WebSocketServer _webServer = null;
         private TcpComServer _tcpServer = null;
 
@@ -48,12 +47,10 @@ namespace GZ_SpotGate.Core
             _webServer = new WebSocketServer(WEB_SERVER_PORT);
             _webServer.Start();
 
-            _megvii = new MegviiGate();
-
             foreach (var c in Channels.ChannelList)
             {
                 ChannelController cc = new ChannelController(_output);
-                await cc.Init(c, _webServer, _megvii);
+                await cc.Init(c, _webServer);
                 _channels.Add(cc);
             }
         }

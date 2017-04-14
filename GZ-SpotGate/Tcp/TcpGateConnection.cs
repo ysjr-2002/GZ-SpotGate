@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace GZ_SpotGate.Tcp
 {
-    class TcpGateConnection : ITcpConnection
+    class TcpGateConnection : IGateTcpConnection
     {
         private TcpClient _tcp = null;
         private bool _running = false;
@@ -50,9 +50,19 @@ namespace GZ_SpotGate.Tcp
 
         public void Start()
         {
+
         }
 
         public void Stop()
+        {
+
+        }
+
+        public void EnterOpen(int count)
+        {
+        }
+
+        public void ExitOpen(int count)
         {
         }
     }

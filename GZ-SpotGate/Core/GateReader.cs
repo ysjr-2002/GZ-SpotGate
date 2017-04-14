@@ -23,6 +23,9 @@ namespace GZ_SpotGate.Core
         /// </summary>
         private const byte denst_add = 0x00;
 
+        private int pre_in_count = 0;
+        private int pre_out_count = 0;
+
         public bool OpenPort(string portname)
         {
             try
@@ -46,17 +49,23 @@ namespace GZ_SpotGate.Core
 
         public bool ClosePort()
         {
+            _stop = true;
+            if (_com != null && _com.IsOpen)
+            {
+                _com.Close();
+            }
             return true;
         }
 
         private void Log(string content)
         {
+            Console.WriteLine(content);
         }
 
         /// <summary>
-        /// 
+        /// 进向开闸
         /// </summary>
-        /// <param name="count"></param>
+        /// <param name="count">值为1时，是进向保持</param>
         public void EnterOpen(byte count = 0)
         {
             byte cid1 = 0x02;
@@ -68,6 +77,9 @@ namespace GZ_SpotGate.Core
             Send(buffer);
         }
 
+        /// <summary>
+        /// 进向关闸
+        /// </summary>
         public void EnterClose()
         {
             byte cid1 = 0x02;
@@ -79,6 +91,10 @@ namespace GZ_SpotGate.Core
             Send(buffer);
         }
 
+        /// <summary>
+        /// 出向开闸
+        /// </summary>
+        /// <param name="count"></param>
         public void ExitOpen(byte count = 0)
         {
             byte cid1 = 0x02;
@@ -90,6 +106,9 @@ namespace GZ_SpotGate.Core
             Send(buffer);
         }
 
+        /// <summary>
+        /// 出向关闸
+        /// </summary>
         public void ExitClose()
         {
             byte cid1 = 0x02;
@@ -101,6 +120,9 @@ namespace GZ_SpotGate.Core
             Send(buffer);
         }
 
+        /// <summary>
+        /// 查询状态
+        /// </summary>
         public void AskGateState()
         {
             byte cid1 = 0x02;
@@ -111,18 +133,31 @@ namespace GZ_SpotGate.Core
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
-
-            Parse();
         }
 
         private void Parse()
         {
             var buffer = Read();
-            if (buffer[3] != 0x12)
+            var checksum = getCheckSum(buffer);
+            if (buffer[3] != 0x12 || checksum != buffer.Last())
                 return;
 
-            var incount = new byte[] { 0, buffer[9], buffer[10], buffer[11] };
-            var outcount = new byte[] { 0, buffer[12], buffer[13], buffer[14] };
+            var incountBytes = new byte[] { 0, buffer[9], buffer[10], buffer[11] };
+            var outcountBytes = new byte[] { 0, buffer[12], buffer[13], buffer[14] };
+
+            var incount = BitConverter.ToInt32(incountBytes, 0);
+            var outcount = BitConverter.ToInt32(outcountBytes, 0);
+
+            if (pre_in_count != incount)
+            {
+
+            }
+            if (pre_out_count != outcount)
+            {
+
+            }
+            pre_in_count = incount;
+            pre_out_count = outcount;
         }
 
         private byte[] Read()
@@ -164,6 +199,10 @@ namespace GZ_SpotGate.Core
 
         private void ReadComm(object obj)
         {
+            while (!_stop)
+            {
+                Parse();
+            }
         }
     }
 }

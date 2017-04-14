@@ -50,6 +50,10 @@ namespace GZ_SpotGate.WS
 
         public void Pass(string androidClient, AndroidMessage message)
         {
+            if (wssv == null)
+            {
+                return;
+            }
             WebSocketServiceHost host = null;
             if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
             {
@@ -58,7 +62,7 @@ namespace GZ_SpotGate.WS
                     var userIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
                     if (userIp == androidClient)
                     {
-                        var json = Util.toJson(message);
+                        var json = Util.ToJson(message);
                         host.Sessions[sID].Context.WebSocket.Send(json);
                         break;
                     }
