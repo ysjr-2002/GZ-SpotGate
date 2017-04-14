@@ -12,11 +12,15 @@ namespace GZ_SpotGate.Core
 
         public const int InIDReaderPort = 1002;
 
-        public const int OutReaderPort = 1003;
+        public const int OutReaderPort = 1004;
 
-        public const int OutIDReaderPort = 1004;
+        public const int OutIDReaderPort = 1005;
 
         public string No { get; set; }
+        /// <summary>
+        /// 通道虚拟Ip
+        /// </summary>
+        public string ChannelVirualIp { get; set; }
         /// <summary>
         /// 串口服务器Ip
         /// </summary>
@@ -46,8 +50,8 @@ namespace GZ_SpotGate.Core
         /// </summary>
         public string FaceOutCameraIp { get; set; }
         /// <summary>
-        /// 继电器
+        /// 闸机控制串口服务器IP
         /// </summary>
-        public string MegviiIP { get; set; }
+        public string GateComServerIp { get; set; }
     }
 }

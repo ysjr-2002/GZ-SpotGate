@@ -44,6 +44,7 @@ namespace GZ_SpotGate.Core
                 ChannelModel cm = new ChannelModel
                 {
                     No = no,
+                    ChannelVirualIp = item.Element("channelvirtualip").Value,
                     ComServerIp = item.Element("comserverip").Value,
                     AndroidInIp = item.Element("androidInip").Value,
                     AndroidOutIp = item.Element("androidOutip").Value,
@@ -51,7 +52,7 @@ namespace GZ_SpotGate.Core
                     FaceOutIp = item.Element("faceOutip").Value,
                     FaceInCameraIp = item.Element("faceInCameraip").Value,
                     FaceOutCameraIp = item.Element("faceOutCameraip").Value,
-                    MegviiIP = item.Element("megviiip").Value,
+                    GateComServerIp = item.Element("gatecomserverip").Value,
                 };
                 ChannelList.Add(cm);
             }

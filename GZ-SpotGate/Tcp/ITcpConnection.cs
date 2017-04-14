@@ -20,4 +20,11 @@ namespace GZ_SpotGate.Tcp
 
         void Stop();
     }
+
+    internal interface IGateTcpConnection : ITcpConnection
+    {
+        void EnterOpen(int count);
+
+        void ExitOpen(int count);
+    }
 }

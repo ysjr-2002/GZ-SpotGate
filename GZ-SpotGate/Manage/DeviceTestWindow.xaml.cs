@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -223,8 +224,7 @@ namespace GZ_SpotGate.Manage
         private async void btnCheck_Click(object sender, RoutedEventArgs e)
         {
             var request = new Request();
-            var c = await request.CheckIn("172.21.4.31", IDType.Face, "2017041000003");
-            var json = c.Deserlizer<FeedBack>();
+            var json = await request.CheckIn("172.21.4.31", IDType.Face, "2017041000003");
             if (json?.code != 100)
             {
                 MessageBox.Show("异常->" + json?.code);
@@ -253,6 +253,70 @@ namespace GZ_SpotGate.Manage
         private void btnAsk_click(object sender, RoutedEventArgs e)
         {
             gr.AskGateState();
+        }
+
+        private async void btnChannel_Click(object sender, RoutedEventArgs e)
+        {
+            var c1 = new ChannelController(tbResult);
+            var code = "1";
+            DataEventArgs arg = new DataEventArgs
+            {
+                Data = code,
+                QRData = true,
+                IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
+            };
+            await c1.Init(Channels.ChannelList.First(), new WebSocketServer(9000));
+
+            Task.Factory.StartNew(() =>
+             {
+                 while (true)
+                 {
+                     c1.Work(arg);
+                     Thread.Sleep(500);
+                 }
+             });
+
+            Thread.Sleep(1000);
+
+            var c2 = new ChannelController(tbResult);
+            await c2.Init(Channels.ChannelList[1], new WebSocketServer(9000));
+
+            Task.Factory.StartNew(() =>
+             {
+                 code = "2";
+                 DataEventArgs arg1 = new DataEventArgs
+                 {
+                     Data = code,
+                     FaceData = true,
+                     IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.3"), 1001)
+                 };
+
+                 while (true)
+                 {
+                     c2.Work(arg1);
+                     Thread.Sleep(500);
+                 }
+             });
+
+            var c3 = new ChannelController(tbResult);
+            await c3.Init(Channels.ChannelList[2], new WebSocketServer(9000));
+
+            Task.Factory.StartNew(() =>
+            {
+                code = "3";
+                DataEventArgs arg1 = new DataEventArgs
+                {
+                    Data = code,
+                    FaceData = true,
+                    IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.3"), 1001)
+                };
+
+                while (true)
+                {
+                    c3.Work(arg1);
+                    Thread.Sleep(500);
+                }
+            });
         }
     }
 }

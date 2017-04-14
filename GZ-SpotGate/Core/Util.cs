@@ -26,7 +26,7 @@ namespace GZ_SpotGate.Core
             return Encoding.UTF8.GetBytes(content);
         }
 
-        public static string toJson(object obj)
+        public static string ToJson(object obj)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var json = js.Serialize(obj);
@@ -36,6 +36,16 @@ namespace GZ_SpotGate.Core
         public static string HMS(this DateTime dt)
         {
             return dt.ToString("HH:mm:ss");
+        }
+
+        public static int ToInt32(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return 0;
+
+            var n = 0;
+            Int32.TryParse(str, out n);
+            return n;
         }
 
         public static T Deserlizer<T>(this string content)

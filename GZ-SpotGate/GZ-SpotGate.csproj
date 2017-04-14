@@ -95,6 +95,7 @@
     <Compile Include="Core\GateReader.cs" />
     <Compile Include="Model\FeedBack.cs" />
     <Compile Include="Model\IDType.cs" />
+    <Compile Include="Tcp\GateConnectionPool.cs" />
     <Compile Include="Tcp\ITcpConnection.cs" />
     <Compile Include="Tcp\TcpGateConnection.cs" />
     <Compile Include="Udp\UdpComServer.cs" />

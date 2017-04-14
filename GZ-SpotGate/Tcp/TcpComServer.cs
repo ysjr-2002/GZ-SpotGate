@@ -50,27 +50,43 @@ namespace GZ_SpotGate.Tcp
                     {
                         connection = new TcpIDConnection(ep, tcpClient);
                     }
-                    else if (rp == 1003)
+                    else if (rp == 1004)
                     {
                         connection = new TcpConnection(ep, tcpClient);
                     }
-                    else if (rp == 1004)
+                    else if (rp == 1005)
                     {
                         connection = new TcpIDConnection(ep, tcpClient);
                     }
 
                     var key = ep.ToString();
                     log.Debug(key);
-                    if (clientCollection.ContainsKey(key))
-                    {
-                        var old = clientCollection[key];
-                        old.Stop();
-                        clientCollection.Remove(key);
-                    }
 
-                    connection.SetCallback(AcceptData);
-                    connection.Start();
-                    clientCollection.Add(key, connection);
+                    if (rp == 1003 || rp == 1006)
+                    {
+                        connection = new TcpGateConnection(ep, tcpClient);
+                        if (GateConnectionPool.ContainsKey(key))
+                        {
+                            var old = GateConnectionPool.GetGateTcp(key);
+                            old.Stop();
+                            GateConnectionPool.RemoveGateTcp(key);
+                        }
+                        connection.SetCallback(AcceptData);
+                        connection.Start();
+                        GateConnectionPool.Add(key, (IGateTcpConnection)connection);
+                    }
+                    else
+                    {
+                        if (clientCollection.ContainsKey(key))
+                        {
+                            var old = clientCollection[key];
+                            old.Stop();
+                            clientCollection.Remove(key);
+                        }
+                        connection.SetCallback(AcceptData);
+                        connection.Start();
+                        clientCollection.Add(key, connection);
+                    }
                 }
                 catch (Exception ex)
                 {

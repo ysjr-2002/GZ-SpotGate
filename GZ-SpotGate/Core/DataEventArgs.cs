@@ -17,6 +17,8 @@ namespace GZ_SpotGate.Core
 
         public bool IDData { get; set; }
 
+        public bool FaceData { get; set; }
+
         public string Name { get; set; }
 
         public string Data { get; set; }
