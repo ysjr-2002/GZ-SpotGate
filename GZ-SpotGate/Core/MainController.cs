@@ -67,16 +67,32 @@ namespace GZ_SpotGate.Core
             ChannelController channlController = null;
             foreach (var channel in _channels)
             {
-                if (channel.ContainIp(epSendIp))
+                if (e.GateOpen)
                 {
-                    channlController = channel;
-                    break;
+                    if (channel.EqualGateServerIp(epSendIp))
+                    {
+                        channlController = channel;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (channel.EqualDataServerIp(epSendIp))
+                    {
+                        channlController = channel;
+                        break;
+                    }
                 }
             }
 
-            if (channlController != null)
+            if (e.GateOpen)
             {
-                channlController.Work(e);
+                //开闸上报
+                channlController?.Report(e);
+            }
+            else
+            {
+                channlController?.Work(e);
             }
         }
 

@@ -15,7 +15,7 @@ namespace GZ_SpotVisual
     class Config
     {
         private const char spliter = '$';
-        private const string faceroot = "facevisual";
+        private const string faceroot = "thd-spot";
         private const string config = "config.txt";
         private const string log = "log.txt";
         public static Profile Profile { get; set; }
@@ -44,11 +44,6 @@ namespace GZ_SpotVisual
                 var content = System.IO.File.ReadAllText(filePath, Encoding.UTF8);
                 var array = content.Split(spliter);
                 Profile.ServerIp = array[0];
-                Profile.CameraMain = array[1];
-                Profile.CameraSub = array[2];
-                Profile.Welcome1 = array[3];
-                Profile.Welcome2 = array[4];
-                Profile.Delay = Convert.ToInt32(array[5]);
             }
         }
 
@@ -61,13 +56,7 @@ namespace GZ_SpotVisual
                 sub.Create();
 
             var filePath = System.IO.Path.Combine(dir, config);
-            var content = string.Concat(Profile.ServerIp, spliter,
-                Profile.CameraMain, spliter,
-                 Profile.CameraSub, spliter,
-                  Profile.Welcome1, spliter,
-                  Profile.Welcome2, spliter,
-                Profile.Delay);
-
+            var content = Profile.ServerIp;
             System.IO.File.WriteAllText(filePath, content, Encoding.UTF8);
         }
     }
@@ -76,18 +65,9 @@ namespace GZ_SpotVisual
     {
         public Profile()
         {
-            CameraMain = "192.168.1.2";
-            CameraSub = "192.168.1.3";
-            Delay = 1000;
-            Welcome1 = "»¶Ó­¹âÁÙ";
-            Welcome2 = "»¶Ó­Äú";
+            ServerIp = "192.168.1.116";
         }
 
         public string ServerIp { get; set; }
-        public string CameraMain { get; set; }
-        public string CameraSub { get; set; }
-        public string Welcome1 { get; set; }
-        public string Welcome2 { get; set; }
-        public int Delay { get; set; }
     }
 }

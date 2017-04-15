@@ -12,18 +12,30 @@ using System.Threading;
 
 namespace GZ_SpotVisual
 {
-    [Activity(Label = "GZ_SpotVisual", Icon = "@drawable/icon")]
+    [Activity(Label = "@string/ApplicationName", Icon = "@drawable/icon")]
     public class MainActivity : RootActivity
     {
         private TextView tvWelcome;
+        private TextView tvTime;
         private TextView tvCopyright;
+        private System.Timers.Timer timer = null;
+
+        private static int Delay = 1000;
+
+        private View vistor = null;
+        private TextView tv;
+        private TextView tvName;
+        private ImageView ivFace;
+        private const int p_width = 500;
+        private const int p_height = 600;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.FaceMain);
-            //RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
 
             tvWelcome = this.FindViewById<TextView>(Resource.Id.tvWelcome);
+            tvTime = this.FindViewById<TextView>(Resource.Id.tvTime);
             tvCopyright = this.FindViewById<TextView>(Resource.Id.tvCopyright);
             vistor = this.FindViewById<LinearLayout>(Resource.Id.alter);
             ivFace = this.FindViewById<ImageView>(Resource.Id.faceImage);
@@ -58,12 +70,15 @@ namespace GZ_SpotVisual
         {
             base.OnStart();
 
+            Showtime();
+            StartTimer();
+
             var ip = getHostIp();
             tvCopyright.Text = ip + "-V1.0";
 
             HttpSocket hs = new HttpSocket(this);
             hs.SetCallback(ReceiveServer);
-            hs.Connect("192.168.0.4");
+            hs.Connect(Config.Profile.ServerIp);
         }
 
         protected override void OnPause()
@@ -74,26 +89,17 @@ namespace GZ_SpotVisual
 
         private void ReceiveServer(AndroidMessage am)
         {
-            var name = "";
             Bitmap faceImage = null;
-
-            name = am.Name;
             if (!string.IsNullOrEmpty(am.Avatar))
             {
                 var url = am.Avatar;
                 faceImage = getFaceBitmap(url);
             }
-            ShowFace(name, faceImage);
+            Delay = am.Delay;
+            ShowFace(am, faceImage);
         }
 
-        private View vistor = null;
-        private TextView tv;
-        private TextView tvName;
-        private ImageView ivFace;
-        private const int p_width = 500;
-        private const int p_height = 600;
-
-        private void ShowFace(string name, Bitmap faceImage)
+        private void ShowFace(AndroidMessage am, Bitmap faceImage)
         {
             RunOnUiThread(() =>
             {
@@ -101,9 +107,9 @@ namespace GZ_SpotVisual
                 lp.Width = p_width;
                 lp.Height = p_height;
                 vistor.LayoutParameters = lp;
-                tvName.Text = name;
+                tvName.Text = am.Name;
                 tvName.SetTextColor(Color.Rgb(255, 106, 00));
-                tv.Text = Config.Profile.Welcome2;
+                tv.Text = am.Message;
                 ivFace.SetImageBitmap(faceImage);
                 faceImage.Dispose();
                 var sa = AnimationUtils.LoadAnimation(this, Resource.Animation.scale);
@@ -114,7 +120,7 @@ namespace GZ_SpotVisual
 
         private void Sa_AnimationEnd(object sender, Animation.AnimationEndEventArgs e)
         {
-            Thread.Sleep(Config.Profile.Delay);
+            Thread.Sleep(Delay);
             var sa = AnimationUtils.LoadAnimation(this, Resource.Animation.translate);
             vistor.StartAnimation(sa);
         }
@@ -130,6 +136,27 @@ namespace GZ_SpotVisual
             var data = DownImage(url);
             var bitmap = BitmapFactory.DecodeByteArray(data, 0, data.Length);
             return bitmap;
+        }
+
+        private void StartTimer()
+        {
+            timer = new System.Timers.Timer();
+            timer.Interval = 1000;
+            timer.Start();
+            timer.Elapsed += Timer_Elapsed;
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Showtime();
+        }
+
+        private void Showtime()
+        {
+            RunOnUiThread(new Action(() =>
+            {
+                tvTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            }));
         }
     }
 }

@@ -14,7 +14,7 @@ namespace GZ_SpotGate.Tcp
         private const int Gate_In_Port = 1003;
         private const int Gate_Out_Port = 1006;
 
-        public static void EnterOpen(string gatecomIp, int entercount)
+        public static void EnterOpen(string gatecomIp, byte entercount)
         {
             var key = string.Concat(gatecomIp, ":" + Gate_In_Port);
             if (clientCollection.ContainsKey(key))
@@ -24,7 +24,7 @@ namespace GZ_SpotGate.Tcp
             }
         }
 
-        public static void ExitOpen(string gatecomIp, int entercount)
+        public static void ExitOpen(string gatecomIp, byte entercount)
         {
             var key = string.Concat(gatecomIp, ":" + Gate_Out_Port);
             if (clientCollection.ContainsKey(key))

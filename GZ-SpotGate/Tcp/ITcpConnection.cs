@@ -23,8 +23,8 @@ namespace GZ_SpotGate.Tcp
 
     internal interface IGateTcpConnection : ITcpConnection
     {
-        void EnterOpen(int count);
+        void EnterOpen(byte count);
 
-        void ExitOpen(int count);
+        void ExitOpen(byte count);
     }
 }

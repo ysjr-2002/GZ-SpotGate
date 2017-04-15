@@ -48,6 +48,16 @@ namespace GZ_SpotGate.Core
             return n;
         }
 
+        public static byte ToByte(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return 0;
+
+            byte n = 0;
+            byte.TryParse(str, out n);
+            return n;
+        }
+
         public static T Deserlizer<T>(this string content)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();

@@ -80,50 +80,6 @@ namespace GZ_SpotGate.Manage
             }
         }
 
-        private void ReadPort()
-        {
-            if (_dType == 0)
-            {
-
-            }
-            else if (_dType == 1)
-            {
-
-            }
-            else if (_dType == 2)
-            {
-
-            }
-            else if (_dType == 3)
-            {
-
-            }
-        }
-
-        //二维码
-        private void BarCode(byte[] data)
-        {
-
-        }
-
-        //身份证
-        private void IDCard(byte[] data)
-        {
-
-        }
-
-        //IC卡
-        private void ICCard(byte[] data)
-        {
-
-        }
-
-        //门票码
-        private void Ticket(byte[] data)
-        {
-
-        }
-
         private void OnGetIDNO(string no)
         {
             this.Dispatcher.Invoke(() =>
@@ -133,17 +89,43 @@ namespace GZ_SpotGate.Manage
         }
 
         GateReader gr = new GateReader();
+        /// <summary>
+        /// 打开闸机串口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOpen1_Click(object sender, RoutedEventArgs e)
         {
             if (!gr.OpenPort(cmbPort1.Text))
             {
                 MessageBox.Show("打开失败！");
+                return;
             }
-        }
+            gr.SetCallback((s) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    tbResult.AppendText(s + "\n");
+                });
+            });
 
-        private void btnOpen2_Click(object sender, RoutedEventArgs e)
-        {
+            byte source_add = 0;
+            byte cid1 = 0x12;
+            byte cid2 = 0;
+            byte denst_add = 0;
+            byte len = 8;
+            byte d0 = 0;
 
+            byte d2 = 0;
+            byte d3 = 0;
+            byte d4 = 1;
+            byte d5 = 0;
+            byte d6 = 0;
+            byte d7 = 1;
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, d0, 0x00, d2, d3, d4, d5, d6, d7, 00 };
+            var check = gr.getCheckSum(buffer);
+            buffer[buffer.Length - 1] = check;
+            gr.Parse(buffer, true);
         }
 
         private WebSocketServer ws = null;
@@ -154,8 +136,6 @@ namespace GZ_SpotGate.Manage
             tcpServer.OnMessageInComming += Tcp_OnMessageInComming;
             tcpServer.Start();
             btnOpenX.IsEnabled = false;
-            //ws = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
-            //ws.Start();
         }
 
         private void Tcp_OnMessageInComming(object sender, DataEventArgs e)
@@ -179,46 +159,60 @@ namespace GZ_SpotGate.Manage
 
         private void btnOpenU_Click(object sender, RoutedEventArgs e)
         {
-            //Udp.UdpComServer udp = new Udp.UdpComServer(9870);
-            //udp.OnMessageInComming += Udp_OnMessageInComming;
-            //udp.Start();
             tcpServer.Stop();
             btnOpenX.IsEnabled = true;
-
-            //AndroidMessage am = new AndroidMessage
-            //{
-            //    Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-05/a856505e44ebc1652de0d3700ea26e542a590373.jpg",
-            //    CheckInType = XmlParser.IDType.Face,
-            //    Name = "yang"
-            //};
-            //ws.Pass("192.168.0.4", am);
         }
 
+        /// <summary>
+        /// 进向开闸
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            gr.EnterOpen();
+            gr.EnterOpen((byte)(txtOpencount.Text.ToInt32()));
         }
-
+        /// <summary>
+        /// 进向持久开闸
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEnterHold_click(object sender, RoutedEventArgs e)
         {
             gr.EnterOpen(1);
         }
-
+        /// <summary>
+        /// 进向关闸
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEnterClose_click(object sender, RoutedEventArgs e)
         {
             gr.EnterClose();
         }
-
+        /// <summary>
+        /// 出向开闸
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            gr.ExitOpen();
+            gr.ExitOpen((byte)(txtOpencount.Text.ToInt32()));
         }
-
+        /// <summary>
+        /// 出向持久
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExitHold_click(object sender, RoutedEventArgs e)
         {
             gr.ExitOpen(4);
         }
-
+        /// <summary>
+        /// 出向关闸
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExitClose_click(object sender, RoutedEventArgs e)
         {
             gr.EnterClose();
@@ -268,7 +262,6 @@ namespace GZ_SpotGate.Manage
                 QRData = true,
                 IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
             };
-
 
             await c1.Init(Channels.ChannelList.First(), ws);
 

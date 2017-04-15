@@ -16,30 +16,31 @@ namespace GZ_SpotVisual
     {
         public CheckIntype CheckInType { get; set; }
 
+        public IntentType IntentType { get; set; }
+
         public string Message { get; set; }
 
         public string Name { get; set; }
 
         public string Avatar { get; set; }
+
+        public int Delay { get; set; }
     }
 
     enum CheckIntype : int
     {
-        /// <summary>
-        /// 二维码
-        /// </summary>
-        BarCode = 1,
-        /// <summary>
-        /// 身份证
-        /// </summary>
-        ID = 2,
-        /// <summary>
-        /// IC卡(内部人员使用)
-        /// </summary>
-        IC = 3,
-        /// <summary>
-        /// 人脸
-        /// </summary>
-        Face = 4
+        IC,
+        ID,
+        Face,
+        BarCode,
+    }
+
+    /// <summary>
+    /// 意图类型
+    /// </summary>
+    enum IntentType
+    {
+        In,
+        Out,
     }
 }

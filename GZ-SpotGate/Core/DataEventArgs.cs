@@ -22,5 +22,9 @@ namespace GZ_SpotGate.Core
         public string Name { get; set; }
 
         public string Data { get; set; }
+
+        public bool GateOpen { get; set; }
+
+        public bool PersonIn { get; set; }
     }
 }

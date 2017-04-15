@@ -61,11 +61,11 @@ namespace GZ_SpotGate.Tcp
                 return;
 
             _running = true;
-            _thread = new Thread(BeginRead);
+            _thread = new Thread(Work);
             _thread.Start();
         }
 
-        private void BeginRead()
+        private void Work()
         {
             while (_running)
             {
@@ -90,7 +90,7 @@ namespace GZ_SpotGate.Tcp
                                 ic = false;
                                 code = Encoding.UTF8.GetString(array, 2, len - 2);
                             }
-                            else if(  prefix == ic_prefiex)
+                            else if (prefix == ic_prefiex)
                             {
                                 //IC卡
                                 qr = false;

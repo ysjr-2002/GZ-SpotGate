@@ -27,7 +27,7 @@ namespace GZ_SpotGate.Core
             return feedback;
         }
 
-        public async Task<string> Calc(string doorIp, string code = "900", string direction = "Z")
+        public async Task<string> Calc(string doorIp, string direction = "Z", string code = "900")
         {
             var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=calccount";
             Dictionary<string, string> dict = new Dictionary<string, string>();

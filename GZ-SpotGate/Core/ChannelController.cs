@@ -26,6 +26,10 @@ namespace GZ_SpotGate.Core
         private Request _request;
         private TextBox _output;
 
+        private const int Delay = 1000;
+        private const string In_Welcome = "欢迎光临";
+        private const string Out_Welcome = "欢迎再次光临";
+
         private static readonly ILog log = LogManager.GetLogger("ChannelController");
 
         public ChannelController(TextBox output)
@@ -60,6 +64,14 @@ namespace GZ_SpotGate.Core
             {
                 return DateTime.Now.HMS() + "->";
             }
+        }
+
+        public async void Report(DataEventArgs data)
+        {
+            if (data.PersonIn)
+                await _request.Calc(this._model.ChannelVirualIp, "Z");
+            else
+                await _request.Calc(this._model.ChannelVirualIp, "F");
         }
 
         public async void Work(DataEventArgs args)
@@ -125,21 +137,24 @@ namespace GZ_SpotGate.Core
                 AndroidMessage am = new AndroidMessage()
                 {
                     CheckInType = checkInType,
+                    IntentType = intentType,
                     Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg",
-                    Name = "杨绍杰",
-                    Message = ""
+                    Name = name,
+                    Delay = Delay
                 };
-                var personCount = content.personCount.ToInt32();
+                byte personCount = content.personCount.ToByte();
                 if (intentType == IntentType.In)
                 {
                     //进入
                     GateConnectionPool.EnterOpen(this._model.GateComServerIp, personCount);
+                    am.Message = In_Welcome;
                     _ws.Pass(_model.AndroidInIp, am);
                 }
                 else
                 {
                     //离开
                     GateConnectionPool.ExitOpen(this._model.GateComServerIp, personCount);
+                    am.Message = Out_Welcome;
                     _ws.Pass(_model.AndroidOutIp, am);
                 }
                 sb.Append(string.Format(prefix + "请通行 {0}人次\n", personCount));
@@ -163,7 +178,7 @@ namespace GZ_SpotGate.Core
             _outFaceSocket?.Disconnect();
         }
 
-        public bool ContainIp(string ip)
+        public bool EqualDataServerIp(string ip)
         {
             if (_model.ComServerIp == ip)
             {
@@ -172,16 +187,29 @@ namespace GZ_SpotGate.Core
             return false;
         }
 
+        public bool EqualGateServerIp(string ip)
+        {
+            if (_model.GateComServerIp == ip)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private async void FaceIn(FaceRecognized face)
         {
+            var name = face.person.name;
             var code = face.person.job_number;
-            await Check(IntentType.In, IDType.Face, code);
+            var avatar = face.person.avatar;
+            await Check(IntentType.In, IDType.Face, code, name, avatar);
         }
 
         private async void FaceOut(FaceRecognized face)
         {
+            var name = face.person.name;
             var code = face.person.job_number;
-            await Check(IntentType.Out, IDType.Face, code);
+            var avatar = face.person.avatar;
+            await Check(IntentType.Out, IDType.Face, code, name, avatar);
         }
 
         /// <summary>

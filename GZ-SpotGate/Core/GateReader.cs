@@ -33,6 +33,9 @@ namespace GZ_SpotGate.Core
                 _com = new SerialPort(portname, baudRate, Parity.None, 8, StopBits.One);
                 _com.Open();
 
+                //获取闸机人次信息
+                getPersonCount();
+
                 ThreadPool.QueueUserWorkItem(ReadComm);
                 return true;
             }
@@ -43,8 +46,16 @@ namespace GZ_SpotGate.Core
             }
         }
 
+        private void getPersonCount()
+        {
+            EnterClose();
+            var buffer = Read();
+            Parse(buffer, false);
+        }
+
         public void SetCallback(Action<string> callback)
         {
+            this._callback = callback;
         }
 
         public bool ClosePort()
@@ -135,9 +146,8 @@ namespace GZ_SpotGate.Core
             Send(buffer);
         }
 
-        private void Parse()
+        public void Parse(byte[] buffer, bool fire)
         {
-            var buffer = Read();
             var checksum = getCheckSum(buffer);
             if (buffer[3] != 0x12 || checksum != buffer.Last())
                 return;
@@ -145,16 +155,19 @@ namespace GZ_SpotGate.Core
             var incountBytes = new byte[] { 0, buffer[9], buffer[10], buffer[11] };
             var outcountBytes = new byte[] { 0, buffer[12], buffer[13], buffer[14] };
 
+            Array.Reverse(incountBytes);
+            Array.Reverse(outcountBytes);
+
             var incount = BitConverter.ToInt32(incountBytes, 0);
             var outcount = BitConverter.ToInt32(outcountBytes, 0);
 
-            if (pre_in_count != incount)
+            if (pre_in_count != incount && fire)
             {
-
+                _callback("入变化=>入次:" + incount + "  出次:" + outcount);
             }
-            if (pre_out_count != outcount)
+            if (pre_out_count != outcount && fire)
             {
-
+                _callback("出变化=>入次:" + incount + "  出次:" + outcount);
             }
             pre_in_count = incount;
             pre_out_count = outcount;
@@ -186,7 +199,7 @@ namespace GZ_SpotGate.Core
             }
         }
 
-        private byte getCheckSum(byte[] data)
+        public byte getCheckSum(byte[] data)
         {
             int sum = 0;
             for (int i = 1; i < data.Length - 1; i++)
@@ -201,7 +214,8 @@ namespace GZ_SpotGate.Core
         {
             while (!_stop)
             {
-                Parse();
+                var buffer = Read();
+                Parse(buffer, true);
             }
         }
     }

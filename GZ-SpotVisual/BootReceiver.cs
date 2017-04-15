@@ -12,21 +12,20 @@ using Android.Widget;
 
 namespace GZ_SpotVisual
 {
-    //[BroadcastReceiver]
-    [IntentFilter(new string[1] { Intent.ActionBootCompleted })]
+    /// <summary>
+    /// 开机启动-必须设置IntentFilter
+    /// </summary>
+    [BroadcastReceiver]
+    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted }, Categories = new[] { Android.Content.Intent.CategoryDefault })]
     class BootReceiver : BroadcastReceiver
     {
-        protected BootReceiver(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-            //配置AndroidManifest.xml权限, Receiver_Boot_Completed
-        }
-
         public override void OnReceive(Context context, Intent intent)
         {
             if (intent.Action == Intent.ActionBootCompleted)
             {
                 Intent newIntent = new Intent(context, typeof(SplashActivity));
-                newIntent.AddFlags(ActivityFlags.NewTask);  //这个标记必须加
+                //这个标记必须加
+                newIntent.AddFlags(ActivityFlags.NewTask);
                 context.StartActivity(newIntent);
             }
         }

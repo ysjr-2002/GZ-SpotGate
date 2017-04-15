@@ -23,7 +23,6 @@ namespace GZ_SpotVisual
             this.Window.SetStatusBarColor(Android.Graphics.Color.Black);
             this.OverridePendingTransition(Resource.Animation.anim_slide_in_left, Resource.Animation.anim_slide_out_left);
             //this.Window.SetFlags(WindowManagerFlags.Fullscreen, WindowManagerFlags.Fullscreen);
-            // Create your application here
         }
     }
 }

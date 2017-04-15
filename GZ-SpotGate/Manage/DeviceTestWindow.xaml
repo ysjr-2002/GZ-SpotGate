@@ -23,6 +23,10 @@
             <Setter Property="Width" Value="100" />
             <Setter Property="Height" Value="24" />
         </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -125,6 +129,13 @@
                 <ColumnDefinition Width="105" />
                 <ColumnDefinition Width="105" />
             </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="1" Content="开闸次数:" />
+
+            <TextBox Name="txtOpencount"
+                     Grid.Column="2"
+                     Height="24"
+                     Text="0" />
 
             <Button Name="btnExit"
                     Grid.Column="3"
