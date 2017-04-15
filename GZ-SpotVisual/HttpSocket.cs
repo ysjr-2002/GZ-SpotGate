@@ -18,7 +18,7 @@ namespace GZ_SpotVisual
     class HttpSocket
     {
         private string serverIp = "";
-        private WebSocket socket = null;
+        private WebSocket ws = null;
         private Action<AndroidMessage> callback = null;
 
         private Activity _activity = null;
@@ -33,22 +33,18 @@ namespace GZ_SpotVisual
 
         public Task Connect(string serverIp)
         {
+            this.serverIp = serverIp;
             return Task.Factory.StartNew(() =>
             {
                var url = "ws://"+ serverIp + ":9872/android";
-                socket = new WebSocket(url);
-                socket.OnOpen += Socket_OnOpen;
-                socket.OnError += Socket_OnError;
-                socket.OnClose += Socket_OnClose;
-                socket.OnMessage += Socket_OnMessage;
-                socket.EmitOnPing = true;
-                socket.Connect();
+                ws = new WebSocket(url);
+                ws.OnOpen += Socket_OnOpen;
+                ws.OnError += Socket_OnError;
+                ws.OnClose += Socket_OnClose;
+                ws.OnMessage += Socket_OnMessage;
+                ws.EmitOnPing = true;
+                ws.Connect();
             });
-        }
-
-        public void Close()
-        {
-            socket?.Close();
         }
 
         public void SetCallback(Action<AndroidMessage> callback)
@@ -75,12 +71,34 @@ namespace GZ_SpotVisual
         private void Socket_OnClose(object sender, CloseEventArgs e)
         {
             //Config.Log(koalaIp + " Websocket close");
-            Dialog("WebSocket connection close");
+            Reconnect();
+            //Dialog("WebSocket connection close");
         }
 
         private void Socket_OnOpen(object sender, EventArgs e)
         {
             Dialog("WebSocket connect ok");
+        }
+
+        private void Reconnect()
+        {
+            Close();
+            Connect(serverIp);
+        }
+
+        public void Close()
+        {
+            if (ws == null)
+                return;
+
+            if (ws.ReadyState == WebSocketState.Open)
+                ws.Close();
+
+            ws.OnOpen -= Socket_OnOpen;
+            ws.OnClose -= Socket_OnClose;
+            ws.OnError -= Socket_OnError;
+            ws.OnMessage -= Socket_OnMessage;
+            ws = null;
         }
 
         private void Dialog(string msg)

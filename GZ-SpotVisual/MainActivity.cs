@@ -15,26 +15,61 @@ namespace GZ_SpotVisual
     [Activity(Label = "GZ_SpotVisual", Icon = "@drawable/icon")]
     public class MainActivity : RootActivity
     {
+        private TextView tvWelcome;
+        private TextView tvCopyright;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.FaceMain);
-            //var a = RequestedOrientation;
             //RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
 
+            tvWelcome = this.FindViewById<TextView>(Resource.Id.tvWelcome);
+            tvCopyright = this.FindViewById<TextView>(Resource.Id.tvCopyright);
             vistor = this.FindViewById<LinearLayout>(Resource.Id.alter);
             ivFace = this.FindViewById<ImageView>(Resource.Id.faceImage);
             tv = this.FindViewById<TextView>(Resource.Id.tvWecomeEmp);
             tvName = this.FindViewById<TextView>(Resource.Id.tvName);
+
+            tvWelcome.Text = "欢迎光临";
+        }
+
+        public String getHostIp()
+        {
+            try
+            {
+                var name = Dns.GetHostName();
+                IPAddress[] ips = Dns.GetHostAddresses(name);
+                if (ips == null)
+                    return string.Empty;
+
+                foreach (var item in ips)
+                {
+                    if (item.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        return item.ToString();
+                }
+            }
+            catch (Exception e)
+            {
+            }
+            return string.Empty;
         }
 
         protected override void OnStart()
         {
             base.OnStart();
+
+            var ip = getHostIp();
+            tvCopyright.Text = ip + "-V1.0";
+
             HttpSocket hs = new HttpSocket(this);
             hs.SetCallback(ReceiveServer);
             hs.Connect("192.168.0.4");
+        }
+
+        protected override void OnPause()
+        {
+            //转后台后，触发OnPause事件
+            base.OnPause();
         }
 
         private void ReceiveServer(AndroidMessage am)
@@ -56,7 +91,7 @@ namespace GZ_SpotVisual
         private TextView tvName;
         private ImageView ivFace;
         private const int p_width = 500;
-        private const int p_height = 700;
+        private const int p_height = 600;
 
         private void ShowFace(string name, Bitmap faceImage)
         {

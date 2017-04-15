@@ -22,7 +22,7 @@ namespace GZ_SpotGate
         {
             ConfigProfile.Current.ReadConfig();
             Channels.Load();
-            var window = new MainWindow();
+            var window = new DeviceTestWindow();
             window.ShowDialog();
             base.OnStartup(e);
         }

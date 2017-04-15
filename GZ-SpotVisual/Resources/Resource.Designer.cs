@@ -164,11 +164,11 @@ namespace GZ_SpotVisual
 			// aapt resource value: 0x7f080012
 			public const int textView2 = 2131230738;
 			
-			// aapt resource value: 0x7f080006
-			public const int textView3 = 2131230726;
-			
 			// aapt resource value: 0x7f08000f
 			public const int textViewx = 2131230735;
+			
+			// aapt resource value: 0x7f080006
+			public const int tvCopyright = 2131230726;
 			
 			// aapt resource value: 0x7f080014
 			public const int tvDelay = 2131230740;

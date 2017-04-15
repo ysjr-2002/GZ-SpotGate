@@ -46,6 +46,9 @@ namespace GZ_SpotGate.Manage
 
             cmbPort1.ItemsSource = ports;
             cmbPort1.SelectedIndex = 0;
+
+            ws = new WebSocketServer(9872);
+            ws.Start();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -265,58 +268,60 @@ namespace GZ_SpotGate.Manage
                 QRData = true,
                 IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
             };
-            await c1.Init(Channels.ChannelList.First(), new WebSocketServer(9000));
 
-            Task.Factory.StartNew(() =>
-             {
-                 while (true)
-                 {
-                     c1.Work(arg);
-                     Thread.Sleep(500);
-                 }
-             });
 
-            Thread.Sleep(1000);
+            await c1.Init(Channels.ChannelList.First(), ws);
 
-            var c2 = new ChannelController(tbResult);
-            await c2.Init(Channels.ChannelList[1], new WebSocketServer(9000));
+            //Task.Factory.StartNew(() =>
+            // {
+            //     while (true)
+            //     {
+            c1.Work(arg);
+            //    Thread.Sleep(500);
+            //}
+            //});
 
-            Task.Factory.StartNew(() =>
-             {
-                 code = "2";
-                 DataEventArgs arg1 = new DataEventArgs
-                 {
-                     Data = code,
-                     FaceData = true,
-                     IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.3"), 1001)
-                 };
+            //Thread.Sleep(1000);
 
-                 while (true)
-                 {
-                     c2.Work(arg1);
-                     Thread.Sleep(500);
-                 }
-             });
+            //var c2 = new ChannelController(tbResult);
+            //await c2.Init(Channels.ChannelList[1], new WebSocketServer(9000));
 
-            var c3 = new ChannelController(tbResult);
-            await c3.Init(Channels.ChannelList[2], new WebSocketServer(9000));
+            //Task.Factory.StartNew(() =>
+            // {
+            //     code = "2";
+            //     DataEventArgs arg1 = new DataEventArgs
+            //     {
+            //         Data = code,
+            //         FaceData = true,
+            //         IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.3"), 1001)
+            //     };
 
-            Task.Factory.StartNew(() =>
-            {
-                code = "3";
-                DataEventArgs arg1 = new DataEventArgs
-                {
-                    Data = code,
-                    FaceData = true,
-                    IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.3"), 1001)
-                };
+            //     while (true)
+            //     {
+            //         c2.Work(arg1);
+            //         Thread.Sleep(500);
+            //     }
+            // });
 
-                while (true)
-                {
-                    c3.Work(arg1);
-                    Thread.Sleep(500);
-                }
-            });
+            //var c3 = new ChannelController(tbResult);
+            //await c3.Init(Channels.ChannelList[2], new WebSocketServer(9000));
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    code = "3";
+            //    DataEventArgs arg1 = new DataEventArgs
+            //    {
+            //        Data = code,
+            //        FaceData = true,
+            //        IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.3"), 1001)
+            //    };
+
+            //    while (true)
+            //    {
+            //        c3.Work(arg1);
+            //        Thread.Sleep(500);
+            //    }
+            //});
         }
     }
 }

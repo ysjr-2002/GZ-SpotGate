@@ -97,14 +97,8 @@ namespace GZ_SpotGate.Core
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
-            if(uniqueId == "3")
-            {
-
-            }
-
             var sb = new StringBuilder();
             sb.Append(prefix + "通道" + _model.No + "\n");
-
             if (intentType == IntentType.In)
             {
                 sb.Append(prefix + "进入 \n");
@@ -131,8 +125,8 @@ namespace GZ_SpotGate.Core
                 AndroidMessage am = new AndroidMessage()
                 {
                     CheckInType = checkInType,
-                    Avatar = avatar,
-                    Name = name,
+                    Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg",
+                    Name = "杨绍杰",
                     Message = ""
                 };
                 var personCount = content.personCount.ToInt32();
