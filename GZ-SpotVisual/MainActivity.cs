@@ -34,10 +34,8 @@ namespace GZ_SpotVisual
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
             RequestWindowFeature(WindowFeatures.NoTitle);
             Window.SetFlags(WindowManagerFlags.Fullscreen, WindowManagerFlags.Fullscreen);
-
             SetContentView(Resource.Layout.FaceMain);
 
             tvWelcome = this.FindViewById<TextView>(Resource.Id.tvWelcome);

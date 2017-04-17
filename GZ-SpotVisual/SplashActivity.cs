@@ -27,7 +27,7 @@ namespace GZ_SpotVisual
                 Config.ReadProfile();
                 this.RunOnUiThread(new Action(() =>
                 {
-                    Intent intent = new Intent(this, typeof(MainActivity));
+                    Intent intent = new Intent(this, typeof(VisitorActivity));
                     StartActivity(intent);
                     Finish();
                 }));

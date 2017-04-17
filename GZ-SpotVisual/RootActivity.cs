@@ -20,7 +20,7 @@ namespace GZ_SpotVisual
             base.OnCreate(savedInstanceState);
             this.RequestWindowFeature(WindowFeatures.NoTitle);
             //this.Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 0x33, 0xcc, 0xff));
-            this.Window.SetStatusBarColor(Android.Graphics.Color.Black);
+            //this.Window.SetStatusBarColor(Android.Graphics.Color.Black);
             this.OverridePendingTransition(Resource.Animation.anim_slide_in_left, Resource.Animation.anim_slide_out_left);
             //this.Window.SetFlags(WindowManagerFlags.Fullscreen, WindowManagerFlags.Fullscreen);
         }

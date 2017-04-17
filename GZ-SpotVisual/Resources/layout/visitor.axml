@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="#242424"
+    android:orientation="horizontal"
+    android:background="@drawable/bg"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <FaceVisual.ImageViewPlus
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="200dip"
+        android:layout_height="200dip"
         android:id="@+id/faceImage"
-        android:layout_marginTop="24dp"
         android:scaleType="fitCenter"
-        android:layout_gravity="center_horizontal" />
-    <TextView
+        android:src="@drawable/popupbg"
+        android:layout_gravity="center_horizontal|center_vertical" />
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvWecomeEmp"
-        android:textSize="24sp"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="48dp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvName"
-        android:textSize="48sp"
-        android:gravity="center_horizontal" />
+        android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvWecomeEmp"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:text="你好你好放假啊快递费劲"
+            android:layout_marginBottom="12dip" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvName"
+            android:textSize="48sp"
+            android:text="欢迎光临"
+            android:gravity="center_horizontal" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" />
+    </LinearLayout>
 </LinearLayout>
