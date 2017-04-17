@@ -22,8 +22,6 @@ namespace GZ_SpotGate.Tcp
         private Dictionary<string, ITcpConnection> clientCollection = new Dictionary<string, ITcpConnection>();
         public event EventHandler<DataEventArgs> OnMessageInComming;
 
-        private Thread _thread = null;
-
         private static ILog log = LogManager.GetLogger("TcpComServer");
 
         public TcpComServer(int port)
@@ -36,19 +34,23 @@ namespace GZ_SpotGate.Tcp
             _tcpListener = new TcpListener(new IPEndPoint(IPAddress.Any, _port));
             _tcpListener.Start();
 
-            //_thread = new Thread(Listen);
-            //_thread.Start();
-
-            Listen();
+            BeginAccept();
         }
 
         private void EndAccept(IAsyncResult ir)
         {
-            var tcpClient = _tcpListener.EndAcceptTcpClient(ir);
-            Listen();
+            TcpClient tcpClient = null;
+            try
+            {
+                tcpClient = _tcpListener.EndAcceptTcpClient(ir);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            BeginAccept();
 
             var ep = (IPEndPoint)tcpClient.Client.RemoteEndPoint;
-            var ra = ep.Address.ToString();
             var rp = ep.Port;
 
             ITcpConnection connection = null;
@@ -71,7 +73,6 @@ namespace GZ_SpotGate.Tcp
 
             var key = ep.ToString();
             log.Debug(key);
-            Output.Current.Log(key + "\n");
             if (rp == 1005)
             {
                 connection = new TcpGateConnection(ep, tcpClient);
@@ -99,11 +100,14 @@ namespace GZ_SpotGate.Tcp
             }
         }
 
-        private void Listen()
+        private void BeginAccept()
         {
             _tcpListener.BeginAcceptTcpClient(EndAccept, null);
-            return;
+        }
 
+        [Obsolete("同步接收方法")]
+        private void SyncAccept()
+        {
             while (!_stop)
             {
                 try
@@ -178,12 +182,12 @@ namespace GZ_SpotGate.Tcp
         public void Stop()
         {
             _stop = true;
-            _tcpListener.Stop();
+            _tcpListener?.Stop();
+            _tcpListener = null;
             foreach (var item in clientCollection)
             {
                 item.Value.Stop();
             }
-            _thread.Abort();
         }
     }
 }

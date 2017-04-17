@@ -43,8 +43,10 @@ namespace GZ_SpotVisual
             {
                 var content = System.IO.File.ReadAllText(filePath, Encoding.UTF8);
                 var array = content.Split(spliter);
-                Profile.ServerIp = array[0];
-                Profile.Welcome = array[1];
+                if (array.Length > 0)
+                    Profile.ServerIp = array[0];
+                if (array.Length > 1)
+                    Profile.Welcome = array[1];
             }
         }
 

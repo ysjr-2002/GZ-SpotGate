@@ -21,40 +21,33 @@ namespace GZ_SpotGate.Core
     class MainController
     {
         private readonly ILog log = LogManager.GetLogger("MainController");
-        private readonly int TCP_COM_SERVER_PORT = 0;
-        private readonly int WEB_SERVER_PORT = 0;
 
         private WebSocketServer _webServer = null;
         private TcpComServer _tcpServer = null;
 
         private List<ChannelController> _channels = new List<ChannelController>();
 
-        private TextBox _output;
-
-        public MainController(TextBox output)
+        public MainController()
         {
-            _output = output;
-            TCP_COM_SERVER_PORT = ConfigProfile.Current.TcpComListenPort;
-            WEB_SERVER_PORT = ConfigProfile.Current.WebSocketListenPort;
         }
 
         public void Start()
         {
-            _tcpServer = new TcpComServer(TCP_COM_SERVER_PORT);
+            _tcpServer = new TcpComServer(ConfigProfile.Current.TcpComListenPort);
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
             _tcpServer.Start();
 
-            _webServer = new WebSocketServer(WEB_SERVER_PORT);
+            _webServer = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
             _webServer.Start();
 
             foreach (var c in Channels.ChannelList)
             {
-                ChannelController cc = new ChannelController(_output);
+                ChannelController cc = new ChannelController();
                 cc.Init(c, _webServer);
                 _channels.Add(cc);
             }
 
-            _output.AppendText("系统已启动 \n");
+            MyConsole.Current.Log("系统已启动 \r");
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)

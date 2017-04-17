@@ -77,7 +77,7 @@
 
             <Button Name="btnOpenU"
                     Grid.Column="6"
-                    Click="btnOpenU_Click"
+                    Click="btnStopTcpServer_Click"
                     Content="停止服务器" />
         </Grid>
 

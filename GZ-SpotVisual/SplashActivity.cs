@@ -25,7 +25,6 @@ namespace GZ_SpotVisual
             Task.Factory.StartNew(new Action(() =>
             {
                 Config.ReadProfile();
-
                 this.RunOnUiThread(new Action(() =>
                 {
                     Intent intent = new Intent(this, typeof(MainActivity));

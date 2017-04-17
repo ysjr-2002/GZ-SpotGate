@@ -22,10 +22,10 @@ namespace GZ_SpotGate.Tcp
         private IPEndPoint _ipEndPoint = null;
         private Action<DataEventArgs> _callback;
         private Thread _thread = null;
-        private static readonly ILog log = LogManager.GetLogger("TcpConnection");
 
         private const string qr_prefiex = "qr";
         private const string ic_prefiex = "ic";
+        private static readonly ILog log = LogManager.GetLogger("TcpConnection");
 
         public TcpClient Tcp
         {
@@ -71,65 +71,91 @@ namespace GZ_SpotGate.Tcp
             {
                 try
                 {
-                    byte b = 0;
-                    List<byte> buffer = new List<byte>();
-                    while ((b = (byte)_nws.ReadByte()) > 0)
+                    #region OLD
+                    //byte b = 0;
+                    //List<byte> buffer = new List<byte>();
+                    //while ((b = (byte)_nws.ReadByte()) > 0)
+                    //{
+                    //    if (b == 13)
+                    //    {
+                    //        NotifySubscribe(buffer.ToArray());
+                    //        buffer.Clear();
+                    //    }
+                    //    else
+                    //    {
+                    //        buffer.Add(b);
+                    //    }
+                    //}
+                    #endregion
+
+                    byte[] buffer = new byte[256];
+                    var len = _nws.Read(buffer, 0, buffer.Length);
+                    if (len > 0)
                     {
-                        if (b == 13)
-                        {
-                            var array = buffer.ToArray();
-                            var len = buffer.Count;
-                            var code = "";
-                            var prefix = Encoding.UTF8.GetString(array, 0, 2);
-                            var ic = false;
-                            var qr = false;
-                            if (prefix == qr_prefiex)
-                            {
-                                //二维码数据
-                                qr = true;
-                                ic = false;
-                                code = Encoding.UTF8.GetString(array, 2, len - 2);
-                            }
-                            else if (prefix == ic_prefiex)
-                            {
-                                //IC卡
-                                qr = false;
-                                ic = true;
-                                code = BitConverter.ToInt32(array, 2).ToString();
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            var data = new DataEventArgs
-                            {
-                                IPEndPoint = _ipEndPoint,
-                                Data = code,
-                                ICData = ic,
-                                QRData = qr
-                            };
-                            _callback?.BeginInvoke(data, null, null);
-                            buffer.Clear();
-                        }
-                        else
-                        {
-                            buffer.Add(b);
-                        }
+                        var data = new byte[len - 1];
+                        Array.Copy(buffer, data, data.Length);
+                        NotifySubscribe(data);
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
+                    break;
                 }
             }
+
+            //客户端关闭
+            Stop();
+        }
+
+        private void NotifySubscribe(byte[] buffer)
+        {
+            if (buffer.Length < 2)
+                return;
+
+            var len = buffer.Length;
+            var code = "";
+            var prefix = Encoding.UTF8.GetString(buffer, 0, 2);
+            var ic = false;
+            var qr = false;
+            if (prefix == qr_prefiex)
+            {
+                //二维码数据
+                qr = true;
+                ic = false;
+                code = Encoding.UTF8.GetString(buffer, 2, len - 2);
+            }
+            else if (prefix == ic_prefiex)
+            {
+                //IC卡
+                qr = false;
+                ic = true;
+                code = BitConverter.ToInt32(buffer, 2).ToString();
+            }
+            else
+            {
+                return;
+            }
+            var data = new DataEventArgs
+            {
+                IPEndPoint = _ipEndPoint,
+                Data = code,
+                ICData = ic,
+                QRData = qr
+            };
+            _callback?.BeginInvoke(data, null, null);
         }
 
         public void Stop()
         {
+            log.Debug("客户端关闭->" + _ipEndPoint);
             _running = false;
-            _nws.Close();
-            _tcp.Close();
-            _thread.Join(100);
+            _nws?.Close();
+            _tcp?.Close();
+            _thread?.Join(100);
             _thread = null;
             _tcp = null;
         }

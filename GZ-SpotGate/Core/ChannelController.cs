@@ -24,7 +24,6 @@ namespace GZ_SpotGate.Core
 
         private WebSocketServer _ws;
         private Request _request;
-        private TextBox _output;
 
         private const int Delay = 2000;
         private const string In_Welcome = "欢迎光临";
@@ -32,9 +31,8 @@ namespace GZ_SpotGate.Core
 
         private static readonly ILog log = LogManager.GetLogger("ChannelController");
 
-        public ChannelController(TextBox output)
+        public ChannelController()
         {
-            _output = output;
         }
 
         public async Task<bool> Init(ChannelModel model, WebSocketServer ws)
@@ -43,11 +41,11 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            //_inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            //var connect1 = await _inFaceSocket.Connect();
+            _inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
+            var connect1 = await _inFaceSocket.Connect();
 
-            //_outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            //var connect2 = await _outFaceSocket.Connect();
+            _outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
+            var connect2 = await _outFaceSocket.Connect();
 
             //if (connect1 && connect2)
             //{
@@ -62,14 +60,6 @@ namespace GZ_SpotGate.Core
             return true;
         }
 
-        private static string prefix
-        {
-            get
-            {
-                return DateTime.Now.HMS() + "->";
-            }
-        }
-
         public async void Report(DataEventArgs data)
         {
             if (data.PersonIn)
@@ -80,10 +70,7 @@ namespace GZ_SpotGate.Core
             {
                 await _request.Calc(this._model.ChannelVirualIp, "F");
             }
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                _output.AppendText(prefix + "上报通行人次 \n");
-            });
+            MyConsole.Current.Log("上报通行人次\r");
         }
 
         public async void Work(DataEventArgs args)
@@ -121,25 +108,25 @@ namespace GZ_SpotGate.Core
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
-            var sb = new StringBuilder();
-            sb.Append(prefix + "通道" + _model.No + "\n");
+            var sb = new List<string>();
+            sb.Add("通道" + _model.No + "\n");
             if (intentType == IntentType.In)
             {
-                sb.Append(prefix + "进入 \n");
+                sb.Add("进入 \n");
             }
             else
             {
-                sb.Append(prefix + "离开 \n");
+                sb.Add("离开 \n");
             }
 
             if (checkInType == IDType.IC)
-                sb.Append(string.Format(prefix + "身份证={0} \n", uniqueId));
+                sb.Add(string.Format("身份证={0} \n", uniqueId));
             if (checkInType == IDType.ID)
-                sb.Append(string.Format(prefix + "IC={0} \n", uniqueId));
+                sb.Add(string.Format("IC={0} \n", uniqueId));
             if (checkInType == IDType.BarCode)
-                sb.Append(string.Format(prefix + "二维码={0} \n", uniqueId));
+                sb.Add(string.Format("二维码={0} \n", uniqueId));
             if (checkInType == IDType.Face)
-                sb.Append(string.Format(prefix + "Face={0} \n", uniqueId));
+                sb.Add(string.Format("Face={0} \n", uniqueId));
 
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
             content.code = 100;
@@ -169,19 +156,14 @@ namespace GZ_SpotGate.Core
                     am.Message = Out_Welcome;
                     _ws.Pass(_model.AndroidOutIp, am);
                 }
-                sb.Append(string.Format(prefix + "请通行 {0}人次\n", personCount));
+                sb.Add(string.Format("请通行 {0}人次\n", personCount));
             }
             else
             {
                 //禁止通行
-                sb.Append(prefix + "禁止通行 \n");
+                sb.Add("禁止通行 \n");
             }
-
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                _output?.AppendText(sb.ToString());
-                _output.ScrollToEnd();
-            });
+            MyConsole.Current.Log(sb.ToArray());
         }
 
         public void Stop()

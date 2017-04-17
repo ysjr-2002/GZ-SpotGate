@@ -34,15 +34,15 @@ namespace GZ_SpotGate
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Output.Current.Init(txtConsole);
+            MyConsole.Current.Init(txtConsole);
 
-            mc = new MainController(txtConsole);
+            mc = new MainController();
             mc.Start();
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 var request = new Request();
-                request.CheckIn("127.0.0.1", IDType.BarCode, "test");
+                await request.CheckIn("127.0.0.1", IDType.BarCode, "test");
             });
 
             txtConsole.Focus();

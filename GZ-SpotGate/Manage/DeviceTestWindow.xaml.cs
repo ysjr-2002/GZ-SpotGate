@@ -21,6 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GZ_SpotGate.Tcp;
 
 namespace GZ_SpotGate.Manage
 {
@@ -31,6 +32,9 @@ namespace GZ_SpotGate.Manage
     {
         private int _dType = 0;
         private IReader reader = null;
+        private GateReader gr = new GateReader();
+        private WebSocketServer ws = null;
+        private TcpComServer tcpServer = null;
 
         public DeviceTestWindow()
         {
@@ -47,8 +51,13 @@ namespace GZ_SpotGate.Manage
             cmbPort1.ItemsSource = ports;
             cmbPort1.SelectedIndex = 1;
 
-            ws = new WebSocketServer(9872);
+            ws = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
             ws.Start();
+
+            tcpServer = new TcpComServer(ConfigProfile.Current.TcpComListenPort);
+            tcpServer.Start();
+
+            MyConsole.Current.Init(tbResult);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -88,7 +97,6 @@ namespace GZ_SpotGate.Manage
             });
         }
 
-        GateReader gr = new GateReader();
         /// <summary>
         /// 打开闸机串口
         /// </summary>
@@ -108,33 +116,11 @@ namespace GZ_SpotGate.Manage
                     tbResult.AppendText(s + "\n");
                 });
             });
-
-            //byte source_add = 0;
-            //byte cid1 = 0x12;
-            //byte cid2 = 0;
-            //byte denst_add = 0;
-            //byte len = 8;
-            //byte d0 = 0;
-
-            //byte d2 = 0;
-            //byte d3 = 0;
-            //byte d4 = 1;
-            //byte d5 = 0;
-            //byte d6 = 0;
-            //byte d7 = 1;
-            //byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, d0, 0x00, d2, d3, d4, d5, d6, d7, 00 };
-            //var check = gr.getCheckSum(buffer);
-            //buffer[buffer.Length - 1] = check;
-            //gr.Parse(buffer, true);
         }
 
-        private WebSocketServer ws = null;
-        private Tcp.TcpComServer tcpServer = null;
+
         private void btnOpenX_Click(object sender, RoutedEventArgs e)
         {
-            tcpServer = new Tcp.TcpComServer(9871);
-            tcpServer.OnMessageInComming += Tcp_OnMessageInComming;
-            tcpServer.Start();
             btnOpenX.IsEnabled = false;
         }
 
@@ -157,9 +143,9 @@ namespace GZ_SpotGate.Manage
             });
         }
 
-        private void btnOpenU_Click(object sender, RoutedEventArgs e)
+        private void btnStopTcpServer_Click(object sender, RoutedEventArgs e)
         {
-            tcpServer.Stop();
+            tcpServer?.Stop();
             btnOpenX.IsEnabled = true;
         }
 
@@ -254,7 +240,7 @@ namespace GZ_SpotGate.Manage
 
         private async void btnChannel_Click(object sender, RoutedEventArgs e)
         {
-            var c1 = new ChannelController(tbResult);
+            var c1 = new ChannelController();
             var code = "1";
             DataEventArgs arg = new DataEventArgs
             {
@@ -262,9 +248,7 @@ namespace GZ_SpotGate.Manage
                 QRData = true,
                 IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
             };
-
             await c1.Init(Channels.ChannelList.First(), ws);
-
             c1.Work(arg);
         }
     }
