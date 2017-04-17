@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -55,6 +57,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>server.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -92,6 +97,7 @@
     <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ConfigProfile.cs" />
     <Compile Include="Core\Channels.cs" />
+    <Compile Include="Core\Console.cs" />
     <Compile Include="Core\GateReader.cs" />
     <Compile Include="Model\FeedBack.cs" />
     <Compile Include="Model\IDType.cs" />
@@ -196,6 +202,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="server.ico" />
     <None Include="channels.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

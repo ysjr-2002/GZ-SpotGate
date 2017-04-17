@@ -265,7 +265,7 @@ namespace GZ_SpotGate.Tcp
                     var idno = getIDNO(array[2]);
                     DataEventArgs args = new DataEventArgs
                     {
-                        Name = "",
+                        Name = array[0],
                         Data = idno,
                         IPEndPoint = _ipEndPoint,
                         IDData = true

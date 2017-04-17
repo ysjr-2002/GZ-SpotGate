@@ -26,7 +26,7 @@ namespace GZ_SpotGate.Core
         private Request _request;
         private TextBox _output;
 
-        private const int Delay = 1000;
+        private const int Delay = 2000;
         private const string In_Welcome = "欢迎光临";
         private const string Out_Welcome = "欢迎再次光临";
 
@@ -43,19 +43,23 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            _inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            var connect1 = await _inFaceSocket.Connect();
+            //_inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
+            //var connect1 = await _inFaceSocket.Connect();
 
-            _outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            var connect2 = await _outFaceSocket.Connect();
+            //_outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
+            //var connect2 = await _outFaceSocket.Connect();
 
-            if (connect1 && connect2)
-                return true;
-            else
-            {
-                log.DebugFormat("初始化失败->{0}", _model.No);
-                return false;
-            }
+            //if (connect1 && connect2)
+            //{
+            //    log.Debug("通道->" + _model.No);
+            //    return true;
+            //}
+            //else
+            //{
+            //    log.DebugFormat("通道[{0}]初始化失败", _model.No);
+            //    return false;
+            //}
+            return true;
         }
 
         private static string prefix
@@ -69,9 +73,17 @@ namespace GZ_SpotGate.Core
         public async void Report(DataEventArgs data)
         {
             if (data.PersonIn)
+            {
                 await _request.Calc(this._model.ChannelVirualIp, "Z");
+            }
             else
+            {
                 await _request.Calc(this._model.ChannelVirualIp, "F");
+            }
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _output.AppendText(prefix + "上报通行人次 \n");
+            });
         }
 
         public async void Work(DataEventArgs args)
@@ -104,7 +116,7 @@ namespace GZ_SpotGate.Core
             {
                 checkInType = IDType.Face;
             }
-            await Check(intentType, checkInType, args.Data);
+            await Check(intentType, checkInType, args.Data, args.Name);
         }
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
@@ -168,6 +180,7 @@ namespace GZ_SpotGate.Core
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _output?.AppendText(sb.ToString());
+                _output.ScrollToEnd();
             });
         }
 

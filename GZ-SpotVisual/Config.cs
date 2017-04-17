@@ -44,6 +44,7 @@ namespace GZ_SpotVisual
                 var content = System.IO.File.ReadAllText(filePath, Encoding.UTF8);
                 var array = content.Split(spliter);
                 Profile.ServerIp = array[0];
+                Profile.Welcome = array[1];
             }
         }
 
@@ -56,7 +57,7 @@ namespace GZ_SpotVisual
                 sub.Create();
 
             var filePath = System.IO.Path.Combine(dir, config);
-            var content = Profile.ServerIp;
+            var content = string.Concat(Profile.ServerIp, spliter, Profile.Welcome);
             System.IO.File.WriteAllText(filePath, content, Encoding.UTF8);
         }
     }
@@ -65,9 +66,12 @@ namespace GZ_SpotVisual
     {
         public Profile()
         {
-            ServerIp = "192.168.1.116";
+            ServerIp = "192.168.0.105";
+            Welcome = "ª∂”≠π‚¡ŸÃÏÃ∂∫”";
         }
 
         public string ServerIp { get; set; }
+
+        public string Welcome { get; set; }
     }
 }

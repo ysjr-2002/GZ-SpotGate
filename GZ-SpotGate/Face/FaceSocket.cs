@@ -27,7 +27,7 @@ namespace GZ_SpotGate.Face
             return Task.Factory.StartNew(() =>
             {
                 var wsUrl = string.Format("ws://{0}:9000", _koalaIp);
-                var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?", _cameraIp);
+                var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?__exper_tuner=xm&__exper_tuner_username=admin&__exper_tuner_password=&__exper_mentor=motion&__exper_levels=320,5,625,5,1250,5,2500,5,5000,5,10000,5,10000,10,10000,20,10000,30&__exper_initlevel=4", _cameraIp);
                 var url = string.Concat(wsUrl, "?url=", rtspUrl.UrlEncode());
                 _socket = new WebSocket(wsUrl);
                 _socket.OnOpen += _socket_OnOpen;
@@ -35,7 +35,7 @@ namespace GZ_SpotGate.Face
                 _socket.OnClose += _socket_OnClose;
                 _socket.OnMessage += _socket_OnMessage;
                 _socket.EmitOnPing = true;
-                //_socket.Connect();
+                _socket.Connect();
                 return _open;
             });
         }

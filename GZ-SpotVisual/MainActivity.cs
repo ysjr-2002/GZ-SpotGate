@@ -20,18 +20,24 @@ namespace GZ_SpotVisual
         private TextView tvCopyright;
         private System.Timers.Timer timer = null;
 
+        private HttpSocket hs = null;
+
         private static int Delay = 1000;
 
         private View vistor = null;
         private TextView tv;
         private TextView tvName;
         private ImageView ivFace;
-        private const int p_width = 500;
-        private const int p_height = 600;
+        private const int p_width = 700;
+        private const int p_height = 500;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            RequestWindowFeature(WindowFeatures.NoTitle);
+            Window.SetFlags(WindowManagerFlags.Fullscreen, WindowManagerFlags.Fullscreen);
+
             SetContentView(Resource.Layout.FaceMain);
 
             tvWelcome = this.FindViewById<TextView>(Resource.Id.tvWelcome);
@@ -42,7 +48,12 @@ namespace GZ_SpotVisual
             tv = this.FindViewById<TextView>(Resource.Id.tvWecomeEmp);
             tvName = this.FindViewById<TextView>(Resource.Id.tvName);
 
-            tvWelcome.Text = "欢迎光临";
+            var settingTextView = FindViewById<TextView>(Resource.Id.settingTextView);
+            settingTextView.Click += delegate
+            {
+                Intent intent = new Intent(this, typeof(SettingActivity));
+                StartActivity(intent);
+            };
         }
 
         public String getHostIp()
@@ -70,13 +81,15 @@ namespace GZ_SpotVisual
         {
             base.OnStart();
 
-            Showtime();
-            StartTimer();
+            tvWelcome.Text = Config.Profile.Welcome;
+
+            //Showtime();
+            //StartTimer();
 
             var ip = getHostIp();
-            tvCopyright.Text = ip + "-V1.0";
+            tvCopyright.Text = ip + "-V1.0 ";
 
-            HttpSocket hs = new HttpSocket(this);
+            hs = new HttpSocket(this);
             hs.SetCallback(ReceiveServer);
             hs.Connect(Config.Profile.ServerIp);
         }
@@ -107,9 +120,12 @@ namespace GZ_SpotVisual
                 lp.Width = p_width;
                 lp.Height = p_height;
                 vistor.LayoutParameters = lp;
-                tvName.Text = am.Name;
+
+                //tv.Text = am.Message;
+
+                tvName.Text = am.Message;
                 tvName.SetTextColor(Color.Rgb(255, 106, 00));
-                tv.Text = am.Message;
+
                 ivFace.SetImageBitmap(faceImage);
                 faceImage.Dispose();
                 var sa = AnimationUtils.LoadAnimation(this, Resource.Animation.scale);
@@ -157,6 +173,13 @@ namespace GZ_SpotVisual
             {
                 tvTime.Text = DateTime.Now.ToString("HH:mm:ss");
             }));
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            timer?.Stop();
+            hs?.Close();
         }
     }
 }

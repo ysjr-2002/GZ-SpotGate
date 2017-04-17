@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Http;
 using GZ_SpotGate.Model;
 using log4net;
+using System.Diagnostics;
+using System.Threading;
 
 namespace GZ_SpotGate.Core
 {
@@ -16,7 +18,7 @@ namespace GZ_SpotGate.Core
 
         public async Task<FeedBack> CheckIn(string doorIp, IDType type, string code)
         {
-            var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=ticketface";
+            var url = ConfigProfile.Current.CheckInServerUrl + "?do=ticketface";
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("doorip", doorIp);
             dict.Add("barcode", code);
@@ -29,7 +31,7 @@ namespace GZ_SpotGate.Core
 
         public async Task<string> Calc(string doorIp, string direction = "Z", string code = "900")
         {
-            var url = "http://220.197.187.4:8000/HarewareService/gatecheck.ashx?do=calccount";
+            var url = ConfigProfile.Current.CheckInServerUrl + "?do=calccount";
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("doorip", doorIp);
             dict.Add("code", code);
@@ -46,6 +48,7 @@ namespace GZ_SpotGate.Core
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = contentBuffer.Length;
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 var requestStream = await request.GetRequestStreamAsync();
@@ -67,6 +70,11 @@ namespace GZ_SpotGate.Core
             {
                 log.Fatal("请求服务异常->" + ex.Message);
                 return string.Empty;
+            }
+            finally
+            {
+                sw.Stop();
+                log.Debug("验证耗时->" + sw.ElapsedMilliseconds);
             }
         }
 

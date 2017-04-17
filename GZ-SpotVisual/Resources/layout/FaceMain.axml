@@ -39,20 +39,20 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:id="@+id/tvWelcome"
-                    android:layout_weight="3"
-                    android:textSize="52sp"
+                    android:layout_weight="1"
+                    android:textSize="64sp"
                     android:textColor="@color/face"
                     android:gravity="center_horizontal|center_vertical" />
+            <!--时间-->
                 <TextView
-                    android:text="00:00:00"
+                    android:text=""
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvTime"
                     android:textColor="@color/face"
                     android:gravity="center_horizontal|center_vertical"
-                    android:layout_weight="2"
                     android:paddingTop="48dp"
                     android:textSize="40sp" />
                 <TextView
@@ -64,33 +64,34 @@
                     android:gravity="right" />
             </LinearLayout>
         </RelativeLayout>
+    <!--android:background="@drawable/popupbg"-->
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
                 android:id="@+id/alter"
-                android:background="@drawable/popupbg"
                 android:layout_height="0dp"
                 android:layout_width="0dp"
+                android:background="#ffffff"
                 android:orientation="vertical"
                 android:layout_centerInParent="true">
-                <ImageView
+                <GZ_SpotVisual.ImageViewPlus
                     android:id="@+id/faceImage"
-                    android:layout_marginTop="48dp"
-                    android:layout_width="360dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
                     android:layout_gravity="center_horizontal" />
-                <TextView
+            <!--<TextView
                     android:gravity="center_horizontal"
                     android:id="@+id/tvWecomeEmp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:textColor="@color/face"
-                    android:textSize="@dimen/popup_welcome_text_size" />
+                    android:textSize="@dimen/popup_welcome_text_size" />-->
                 <TextView
                     android:gravity="center_horizontal"
                     android:id="@+id/tvName"

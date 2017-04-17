@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:GZ_SpotGate"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="通道闸控制器"
+        Title="通道闸控制服务器软件"
         Width="1000"
         Height="700"
+        Icon="server.ico"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d">
     <Grid>
@@ -18,7 +19,9 @@
         <TextBox Name="txtConsole"
                  Grid.Row="1"
                  Background="Black"
-                 FontSize="14"
-                 Foreground="Green" />
+                 FontSize="18"
+                 Foreground="White"
+                 HorizontalScrollBarVisibility="Disabled"
+                 VerticalScrollBarVisibility="Auto" />
     </Grid>
 </Window>

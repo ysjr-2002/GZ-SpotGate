@@ -12,9 +12,9 @@ namespace GZ_SpotGate.Core
 
         public const int InIDReaderPort = 1002;
 
-        public const int OutReaderPort = 1004;
+        public const int OutReaderPort = 1003;
 
-        public const int OutIDReaderPort = 1005;
+        public const int OutIDReaderPort = 1004;
 
         public string No { get; set; }
         /// <summary>
