@@ -55,12 +55,6 @@ namespace GZ_SpotGate.Core
             }
         }
 
-        private List<ChannelModel> GetChannelModels()
-        {
-            List<ChannelModel> list = new List<ChannelModel>();
-            return list;
-        }
-
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
         {
             var epSendIp = e.IPEndPoint.Address.ToString();
