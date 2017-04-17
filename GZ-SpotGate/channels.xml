@@ -8,9 +8,9 @@
     <!--串口服务器-->
     <comserverip>192.168.1.100</comserverip>
     <!--入平板-->
-    <androidInip>192.168.0.6</androidInip>
+    <androidInip>192.168.0.110</androidInip>
     <!--出平板-->
-    <androidOutip>192.168.1.21</androidOutip>
+    <androidOutip>192.168.0.7</androidOutip>
     <!--入人脸服务器-->
     <faceInip>192.168.1.22</faceInip>
     <!--出人脸服务器-->
@@ -20,19 +20,19 @@
     <!--出摄像机-->
     <faceOutCameraip>192.168.1.23</faceOutCameraip>
     <!--闸机串口服务器-->
-    <gatecomserverip>192.168.1.20</gatecomserverip>
+    <gatecomserverip>192.168.1.101</gatecomserverip>
   </channel>
   <!--通道2-->
   <channel>
     <no>2</no>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.30</channelvirtualip>
+    <channelvirtualip>127.0.0.1</channelvirtualip>
     <!--串口服务器-->
-    <comserverip>192.168.1.100</comserverip>
+    <comserverip>192.168.1.6</comserverip>
     <!--入平板-->
-    <androidInip>192.168.1.20</androidInip>
+    <androidInip>192.168.0.6</androidInip>
     <!--出平板-->
-    <androidOutip>192.168.1.21</androidOutip>
+    <androidOutip>192.168.0.7</androidOutip>
     <!--入人脸服务器-->
     <faceInip>192.168.1.22</faceInip>
     <!--出人脸服务器-->
@@ -42,19 +42,17 @@
     <!--出摄像机-->
     <faceOutCameraip>192.168.1.23</faceOutCameraip>
     <!--闸机串口服务器-->
-    <gatecomserverip>192.168.1.21</gatecomserverip>
+    <gatecomserverip>192.168.1.87</gatecomserverip>
   </channel>
   <!--通道3-->
   <channel>
     <no>3</no>
-    <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.29</channelvirtualip>
-    <!--串口服务器-->
-    <comserverip>192.168.1.100</comserverip>
+    <channelvirtualip>127.0.0.1</channelvirtualip>
+    <comserverip>192.168.1.7</comserverip>
     <!--入平板-->
-    <androidInip>192.168.1.20</androidInip>
+    <androidInip>192.168.0.6</androidInip>
     <!--出平板-->
-    <androidOutip>192.168.1.21</androidOutip>
+    <androidOutip>192.168.0.7</androidOutip>
     <!--入人脸服务器-->
     <faceInip>192.168.1.22</faceInip>
     <!--出人脸服务器-->
@@ -64,7 +62,7 @@
     <!--出摄像机-->
     <faceOutCameraip>192.168.1.23</faceOutCameraip>
     <!--闸机串口服务器-->
-    <gatecomserverip>192.168.1.22</gatecomserverip>
+    <gatecomserverip>192.168.1.88</gatecomserverip>
   </channel>
   <!--通道4-->
   <channel>

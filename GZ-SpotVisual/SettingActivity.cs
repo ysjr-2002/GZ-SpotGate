@@ -23,9 +23,11 @@ namespace GZ_SpotVisual
 
             var btnSave = this.FindViewById<Button>(Resource.Id.btnSave);
             var koala = this.FindViewById<EditText>(Resource.Id.koalaEditText);
+            var welcome1 = this.FindViewById<EditText>(Resource.Id.welcomeEditText1);
 
             var cfg = Config.Profile;
             koala.Text = cfg.ServerIp;
+            welcome1.Text = cfg.Welcome;
 
             btnSave.Click += (s, e) =>
             {
@@ -35,7 +37,8 @@ namespace GZ_SpotVisual
                     return;
                 }
 
-                Config.Profile.ServerIp = koala.Text;
+                cfg.ServerIp = koala.Text;
+                cfg.Welcome = welcome1.Text;
                 Config.SaveProfile();
 
                 StartActivity(typeof(MainActivity));

@@ -49,8 +49,16 @@ namespace GZ_SpotGate.Tcp
             _tcp = tcp;
         }
 
+        private void getPersonCount()
+        {
+            AskGateState();
+            var buffer = Read();
+            Parse(buffer, false);
+        }
+
         public void SetCallback(Action<DataEventArgs> act)
         {
+            _callback = act;
         }
 
         public void Start()
@@ -60,6 +68,9 @@ namespace GZ_SpotGate.Tcp
 
             _running = true;
             _nws = _tcp.GetStream();
+
+            getPersonCount();
+
             _thread = new Thread(Work);
             _thread.Start();
         }
@@ -71,7 +82,7 @@ namespace GZ_SpotGate.Tcp
                 try
                 {
                     var buffer = Read();
-                    Parse(buffer);
+                    Parse(buffer, true);
                 }
                 catch (Exception)
                 {
@@ -89,7 +100,7 @@ namespace GZ_SpotGate.Tcp
                 var read = _nws.Read(buffer, pos, count);
                 pos += read;
                 count -= read;
-                if (pos == count)
+                if (pos == buffer.Length)
                 {
                     break;
                 }
@@ -97,7 +108,7 @@ namespace GZ_SpotGate.Tcp
             return buffer;
         }
 
-        public void Parse(byte[] buffer)
+        public void Parse(byte[] buffer, bool fire)
         {
             var checksum = getCheckSum(buffer);
             if (buffer[3] != 0x12 || checksum != buffer.Last())
@@ -112,7 +123,7 @@ namespace GZ_SpotGate.Tcp
             var incount = BitConverter.ToInt32(incountBytes, 0);
             var outcount = BitConverter.ToInt32(outcountBytes, 0);
 
-            if (pre_in_count != incount)
+            if (pre_in_count != incount && fire)
             {
                 DataEventArgs arg = new DataEventArgs
                 {
@@ -122,7 +133,7 @@ namespace GZ_SpotGate.Tcp
                 };
                 _callback.BeginInvoke(arg, null, null);
             }
-            if (pre_out_count != outcount)
+            if (pre_out_count != outcount && fire)
             {
                 DataEventArgs arg = new DataEventArgs
                 {
@@ -136,7 +147,11 @@ namespace GZ_SpotGate.Tcp
             pre_out_count = outcount;
         }
 
-        public void EnterOpen(byte count)
+        /// <summary>
+        /// 进向开闸
+        /// </summary>
+        /// <param name="count">值为1时，是进向保持</param>
+        public void EnterOpen(byte count = 0)
         {
             byte cid1 = 0x02;
             byte cid2 = 0x00;
@@ -144,17 +159,81 @@ namespace GZ_SpotGate.Tcp
             byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, count, 00, 00, 00, 00, 00, 00, 00 };
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
-            _nws.Write(buffer, 0, buffer.Length);
+            Send(buffer);
         }
 
-        public void ExitOpen(byte count)
+        /// <summary>
+        /// 进向关闸
+        /// </summary>
+        public void EnterClose()
         {
             byte cid1 = 0x02;
             byte cid2 = 0x00;
             byte len = 0x08;
-            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 0x03, count, 00, 00, 00, 00, 00, 00, 00 };
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, 02, 00, 00, 00, 00, 00, 00, 00 };
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
+            Send(buffer);
+        }
+
+        /// <summary>
+        /// 出向开闸
+        /// </summary>
+        /// <param name="count"></param>
+        public void ExitOpen(byte count = 0)
+        {
+            byte cid1 = 0x02;
+            byte cid2 = 0x00;
+            byte len = 0x08;
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 0x00, 0x03, count, 00, 00, 00, 00, 00, 00 };
+            var check = getCheckSum(buffer);
+            buffer[buffer.Length - 1] = check;
+            Send(buffer);
+        }
+
+        public void ExitHoldOpen()
+        {
+            byte cid1 = 0x02;
+            byte cid2 = 0x00;
+            byte len = 0x08;
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 0x00, 0x04, 00, 00, 00, 00, 00, 00, 00 };
+            var check = getCheckSum(buffer);
+            buffer[buffer.Length - 1] = check;
+            Send(buffer);
+        }
+
+        /// <summary>
+        /// 出向关闸
+        /// </summary>
+        public void ExitClose()
+        {
+            byte cid1 = 0x02;
+            byte cid2 = 0x00;
+            byte len = 0x08;
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, 0x04, 00, 00, 00, 00, 00, 00, 00 };
+            var check = getCheckSum(buffer);
+            buffer[buffer.Length - 1] = check;
+            Send(buffer);
+        }
+
+        /// <summary>
+        /// 查询状态
+        /// </summary>
+        public void AskGateState()
+        {
+            byte cid1 = 0x02;
+            byte cid2 = 0x00;
+            byte len = 0x08;
+            byte data0 = 0xFF;
+            //查询闸机状态不支持广播
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, 11, len, data0, 0x00, 00, 00, 00, 00, 00, 00, 00 };
+            var check = getCheckSum(buffer);
+            buffer[buffer.Length - 1] = check;
+            Send(buffer);
+        }
+
+        private void Send(byte[] buffer)
+        {
             _nws.Write(buffer, 0, buffer.Length);
         }
 

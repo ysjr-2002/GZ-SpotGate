@@ -9,17 +9,17 @@ namespace GZ_SpotGate.Tcp
 {
     static class GateConnectionPool
     {
-        private static Dictionary<string, IGateTcpConnection> clientCollection = new Dictionary<string, IGateTcpConnection>();
+        private static Dictionary<string, IGateTcpConnection> gateClientCollection = new Dictionary<string, IGateTcpConnection>();
 
-        private const int Gate_In_Port = 1003;
+        private const int Gate_In_Port = 1005;
         private const int Gate_Out_Port = 1006;
 
         public static void EnterOpen(string gatecomIp, byte entercount)
         {
             var key = string.Concat(gatecomIp, ":" + Gate_In_Port);
-            if (clientCollection.ContainsKey(key))
+            if (gateClientCollection.ContainsKey(key))
             {
-                var tcp = clientCollection[key];
+                var tcp = gateClientCollection[key];
                 tcp.EnterOpen(entercount);
             }
         }
@@ -27,31 +27,39 @@ namespace GZ_SpotGate.Tcp
         public static void ExitOpen(string gatecomIp, byte entercount)
         {
             var key = string.Concat(gatecomIp, ":" + Gate_Out_Port);
-            if (clientCollection.ContainsKey(key))
+            if (gateClientCollection.ContainsKey(key))
             {
-                var tcp = clientCollection[key];
+                var tcp = gateClientCollection[key];
                 tcp.ExitOpen(entercount);
             }
         }
 
         public static bool ContainsKey(string key)
         {
-            return clientCollection.ContainsKey(key);
+            return gateClientCollection.ContainsKey(key);
         }
 
         public static IGateTcpConnection GetGateTcp(string key)
         {
-            return clientCollection[key];
+            return gateClientCollection[key];
         }
 
         public static void RemoveGateTcp(string key)
         {
-            clientCollection.Remove(key);
+            gateClientCollection.Remove(key);
         }
 
         public static void Add(string key, IGateTcpConnection gate)
         {
-            clientCollection.Add(key, gate);
+            gateClientCollection.Add(key, gate);
+        }
+
+        public static void Dispose()
+        {
+            foreach (var item in gateClientCollection)
+            {
+                item.Value.Stop();
+            }
         }
     }
 }

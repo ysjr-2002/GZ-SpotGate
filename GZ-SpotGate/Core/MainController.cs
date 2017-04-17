@@ -38,7 +38,7 @@ namespace GZ_SpotGate.Core
             WEB_SERVER_PORT = ConfigProfile.Current.WebSocketListenPort;
         }
 
-        public async void Start()
+        public void Start()
         {
             _tcpServer = new TcpComServer(TCP_COM_SERVER_PORT);
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
@@ -50,9 +50,11 @@ namespace GZ_SpotGate.Core
             foreach (var c in Channels.ChannelList)
             {
                 ChannelController cc = new ChannelController(_output);
-                await cc.Init(c, _webServer);
+                cc.Init(c, _webServer);
                 _channels.Add(cc);
             }
+
+            _output.AppendText("系统已启动 \n");
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -98,6 +100,7 @@ namespace GZ_SpotGate.Core
             {
                 channel.Stop();
             }
+            GateConnectionPool.Dispose();
         }
     }
 }

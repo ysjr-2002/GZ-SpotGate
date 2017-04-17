@@ -45,7 +45,7 @@ namespace GZ_SpotGate.Manage
             cmbPort.SelectedIndex = 0;
 
             cmbPort1.ItemsSource = ports;
-            cmbPort1.SelectedIndex = 0;
+            cmbPort1.SelectedIndex = 1;
 
             ws = new WebSocketServer(9872);
             ws.Start();
@@ -109,23 +109,23 @@ namespace GZ_SpotGate.Manage
                 });
             });
 
-            byte source_add = 0;
-            byte cid1 = 0x12;
-            byte cid2 = 0;
-            byte denst_add = 0;
-            byte len = 8;
-            byte d0 = 0;
+            //byte source_add = 0;
+            //byte cid1 = 0x12;
+            //byte cid2 = 0;
+            //byte denst_add = 0;
+            //byte len = 8;
+            //byte d0 = 0;
 
-            byte d2 = 0;
-            byte d3 = 0;
-            byte d4 = 1;
-            byte d5 = 0;
-            byte d6 = 0;
-            byte d7 = 1;
-            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, d0, 0x00, d2, d3, d4, d5, d6, d7, 00 };
-            var check = gr.getCheckSum(buffer);
-            buffer[buffer.Length - 1] = check;
-            gr.Parse(buffer, true);
+            //byte d2 = 0;
+            //byte d3 = 0;
+            //byte d4 = 1;
+            //byte d5 = 0;
+            //byte d6 = 0;
+            //byte d7 = 1;
+            //byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, d0, 0x00, d2, d3, d4, d5, d6, d7, 00 };
+            //var check = gr.getCheckSum(buffer);
+            //buffer[buffer.Length - 1] = check;
+            //gr.Parse(buffer, true);
         }
 
         private WebSocketServer ws = null;
@@ -206,7 +206,7 @@ namespace GZ_SpotGate.Manage
         /// <param name="e"></param>
         private void btnExitHold_click(object sender, RoutedEventArgs e)
         {
-            gr.ExitOpen(4);
+            gr.ExitHoldOpen();
         }
         /// <summary>
         /// 出向关闸

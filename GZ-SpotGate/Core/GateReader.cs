@@ -48,7 +48,7 @@ namespace GZ_SpotGate.Core
 
         private void getPersonCount()
         {
-            EnterClose();
+            AskGateState();
             var buffer = Read();
             Parse(buffer, false);
         }
@@ -111,7 +111,18 @@ namespace GZ_SpotGate.Core
             byte cid1 = 0x02;
             byte cid2 = 0x00;
             byte len = 0x08;
-            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 0x03, count, 00, 00, 00, 00, 00, 00, 00 };
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 0x00, 0x03, count, 00, 00, 00, 00, 00, 00 };
+            var check = getCheckSum(buffer);
+            buffer[buffer.Length - 1] = check;
+            Send(buffer);
+        }
+
+        public void ExitHoldOpen()
+        {
+            byte cid1 = 0x02;
+            byte cid2 = 0x00;
+            byte len = 0x08;
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 0x00, 0x04, 00, 00, 00, 00, 00, 00, 00 };
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
@@ -125,7 +136,7 @@ namespace GZ_SpotGate.Core
             byte cid1 = 0x02;
             byte cid2 = 0x00;
             byte len = 0x08;
-            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, 0x05, 00, 00, 00, 00, 00, 00, 00 };
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, 0x04, 00, 00, 00, 00, 00, 00, 00 };
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
@@ -140,7 +151,8 @@ namespace GZ_SpotGate.Core
             byte cid2 = 0x00;
             byte len = 0x08;
             byte data0 = 0xFF;
-            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, data0, 0x00, 00, 00, 00, 00, 00, 00, 00 };
+            //查询闸机状态不支持广播
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, 11, len, data0, 0x00, 00, 00, 00, 00, 00, 00, 00 };
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
@@ -180,10 +192,17 @@ namespace GZ_SpotGate.Core
             var count = buffer.Length;
             while (true)
             {
-                var read = _com.Read(buffer, pos, count);
-                pos += read;
-                count -= read;
-                if (pos == count)
+                try
+                {
+                    var read = _com.Read(buffer, pos, count);
+                    pos += read;
+                    count -= read;
+                    if (pos == buffer.Length)
+                    {
+                        break;
+                    }
+                }
+                catch (Exception)
                 {
                     break;
                 }
@@ -195,6 +214,12 @@ namespace GZ_SpotGate.Core
         {
             if (_com != null && _com.IsOpen)
             {
+                var sb = new StringBuilder();
+                foreach (var b in data)
+                {
+                    sb.Append(b.ToString("X2") + " ");
+                }
+                Console.WriteLine(sb.ToString());
                 _com.Write(data, 0, data.Length);
             }
         }

@@ -12,6 +12,7 @@ using Android.Widget;
 using WebSocketSharp;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace GZ_SpotVisual
 {
@@ -36,7 +37,7 @@ namespace GZ_SpotVisual
             this.serverIp = serverIp;
             return Task.Factory.StartNew(() =>
             {
-               var url = "ws://"+ serverIp + ":9872/android";
+                var url = "ws://" + serverIp + ":9872/android";
                 ws = new WebSocket(url);
                 ws.OnOpen += Socket_OnOpen;
                 ws.OnError += Socket_OnError;
@@ -72,7 +73,7 @@ namespace GZ_SpotVisual
         {
             //Config.Log(koalaIp + " Websocket close");
             Reconnect();
-            //Dialog("WebSocket connection close");
+            Thread.Sleep(5000);
         }
 
         private void Socket_OnOpen(object sender, EventArgs e)
