@@ -27,8 +27,11 @@ namespace GZ_SpotVisual
                 Config.ReadProfile();
                 this.RunOnUiThread(new Action(() =>
                 {
-                    Intent intent = new Intent(this, typeof(VisitorActivity));
+                    Intent intent = new Intent(this, typeof(MainActivity));
                     StartActivity(intent);
+
+                    Intent intentService = new Intent(this, typeof(WebSocketService));
+                    StartService(intentService);
                     Finish();
                 }));
             }));

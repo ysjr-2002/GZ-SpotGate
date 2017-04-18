@@ -18,12 +18,14 @@ namespace GZ_SpotVisual
 {
     class HttpSocket
     {
-        private string serverIp = "";
         private WebSocket ws = null;
-        private Action<AndroidMessage> callback = null;
+        private string serverIp = "";
+        private Action<string> callback = null;
 
-        private Activity _activity = null;
-        public HttpSocket(Activity activity)
+        private Context _activity = null;
+        private const int Reconnect_Interval = 30000;
+
+        public HttpSocket(Context activity)
         {
             _activity = activity;
         }
@@ -48,7 +50,7 @@ namespace GZ_SpotVisual
             });
         }
 
-        public void SetCallback(Action<AndroidMessage> callback)
+        public void SetCallback(Action<string> callback)
         {
             this.callback = callback;
         }
@@ -57,9 +59,9 @@ namespace GZ_SpotVisual
         {
             if (e.IsText)
             {
-                Console.WriteLine(e.Data);
-                var entity = JsonConvert.DeserializeObject<AndroidMessage>(e.Data);
-                callback?.Invoke(entity);
+                var content = e.Data;
+                //var entity = JsonConvert.DeserializeObject<AndroidMessage>(content);
+                callback?.Invoke(content);
             }
         }
 
@@ -73,7 +75,7 @@ namespace GZ_SpotVisual
         {
             //Config.Log(koalaIp + " Websocket close");
             Reconnect();
-            Thread.Sleep(5000);
+            Thread.Sleep(Reconnect_Interval);
         }
 
         private void Socket_OnOpen(object sender, EventArgs e)
@@ -104,10 +106,10 @@ namespace GZ_SpotVisual
 
         private void Dialog(string msg)
         {
-            _activity.RunOnUiThread(() =>
-            {
-                Toast.MakeText(Application.Context, msg, ToastLength.Short).Show();
-            });
+            //_activity.RunOnUiThread(() =>
+            //{
+            //    Toast.MakeText(Application.Context, msg, ToastLength.Short).Show();
+            //});
         }
     }
 }

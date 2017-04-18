@@ -25,9 +25,15 @@ namespace GZ_SpotGate.Core
         private WebSocketServer _ws;
         private Request _request;
 
-        private const int Delay = 2000;
-        private const string In_Welcome = "欢迎光临";
-        private const string Out_Welcome = "欢迎再次光临";
+        private const int Delay = 1500;
+        private const string In_Ok = "欢迎光临,请入园";
+        private const string In_Failure = "请重新验证";
+
+        private const string Out_Ok = "欢迎再次光临";
+        private const string Out_Failure = "请重新验证";
+
+        private const string Line2_Ok_Tip = "验证成功";
+        private const string Line2_Failure_Tip = "验证失败";
 
         private static readonly ILog log = LogManager.GetLogger("ChannelController");
 
@@ -41,11 +47,11 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            _inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            var connect1 = await _inFaceSocket.Connect();
+            //_inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
+            //var connect1 = await _inFaceSocket.Connect();
 
-            _outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            var connect2 = await _outFaceSocket.Connect();
+            //_outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
+            //var connect2 = await _outFaceSocket.Connect();
 
             //if (connect1 && connect2)
             //{
@@ -57,6 +63,8 @@ namespace GZ_SpotGate.Core
             //    log.DebugFormat("通道[{0}]初始化失败", _model.No);
             //    return false;
             //}
+
+            await Task.Delay(1);
             return true;
         }
 
@@ -111,57 +119,71 @@ namespace GZ_SpotGate.Core
             var sb = new List<string>();
             sb.Add("通道" + _model.No + "\n");
             if (intentType == IntentType.In)
-            {
                 sb.Add("进入 \n");
-            }
             else
-            {
                 sb.Add("离开 \n");
-            }
 
             if (checkInType == IDType.IC)
                 sb.Add(string.Format("身份证={0} \n", uniqueId));
-            if (checkInType == IDType.ID)
+            else if (checkInType == IDType.ID)
                 sb.Add(string.Format("IC={0} \n", uniqueId));
-            if (checkInType == IDType.BarCode)
+            else if (checkInType == IDType.BarCode)
                 sb.Add(string.Format("二维码={0} \n", uniqueId));
-            if (checkInType == IDType.Face)
+            else if (checkInType == IDType.Face)
                 sb.Add(string.Format("Face={0} \n", uniqueId));
 
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
-            content.code = 100;
+            //content.code = 100;
+            //允许通行
+            AndroidMessage am = new AndroidMessage()
+            {
+                CheckInType = checkInType,
+                IntentType = intentType,
+                Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg",
+                Delay = Delay,
+                Code = content?.code ?? 0
+            };
+
+            byte personCount = content.personCount.ToByte();
             if (content?.code == 100)
             {
-                //允许通行
-                AndroidMessage am = new AndroidMessage()
-                {
-                    CheckInType = checkInType,
-                    IntentType = intentType,
-                    Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg",
-                    Name = name,
-                    Delay = Delay
-                };
-                byte personCount = content.personCount.ToByte();
-                if (intentType == IntentType.In)
-                {
-                    //进入
-                    GateConnectionPool.EnterOpen(this._model.GateComServerIp, personCount);
-                    am.Message = In_Welcome;
-                    _ws.Pass(_model.AndroidInIp, am);
-                }
-                else
-                {
-                    //离开
-                    GateConnectionPool.ExitOpen(this._model.GateComServerIp, personCount);
-                    am.Message = Out_Welcome;
-                    _ws.Pass(_model.AndroidOutIp, am);
-                }
                 sb.Add(string.Format("请通行 {0}人次\n", personCount));
             }
             else
             {
                 //禁止通行
                 sb.Add("禁止通行 \n");
+            }
+
+            if (intentType == IntentType.In && content?.code == 100)
+            {
+                //进入-成功
+                GateConnectionPool.EnterOpen(this._model.GateComServerIp, personCount);
+                am.Line1 = In_Ok;
+                am.Line2 = Line2_Ok_Tip;
+                _ws.Pass(_model.AndroidInIp, am);
+            }
+            if (intentType == IntentType.In && content?.code != 100)
+            {
+                //进入-失败
+                am.Line1 = In_Failure;
+                am.Line2 = Line2_Failure_Tip;
+                _ws.Pass(_model.AndroidInIp, am);
+            }
+            if (intentType == IntentType.Out && content?.code == 100)
+            {
+                //离开-成功
+                GateConnectionPool.ExitOpen(this._model.GateComServerIp, personCount);
+                am.Line1 = Out_Ok;
+                am.Line2 = Line2_Ok_Tip;
+                _ws.Pass(_model.AndroidOutIp, am);
+            }
+            if (intentType == IntentType.Out && content?.code != 100)
+            {
+                //离开-失败
+                am.Line1 = Out_Failure;
+                am.Line2 = Line2_Failure_Tip;
+                _ws.Pass(_model.AndroidOutIp, am);
             }
             MyConsole.Current.Log(sb.ToArray());
         }

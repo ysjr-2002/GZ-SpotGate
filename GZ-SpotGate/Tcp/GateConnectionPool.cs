@@ -12,7 +12,6 @@ namespace GZ_SpotGate.Tcp
         private static Dictionary<string, IGateTcpConnection> gateClientCollection = new Dictionary<string, IGateTcpConnection>();
 
         private const int Gate_In_Port = 1005;
-        private const int Gate_Out_Port = 1006;
 
         public static void EnterOpen(string gatecomIp, byte entercount)
         {
@@ -26,7 +25,7 @@ namespace GZ_SpotGate.Tcp
 
         public static void ExitOpen(string gatecomIp, byte entercount)
         {
-            var key = string.Concat(gatecomIp, ":" + Gate_Out_Port);
+            var key = string.Concat(gatecomIp, ":" + Gate_In_Port);
             if (gateClientCollection.ContainsKey(key))
             {
                 var tcp = gateClientCollection[key];

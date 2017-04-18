@@ -16,12 +16,14 @@ namespace GZ_SpotGate.WS
 
         public bool Result { get; set; }
 
-        public string Message { get; set; }
+        public string Line1 { get; set; }
 
-        public string Name { get; set; }
+        public string Line2 { get; set; }
 
         public string Avatar { get; set; }
 
         public int Delay { get; set; }
+
+        public int Code { get; set; }
     }
 }

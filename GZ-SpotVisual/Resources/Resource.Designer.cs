@@ -126,10 +126,16 @@ namespace GZ_SpotVisual
 			public const int Icon = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int popupbg = 2130837506;
+			public const int no = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int shape = 2130837507;
+			public const int popupbg = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int shape = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int yes = 2130837509;
 			
 			static Drawable()
 			{
@@ -180,11 +186,11 @@ namespace GZ_SpotVisual
 			// aapt resource value: 0x7f09000a
 			public const int tvName = 2131296266;
 			
+			// aapt resource value: 0x7f09000f
+			public const int tvState = 2131296271;
+			
 			// aapt resource value: 0x7f090005
 			public const int tvTime = 2131296261;
-			
-			// aapt resource value: 0x7f09000f
-			public const int tvWecomeEmp = 2131296271;
 			
 			// aapt resource value: 0x7f090004
 			public const int tvWelcome = 2131296260;

@@ -92,6 +92,7 @@
     <Compile Include="SettingActivity.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="VisitorActivity.cs" />
+    <Compile Include="WebSocketService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -152,6 +153,8 @@
     <Content Include="dll\Newtonsoft.Json.dll" />
     <Content Include="dll\websocket-sharp.dll" />
     <AndroidResource Include="Resources\values\Dimens.xml" />
+    <AndroidResource Include="Resources\drawable\no.png" />
+    <AndroidResource Include="Resources\drawable\yes.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

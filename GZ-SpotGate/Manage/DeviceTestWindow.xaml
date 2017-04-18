@@ -169,6 +169,7 @@
                 <ColumnDefinition Width="105" />
                 <ColumnDefinition Width="105" />
                 <ColumnDefinition Width="105" />
+                <ColumnDefinition Width="105" />
             </Grid.ColumnDefinitions>
 
             <Button Name="btnVerify"
@@ -182,10 +183,25 @@
                     Content="人员汇总" />
 
 
-            <Button Name="btnChannel"
+            <Button Name="btnInOK"
                     Grid.Column="5"
                     Click="btnChannel_Click"
-                    Content="通道测试" />
+                    Content="入-OK" />
+
+            <Button Name="btnInError"
+                    Grid.Column="6"
+                    Click="btnChannel_Click"
+                    Content="入-Error" />
+
+            <Button Name="btnOutOk"
+                    Grid.Column="7"
+                    Click="btnChannel_Click"
+                    Content="出-Ok" />
+
+            <Button Name="btnOutError"
+                    Grid.Column="8"
+                    Click="btnChannel_Click"
+                    Content="出-Error" />
         </Grid>
 
         <Label Name="lblContent"

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="200dip"
-        android:layout_height="200dip"
+        android:layout_width="400dip"
+        android:layout_height="400dip"
         android:id="@+id/faceImage"
         android:scaleType="fitCenter"
         android:src="@drawable/popupbg"
@@ -22,17 +22,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvWecomeEmp"
-            android:textSize="24sp"
+            android:id="@+id/tvWelcome"
+            android:textSize="40sp"
             android:gravity="center_horizontal"
-            android:text="你好你好放假啊快递费劲"
+            android:textColor="@color/face"
             android:layout_marginBottom="12dip" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvName"
-            android:textSize="48sp"
-            android:text="欢迎光临"
+            android:id="@+id/tvState"
+            android:textSize="36sp"
+            android:textColor="@color/face"
             android:gravity="center_horizontal" />
         <View
             android:layout_width="match_parent"

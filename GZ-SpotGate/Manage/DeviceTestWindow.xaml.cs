@@ -242,14 +242,54 @@ namespace GZ_SpotGate.Manage
         {
             var c1 = new ChannelController();
             var code = "1";
-            DataEventArgs arg = new DataEventArgs
+            DataEventArgs arg = null;
+            if (sender == btnInOK)
             {
-                Data = code,
-                QRData = true,
-                IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
-            };
+                arg = new DataEventArgs
+                {
+                    Data = code,
+                    QRData = true,
+                    IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
+                };
+            }
+            if (sender == btnInError)
+            {
+                arg = new DataEventArgs
+                {
+                    Data = code,
+                    QRData = true,
+                    IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
+                };
+            }
+            if (sender == btnOutOk)
+            {
+                arg = new DataEventArgs
+                {
+                    Data = code,
+                    QRData = true,
+                    IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1003)
+                };
+            }
+            if (sender == btnOutError)
+            {
+                arg = new DataEventArgs
+                {
+                    Data = code,
+                    QRData = true,
+                    IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1003)
+                };
+            }
             await c1.Init(Channels.ChannelList.First(), ws);
-            c1.Work(arg);
+
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    c1.Work(arg);
+                    break;
+                    Thread.Sleep(3000);
+                }
+            });
         }
     }
 }

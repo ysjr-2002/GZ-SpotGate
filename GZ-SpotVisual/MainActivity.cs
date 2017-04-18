@@ -20,12 +20,9 @@ namespace GZ_SpotVisual
         private TextView tvCopyright;
         private System.Timers.Timer timer = null;
 
-        private HttpSocket hs = null;
-
         private static int Delay = 1000;
 
         private View vistor = null;
-        private TextView tv;
         private TextView tvName;
         private ImageView ivFace;
         private const int p_width = 700;
@@ -43,7 +40,6 @@ namespace GZ_SpotVisual
             tvCopyright = this.FindViewById<TextView>(Resource.Id.tvCopyright);
             vistor = this.FindViewById<LinearLayout>(Resource.Id.alter);
             ivFace = this.FindViewById<ImageView>(Resource.Id.faceImage);
-            tv = this.FindViewById<TextView>(Resource.Id.tvWecomeEmp);
             tvName = this.FindViewById<TextView>(Resource.Id.tvName);
 
             var settingTextView = FindViewById<TextView>(Resource.Id.settingTextView);
@@ -81,15 +77,8 @@ namespace GZ_SpotVisual
 
             tvWelcome.Text = Config.Profile.Welcome;
 
-            //Showtime();
-            //StartTimer();
-
             var ip = getHostIp();
             tvCopyright.Text = ip + "-V1.0 ";
-
-            hs = new HttpSocket(this);
-            hs.SetCallback(ReceiveServer);
-            hs.Connect(Config.Profile.ServerIp);
         }
 
         protected override void OnPause()
@@ -100,14 +89,14 @@ namespace GZ_SpotVisual
 
         private void ReceiveServer(AndroidMessage am)
         {
-            Bitmap faceImage = null;
-            if (!string.IsNullOrEmpty(am.Avatar))
-            {
-                var url = am.Avatar;
-                faceImage = getFaceBitmap(url);
-            }
-            Delay = am.Delay;
-            ShowFace(am, faceImage);
+            //Bitmap faceImage = null;
+            //if (!string.IsNullOrEmpty(am.Avatar))
+            //{
+            //    var url = am.Avatar;
+            //    faceImage = getFaceBitmap(url);
+            //}
+            //Delay = am.Delay;
+            //ShowFace(am, faceImage);
         }
 
         private void ShowFace(AndroidMessage am, Bitmap faceImage)
@@ -119,9 +108,7 @@ namespace GZ_SpotVisual
                 lp.Height = p_height;
                 vistor.LayoutParameters = lp;
 
-                //tv.Text = am.Message;
-
-                tvName.Text = am.Message;
+                tvName.Text = am.Line1;
                 tvName.SetTextColor(Color.Rgb(255, 106, 00));
 
                 ivFace.SetImageBitmap(faceImage);
@@ -175,9 +162,10 @@ namespace GZ_SpotVisual
 
         protected override void OnDestroy()
         {
-            base.OnDestroy();
             timer?.Stop();
-            hs?.Close();
+            timer = null;
+            StopService(new Intent(this, typeof(WebSocketService)));
+            base.OnDestroy();
         }
     }
 }

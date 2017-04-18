@@ -206,6 +206,7 @@
     <Resource Include="server.ico" />
     <None Include="channels.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Document\face-api.html" />
   </ItemGroup>
