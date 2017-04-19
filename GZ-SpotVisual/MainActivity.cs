@@ -78,7 +78,7 @@ namespace GZ_SpotVisual
             tvWelcome.Text = Config.Profile.Welcome;
 
             var ip = getHostIp();
-            tvCopyright.Text = ip + "-V1.0 ";
+            tvCopyright.Text = "终端：" + ip + "  版本：V1.0 ";
         }
 
         protected override void OnPause()

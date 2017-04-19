@@ -26,5 +26,7 @@ namespace GZ_SpotGate.Tcp
         void EnterOpen(byte count);
 
         void ExitOpen(byte count);
+
+        void StopAsync();
     }
 }

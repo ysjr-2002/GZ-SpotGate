@@ -47,25 +47,22 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            //_inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            //var connect1 = await _inFaceSocket.Connect();
+            _inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
+            var connect1 = await _inFaceSocket.Connect();
 
-            //_outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            //var connect2 = await _outFaceSocket.Connect();
+            _outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
+            var connect2 = await _outFaceSocket.Connect();
 
-            //if (connect1 && connect2)
-            //{
-            //    log.Debug("通道->" + _model.No);
-            //    return true;
-            //}
-            //else
-            //{
-            //    log.DebugFormat("通道[{0}]初始化失败", _model.No);
-            //    return false;
-            //}
-
-            await Task.Delay(1);
-            return true;
+            if (connect1 && connect2)
+            {
+                log.Debug("通道->" + _model.No);
+                return true;
+            }
+            else
+            {
+                log.DebugFormat("通道[{0}]初始化失败", _model.No);
+                return false;
+            }
         }
 
         public async void Report(DataEventArgs data)
@@ -139,7 +136,8 @@ namespace GZ_SpotGate.Core
             {
                 CheckInType = checkInType,
                 IntentType = intentType,
-                Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg",
+                //Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg",
+                Avatar = avatar,
                 Delay = Delay,
                 Code = content?.code ?? 0
             };

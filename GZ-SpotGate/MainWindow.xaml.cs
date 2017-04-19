@@ -26,6 +26,7 @@ namespace GZ_SpotGate
     public partial class MainWindow : Window
     {
         MainController mc = null;
+        const string appname = "SpotGate";
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +35,10 @@ namespace GZ_SpotGate
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            bool auto = (ConfigProfile.Current.AutoRun == 1);
+            string appPath = System.Windows.Forms.Application.ExecutablePath;
+            Util.RunWhenStart(auto, appname, appPath);
+
             MyConsole.Current.Init(txtConsole);
 
             mc = new MainController();
@@ -44,7 +49,6 @@ namespace GZ_SpotGate
                 var request = new Request();
                 await request.CheckIn("127.0.0.1", IDType.BarCode, "test");
             });
-
             txtConsole.Focus();
         }
 

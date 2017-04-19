@@ -12,6 +12,8 @@ namespace GZ_SpotGate.Core
     {
         private static ConfigProfile _current = new ConfigProfile();
 
+        public int AutoRun { get; set; }
+
         public string CheckInServerUrl { get; set; }
 
         public int UdpComListenPort { get; set; }
@@ -36,6 +38,7 @@ namespace GZ_SpotGate.Core
 
         public void ReadConfig()
         {
+            AutoRun = GetKey("auto").ToInt32();
             CheckInServerUrl = GetKey("checkInServerUrl");
             TcpComListenPort = Int32.Parse(GetKey("tcpComListenPort"));
             WebSocketListenPort = Int32.Parse(GetKey("webSocketListenPort"));

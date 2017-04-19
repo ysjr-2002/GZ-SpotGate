@@ -83,11 +83,13 @@ namespace GZ_SpotGate.Core
             if (type == IDType.BarCode)
                 return "T";
             else if (type == IDType.IC)
-                return "";
+                return "IC/C";
             else if (type == IDType.Face)
                 return "P";
-            else
+            else if (type == IDType.ID)
                 return "I";
+
+            throw new ArgumentException("参数异常");
         }
     }
 }

@@ -69,14 +69,13 @@ namespace GZ_SpotGate.Tcp
             _running = true;
             _nws = _tcp.GetStream();
 
-            getPersonCount();
-
             _thread = new Thread(Work);
             _thread.Start();
         }
 
         private void Work()
         {
+            getPersonCount();
             while (_running)
             {
                 try
@@ -250,9 +249,20 @@ namespace GZ_SpotGate.Tcp
 
         public void Stop()
         {
+            StopInternal();
+        }
+
+        public void StopAsync()
+        {
+            Action act = () => { StopInternal(); };
+            act.BeginInvoke(null, null);
+        }
+
+        private void StopInternal()
+        {
             _running = false;
             _nws.Close();
-            _thread.Join(1000);
+            _thread.Join(500);
             _thread = null;
         }
     }

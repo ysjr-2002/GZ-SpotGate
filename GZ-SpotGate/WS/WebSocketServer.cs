@@ -44,16 +44,18 @@ namespace GZ_SpotGate.WS
 
         private AndroidBehavior InitAndroid()
         {
-            AndroidBehavior chat = new AndroidBehavior();
+            AndroidBehavior chat = new AndroidBehavior();            
             return chat;
         }
 
         public void Pass(string androidClient, AndroidMessage message)
         {
-            if (wssv == null)
-            {
+            if (message == null)
                 return;
-            }
+
+            if (wssv == null)
+                return;
+
             WebSocketServiceHost host = null;
             if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
             {

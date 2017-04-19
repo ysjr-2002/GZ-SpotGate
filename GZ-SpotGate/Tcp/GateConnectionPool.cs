@@ -57,7 +57,7 @@ namespace GZ_SpotGate.Tcp
         {
             foreach (var item in gateClientCollection)
             {
-                item.Value.Stop();
+                item.Value.StopAsync();
             }
         }
     }

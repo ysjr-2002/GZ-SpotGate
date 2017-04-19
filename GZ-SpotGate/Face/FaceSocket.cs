@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using WebSocketSharp;
 
@@ -54,6 +55,14 @@ namespace GZ_SpotGate.Face
 
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
+            _open = false;
+
+            if (!_appclose)
+            {
+                Dispose();
+                Thread.Sleep(10000);
+                Connect();
+            }
         }
 
         private void _socket_OnError(object sender, ErrorEventArgs e)
@@ -81,9 +90,12 @@ namespace GZ_SpotGate.Face
             _socket = null;
         }
 
+        private bool _appclose = false;
         public void Disconnect()
         {
-            _socket?.Close();
+            _appclose = true;
+            _socket?.CloseAsync();
+            _socket = null;
         }
     }
 }

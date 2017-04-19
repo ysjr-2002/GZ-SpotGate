@@ -6,11 +6,11 @@
     <!--通道虚拟IP，因为验证需要-->
     <channelvirtualip>172.21.4.31</channelvirtualip>
     <!--串口服务器-->
-    <comserverip>192.168.1.116</comserverip>
+    <comserverip>172.21.5.1</comserverip>
     <!--入平板-->
-    <androidInip>192.168.1.116</androidInip>
+    <androidInip>192.168.0.110</androidInip>
     <!--出平板-->
-    <androidOutip>192.168.1.116</androidOutip>
+    <androidOutip>192.168.0.7</androidOutip>
     <!--入人脸服务器-->
     <faceInip>192.168.1.22</faceInip>
     <!--出人脸服务器-->
@@ -20,148 +20,149 @@
     <!--出摄像机-->
     <faceOutCameraip>192.168.1.23</faceOutCameraip>
     <!--闸机串口服务器-->
-    <gatecomserverip>192.168.1.101</gatecomserverip>
+    <gatecomserverip>172.21.5.2</gatecomserverip>
   </channel>
   <!--通道2-->
   <channel>
     <no>2</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.32</channelvirtualip>
+    <comserverip>172.21.5.3</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.4</gatecomserverip>
   </channel>
   <!--通道3-->
   <channel>
     <no>3</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.33</channelvirtualip>
+    <comserverip>172.21.5.5</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.6</gatecomserverip>
   </channel>
   <!--通道4-->
   <channel>
     <no>4</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.34</channelvirtualip>
+    <comserverip>172.21.5.7</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.8</gatecomserverip>
   </channel>
   <!--通道5-->
   <channel>
     <no>5</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.35</channelvirtualip>
+    <comserverip>172.21.5.9</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.10</gatecomserverip>
   </channel>
   <!--通道6-->
   <channel>
     <no>6</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.36</channelvirtualip>
+    <comserverip>172.21.5.11</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.12</gatecomserverip>
   </channel>
   <!--通道7-->
   <channel>
     <no>7</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.37</channelvirtualip>
+    <comserverip>172.21.5.13</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.14</gatecomserverip>
   </channel>
   <!--通道8-->
   <channel>
     <no>8</no>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.38</channelvirtualip>
+    <comserverip>172.21.5.15</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <megviiip></megviiip>
+    <gatecomserverip>172.21.5.16</gatecomserverip>
   </channel>
   <!--通道9-->
   <channel>
     <no>9</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.39</channelvirtualip>
+    <comserverip>172.21.5.17</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.18</gatecomserverip>
   </channel>
   <!--通道10-->
   <channel>
     <no>10</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.40</channelvirtualip>
+    <comserverip>172.21.5.19</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.20</gatecomserverip>
   </channel>
   <!--通道11-->
   <channel>
     <no>11</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.41</channelvirtualip>
+    <comserverip>172.21.5.21</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.22</gatecomserverip>
   </channel>
    <!--通道12-->
   <channel>
     <no>12</no>
-    <channelvirtualip></channelvirtualip>
-    <comserverip></comserverip>
+    <channelvirtualip>172.21.4.42</channelvirtualip>
+    <comserverip>172.21.5.23</comserverip>
     <androidInip></androidInip>
     <androidOutip></androidOutip>
     <faceInip></faceInip>
     <faceOutip></faceOutip>
     <faceInCameraip></faceInCameraip>
     <faceOutCameraip></faceOutCameraip>
-    <gatecomserverip></gatecomserverip>
+    <gatecomserverip>172.21.5.24</gatecomserverip>
   </channel>
 </channels>
