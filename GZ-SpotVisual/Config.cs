@@ -68,7 +68,7 @@ namespace GZ_SpotVisual
     {
         public Profile()
         {
-            ServerIp = "192.168.1.116";
+            ServerIp = "172.21.5.88";
             Welcome = "ª∂”≠π‚¡ŸÃÏÃ∂∫”";
         }
 

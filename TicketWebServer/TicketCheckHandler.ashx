@@ -13,12 +13,12 @@ public class TicketCheckHandler : IHttpHandler
         var request = context.Request;
         var response = context.Response;
 
+        var a = context.Request.Form["doorip"];
+        var c = context.Request["barcode"];
+        var t = context.Request["type"];
+
         if (request.ContentLength > 0)
         {
-            var a = context.Request.Form["doorip"];
-            var b = context.Request["doorip"];
-            var c = context.Request["barcode"];
-            var t = context.Request["type"];
             var stream = request.InputStream;
             using (var reader = new StreamReader(stream, Encoding.UTF8))
             {
