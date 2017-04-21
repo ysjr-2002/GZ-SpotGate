@@ -19,8 +19,8 @@ namespace GZ_SpotGate.Core
     class ChannelController
     {
         private ChannelModel _model;
-        private FaceSocket _inFaceSocket;
-        private FaceSocket _outFaceSocket;
+        private FaceSocket _faceInSocket;
+        private FaceSocket _faceOutSocket;
 
         private WebSocketServer _ws;
         private Request _request;
@@ -47,11 +47,11 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            _inFaceSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            var connect1 = await _inFaceSocket.Connect();
+            _faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
+            var connect1 = await _faceInSocket.Connect();
 
-            _outFaceSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            var connect2 = await _outFaceSocket.Connect();
+            _faceOutSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
+            var connect2 = await _faceOutSocket.Connect();
 
             if (connect1 && connect2)
             {
@@ -189,8 +189,8 @@ namespace GZ_SpotGate.Core
         public void Stop()
         {
             //释放websocket资源
-            _inFaceSocket?.Disconnect();
-            _outFaceSocket?.Disconnect();
+            _faceInSocket?.Disconnect();
+            _faceOutSocket?.Disconnect();
         }
 
         public bool EqualDataServerIp(string ip)

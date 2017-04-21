@@ -9,13 +9,13 @@ namespace GZ_SpotGate.Tcp
 {
     static class GateConnectionPool
     {
-        private static Dictionary<string, IGateTcpConnection> gateClientCollection = new Dictionary<string, IGateTcpConnection>();
+        private const int Gate_Port = 1005;
 
-        private const int Gate_In_Port = 1005;
+        private static Dictionary<string, IGateTcpConnection> gateClientCollection = new Dictionary<string, IGateTcpConnection>();
 
         public static void EnterOpen(string gatecomIp, byte entercount)
         {
-            var key = string.Concat(gatecomIp, ":" + Gate_In_Port);
+            var key = string.Concat(gatecomIp, ":", Gate_Port);
             if (gateClientCollection.ContainsKey(key))
             {
                 var tcp = gateClientCollection[key];
@@ -25,7 +25,7 @@ namespace GZ_SpotGate.Tcp
 
         public static void ExitOpen(string gatecomIp, byte entercount)
         {
-            var key = string.Concat(gatecomIp, ":" + Gate_In_Port);
+            var key = string.Concat(gatecomIp, ":", Gate_Port);
             if (gateClientCollection.ContainsKey(key))
             {
                 var tcp = gateClientCollection[key];

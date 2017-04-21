@@ -261,8 +261,9 @@ namespace GZ_SpotGate.Tcp
         private void StopInternal()
         {
             _running = false;
-            _nws.Close();
-            _thread.Join(500);
+            _tcp?.Close();
+            _tcp = null;
+            _thread.Join(100);
             _thread = null;
         }
     }

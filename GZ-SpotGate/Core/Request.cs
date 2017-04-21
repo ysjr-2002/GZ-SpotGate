@@ -89,7 +89,7 @@ namespace GZ_SpotGate.Core
             else if (type == IDType.ID)
                 return "I";
 
-            throw new ArgumentException("参数异常");
+            throw new ArgumentException("凭证类型参数异常");
         }
     }
 }

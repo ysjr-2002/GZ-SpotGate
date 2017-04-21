@@ -40,8 +40,7 @@ namespace GZ_SpotVisual
 
             var content = Intent.GetStringExtra("am");
             var am = Newtonsoft.Json.JsonConvert.DeserializeObject<AndroidMessage>(content);
-
-            if (am.Code == 100)
+            if (am?.Code == 100)
             {
                 if (am.CheckInType == CheckIntype.Face)
                     ShowFace(am.Avatar);
@@ -55,12 +54,12 @@ namespace GZ_SpotVisual
                 faceImage.SetImageResource(Resource.Drawable.no);
             }
 
-            tvWelcome.Text = am.Line1;
-            tvState.Text = am.Line2;
+            tvWelcome.Text = am?.Line1;
+            tvState.Text = am?.Line2;
 
             System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
-                System.Threading.Thread.Sleep(am.Delay);
+                System.Threading.Thread.Sleep(am?.Delay ?? 1000);
 
                 StartActivity(typeof(MainActivity));
                 Finish();

@@ -43,7 +43,6 @@ namespace GZ_SpotVisual
         private void ReceiveServer(string jsonMessage)
         {
             Intent intent = new Intent(this, typeof(VisitorActivity));
-            //var json = Newtonsoft.Json.JsonConvert.SerializeObject(jsonMessage);
             intent.AddFlags(ActivityFlags.NewTask);
             intent.PutExtra("am", jsonMessage);
             StartActivity(intent);            

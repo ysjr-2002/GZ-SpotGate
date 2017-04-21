@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Xml.Linq;
 
 namespace GZ_SpotGate.Core
 {
@@ -53,6 +54,16 @@ namespace GZ_SpotGate.Core
             byte n = 0;
             byte.TryParse(str, out n);
             return n;
+        }
+
+        public static bool IsEmpty(this string input)
+        {
+            return string.IsNullOrEmpty(input);
+        }
+
+        public static string SubElement(this XElement element, string name)
+        {
+            return element.Element(name).Value;
         }
 
         public static string ToJson(object obj)

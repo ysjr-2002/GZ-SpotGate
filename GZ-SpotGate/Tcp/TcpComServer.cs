@@ -79,8 +79,8 @@ namespace GZ_SpotGate.Tcp
                 if (GateConnectionPool.ContainsKey(key))
                 {
                     var old = GateConnectionPool.GetGateTcp(key);
-                    old.Stop();
                     GateConnectionPool.RemoveGateTcp(key);
+                    old.StopAsync();
                 }
                 connection.SetCallback(AcceptData);
                 connection.Start();

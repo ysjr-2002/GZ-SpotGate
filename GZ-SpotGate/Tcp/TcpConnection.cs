@@ -153,11 +153,10 @@ namespace GZ_SpotGate.Tcp
         {
             log.Debug("客户端关闭->" + _ipEndPoint);
             _running = false;
-            _nws?.Close();
             _tcp?.Close();
+            _tcp = null;
             _thread?.Join(100);
             _thread = null;
-            _tcp = null;
         }
     }
 }

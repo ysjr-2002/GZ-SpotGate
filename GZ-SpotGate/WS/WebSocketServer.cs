@@ -11,7 +11,8 @@ using WebSocketSharp.Server;
 namespace GZ_SpotGate.WS
 {
     /// <summary>
-    /// Websocket服务，接收android平台的连接
+    /// 启动一个Websocket服务，接收android平台的连接
+    /// 并将消息发送到指定的平台
     /// </summary>
     class WebSocketServer
     {
@@ -44,7 +45,7 @@ namespace GZ_SpotGate.WS
 
         private AndroidBehavior InitAndroid()
         {
-            AndroidBehavior chat = new AndroidBehavior();            
+            AndroidBehavior chat = new AndroidBehavior();
             return chat;
         }
 

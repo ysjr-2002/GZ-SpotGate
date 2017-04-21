@@ -66,7 +66,8 @@ namespace GZ_SpotGate.Tcp
         public void Stop()
         {
             _running = false;
-            _nws?.Close();
+            _tcp?.Close();
+            _tcp = null;
             Thread.Sleep(200);
             _thread = null;
         }

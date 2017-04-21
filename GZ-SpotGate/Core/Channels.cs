@@ -35,9 +35,18 @@ namespace GZ_SpotGate.Core
             foreach (var item in root.Elements("channel"))
             {
                 var no = item.Element("no").Value;
-                if (string.IsNullOrEmpty(item.Element("comserverip").Value))
+                if (item.SubElement("no").IsEmpty() ||
+                    item.SubElement("channelvirtualip").IsEmpty() ||
+                    item.SubElement("comserverip").IsEmpty() ||
+                    item.SubElement("androidInip").IsEmpty() ||
+                    item.SubElement("androidOutip").IsEmpty() ||
+                    item.SubElement("faceInip").IsEmpty() ||
+                    item.SubElement("faceOutip").IsEmpty() ||
+                    item.SubElement("faceInCameraip").IsEmpty() ||
+                    item.SubElement("faceOutCameraip").IsEmpty() ||
+                    item.SubElement("gatecomserverip").IsEmpty())
                 {
-                    log.DebugFormat("通道{0}，信息不完整", no);
+                    log.DebugFormat("{0}通道信息配置不完整", no);
                     continue;
                 }
 
@@ -56,6 +65,11 @@ namespace GZ_SpotGate.Core
                 };
                 ChannelList.Add(cm);
             }
+        }
+
+        public static string EValue(XElement e, string name)
+        {
+            return e.Element(name).Value;
         }
     }
 }

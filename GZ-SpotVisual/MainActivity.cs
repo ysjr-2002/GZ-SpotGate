@@ -1,13 +1,14 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
+using Android.Graphics;
+using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using Android.Widget;
-using Android.OS;
-using Android.Graphics;
-using System.Net;
 using Android.Views.Animations;
+using Android.Widget;
+using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 
 namespace GZ_SpotVisual
@@ -50,19 +51,19 @@ namespace GZ_SpotVisual
             };
         }
 
-        public String getHostIp()
+        public String GetHostIp()
         {
             try
             {
-                var name = Dns.GetHostName();
-                IPAddress[] ips = Dns.GetHostAddresses(name);
-                if (ips == null)
+                var hostname = Dns.GetHostName();
+                IPAddress[] ipaddresses = Dns.GetHostAddresses(hostname);
+                if (ipaddresses == null)
                     return string.Empty;
 
-                foreach (var item in ips)
+                foreach (IPAddress address in ipaddresses)
                 {
-                    if (item.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                        return item.ToString();
+                    if (address.AddressFamily == AddressFamily.InterNetwork)
+                        return address.ToString();
                 }
             }
             catch (Exception e)
@@ -76,9 +77,8 @@ namespace GZ_SpotVisual
             base.OnStart();
 
             tvWelcome.Text = Config.Profile.Welcome;
-
-            var ip = getHostIp();
-            tvCopyright.Text = "终端：" + ip + "  版本：V1.0 ";
+            var address = GetHostIp();
+            tvCopyright.Text = "终端：" + address + "  版本：V1.0 ";
         }
 
         protected override void OnPause()
@@ -87,7 +87,7 @@ namespace GZ_SpotVisual
             base.OnPause();
         }
 
-        private void ReceiveServer(AndroidMessage am)
+        private void ReceiveFromServer(AndroidMessage am)
         {
             //Bitmap faceImage = null;
             //if (!string.IsNullOrEmpty(am.Avatar))
