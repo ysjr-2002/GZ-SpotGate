@@ -130,7 +130,6 @@ namespace GZ_SpotGate.Core
                 sb.Add(string.Format("Face={0} \n", uniqueId));
 
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
-            //content.code = 100;
             //允许通行
             AndroidMessage am = new AndroidMessage()
             {
