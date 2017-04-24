@@ -73,12 +73,14 @@
             <Button Name="btnOpenX"
                     Grid.Column="5"
                     Click="btnOpenX_Click"
-                    Content="tcp服务器" />
+                    Content="tcp服务器"
+                    Visibility="Collapsed" />
 
             <Button Name="btnOpenU"
                     Grid.Column="6"
                     Click="btnStopTcpServer_Click"
-                    Content="停止服务器" />
+                    Content="停止服务器"
+                    Visibility="Collapsed" />
         </Grid>
 
         <Grid Grid.Row="1">

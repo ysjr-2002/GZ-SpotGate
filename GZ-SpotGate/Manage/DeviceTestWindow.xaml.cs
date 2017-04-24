@@ -22,6 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GZ_SpotGate.Tcp;
+using System.ComponentModel;
 
 namespace GZ_SpotGate.Manage
 {
@@ -58,6 +59,13 @@ namespace GZ_SpotGate.Manage
             tcpServer.Start();
 
             MyConsole.Current.Init(tbResult);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            ws?.Stop();
+            tcpServer?.Stop();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -117,7 +125,6 @@ namespace GZ_SpotGate.Manage
                 });
             });
         }
-
 
         private void btnOpenX_Click(object sender, RoutedEventArgs e)
         {
