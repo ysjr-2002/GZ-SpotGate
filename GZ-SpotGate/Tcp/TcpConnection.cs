@@ -151,7 +151,6 @@ namespace GZ_SpotGate.Tcp
 
         public void Stop()
         {
-            log.Debug("客户端关闭->" + _ipEndPoint);
             _running = false;
             _tcp?.Close();
             _tcp = null;

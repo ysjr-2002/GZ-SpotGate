@@ -45,6 +45,7 @@ namespace GZ_SpotGate.Core
         {
             var contentBuffer = postData.ToBuffer();
             WebRequest request = WebRequest.Create(url);
+            request.Timeout = 5000;
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = contentBuffer.Length;

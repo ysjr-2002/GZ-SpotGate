@@ -48,11 +48,10 @@ namespace FaceAPI
                 SubjectData subject = new SubjectData
                 {
                     //0:员工 1:访客 2:VIP
-                    subject_type = 0,
+                    subject_type = 1,
                     name = name,
                     gender = 2,
                     //avatar = "@" + (avatarurl),
-                    avatar = "@",
                     department = "研发部",
                     description = "",
                     title = "",

@@ -72,7 +72,7 @@ namespace GZ_SpotGate.Tcp
             }
 
             var key = ep.ToString();
-            log.Debug(key);
+            log.Debug("端口连接->" + key);
             if (rp == 1005)
             {
                 connection = new TcpGateConnection(ep, tcpClient);

@@ -11,6 +11,9 @@ using System.Threading;
 
 namespace GZ_SpotGate.Tcp
 {
+    /// <summary>
+    /// 闸机连接
+    /// </summary>
     class TcpGateConnection : IGateTcpConnection
     {
         private TcpClient _tcp = null;
@@ -19,7 +22,7 @@ namespace GZ_SpotGate.Tcp
         private IPEndPoint _ipEndPoint = null;
         private Action<DataEventArgs> _callback;
         private Thread _thread = null;
-        private static readonly ILog log = LogManager.GetLogger("TcpConnection");
+        private static readonly ILog log = LogManager.GetLogger("TcpGateConnection");
 
         private const byte source_add = 0x01;
         private const byte denst_add = 0x00;

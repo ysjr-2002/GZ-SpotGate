@@ -46,10 +46,8 @@ namespace FaceAPI
             if (upload != null && upload.code == 0)
             {
                 photo_id = upload.data.id;
-                
-                var avatar = await api.UpdateAvatar(txtPhoto.Text);
-                avatarurl = avatar.data.url;
-
+                //var avatar = await api.UpdateAvatar(txtPhoto.Text);
+                //avatarurl = avatar.data.url;
                 MessageBox.Show("符合识别要求");
             }
             else
@@ -116,8 +114,13 @@ namespace FaceAPI
             var list = (api.GetSubject()).Deserialize<SubjectList>();
             foreach (var item in list.data)
             {
-                Console.WriteLine(item.name + " " + item.avatar);
+                Console.WriteLine(item.name + " " + item.job_number + " " + item.avatar);
             }
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

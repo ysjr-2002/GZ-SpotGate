@@ -11,8 +11,7 @@ namespace GZ_SpotGate.Core
     class MyConsole
     {
         private static MyConsole _output;
-
-        private static object sync = new object();
+        private static object _sync = new object();
 
         public static MyConsole Current
         {
@@ -20,7 +19,7 @@ namespace GZ_SpotGate.Core
             {
                 if (_output == null)
                 {
-                    lock (sync)
+                    lock (_sync)
                     {
                         if (_output == null)
                         {
@@ -63,7 +62,7 @@ namespace GZ_SpotGate.Core
                 sb.Append(prefix + line);
             }
 
-            lock (sync)
+            lock (_sync)
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {

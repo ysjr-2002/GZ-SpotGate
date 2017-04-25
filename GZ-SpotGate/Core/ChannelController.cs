@@ -113,21 +113,21 @@ namespace GZ_SpotGate.Core
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
-            var sb = new List<string>();
-            sb.Add("通道" + _model.No + "\n");
+            var listlog = new List<string>();
+            listlog.Add("通道" + _model.No + "\n");
             if (intentType == IntentType.In)
-                sb.Add("进入 \n");
+                listlog.Add("进入 \n");
             else
-                sb.Add("离开 \n");
+                listlog.Add("离开 \n");
 
             if (checkInType == IDType.IC)
-                sb.Add(string.Format("身份证={0} \n", uniqueId));
+                listlog.Add(string.Format("身份证={0} \n", uniqueId));
             else if (checkInType == IDType.ID)
-                sb.Add(string.Format("IC={0} \n", uniqueId));
+                listlog.Add(string.Format("IC={0} \n", uniqueId));
             else if (checkInType == IDType.BarCode)
-                sb.Add(string.Format("二维码={0} \n", uniqueId));
+                listlog.Add(string.Format("二维码={0} \n", uniqueId));
             else if (checkInType == IDType.Face)
-                sb.Add(string.Format("Face={0} \n", uniqueId));
+                listlog.Add(string.Format("Face={0} \n", uniqueId));
 
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
             //允许通行
@@ -141,15 +141,15 @@ namespace GZ_SpotGate.Core
                 Code = content?.code ?? 0
             };
 
-            byte personCount = content.personCount.ToByte();
+            byte personCount = content?.personCount.ToByte() ?? 0;
             if (content?.code == 100)
             {
-                sb.Add(string.Format("请通行 {0}人次\n", personCount));
+                listlog.Add(string.Format("请通行 {0}人次\n", personCount));
             }
             else
             {
                 //禁止通行
-                sb.Add("禁止通行 \n");
+                listlog.Add("禁止通行 \n");
             }
 
             if (intentType == IntentType.In && content?.code == 100)
@@ -182,7 +182,11 @@ namespace GZ_SpotGate.Core
                 am.Line2 = Line2_Failure_Tip;
                 _ws.Pass(_model.AndroidOutIp, am);
             }
-            MyConsole.Current.Log(sb.ToArray());
+            foreach (var c in listlog)
+            {
+                log.Debug(c);
+            }
+            MyConsole.Current.Log(listlog.ToArray());
         }
 
         public void Stop()

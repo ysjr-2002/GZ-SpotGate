@@ -214,7 +214,7 @@ namespace GZ_SpotGate.Manage
         private async void btnCheck_Click(object sender, RoutedEventArgs e)
         {
             var request = new Request();
-            var json = await request.CheckIn("172.21.4.31", IDType.Face, "2017041000003");
+            var json = await request.CheckIn("172.21.4.31", IDType.ID, "123");
             if (json?.code != 100)
             {
                 MessageBox.Show("异常->" + json?.code);
