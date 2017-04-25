@@ -84,7 +84,7 @@ namespace GZ_SpotGate.Core
             if (type == IDType.BarCode)
                 return "T";
             else if (type == IDType.IC)
-                return "IC/C";
+                return "IC";
             else if (type == IDType.Face)
                 return "P";
             else if (type == IDType.ID)
