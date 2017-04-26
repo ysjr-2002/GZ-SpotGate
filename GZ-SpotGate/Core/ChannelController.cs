@@ -75,8 +75,7 @@ namespace GZ_SpotGate.Core
             {
                 await _request.Calc(this._model.ChannelVirualIp, "F");
             }
-            log.Debug("上报通行人次");
-            MyConsole.Current.Log("上报通行人次\r");
+            MyConsole.Current.Log("上报通行人次");
         }
 
         public async void Work(DataEventArgs args)
@@ -115,22 +114,25 @@ namespace GZ_SpotGate.Core
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
             var listlog = new List<string>();
-            listlog.Add("通道" + _model.No + "\n");
+            listlog.Add("通道" + _model.No);
             if (intentType == IntentType.In)
-                listlog.Add("进入 \n");
+                listlog.Add("进入");
             else
-                listlog.Add("离开 \n");
+                listlog.Add("离开");
 
             if (checkInType == IDType.IC)
-                listlog.Add(string.Format("身份证={0} \n", uniqueId));
+                listlog.Add(string.Format("IC={0}", uniqueId));
             else if (checkInType == IDType.ID)
-                listlog.Add(string.Format("IC={0} \n", uniqueId));
+                listlog.Add(string.Format("身份证={0}", uniqueId));
             else if (checkInType == IDType.BarCode)
-                listlog.Add(string.Format("二维码={0} \n", uniqueId));
+                listlog.Add(string.Format("二维码={0}", uniqueId));
             else if (checkInType == IDType.Face)
-                listlog.Add(string.Format("Face={0} \n", uniqueId));
+                listlog.Add(string.Format("人脸={0}", uniqueId));
 
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
+            //content = new Model.FeedBack();
+            //content.code = 100;
+            //content.personCount = "1";
             //允许通行
             AndroidMessage am = new AndroidMessage()
             {
@@ -145,12 +147,12 @@ namespace GZ_SpotGate.Core
             byte personCount = content?.personCount.ToByte() ?? 0;
             if (content?.code == 100)
             {
-                listlog.Add(string.Format("请通行 {0}人次\n", personCount));
+                listlog.Add(string.Format("请通行->{0}", personCount));
             }
             else
             {
                 //禁止通行
-                listlog.Add("禁止通行 \n");
+                listlog.Add(content?.message ?? "禁止通行");
             }
 
             if (intentType == IntentType.In && content?.code == 100)
@@ -182,10 +184,6 @@ namespace GZ_SpotGate.Core
                 am.Line1 = Out_Failure;
                 am.Line2 = Line2_Failure_Tip;
                 _ws.Pass(_model.AndroidOutIp, am);
-            }
-            foreach (var c in listlog)
-            {
-                log.Debug(c);
             }
             MyConsole.Current.Log(listlog.ToArray());
         }

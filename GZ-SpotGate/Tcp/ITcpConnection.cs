@@ -23,8 +23,16 @@ namespace GZ_SpotGate.Tcp
 
     internal interface IGateTcpConnection : ITcpConnection
     {
+        /// <summary>
+        /// 进向开闸
+        /// </summary>
+        /// <param name="count">值为1时，开闸保持</param>
         void EnterOpen(byte count);
 
+        /// <summary>
+        /// 出向开闸
+        /// </summary>
+        /// <param name="count"></param>
         void ExitOpen(byte count);
 
         void StopAsync();

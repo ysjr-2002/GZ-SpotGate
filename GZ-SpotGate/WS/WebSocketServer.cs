@@ -67,6 +67,7 @@ namespace GZ_SpotGate.WS
                     {
                         var json = Util.ToJson(message);
                         host.Sessions[sID].Context.WebSocket.Send(json);
+                        log.Debug("发送到平版->" + userIp);
                         break;
                     }
                 }

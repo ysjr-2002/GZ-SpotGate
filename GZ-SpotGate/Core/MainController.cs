@@ -20,7 +20,7 @@ namespace GZ_SpotGate.Core
     /// </summary>
     class MainController
     {
-        private readonly ILog log = LogManager.GetLogger("MainController");
+        private static readonly ILog log = LogManager.GetLogger("MainController");
 
         private WebSocketServer _webServer = null;
         private TcpComServer _tcpServer = null;
@@ -47,7 +47,7 @@ namespace GZ_SpotGate.Core
                 _channels.Add(cc);
             }
 
-            MyConsole.Current.Log("系统已启动 \r");
+            MyConsole.Current.Log("系统已启动");
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)

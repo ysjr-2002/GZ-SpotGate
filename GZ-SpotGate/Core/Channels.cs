@@ -12,7 +12,8 @@ namespace GZ_SpotGate.Core
 {
     internal class Channels
     {
-        private static ILog log = LogManager.GetLogger("Channels");
+        private static readonly ILog log = LogManager.GetLogger("Channels");
+
         private Channels()
         {
         }

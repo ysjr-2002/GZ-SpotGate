@@ -248,14 +248,14 @@ namespace GZ_SpotGate.Manage
         private async void btnChannel_Click(object sender, RoutedEventArgs e)
         {
             var c1 = new ChannelController();
-            var code = "1";
+            var code = "360732198905244630";
             DataEventArgs arg = null;
             if (sender == btnInOK)
             {
                 arg = new DataEventArgs
                 {
                     Data = code,
-                    QRData = true,
+                    FaceData = true,
                     IPEndPoint = new System.Net.IPEndPoint(IPAddress.Parse("192.168.1.2"), 1001)
                 };
             }

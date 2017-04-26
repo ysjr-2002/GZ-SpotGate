@@ -12,7 +12,7 @@ namespace GZ_SpotGate.Core
 {
     static class Util
     {
-        private static ILog log = LogManager.GetLogger("Util");
+        private static readonly ILog log = LogManager.GetLogger("Util");
 
         public static string LinkUrl(this Dictionary<string, string> param)
         {
@@ -123,7 +123,7 @@ namespace GZ_SpotGate.Core
                     key.DeleteValue(exeName);//取消开机启动
                     key.Close();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return false;
                 }

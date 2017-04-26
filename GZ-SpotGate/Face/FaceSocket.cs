@@ -1,4 +1,5 @@
 ﻿using GZ_SpotGate.Core;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace GZ_SpotGate.Face
         private bool _open = false;
         private WebSocket _socket = null;
         private Action<FaceRecognized> _callback = null;
+        private static readonly ILog log = LogManager.GetLogger("FaceSocket");
         public FaceSocket(string koalaIp, string cameraIp, Action<FaceRecognized> callback)
         {
             _koalaIp = koalaIp;
@@ -28,7 +30,8 @@ namespace GZ_SpotGate.Face
             return Task.Factory.StartNew(() =>
             {
                 var wsUrl = string.Format("ws://{0}:9000", _koalaIp);
-                var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?__exper_tuner=xm&__exper_tuner_username=admin&__exper_tuner_password=&__exper_mentor=motion&__exper_levels=320,5,625,5,1250,5,2500,5,5000,5,10000,5,10000,10,10000,20,10000,30&__exper_initlevel=4", _cameraIp);
+                //var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?__exper_tuner=xm&__exper_tuner_username=admin&__exper_tuner_password=&__exper_mentor=motion&__exper_levels=320,5,625,5,1250,5,2500,5,5000,5,10000,5,10000,10,10000,20,10000,30&__exper_initlevel=4", _cameraIp);
+                var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp);
                 var url = string.Concat(wsUrl, "?url=", rtspUrl.UrlEncode());
                 _socket = new WebSocket(wsUrl);
                 _socket.OnOpen += _socket_OnOpen;
@@ -45,6 +48,7 @@ namespace GZ_SpotGate.Face
         {
             if (e.IsText)
             {
+                MyConsole.Current.Log("收到数据->" + _koalaIp);
                 var entity = e.Data.Deserlizer<FaceRecognized>();
                 if (entity.type == RecognizeState.recognized.ToString())
                 {
@@ -55,8 +59,8 @@ namespace GZ_SpotGate.Face
 
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
+            log.Debug("Websocket关闭->" + _koalaIp);
             _open = false;
-
             if (!_appclose)
             {
                 Dispose();
@@ -67,11 +71,13 @@ namespace GZ_SpotGate.Face
 
         private void _socket_OnError(object sender, ErrorEventArgs e)
         {
+            log.Debug("Websocket错误->" + _koalaIp);
             _open = false;
         }
 
         private void _socket_OnOpen(object sender, EventArgs e)
         {
+            log.Debug("Websocket成功->" + _koalaIp);
             _open = true;
         }
 

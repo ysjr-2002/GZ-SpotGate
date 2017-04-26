@@ -152,7 +152,7 @@ namespace GZ_SpotGate.Tcp
         /// <summary>
         /// 进向开闸
         /// </summary>
-        /// <param name="count">值为1时，是进向保持</param>
+        /// <param name="count">值为1时，进向保持</param>
         public void EnterOpen(byte count = 0)
         {
             byte cid1 = 0x02;

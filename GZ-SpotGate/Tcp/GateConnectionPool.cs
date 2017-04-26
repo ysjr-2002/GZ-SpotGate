@@ -13,22 +13,37 @@ namespace GZ_SpotGate.Tcp
 
         private static Dictionary<string, IGateTcpConnection> gateClientCollection = new Dictionary<string, IGateTcpConnection>();
 
+        /// <summary>
+        /// 进向开闸
+        /// </summary>
+        /// <param name="gatecomIp"></param>
+        /// <param name="entercount"></param>
         public static void EnterOpen(string gatecomIp, byte entercount)
         {
             var key = string.Concat(gatecomIp, ":", Gate_Port);
             if (gateClientCollection.ContainsKey(key))
             {
                 var tcp = gateClientCollection[key];
+                if (entercount == 1)
+                    entercount = 0;
                 tcp.EnterOpen(entercount);
             }
         }
 
+        /// <summary>
+        /// 出向开闸
+        /// </summary>
+        /// <param name="gatecomIp"></param>
+        /// <param name="entercount"></param>
         public static void ExitOpen(string gatecomIp, byte entercount)
         {
             var key = string.Concat(gatecomIp, ":", Gate_Port);
             if (gateClientCollection.ContainsKey(key))
             {
                 var tcp = gateClientCollection[key];
+                if (entercount == 1)
+                    entercount = 0;
+
                 tcp.ExitOpen(entercount);
             }
         }

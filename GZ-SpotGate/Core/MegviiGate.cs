@@ -16,7 +16,7 @@ namespace GZ_SpotGate.Core
         private const string COMMAND_CLOSE = "off1";
 
         private UdpClient socket = null;
-        private static object async = new object();
+        private static readonly object async = new object();
 
         public MegviiGate()
         {

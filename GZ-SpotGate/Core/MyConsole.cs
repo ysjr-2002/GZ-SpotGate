@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace GZ_SpotGate.Core
     class MyConsole
     {
         private static MyConsole _output;
+        private static readonly ILog log4 = log4net.LogManager.GetLogger("MyConsole");
         private static object _sync = new object();
 
         public static MyConsole Current
@@ -59,7 +61,8 @@ namespace GZ_SpotGate.Core
             var sb = new StringBuilder();
             foreach (var line in lines)
             {
-                sb.Append(prefix + line);
+                log4.Debug(line);
+                sb.Append(prefix + line + "\r");
             }
 
             lock (_sync)

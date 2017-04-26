@@ -14,7 +14,7 @@ namespace GZ_SpotGate.Core
 {
     class Request
     {
-        private ILog log = LogManager.GetLogger("Request");
+        private static readonly ILog log = LogManager.GetLogger("Request");
 
         public async Task<FeedBack> CheckIn(string doorIp, IDType type, string code)
         {
@@ -75,7 +75,7 @@ namespace GZ_SpotGate.Core
             finally
             {
                 sw.Stop();
-                log.Debug("验证耗时->" + sw.ElapsedMilliseconds);
+                MyConsole.Current.Log("验证耗时->" + sw.ElapsedMilliseconds);
             }
         }
 
