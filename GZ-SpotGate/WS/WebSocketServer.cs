@@ -60,15 +60,16 @@ namespace GZ_SpotGate.WS
             WebSocketServiceHost host = null;
             if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
             {
+                MyConsole.Current.Log("已连接平板数量->" + host.Sessions.ActiveIDs.Count());
                 foreach (var sID in host.Sessions.ActiveIDs)
                 {
                     var userIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
+                    MyConsole.Current.Log("发送至平板->" + androidClient);
                     if (userIp == androidClient)
                     {
                         var json = Util.ToJson(message);
                         host.Sessions[sID].Context.WebSocket.Send(json);
-                        log.Debug("发送到平版->" + userIp);
-                        break;
+                        MyConsole.Current.Log("发送成功");
                     }
                 }
             }
