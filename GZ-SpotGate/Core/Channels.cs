@@ -63,6 +63,7 @@ namespace GZ_SpotGate.Core
                     FaceInCameraIp = item.Element("faceInCameraip").Value,
                     FaceOutCameraIp = item.Element("faceOutCameraip").Value,
                     GateComServerIp = item.Element("gatecomserverip").Value,
+                    IsEnable = item.Element("enable").Value.ToInt32() == 1
                 };
                 ChannelList.Add(cm);
             }

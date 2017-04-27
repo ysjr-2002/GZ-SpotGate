@@ -58,21 +58,27 @@ namespace GZ_SpotGate.Core
 
         public void Log(string[] lines)
         {
-            var sb = new StringBuilder();
-            foreach (var line in lines)
+            try
             {
-                log4.Debug(line);
-                sb.Append(prefix + line + "\r");
-            }
-
-            lock (_sync)
-            {
-                Application.Current.Dispatcher.Invoke(() =>
+                var sb = new StringBuilder();
+                foreach (var line in lines)
                 {
-                    _textbox.AppendText(sb.ToString());
-                    _textbox.ScrollToEnd();
-                });
-            };
+                    log4.Debug(line);
+                    sb.Append(prefix + line + "\r");
+                }
+
+                lock (_sync)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        _textbox.AppendText(sb.ToString());
+                        _textbox.ScrollToEnd();
+                    });
+                };
+            }
+            catch
+            {
+            }
         }
     }
 }

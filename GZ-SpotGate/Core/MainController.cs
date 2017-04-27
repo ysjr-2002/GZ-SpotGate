@@ -40,7 +40,8 @@ namespace GZ_SpotGate.Core
             _webServer = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
             _webServer.Start();
 
-            foreach (var c in Channels.ChannelList)
+            var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
+            foreach (var c in enableChannels)
             {
                 ChannelController cc = new ChannelController();
                 cc.Init(c, _webServer);

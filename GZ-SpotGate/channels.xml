@@ -19,8 +19,10 @@
     <faceInCameraip>172.21.5.150</faceInCameraip>
     <!--出摄像机-->
     <faceOutCameraip>172.21.5.151</faceOutCameraip>
-    <!--闸机串口服务器-->
+    <!--闸机串*口服务器-->
     <gatecomserverip>172.21.5.2</gatecomserverip>
+    <!--是否启用-->
+    <enable>0</enable>
   </channel>
   <!--通道2-->
   <channel>
@@ -34,6 +36,7 @@
     <faceInCameraip>172.21.5.152</faceInCameraip>
     <faceOutCameraip>172.21.5.153</faceOutCameraip>
     <gatecomserverip>172.21.5.4</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道3-->
   <channel>
@@ -47,6 +50,7 @@
     <faceInCameraip>172.21.5.154</faceInCameraip>
     <faceOutCameraip>172.21.5.155</faceOutCameraip>
     <gatecomserverip>172.21.5.6</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道4-->
   <channel>
@@ -60,6 +64,7 @@
     <faceInCameraip>172.21.5.156</faceInCameraip>
     <faceOutCameraip>172.21.5.157</faceOutCameraip>
     <gatecomserverip>172.21.5.8</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道5-->
   <channel>
@@ -73,6 +78,7 @@
     <faceInCameraip>172.21.5.158</faceInCameraip>
     <faceOutCameraip>172.21.5.159</faceOutCameraip>
     <gatecomserverip>172.21.5.10</gatecomserverip>
+    <enable>1</enable>
   </channel>
   <!--通道6-->
   <channel>
@@ -86,6 +92,7 @@
     <faceInCameraip>172.21.5.160</faceInCameraip>
     <faceOutCameraip>172.21.5.161</faceOutCameraip>
     <gatecomserverip>172.21.5.12</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道7-->
   <channel>
@@ -99,6 +106,7 @@
     <faceInCameraip>172.21.5.162</faceInCameraip>
     <faceOutCameraip>172.21.5.163</faceOutCameraip>
     <gatecomserverip>172.21.5.14</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道8-->
   <channel>
@@ -112,6 +120,7 @@
     <faceInCameraip>172.21.5.164</faceInCameraip>
     <faceOutCameraip>172.21.5.165</faceOutCameraip>
     <gatecomserverip>172.21.5.16</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道9-->
   <channel>
@@ -125,6 +134,7 @@
     <faceInCameraip>172.21.5.166</faceInCameraip>
     <faceOutCameraip>172.21.5.167</faceOutCameraip>
     <gatecomserverip>172.21.5.18</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道10-->
   <channel>
@@ -138,6 +148,7 @@
     <faceInCameraip>172.21.5.168</faceInCameraip>
     <faceOutCameraip>172.21.5.169</faceOutCameraip>
     <gatecomserverip>172.21.5.20</gatecomserverip>
+    <enable>0</enable>
   </channel>
   <!--通道11-->
   <channel>
@@ -151,8 +162,9 @@
     <faceInCameraip>172.21.5.170</faceInCameraip>
     <faceOutCameraip>172.21.5.171</faceOutCameraip>
     <gatecomserverip>172.21.5.22</gatecomserverip>
+    <enable>0</enable>
   </channel>
-   <!--通道12-->
+  <!--通道12-->
   <channel>
     <no>12</no>
     <channelvirtualip>172.21.4.111</channelvirtualip>
@@ -164,5 +176,6 @@
     <faceInCameraip>172.21.5.172</faceInCameraip>
     <faceOutCameraip>172.21.5.173</faceOutCameraip>
     <gatecomserverip>172.21.5.24</gatecomserverip>
+    <enable>0</enable>
   </channel>
 </channels>

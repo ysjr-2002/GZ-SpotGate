@@ -75,7 +75,7 @@ namespace GZ_SpotGate.Core
             finally
             {
                 sw.Stop();
-                MyConsole.Current.Log("验证耗时->" + sw.ElapsedMilliseconds);
+                MyConsole.Current.Log("验证耗时->" + sw.ElapsedMilliseconds + "ms");
             }
         }
 

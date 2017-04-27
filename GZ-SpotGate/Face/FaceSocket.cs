@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using WebSocketSharp;
 
 namespace GZ_SpotGate.Face
@@ -18,6 +19,9 @@ namespace GZ_SpotGate.Face
         private WebSocket _socket = null;
         private Action<FaceRecognized> _callback = null;
         private static readonly ILog log = LogManager.GetLogger("FaceSocket");
+
+
+        private const int sleep = 30 * 1000;
         public FaceSocket(string koalaIp, string cameraIp, Action<FaceRecognized> callback)
         {
             _koalaIp = koalaIp;
@@ -29,17 +33,24 @@ namespace GZ_SpotGate.Face
         {
             return Task.Factory.StartNew(() =>
             {
-                var wsUrl = string.Format("ws://{0}:9000", _koalaIp);
-                //var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?__exper_tuner=xm&__exper_tuner_username=admin&__exper_tuner_password=&__exper_mentor=motion&__exper_levels=320,5,625,5,1250,5,2500,5,5000,5,10000,5,10000,10,10000,20,10000,30&__exper_initlevel=4", _cameraIp);
-                var rtspUrl = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp);
-                var url = string.Concat(wsUrl, "?url=", rtspUrl.UrlEncode());
-                _socket = new WebSocket(wsUrl);
+                var url = string.Format("ws://{0}:9000/video", _koalaIp.Trim());
+                var rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp.Trim());
+                rtsp = HttpUtility.UrlEncode(rtsp);
+                var all = string.Concat(url, "?url=", rtsp);
+                //MyConsole.Current.Log(url);
+
+                //var url = "ws://172.21.5.193:9000/video";
+                //var rtsp = "rtsp://172.21.5.159/user=admin&password=&channel=1&stream=0.sdp";
+                //rtsp = HttpUtility.UrlEncode(rtsp);
+                //var all = string.Concat(url, "?url=", rtsp);
+
+                _socket = new WebSocket(all);
                 _socket.OnOpen += _socket_OnOpen;
                 _socket.OnError += _socket_OnError;
                 _socket.OnClose += _socket_OnClose;
                 _socket.OnMessage += _socket_OnMessage;
-                _socket.EmitOnPing = true;
                 _socket.Connect();
+                MyConsole.Current.Log("连接成功->" + _koalaIp);
                 return _open;
             });
         }
@@ -48,7 +59,6 @@ namespace GZ_SpotGate.Face
         {
             if (e.IsText)
             {
-                MyConsole.Current.Log("收到数据->" + _koalaIp);
                 var entity = e.Data.Deserlizer<FaceRecognized>();
                 if (entity.type == RecognizeState.recognized.ToString())
                 {
@@ -64,7 +74,7 @@ namespace GZ_SpotGate.Face
             if (!_appclose)
             {
                 Dispose();
-                Thread.Sleep(10000);
+                Thread.Sleep(sleep);
                 Connect();
             }
         }

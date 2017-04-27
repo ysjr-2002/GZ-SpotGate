@@ -75,7 +75,7 @@ namespace GZ_SpotGate.Core
             {
                 await _request.Calc(this._model.ChannelVirualIp, "F");
             }
-            MyConsole.Current.Log("上报通行人次");
+            MyConsole.Current.Log("上报通行人次->" + _model.No);
         }
 
         public async void Work(DataEventArgs args)
@@ -147,7 +147,7 @@ namespace GZ_SpotGate.Core
             byte personCount = content?.personCount.ToByte() ?? 0;
             if (content?.code == 100)
             {
-                listlog.Add(string.Format("请通行->{0}", personCount));
+                listlog.Add(string.Format("请通行->{0}人次", personCount));
             }
             else
             {

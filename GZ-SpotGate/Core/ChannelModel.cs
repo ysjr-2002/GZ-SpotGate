@@ -53,5 +53,9 @@ namespace GZ_SpotGate.Core
         /// 闸机控制串口服务器IP
         /// </summary>
         public string GateComServerIp { get; set; }
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool IsEnable { get; set; }
     }
 }

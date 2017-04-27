@@ -35,6 +35,7 @@ namespace GZ_SpotGate
                 Channels.Load();
                 var window = new MainWindow();
                 window.ShowDialog();
+
                 mutex.WaitOne();
             }
             else
