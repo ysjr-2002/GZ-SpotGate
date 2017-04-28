@@ -60,7 +60,6 @@ namespace GZ_SpotVisual
             System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
                 System.Threading.Thread.Sleep(am?.Delay ?? 1000);
-
                 StartActivity(typeof(MainActivity));
                 Finish();
             });
@@ -74,6 +73,9 @@ namespace GZ_SpotVisual
 
         private async void ShowFace(string url)
         {
+            if (string.IsNullOrEmpty(url))
+                return;
+
             facebm = await getFaceBitmap(url);
             faceImage.SetImageBitmap(facebm);
         }

@@ -33,7 +33,7 @@ namespace GZ_SpotGate
                 Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
                 ConfigProfile.Current.ReadConfig();
                 Channels.Load();
-                var window = new MainWindow();
+                var window = new DeviceTestWindow();
                 window.ShowDialog();
 
                 mutex.WaitOne();

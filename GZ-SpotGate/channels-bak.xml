@@ -8,7 +8,7 @@
     <!--串口服务器-->
     <comserverip>172.21.5.1</comserverip>
     <!--入平板-->
-    <androidInip>192.168.1.116</androidInip>
+    <androidInip>172.21.5.25</androidInip>
     <!--出平板-->
     <androidOutip>172.21.5.26</androidOutip>
     <!--入人脸服务器-->

@@ -37,20 +37,13 @@ namespace GZ_SpotGate.Face
                 var rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp.Trim());
                 rtsp = HttpUtility.UrlEncode(rtsp);
                 var all = string.Concat(url, "?url=", rtsp);
-                //MyConsole.Current.Log(url);
-
-                //var url = "ws://172.21.5.193:9000/video";
-                //var rtsp = "rtsp://172.21.5.159/user=admin&password=&channel=1&stream=0.sdp";
-                //rtsp = HttpUtility.UrlEncode(rtsp);
-                //var all = string.Concat(url, "?url=", rtsp);
-
+                
                 _socket = new WebSocket(all);
                 _socket.OnOpen += _socket_OnOpen;
                 _socket.OnError += _socket_OnError;
                 _socket.OnClose += _socket_OnClose;
                 _socket.OnMessage += _socket_OnMessage;
                 _socket.Connect();
-                MyConsole.Current.Log("连接成功->" + _koalaIp);
                 return _open;
             });
         }
@@ -87,7 +80,7 @@ namespace GZ_SpotGate.Face
 
         private void _socket_OnOpen(object sender, EventArgs e)
         {
-            log.Debug("Websocket成功->" + _koalaIp);
+            MyConsole.Current.Log("Websocket成功->" + _koalaIp);
             _open = true;
         }
 

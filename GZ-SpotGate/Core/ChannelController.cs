@@ -47,22 +47,23 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            _faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            var connect1 = await _faceInSocket.Connect();
+            //_faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
+            //var connect1 = await _faceInSocket.Connect();
 
-            _faceOutSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            var connect2 = await _faceOutSocket.Connect();
+            //_faceOutSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
+            //var connect2 = await _faceOutSocket.Connect();
 
-            if (connect1 && connect2)
-            {
-                log.Debug("通道->" + _model.No);
-                return true;
-            }
-            else
-            {
-                log.DebugFormat("通道[{0}]初始化失败", _model.No);
-                return false;
-            }
+            //if (connect1 && connect2)
+            //{
+            //    log.Debug(string.Format("[{0}]通道初始化成功", _model.No));
+            //    return true;
+            //}
+            //else
+            //{
+            //    log.DebugFormat("[{0}]通道初始化失败", _model.No);
+            //    return false;
+            //}
+            return true;
         }
 
         public async void Report(DataEventArgs data)
@@ -75,7 +76,7 @@ namespace GZ_SpotGate.Core
             {
                 await _request.Calc(this._model.ChannelVirualIp, "F");
             }
-            MyConsole.Current.Log("上报通行人次->" + _model.No);
+            MyConsole.Current.Log(string.Format("[{0}]通道上报通行人次->", _model.No));
         }
 
         public async void Work(DataEventArgs args)
@@ -114,7 +115,7 @@ namespace GZ_SpotGate.Core
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
             var listlog = new List<string>();
-            listlog.Add("通道" + _model.No);
+            listlog.Add(string.Format("[{0}]通道", _model.No));
             if (intentType == IntentType.In)
                 listlog.Add("进入");
             else

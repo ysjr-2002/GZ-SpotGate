@@ -63,14 +63,27 @@ namespace GZ_SpotGate.WS
                 MyConsole.Current.Log("已连接平板数量->" + host.Sessions.ActiveIDs.Count());
                 foreach (var sID in host.Sessions.ActiveIDs)
                 {
-                    var userIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
-                    MyConsole.Current.Log("发送至平板->" + androidClient);
-                    if (userIp == androidClient)
+                    var remoteIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
+                    if (remoteIp == androidClient && host.Sessions[sID].State == WebSocketSharp.WebSocketState.Open)
                     {
+                        MyConsole.Current.Log("发送至平板->" + androidClient);
                         var json = Util.ToJson(message);
                         host.Sessions[sID].Context.WebSocket.Send(json);
                         MyConsole.Current.Log("发送成功");
                     }
+                }
+            }
+        }
+
+        private static void send(string ip, WebSocketServiceHost host)
+        {
+            List<string> list = new List<string>();
+            foreach (var sID in host.Sessions.ActiveIDs)
+            {
+                var remoteIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
+                if (remoteIp == ip)
+                {
+                    list.Add(sID);
                 }
             }
         }
