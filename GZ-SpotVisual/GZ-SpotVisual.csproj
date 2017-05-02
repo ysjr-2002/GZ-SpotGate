@@ -80,7 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnroidMessage.cs" />
+    <Compile Include="AndroidMessage.cs" />
     <Compile Include="BootReceiver.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="HttpSocket.cs" />
