@@ -45,7 +45,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(158, 21);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "172.21.5.193";
             // 
             // textBox2
             // 
@@ -54,7 +53,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(464, 21);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "rtsp://172.21.5.159/user=admin&password=&channel=1&stream=0.sdp";
             // 
             // button1
             // 
@@ -75,7 +73,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 3;
-            this.label1.Text = "摄像机IP：";
+            this.label1.Text = "Koala IP：";
             // 
             // label2
             // 

@@ -24,12 +24,21 @@ namespace WindowsFormsApplication1
         WebSocket ws = null;
         private void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("请输入Koala Ip地址！");
+                return;
+            }
+            if (string.IsNullOrEmpty(textBox2.Text) || !textBox2.Text.StartsWith("rtsp:"))
+            {
+                MessageBox.Show("请输入摄像机rtsp地址！");
+                return;
+            }
+
             var url = "ws://" + textBox1.Text + ":9000/video";
             var rtsp = textBox2.Text;
             rtsp = HttpUtility.UrlEncode(rtsp);
             var all = string.Concat(url, "?url=", rtsp);
-            //var all = "ws://192.168.1.116:9872/android";
-            MessageBox.Show("连接地址->" + all);
             ws = new WebSocket(all);
             ws.OnError += Ws_OnError1;
             ws.OnClose += Ws_OnClose;
@@ -82,7 +91,7 @@ namespace WindowsFormsApplication1
         private void Ws_OnOpen(object sender, EventArgs e)
         {
             lblState.Text = "连接成功，请进行人脸识别";
-            pictureBox1.ImageLocation = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg";
+            //pictureBox1.ImageLocation = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg";
         }
 
         private void Ws_OnClose(object sender, CloseEventArgs e)
