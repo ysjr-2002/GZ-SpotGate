@@ -23,6 +23,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TicketWebServer", "TicketWe
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "12840"
+		SlnRelativePath = "TicketWebServer\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
@@ -41,7 +42,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|x86.ActiveCfg = Debug|x86
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Debug|x86.Build.0 = Debug|x86
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,7 +49,6 @@ Global
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Release|x86.ActiveCfg = Release|x86
 		{27408243-3AAB-4B40-B492-A61ADBCEB2F1}.Release|x86.Build.0 = Release|x86
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Debug|x86.Build.0 = Debug|Any CPU
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
@@ -57,8 +56,6 @@ Global
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Release|x86.ActiveCfg = Debug|Any CPU
 		{8B0E3F4A-D38E-45D2-8985-3EB9842412F1}.Release|x86.Build.0 = Debug|Any CPU
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|x86.ActiveCfg = Debug|x86
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|x86.Build.0 = Debug|x86
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Debug|x86.Deploy.0 = Debug|x86
@@ -69,7 +66,6 @@ Global
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|x86.Build.0 = Release|x86
 		{08CEDA7A-4DBC-4D4C-BB95-EE05D706F9B9}.Release|x86.Deploy.0 = Release|x86
 		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|x86.ActiveCfg = Debug|x86
 		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Debug|x86.Build.0 = Debug|x86
 		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,7 +73,6 @@ Global
 		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Release|x86.ActiveCfg = Release|x86
 		{A3DDFA5A-D48F-48B7-814B-5B768570E811}.Release|x86.Build.0 = Release|x86
 		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Debug|x86.Build.0 = Debug|Any CPU
 		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -29,6 +29,13 @@ namespace GZ_SpotGate.Core
 
         public MainController()
         {
+            log.Info("fff");
+            log.Info("fff");
+            log.Info("fff");
+            log.Info("fff");
+            log.Info("fff");
+            log.Info("fff");
+            log.Info("fff");
         }
 
         public void Start()
