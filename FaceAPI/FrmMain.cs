@@ -122,5 +122,10 @@ namespace FaceAPI
         {
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var str = api.GetEventUser();
+        }
     }
 }

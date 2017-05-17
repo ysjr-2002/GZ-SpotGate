@@ -17,6 +17,7 @@ namespace FaceAPI
         static string subjectdelete_url = root + "/subject/";
         static string subjectphoto_url = root + "/subject/photo";
         static string avatar_url = root + "/subject/avatar";
+        static string event_url = root + "/event/user";
 
         string session = "";
 
@@ -119,6 +120,13 @@ namespace FaceAPI
         {
             var request = new HttpRequest();
             var responseStr = request.Get(subjectlist_url, session);
+            return responseStr;
+        }
+
+        public string GetEventUser()
+        {
+            var request = new HttpRequest();
+            var responseStr = request.Get(event_url, session);
             return responseStr;
         }
     }
