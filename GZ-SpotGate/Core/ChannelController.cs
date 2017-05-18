@@ -47,22 +47,22 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            //_faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            //var connect1 = await _faceInSocket.Connect();
+            _faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
+            var connect1 = await _faceInSocket.Connect();
 
-            //_faceOutSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            //var connect2 = await _faceOutSocket.Connect();
+            _faceOutSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
+            var connect2 = await _faceOutSocket.Connect();
 
-            //if (connect1 && connect2)
-            //{
-            //    log.Debug(string.Format("[{0}]通道初始化成功", _model.No));
-            //    return true;
-            //}
-            //else
-            //{
-            //    log.DebugFormat("[{0}]通道初始化失败", _model.No);
-            //    return false;
-            //}
+            if (connect1 && connect2)
+            {
+                log.Debug(string.Format("[{0}]通道初始化成功", _model.No));
+                return true;
+            }
+            else
+            {
+                log.DebugFormat("[{0}]通道初始化失败", _model.No);
+                return false;
+            }
             return true;
         }
 
