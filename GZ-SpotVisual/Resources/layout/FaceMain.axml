@@ -42,7 +42,7 @@
                     android:layout_height="0dp"
                     android:id="@+id/tvWelcome"
                     android:layout_weight="1"
-                    android:textSize="64sp"
+                    android:textSize="110sp"
                     android:textColor="@color/face"
                     android:gravity="center_horizontal|center_vertical" />
             <!--时间-->

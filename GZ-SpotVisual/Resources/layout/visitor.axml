@@ -9,7 +9,8 @@
         android:layout_height="400dip"
         android:id="@+id/faceImage"
         android:scaleType="fitCenter"
-        android:layout_gravity="center_horizontal|center_vertical" />
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginLeft="96dp" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvWelcome"
-            android:textSize="40sp"
+            android:textSize="80sp"
             android:gravity="center_horizontal"
             android:textColor="@color/face"
             android:layout_marginBottom="12dip" />
@@ -30,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvState"
-            android:textSize="36sp"
+            android:textSize="80sp"
             android:textColor="@color/face"
             android:gravity="center_horizontal" />
         <View

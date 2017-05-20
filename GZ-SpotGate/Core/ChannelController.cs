@@ -25,7 +25,7 @@ namespace GZ_SpotGate.Core
         private WebSocketServer _ws;
         private Request _request;
 
-        private const int Delay = 1500;
+        private const int Delay = 3000;
         private const string In_Ok = "欢迎光临,请入园";
         private const string In_Failure = "请重新验证";
 
@@ -63,7 +63,6 @@ namespace GZ_SpotGate.Core
                 log.DebugFormat("[{0}]通道初始化失败", _model.No);
                 return false;
             }
-            return true;
         }
 
         public async void Report(DataEventArgs data)
