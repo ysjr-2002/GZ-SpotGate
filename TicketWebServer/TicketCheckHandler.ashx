@@ -13,22 +13,22 @@ public class TicketCheckHandler : IHttpHandler
         var request = context.Request;
         var response = context.Response;
 
-        var a = context.Request.Form["doorip"];
-        var c = context.Request["barcode"];
-        var t = context.Request["type"];
+        //var a = context.Request.Form["doorip"];
+        //var c = context.Request["barcode"];
+        //var t = context.Request["type"];
 
-        if (request.ContentLength > 0)
-        {
-            var stream = request.InputStream;
-            using (var reader = new StreamReader(stream, Encoding.UTF8))
-            {
-                var content = reader.ReadToEnd();
-                System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
-                var obj = js.Deserialize(content, typeof(requestParam));
-            }
-        }
-
-        var responseStr = "";
+        //if (request.ContentLength > 0)
+        //{
+        //    var stream = request.InputStream;
+        //    using (var reader = new StreamReader(stream, Encoding.UTF8))
+        //    {
+        //        var content = reader.ReadToEnd();
+        //        System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+        //        var obj = js.Deserialize(content, typeof(requestParam));
+        //    }
+        //}
+        System.Threading.Thread.Sleep(5000);
+        var responseStr = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss");
         response.ContentType = "application/json";
         response.ContentEncoding = Encoding.UTF8;
         response.Write(responseStr);

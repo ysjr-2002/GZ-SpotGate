@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace GZ_SpotGate.Core
 {
-    class Request
+    internal class Request
     {
         private static readonly ILog log = LogManager.GetLogger("Request");
 
