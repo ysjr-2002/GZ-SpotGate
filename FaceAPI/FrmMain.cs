@@ -115,17 +115,15 @@ namespace FaceAPI
             foreach (var item in list.data)
             {
                 Console.WriteLine(item.name + " " + item.job_number + " " + item.avatar);
+                foreach (var p in item.photos)
+                {
+                    Console.WriteLine(p.url);
+                }
             }
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            var str = api.GetEventUser();
         }
     }
 }
