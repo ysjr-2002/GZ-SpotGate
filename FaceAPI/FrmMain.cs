@@ -114,7 +114,10 @@ namespace FaceAPI
             var list = (api.GetSubject()).Deserialize<SubjectList>();
             foreach (var item in list.data)
             {
-                Console.WriteLine(item.name + " " + item.job_number + " " + item.avatar);
+                if (item.name.StartsWith("王"))
+                {
+                    Console.WriteLine(item.name + " " + item.job_number + " " + item.avatar);
+                }
             }
         }
 

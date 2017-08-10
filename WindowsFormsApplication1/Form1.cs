@@ -90,13 +90,19 @@ namespace WindowsFormsApplication1
 
         private void Ws_OnOpen(object sender, EventArgs e)
         {
-            lblState.Text = "连接成功，请进行人脸识别";
+            Invoke(new Action(() =>
+            {
+                lblState.Text = "连接成功，请进行人脸识别";
+            }));
             //pictureBox1.ImageLocation = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg";
         }
 
         private void Ws_OnClose(object sender, CloseEventArgs e)
         {
-            lblState.Text = "连接关闭";
+            Invoke(new Action(() =>
+            {
+                lblState.Text = "连接关闭";
+            }));
         }
     }
 }

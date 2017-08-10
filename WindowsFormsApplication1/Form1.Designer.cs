@@ -52,7 +52,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(617, 22);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "rtsp://192.168.1.12/user=admin&password=&channel=1&stream=0.sdp?";
+            this.textBox2.Text = "rtsp://192.168.1.12:554/media/live/1/1";
             // 
             // button1
             // 
@@ -94,7 +94,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(245, 152);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(352, 353);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
