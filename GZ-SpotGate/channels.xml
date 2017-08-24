@@ -19,7 +19,7 @@
     <faceInCameraip>172.21.5.150</faceInCameraip>
     <!--出摄像机-->
     <faceOutCameraip>172.21.5.151</faceOutCameraip>
-    <!--闸机串*口服务器-->
+    <!--闸机串口服务器-->
     <gatecomserverip>172.21.5.2</gatecomserverip>
     <!--是否启用-->
     <enable>1</enable>
