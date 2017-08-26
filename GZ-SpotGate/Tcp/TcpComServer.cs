@@ -56,18 +56,22 @@ namespace GZ_SpotGate.Tcp
             ITcpConnection connection = null;
             if (rp == 1001)
             {
+                //入二维码、IC卡
                 connection = new TcpConnection(ep, tcpClient);
             }
             else if (rp == 1002)
             {
+                //入身份证证
                 connection = new TcpIDConnection(ep, tcpClient);
             }
             else if (rp == 1003)
             {
+                //出二维码、IC卡
                 connection = new TcpConnection(ep, tcpClient);
             }
             else if (rp == 1004)
             {
+                //出身份证
                 connection = new TcpIDConnection(ep, tcpClient);
             }
 
@@ -75,6 +79,7 @@ namespace GZ_SpotGate.Tcp
             log.Debug("端口连接->" + key);
             if (rp == 1005)
             {
+                //闸机串口
                 connection = new TcpGateConnection(ep, tcpClient);
                 if (GateConnectionPool.ContainsKey(key))
                 {
