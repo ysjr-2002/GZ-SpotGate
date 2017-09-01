@@ -44,7 +44,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(209, 22);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "192.168.1.60";
+            this.textBox1.Text = "192.168.1.137";
             // 
             // textBox2
             // 
@@ -52,7 +52,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(617, 22);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "rtsp://192.168.1.12:554/media/live/1/1";
+            this.textBox2.Text = "rtsp://192.168.1.139:554/media/live/1/1";
             // 
             // button1
             // 
