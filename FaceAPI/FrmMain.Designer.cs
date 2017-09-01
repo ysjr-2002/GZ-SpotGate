@@ -217,31 +217,11 @@
             this.button6.Text = "获取所有";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-<<<<<<< HEAD
-=======
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(32, 305);
-            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(107, 32);
-            this.button7.TabIndex = 21;
-            this.button7.Text = "获取所有";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
->>>>>>> 8b84a43f7696c03470de1a3f83ebbf4f15b90bac
-            // FrmMain
-            // 
+ 
+       
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(587, 256);
-=======
             this.ClientSize = new System.Drawing.Size(783, 341);
-            this.Controls.Add(this.button7);
->>>>>>> 8b84a43f7696c03470de1a3f83ebbf4f15b90bac
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label5);

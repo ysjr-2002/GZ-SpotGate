@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZ-SpotVisual", "GZ-SpotVis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceAPI", "FaceAPI\FaceAPI.csproj", "{A3DDFA5A-D48F-48B7-814B-5B768570E811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{0C1176E8-FA47-4123-8973-C1F29DB843DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketTest", "WindowsFormsApplication1\WebSocketTest.csproj", "{0C1176E8-FA47-4123-8973-C1F29DB843DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPVoice", "IPVoice\IPVoice.csproj", "{B653185F-3C6C-48D6-9416-C62C3300278F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPVoiceSafe", "IPVoiceSafe\IPVoiceSafe.csproj", "{E0082051-52A5-4FD5-9887-560657331B39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +56,22 @@ Global
 		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Release|x86.ActiveCfg = Release|Any CPU
 		{0C1176E8-FA47-4123-8973-C1F29DB843DB}.Release|x86.Build.0 = Release|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Debug|x86.Build.0 = Debug|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Release|x86.ActiveCfg = Release|Any CPU
+		{B653185F-3C6C-48D6-9416-C62C3300278F}.Release|x86.Build.0 = Release|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Debug|x86.Build.0 = Debug|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0082051-52A5-4FD5-9887-560657331B39}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
