@@ -54,6 +54,14 @@ namespace GZ_SpotGate.Core
         /// </summary>
         public string GateComServerIp { get; set; }
         /// <summary>
+        /// 入声音
+        /// </summary>
+        public string InVoiceIp { get; set; }
+        /// <summary>
+        /// 出声音
+        /// </summary>
+        public string OutVoiceIp { get; set; }
+        /// <summary>
         /// 是否启用
         /// </summary>
         public bool IsEnable { get; set; }

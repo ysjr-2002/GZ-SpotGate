@@ -95,6 +95,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\IPVoiceSafe\LCAudioThrDll.cs">
+      <Link>Core\LCAudioThrDll.cs</Link>
+    </Compile>
+    <Compile Include="..\IPVoiceSafe\Voice.cs">
+      <Link>Core\Voice.cs</Link>
+    </Compile>
     <Compile Include="Core\ChannelController.cs" />
     <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ConfigProfile.cs" />

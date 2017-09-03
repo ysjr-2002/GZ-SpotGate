@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,49 +28,34 @@ namespace IPVoice
         [DllImport("LCAudioThrDll.dll")]
         public static extern int lc_get_playstatus(IntPtr Plm);
 
+        [DllImport("LCAudioThrDll.dll")]
+        public static extern int lc_get_duration(IntPtr Plm);
 
-        
-
-        public static int LCInit(string filename, IntPtr PlayParam)
+        public static PlayParam GetPlayPlayParam(IntPtr ptr, string ipaddress)
         {
-            //int len = System.Text.Encoding.Default.GetByteCount(filename);
-            //byte[] fn = new byte[len + 1];
-            //fn = CodeBytes(filename, len + 1);
-            return lc_init(filename, PlayParam);
+            var ip = IptoUint(ipaddress);
+            var PlayParam = new PlayParam
+            {
+                hWnd = (uint)ptr,
+                Priority = 1,
+                IP = ip,
+                SourcType = 0,
+                CastMode = 0,
+                Volume = 80
+            };
+            return PlayParam;
         }
 
-        public static int LCPlay(IntPtr PlayParam)
+        public static uint IptoUint(string ipaddress)
         {
-            return lc_play(PlayParam);
-        }
-
-
-        //将一个字符串转换成
-        public static byte[] CodeBytes(string str, int len)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                str = string.Empty;
-            }
-
-            byte[] result = new byte[len];
-            byte[] strBytes = Encoding.Default.GetBytes(str);
-
-            for (int i = 0; i < len; i++)
-            {
-
-                if (i < strBytes.Length)
-                    result[i] = strBytes[i];
-                else
-                    result[i] = 0;
-            }
-
-            return result;
+            var ip = IPAddress.Parse(ipaddress);
+            var iplong = BitConverter.ToUInt32(ip.GetAddressBytes(), 0);
+            return iplong;
         }
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
-    public struct _PlayParam
+    public struct PlayParam
     {
         /// <summary>
         /// Windows窗口句柄，如果不为NULL，线程将事件消息发送到此窗口
@@ -92,7 +78,7 @@ namespace IPVoice
         /// </summary>
         public UInt32 IP;//20110402
         /// <summary>
-        /// 音量
+        /// 音量 0~100
         /// </summary>
         public UInt32 Volume;
         /// <summary>
@@ -119,7 +105,6 @@ namespace IPVoice
         /// 音频数据源，0表示数据源为文件，1表示数据源为声卡输入（Line in 或 mic输入）
         /// </summary>
         public UInt32 SourcType;
-
         /// <summary>
         /// 声卡ID号，仅在SourcType = 1时有效，表示采用哪个声卡的输入。
         /// </summary>

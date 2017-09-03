@@ -49,62 +49,44 @@ namespace IPVoiceSafe
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            var result = ofd.ShowDialog();
-            if (result != DialogResult.OK)
-            {
-                return;
-            }
-            var filename = ofd.FileName;
-            var ip = IPAddress.Parse("192.168.1.10");
-            var iplong = BitConverter.ToUInt32(ip.GetAddressBytes(), 0);
-            PlayParam = new _PlayParam
-            {
-                hWnd = (UInt32)this.Handle,
-                Priority = 1,
-                IP = iplong,
-                SourcType = 0,
-                CastMode = 0,
-                Volume = 80
-            };
+            //OpenFileDialog ofd = new OpenFileDialog();
+            //var result = ofd.ShowDialog();
+            //if (result != DialogResult.OK)
+            //{
+            //    return;
+            //}
+            //var filename = ofd.FileName;
 
-            int size = Marshal.SizeOf(PlayParam);
-            PlayHandle = Marshal.AllocHGlobal(size);
-            Marshal.StructureToPtr(PlayParam, PlayHandle, false);
-            init = LCAudioThrDll.lc_init(filename, PlayHandle);
-            if (init == 0)
-            {
-                playId = LCAudioThrDll.lc_play(PlayHandle);
+            var filename = @"C:\Users\Shaojie\Desktop\test_cbr.mp3";
+            string ip = "192.168.1.10";
+            Voice.Speak(this.Handle, ip, filename);
+            //Voice.Speak(this.Handle, ip, filename);
+            //Voice.Speak(this.Handle, ip, filename);
+            //Voice.Speak(this.Handle, ip, filename);
 
-                Task.Factory.StartNew(() =>
-                {
-                    while (true)
-                    {
-                        int status = LCAudioThrDll.lc_get_playstatus(PlayHandle);
-                        if (status == 0)
-                        {
-                            Console.WriteLine("运行");
-                        }
-                        else if (status == 1)
-                        {
-                            Console.WriteLine("暂停");
-                        }
-                        else if (status == 3)
-                        {
-                            Console.WriteLine("停止");
-                            break;
-                        }
-                        Thread.Sleep(500);
-                    }
-                });
-            }
-            else
+
+
+            Task.Factory.StartNew(() =>
             {
-                MessageBox.Show("初始化失败！");
-            }
+                //var filename = @"C:\Users\Shaojie\Desktop\ringin.wav";
+                //string ip = "192.168.1.10";
+                //Voice.Speak(this.Handle, ip, filename);
+            });
+            //Task.Factory.StartNew(() =>
+            //{
+            //    var filename = @"C:\Users\Shaojie\Desktop\ringin.wav";
+            //    string ip = "192.168.1.11";
+            //    Voice.Speak(this.Handle, ip, filename);
+            //});
+            //Task.Factory.StartNew(() =>
+            //{
+            //    var filename = @"C:\Users\Shaojie\Desktop\ringin.wav";
+            //    string ip = "192.168.1.12";
+            //    Voice.Speak(this.Handle, ip, filename);
+            //});
         }
 
-        _PlayParam PlayParam;
+        PlayParam PlayParam;
         IntPtr PlayHandle = IntPtr.Zero;
         int init = -1;
         int playId = 0;
