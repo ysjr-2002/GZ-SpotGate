@@ -36,7 +36,7 @@ namespace IPVoice
             var ip = IptoUint(ipaddress);
             var PlayParam = new PlayParam
             {
-                hWnd = (uint)ptr,
+                hWnd = ptr,
                 Priority = 1,
                 IP = ip,
                 SourcType = 0,
@@ -54,13 +54,13 @@ namespace IPVoice
         }
     }
 
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct PlayParam
     {
         /// <summary>
         /// Windows窗口句柄，如果不为NULL，线程将事件消息发送到此窗口
         /// </summary>
-        public UInt32 hWnd;
+        public IntPtr hWnd;
         /// <summary>
         /// 音频流优先级，0优先级最低，255优先级最高，音频终端优先播放优先级高的音频。
         /// </summary>

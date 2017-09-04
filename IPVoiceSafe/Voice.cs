@@ -28,7 +28,6 @@ namespace IPVoice
                 {
                     var playId = LCAudioThrDll.lc_play(playHandle);
                 }
-
                 var len = LCAudioThrDll.lc_get_duration(playHandle);
                 len = len / 1000;
             }

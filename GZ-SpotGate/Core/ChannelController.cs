@@ -2,6 +2,7 @@
 using GZ_SpotGate.Model;
 using GZ_SpotGate.Tcp;
 using GZ_SpotGate.WS;
+using IPVoice;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace GZ_SpotGate.Core
 
         private const string Line2_Ok_Tip = "验证成功";
         private const string Line2_Failure_Tip = "验证失败";
+
+        private string voice_in_ok = "";
+        private string voice_in_error = "";
 
         private static readonly ILog log = LogManager.GetLogger("ChannelController");
 
@@ -162,6 +166,8 @@ namespace GZ_SpotGate.Core
                 am.Line1 = In_Ok;
                 am.Line2 = Line2_Ok_Tip;
                 _ws.Pass(_model.AndroidInIp, am);
+
+                Voice.Speak(IntPtr.Zero, this._model.InVoiceIp, voice_in_ok);
             }
             if (intentType == IntentType.In && content?.code != 100)
             {

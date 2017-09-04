@@ -18,7 +18,7 @@ namespace IPVoiceConsole
             var iplong = BitConverter.ToUInt32(ip.GetAddressBytes(), 0);
             var PlayParam = new PlayParam
             {
-                hWnd = 0,
+                hWnd = IntPtr.Zero,
                 Priority = 1,
                 IP = iplong,
                 SourcType = 0,
