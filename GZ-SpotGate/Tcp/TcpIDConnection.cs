@@ -293,7 +293,9 @@ namespace GZ_SpotGate.Tcp
 
         private string getIDNO(string str)
         {
-            Regex regex = new Regex(@"\d+");
+            //Regex regex = new Regex(@"\d+");
+            //Regex regex = new Regex(@"\d+(X|x)?");
+            Regex regex = new Regex(@"\d+(X)?", RegexOptions.IgnoreCase);
             Match match = regex.Match(str);
             if (regex.IsMatch(str))
             {

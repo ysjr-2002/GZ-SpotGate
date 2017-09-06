@@ -183,6 +183,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Document\GA467-2013 居民身份证验证安全控制模块接口技术规范.pdf" />
+    <None Include="Document\Voice\NAManager%283.2.12%29.rar" />
+    <None Include="Document\Voice\NAManger使用说明%283.2.11%29.docx" />
     <None Include="Document\三辊闸485协议17.04.10.pdf" />
     <None Include="Document\人脸接口说明.docx" />
     <None Include="Document\接口.docx" />
