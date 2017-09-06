@@ -51,34 +51,15 @@ namespace IPVoice
                 return;
             }
             var name = ofd.FileName;
-            //var ip = IPAddress.Parse("192.168.1.10");
-            //var x = Convert.ToUInt32(ip.Address);
-            //PlayParam = new _PlayParam
-            //{
-            //    hWnd = (UInt32)this.Handle,
-            //    Priority = 1,
-            //    IP = x,
-            //    SourcType = 0,
-            //    CastMode = 0,
-            //    Volume = 80
-            //};
-            //init = LCAudioThrDll.lc_init(name, ref PlayParam);
-            //if (init == 0)
-            //{
-            //    playId = Voice.lc_play(ref PlayParam);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("初始化失败！");
-            //}
+
 
             PlayParam->hWnd = (UInt32)this.Handle;
-            PlayParam->Priority = 80;
+            PlayParam->Priority = 255;
             PlayParam->Volume = 80;
             PlayParam->SourcType = 0;
-            System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse("192.168.1.10");
+            System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse("192.168.1.101");
             PlayParam->CastMode = 0;//广播模式
-            PlayParam->IP = Convert.ToUInt32(ipaddress.Address);
+            PlayParam->IP = BitConverter.ToUInt32(ipaddress.GetAddressBytes(), 0);
 
             init = LCAudioThrDll.LCInit(name, PlayParam);
             if (init == 0)
@@ -87,7 +68,7 @@ namespace IPVoice
             }
             else
             {
-                MessageBox.Show("初始化失败！");
+                MessageBox.Show("初始化失败！->" + init);
             }
         }
 

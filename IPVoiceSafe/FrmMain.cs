@@ -50,42 +50,15 @@ namespace IPVoiceSafe
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "*.mp3|*.mp3|*.wav|*.wav";
             var result = ofd.ShowDialog();
             if (result != DialogResult.OK)
             {
                 return;
             }
             var filename = ofd.FileName;
-            string ip = "192.168.1.10";
-            IntPtr temp = this.Handle;
-
-            Task.Factory.StartNew(() =>
-            {
-                Voice.Speak(temp, ip, filename);
-            });
-            //Voice.Speak(this.Handle, ip, filename);
-            //Voice.Speak(this.Handle, ip, filename);
-            //Voice.Speak(this.Handle, ip, filename);
-
-
-            Task.Factory.StartNew(() =>
-            {
-                //var filename = @"C:\Users\Shaojie\Desktop\ringin.wav";
-                //string ip = "192.168.1.10";
-                //Voice.Speak(temp, ip, filename);
-            });
-            //Task.Factory.StartNew(() =>
-            //{
-            //    var filename = @"C:\Users\Shaojie\Desktop\ringin.wav";
-            //    string ip = "192.168.1.11";
-            //    Voice.Speak(temp, ip, filename);
-            //});
-            //Task.Factory.StartNew(() =>
-            //{
-            //    var filename = @"C:\Users\Shaojie\Desktop\ringin.wav";
-            //    string ip = "192.168.1.12";
-            //    Voice.Speak(temp, ip, filename);
-            //});
+            string ip = "192.168.1.101";
+            Voice.Speak(this.Handle, ip, filename);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)

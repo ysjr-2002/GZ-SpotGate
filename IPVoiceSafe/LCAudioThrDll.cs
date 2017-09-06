@@ -37,7 +37,7 @@ namespace IPVoice
             var PlayParam = new PlayParam
             {
                 hWnd = ptr,
-                Priority = 1,
+                Priority = 255,
                 IP = ip,
                 SourcType = 0,
                 CastMode = 0,
