@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -23,24 +24,24 @@ namespace IPVoiceSafe
         public const int WM_MSG_PAUSE = USER + 102;
         public const int WM_MSG_CONTINUE = USER + 103;
 
-        protected override void DefWndProc(ref System.Windows.Forms.Message m)
-        {
-            switch (m.Msg)
-            {
-                case WM_MSG_STOP:
-                    MessageBox.Show("播放结束 \r\n");
-                    break;
-                case WM_MSG_PAUSE:
-                    MessageBox.Show("播放暂停 \r\n");
-                    break;
-                case WM_MSG_CONTINUE:
-                    MessageBox.Show("播放继续 \r\n");
-                    break;
-                default:
-                    base.DefWndProc(ref m);//调用基类函数处理非自定义消息。 
-                    break;
-            }
-        }
+        //protected override void DefWndProc(ref System.Windows.Forms.Message m)
+        //{
+        //    switch (m.Msg)
+        //    {
+        //        case WM_MSG_STOP:
+        //            MessageBox.Show("播放结束 \r\n");
+        //            break;
+        //        case WM_MSG_PAUSE:
+        //            MessageBox.Show("播放暂停 \r\n");
+        //            break;
+        //        case WM_MSG_CONTINUE:
+        //            MessageBox.Show("播放继续 \r\n");
+        //            break;
+        //        default:
+        //            base.DefWndProc(ref m);//调用基类函数处理非自定义消息。 
+        //            break;
+        //    }
+        //}
 
         public FrmMain()
         {
@@ -49,16 +50,27 @@ namespace IPVoiceSafe
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "*.mp3|*.mp3|*.wav|*.wav";
-            var result = ofd.ShowDialog();
-            if (result != DialogResult.OK)
+            //OpenFileDialog ofd = new OpenFileDialog();
+            //ofd.Filter = "*.mp3|*.mp3|*.wav|*.wav";
+            //var result = ofd.ShowDialog();
+            //if (result != DialogResult.OK)
+            //{
+            //    return;
+            //}
+            //var filename = ofd.FileName;
+
+            IntPtr handle = this.Handle;
+            Task.Factory.StartNew(() =>
             {
-                return;
-            }
-            var filename = ofd.FileName;
-            string ip = "192.168.1.101";
-            Voice.Speak(this.Handle, ip, filename);
+                while (true)
+                {
+                    Debug.WriteLine("hz:新播放");
+                    var filename = @"C:\Users\ysj\Desktop\新UI\Alarm01.wav";
+                    string ip = "192.168.1.101";
+                    Voice.Speak(handle, ip, filename);
+                    Thread.Sleep(5000);
+                }
+            });
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
