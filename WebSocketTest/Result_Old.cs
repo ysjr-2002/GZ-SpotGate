@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApplication1
+namespace WindowsFormsApplication1.Old
 {
     public class Rect
     {
@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
         public Rect rect { get; set; }
     }
 
-    public class Person
+    public class DataPerson
     {
         public int feature_Id { get; set; }
 
@@ -47,7 +47,7 @@ namespace WindowsFormsApplication1
 
         public Face face { get; set; }
 
-        public Person person { get; set; }
+        public DataPerson person { get; set; }
 
         public double quality { get; set; }
     }
@@ -61,7 +61,7 @@ namespace WindowsFormsApplication1
         public double female { get; set; }
     }
 
-    public class Employee
+    public class Person
     {
         public string src { get; set; }
 
@@ -94,9 +94,9 @@ namespace WindowsFormsApplication1
         public string name { get; set; }
     }
 
-    public class FaceRecognized
+    public class FaceRecognized_Old
     {
-        public Employee person { get; set; }
+        public Person person { get; set; }
 
         public bool open_door { get; set; }
 
@@ -105,18 +105,5 @@ namespace WindowsFormsApplication1
         public Data data { get; set; }
 
         public string error { get; set; }
-    }
-
-    enum RecognizeState
-    {
-        recognizing,
-
-        recognized,
-
-        unrecognized,
-
-        lastface,
-
-        gone,
     }
 }

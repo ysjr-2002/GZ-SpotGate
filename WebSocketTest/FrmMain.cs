@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using WebSocketSharp;
+using WindowsFormsApplication1.New;
 
 namespace WindowsFormsApplication1
 {
@@ -57,18 +59,22 @@ namespace WindowsFormsApplication1
             if (e.IsText)
             {
                 var js = new JavaScriptSerializer();
-                var obj = js.Deserialize<FaceRecognized>(e.Data);
-                if (obj.type == RecognizeState.recognized.ToString())
+                var face = js.Deserialize<FaceRecognized_New>(e.Data);
+                if (face.type == RecognizeState.recognized.ToString())
                 {
                     try
                     {
-                        var base64 = obj.data.face.image;
+                        var base64 = face.data.face.image;
                         var buffer = Convert.FromBase64String(base64);
                         var ms = new MemoryStream(buffer);
                         var image = Image.FromStream(ms);
                         if (this.InvokeRequired)
                         {
-                            this.Invoke(new Action(() => { showFace(image); }));
+                            this.Invoke(new Action(() =>
+                            {
+                                label3.Text = face.person.name + "-" + (int)face.data.person.confidence;
+                                showFace(image);
+                            }));
                         }
                         else
                         {
@@ -90,10 +96,11 @@ namespace WindowsFormsApplication1
 
         private void Ws_OnOpen(object sender, EventArgs e)
         {
-            Invoke(new Action(() =>
+            this.Invoke(new Action(() =>
             {
                 lblState.Text = "连接成功，请进行人脸识别";
             }));
+            Debug.WriteLine("hz:连接成功");
             //pictureBox1.ImageLocation = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg";
         }
 
@@ -102,7 +109,14 @@ namespace WindowsFormsApplication1
             Invoke(new Action(() =>
             {
                 lblState.Text = "连接关闭";
+                Debug.WriteLine("hz:连接关闭");
             }));
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            ws.Close();
+            base.OnClosing(e);
         }
     }
 }

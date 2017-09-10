@@ -27,13 +27,24 @@ namespace IPVoice
                 if (init == 0)
                 {
                     var playId = LCAudioThrDll.lc_play(playHandle);
+                    var len = LCAudioThrDll.lc_get_duration(playHandle);
+                    len = len / 1000;
                 }
-                var len = LCAudioThrDll.lc_get_duration(playHandle);
-                len = len / 1000;
             }
             finally
             {
                 //Marshal.FreeHGlobal(playHandle);
+            }
+        }
+
+        public static void Speak(string filename, IntPtr playHandle)
+        {
+            var init = LCAudioThrDll.lc_init(filename, playHandle);
+            if (init == 0)
+            {
+                var playId = LCAudioThrDll.lc_play(playHandle);
+                var len = LCAudioThrDll.lc_get_duration(playHandle);
+                len = len / 1000;
             }
         }
     }

@@ -7,6 +7,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,8 +37,14 @@ namespace GZ_SpotGate.Core
         private const string Line2_Ok_Tip = "验证成功";
         private const string Line2_Failure_Tip = "验证失败";
 
-        private string voice_in_ok = "";
-        private string voice_in_error = "";
+        private string voice_ok = "";
+        private string voice_no = "";
+
+        private PlayParam playParam_in;
+        private PlayParam playParam_out;
+
+        private IntPtr playHandle_in = IntPtr.Zero;
+        private IntPtr playHandle_out = IntPtr.Zero;
 
         private static readonly ILog log = LogManager.GetLogger("ChannelController");
 
@@ -51,6 +58,19 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
+            playParam_in = LCAudioThrDll.GetPlayPlayParam(IntPtr.Zero, model.InVoiceIp);
+            playParam_out = LCAudioThrDll.GetPlayPlayParam(IntPtr.Zero, model.OutVoiceIp);
+
+            int size = Marshal.SizeOf(typeof(PlayParam));
+            playHandle_in = Marshal.AllocHGlobal(size);
+            playHandle_out = Marshal.AllocHGlobal(size);
+
+            Marshal.StructureToPtr(playParam_in, playHandle_in, false);
+            Marshal.StructureToPtr(playParam_out, playHandle_out, false);
+
+            voice_ok = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "yes.mp3");
+            voice_no = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "no.mp3");
+
             _faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
             var connect1 = await _faceInSocket.Connect();
 
@@ -59,12 +79,12 @@ namespace GZ_SpotGate.Core
 
             if (connect1 && connect2)
             {
-                log.Debug(string.Format("[{0}]通道初始化成功", _model.No));
+                MyConsole.Current.Log(string.Format("[{0}]通道初始化成功", _model.No));
                 return true;
             }
             else
             {
-                log.DebugFormat("[{0}]通道初始化失败", _model.No);
+                MyConsole.Current.Log(string.Format("[{0}]通道初始化失败", _model.No));
                 return false;
             }
         }
@@ -166,8 +186,8 @@ namespace GZ_SpotGate.Core
                 am.Line1 = In_Ok;
                 am.Line2 = Line2_Ok_Tip;
                 _ws.Pass(_model.AndroidInIp, am);
-
-                Voice.Speak(IntPtr.Zero, this._model.InVoiceIp, voice_in_ok);
+                //声音
+                Voice.Speak(voice_ok, playHandle_in);
             }
             if (intentType == IntentType.In && content?.code != 100)
             {
@@ -175,6 +195,8 @@ namespace GZ_SpotGate.Core
                 am.Line1 = In_Failure;
                 am.Line2 = Line2_Failure_Tip;
                 _ws.Pass(_model.AndroidInIp, am);
+                //声音
+                Voice.Speak(voice_no, playHandle_in);
             }
             if (intentType == IntentType.Out && content?.code == 100)
             {
@@ -183,6 +205,8 @@ namespace GZ_SpotGate.Core
                 am.Line1 = Out_Ok;
                 am.Line2 = Line2_Ok_Tip;
                 _ws.Pass(_model.AndroidOutIp, am);
+                //声音
+                Voice.Speak(voice_ok, playHandle_out);
             }
             if (intentType == IntentType.Out && content?.code != 100)
             {
@@ -190,6 +214,8 @@ namespace GZ_SpotGate.Core
                 am.Line1 = Out_Failure;
                 am.Line2 = Line2_Failure_Tip;
                 _ws.Pass(_model.AndroidOutIp, am);
+                //声音
+                Voice.Speak(voice_no, playHandle_out);
             }
             MyConsole.Current.Log(listlog.ToArray());
         }

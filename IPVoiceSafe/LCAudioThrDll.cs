@@ -41,7 +41,7 @@ namespace IPVoice
                 IP = ip,
                 SourcType = 0,
                 CastMode = 0,
-                Volume = 80
+                Volume = 95
             };
             return PlayParam;
         }
@@ -70,7 +70,7 @@ namespace IPVoice
         /// </summary>
         public UInt32 MultiGroup;
         /// <summary>
-        /// 播放方式，单播，组播和广播
+        /// 播放方式 0:单播 1:组播 2:广播
         /// </summary>
         public UInt32 CastMode;
         /// <summary>

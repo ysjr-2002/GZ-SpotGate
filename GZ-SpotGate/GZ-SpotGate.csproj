@@ -213,6 +213,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Document\Voice\no.mp3" />
+    <Content Include="Document\Voice\yes.mp3" />
     <Resource Include="server.ico" />
     <None Include="channels.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

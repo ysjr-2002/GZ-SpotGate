@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -23,6 +24,8 @@ namespace IPVoiceSafe
         public const int WM_MSG_STOP = USER + 101;
         public const int WM_MSG_PAUSE = USER + 102;
         public const int WM_MSG_CONTINUE = USER + 103;
+
+        PlayParam playParam;
 
         //protected override void DefWndProc(ref System.Windows.Forms.Message m)
         //{
@@ -48,33 +51,27 @@ namespace IPVoiceSafe
             InitializeComponent();
         }
 
+        IntPtr playHandle = IntPtr.Zero;
+        string ip = "192.168.1.101";
         private void button1_Click(object sender, EventArgs e)
         {
-            //OpenFileDialog ofd = new OpenFileDialog();
-            //ofd.Filter = "*.mp3|*.mp3|*.wav|*.wav";
-            //var result = ofd.ShowDialog();
-            //if (result != DialogResult.OK)
-            //{
-            //    return;
-            //}
-            //var filename = ofd.FileName;
+            var filename = Path.Combine(Application.StartupPath, "yes.mp3");
+            Marshal.StructureToPtr(playParam, playHandle, false);
+            Voice.Speak(filename, playHandle);
+        }
 
-            IntPtr handle = this.Handle;
-            Task.Factory.StartNew(() =>
-            {
-                while (true)
-                {
-                    Debug.WriteLine("hz:新播放");
-                    var filename = @"C:\Users\ysj\Desktop\新UI\Alarm01.wav";
-                    string ip = "192.168.1.101";
-                    Voice.Speak(handle, ip, filename);
-                    Thread.Sleep(5000);
-                }
-            });
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var filename = Path.Combine(Application.StartupPath, "no.mp3");
+            Marshal.StructureToPtr(playParam, playHandle, false);
+            Voice.Speak(filename, playHandle);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            playParam = LCAudioThrDll.GetPlayPlayParam(this.Handle, ip);
+            int size = Marshal.SizeOf(playParam);
+            playHandle = Marshal.AllocHGlobal(size);
         }
 
         private void button2_Click(object sender, EventArgs e)
