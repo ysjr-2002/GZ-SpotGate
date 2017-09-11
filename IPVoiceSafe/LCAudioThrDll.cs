@@ -48,9 +48,16 @@ namespace IPVoice
 
         public static uint IptoUint(string ipaddress)
         {
-            var ip = IPAddress.Parse(ipaddress);
-            var iplong = BitConverter.ToUInt32(ip.GetAddressBytes(), 0);
-            return iplong;
+            try
+            {
+                var ip = IPAddress.Parse(ipaddress);
+                var iplong = BitConverter.ToUInt32(ip.GetAddressBytes(), 0);
+                return iplong;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
     }
 

@@ -8,23 +8,19 @@
     <!--串口服务器-->
     <comserverip>172.21.5.1</comserverip>
     <!--入平板-->
-    <androidInip>192.168.1.116</androidInip>
+    <androidInip>172.21.5.25</androidInip>
     <!--出平板-->
     <androidOutip>172.21.5.26</androidOutip>
     <!--入人脸服务器-->
-    <faceInip>192.168.0.50</faceInip>
+    <faceInip>172.21.5.190</faceInip>
     <!--出人脸服务器-->
-    <faceOutip>192.168.0.51</faceOutip>
+    <faceOutip>172.21.5.191</faceOutip>
     <!--入摄像机-->
-    <faceInCameraip>192.168.0.10</faceInCameraip>
+    <faceInCameraip>172.21.5.152</faceInCameraip>
     <!--出摄像机-->
-    <faceOutCameraip>172.21.5.151</faceOutCameraip>
+    <faceOutCameraip>172.21.5.153</faceOutCameraip>
     <!--闸机串口服务器-->
     <gatecomserverip>172.21.5.2</gatecomserverip>
-    <!--入声音设备-->
-    <invoiceip>192.168.1.2</invoiceip>
-    <!--出声音设备-->
-    <outvoiceip>192.168.1.3</outvoiceip>
     <!--是否启用-->
     <enable>1</enable>
   </channel>
@@ -63,10 +59,10 @@
     <comserverip>172.21.5.7</comserverip>
     <androidInip>172.21.5.31</androidInip>
     <androidOutip>172.21.5.32</androidOutip>
-    <faceInip>172.21.5.192</faceInip>
-    <faceOutip>172.21.5.192</faceOutip>
-    <faceInCameraip>172.21.5.156</faceInCameraip>
-    <faceOutCameraip>172.21.5.157</faceOutCameraip>
+    <faceInip>172.21.5.193</faceInip>
+    <faceOutip>172.21.5.193</faceOutip>
+    <faceInCameraip>172.21.5.160</faceInCameraip>
+    <faceOutCameraip>172.21.5.161</faceOutCameraip>
     <gatecomserverip>172.21.5.8</gatecomserverip>
     <enable>0</enable>
   </channel>
@@ -91,10 +87,10 @@
     <comserverip>172.21.5.11</comserverip>
     <androidInip>172.21.5.35</androidInip>
     <androidOutip>172.21.5.36</androidOutip>
-    <faceInip>172.21.5.193</faceInip>
-    <faceOutip>172.21.5.193</faceOutip>
-    <faceInCameraip>172.21.5.160</faceInCameraip>
-    <faceOutCameraip>172.21.5.161</faceOutCameraip>
+    <faceInip>172.21.5.192</faceInip>
+    <faceOutip>172.21.5.192</faceOutip>
+    <faceInCameraip>172.21.5.157</faceInCameraip>
+    <faceOutCameraip>172.21.5.156</faceOutCameraip>
     <gatecomserverip>172.21.5.12</gatecomserverip>
     <enable>0</enable>
   </channel>
@@ -149,8 +145,8 @@
     <androidOutip>172.21.5.44</androidOutip>
     <faceInip>172.21.5.196</faceInip>
     <faceOutip>172.21.5.196</faceOutip>
-    <faceInCameraip>172.21.5.168</faceInCameraip>
-    <faceOutCameraip>172.21.5.169</faceOutCameraip>
+    <faceInCameraip>172.21.5.152</faceInCameraip>
+    <faceOutCameraip>172.21.5.153</faceOutCameraip>
     <gatecomserverip>172.21.5.20</gatecomserverip>
     <enable>0</enable>
   </channel>

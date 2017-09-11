@@ -56,22 +56,31 @@ namespace IPVoiceSafe
         private void button1_Click(object sender, EventArgs e)
         {
             var filename = Path.Combine(Application.StartupPath, "yes.mp3");
+            ip = textBox1.Text;
+            playParam = LCAudioThrDll.GetPlayPlayParam(this.Handle, ip);
+            int size = Marshal.SizeOf(playParam);
+            playHandle = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(playParam, playHandle, false);
             Voice.Speak(filename, playHandle);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            ip = textBox1.Text;
             var filename = Path.Combine(Application.StartupPath, "no.mp3");
+            playParam = LCAudioThrDll.GetPlayPlayParam(this.Handle, ip);
+            int size = Marshal.SizeOf(playParam);
+            playHandle = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(playParam, playHandle, false);
             Voice.Speak(filename, playHandle);
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            playParam = LCAudioThrDll.GetPlayPlayParam(this.Handle, ip);
-            int size = Marshal.SizeOf(playParam);
-            playHandle = Marshal.AllocHGlobal(size);
+            //playParam = LCAudioThrDll.GetPlayPlayParam(this.Handle, ip);
+            //int size = Marshal.SizeOf(playParam);
+            //playHandle = Marshal.AllocHGlobal(size);
+            //Marshal.StructureToPtr(playParam, playHandle, false);
         }
 
         private void button2_Click(object sender, EventArgs e)

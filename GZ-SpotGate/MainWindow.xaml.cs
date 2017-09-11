@@ -60,6 +60,7 @@ namespace GZ_SpotGate
                 e.Cancel = true;
                 return;
             }
+            MyConsole.Current.Log("系统退出");
             mc.Dispose();
             base.OnClosing(e);
         }

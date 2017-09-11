@@ -18,8 +18,6 @@ namespace GZ_SpotGate.Face
         private bool _open = false;
         private WebSocket _socket = null;
         private Action<FaceRecognized> _callback = null;
-        private static readonly ILog log = LogManager.GetLogger("FaceSocket");
-
 
         private const int sleep = 30 * 1000;
         public FaceSocket(string koalaIp, string cameraIp, Action<FaceRecognized> callback)
@@ -33,11 +31,13 @@ namespace GZ_SpotGate.Face
         {
             return Task.Factory.StartNew(() =>
             {
+                Dispose();
+
                 var url = string.Format("ws://{0}:9000/video", _koalaIp.Trim());
                 var rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp.Trim());
                 rtsp = HttpUtility.UrlEncode(rtsp);
                 var all = string.Concat(url, "?url=", rtsp);
-                
+
                 _socket = new WebSocket(all);
                 _socket.OnOpen += _socket_OnOpen;
                 _socket.OnError += _socket_OnError;
@@ -62,26 +62,28 @@ namespace GZ_SpotGate.Face
 
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
-            log.Debug("Websocket关闭->" + _koalaIp);
             _open = false;
+            MyConsole.Current.Log("Websocket关闭->" + _koalaIp);
             if (!_appclose)
             {
-                Dispose();
-                Thread.Sleep(sleep);
-                Connect();
+                Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(sleep);
+                    Connect();
+                });
             }
         }
 
         private void _socket_OnError(object sender, ErrorEventArgs e)
         {
-            log.Debug("Websocket错误->" + _koalaIp);
             _open = false;
+            MyConsole.Current.Log("Websocket错误->" + _koalaIp);
         }
 
         private void _socket_OnOpen(object sender, EventArgs e)
         {
-            MyConsole.Current.Log("Websocket成功->" + _koalaIp);
             _open = true;
+            MyConsole.Current.Log("Websocket成功->" + _koalaIp);
         }
 
         private void Dispose()

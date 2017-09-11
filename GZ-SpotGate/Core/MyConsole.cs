@@ -76,8 +76,9 @@ namespace GZ_SpotGate.Core
                     });
                 };
             }
-            catch
+            catch (Exception ex)
             {
+                var str = "";
             }
         }
     }

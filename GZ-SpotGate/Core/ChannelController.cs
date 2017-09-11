@@ -71,11 +71,18 @@ namespace GZ_SpotGate.Core
             voice_ok = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "yes.mp3");
             voice_no = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "no.mp3");
 
+            //var connect1 = false;
+            //var connect2 = false;
+
             _faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
-            var connect1 = await _faceInSocket.Connect();
+            var cameratask1 = _faceInSocket.Connect();
 
             _faceOutSocket = new FaceSocket(model.FaceOutIp, model.FaceOutCameraIp, FaceOut);
-            var connect2 = await _faceOutSocket.Connect();
+            var cameratask2 = _faceOutSocket.Connect();
+
+            await Task.WhenAll(cameratask1, cameratask2);
+            var connect1 = cameratask1.Result;
+            var connect2 = cameratask2.Result;
 
             if (connect1 && connect2)
             {

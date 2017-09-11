@@ -13,6 +13,7 @@ using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using WebSocketSharp;
 using WindowsFormsApplication1.New;
+using WindowsFormsApplication1.Old;
 
 namespace WindowsFormsApplication1
 {
@@ -59,7 +60,7 @@ namespace WindowsFormsApplication1
             if (e.IsText)
             {
                 var js = new JavaScriptSerializer();
-                var face = js.Deserialize<FaceRecognized_New>(e.Data);
+                var face = js.Deserialize<FaceRecognized_Old>(e.Data);
                 if (face.type == RecognizeState.recognized.ToString())
                 {
                     try
@@ -72,7 +73,7 @@ namespace WindowsFormsApplication1
                         {
                             this.Invoke(new Action(() =>
                             {
-                                label3.Text = face.person.name + "-" + (int)face.data.person.confidence;
+                                label3.Text = face.person.name;//+ "-" + (int)face.data.person.confidence;
                                 showFace(image);
                             }));
                         }

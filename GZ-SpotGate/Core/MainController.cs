@@ -29,13 +29,6 @@ namespace GZ_SpotGate.Core
 
         public MainController()
         {
-            log.Info("fff");
-            log.Info("fff");
-            log.Info("fff");
-            log.Info("fff");
-            log.Info("fff");
-            log.Info("fff");
-            log.Info("fff");
         }
 
         public void Start()
@@ -55,7 +48,7 @@ namespace GZ_SpotGate.Core
                 _channels.Add(cc);
             }
 
-            MyConsole.Current.Log("系统已启动");
+            MyConsole.Current.Log("系统启动");
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
