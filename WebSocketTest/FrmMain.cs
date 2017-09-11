@@ -60,33 +60,44 @@ namespace WindowsFormsApplication1
             if (e.IsText)
             {
                 var js = new JavaScriptSerializer();
-                var face = js.Deserialize<FaceRecognized_Old>(e.Data);
-                if (face.type == RecognizeState.recognized.ToString())
+                if (radioButton1.Checked)
                 {
-                    try
+                    //旧协议
+                    var face_old = js.Deserialize<FaceRecognized_Old>(e.Data);
+                    if (face_old.type == RecognizeState.recognized.ToString())
                     {
-                        var base64 = face.data.face.image;
-                        var buffer = Convert.FromBase64String(base64);
-                        var ms = new MemoryStream(buffer);
-                        var image = Image.FromStream(ms);
-                        if (this.InvokeRequired)
-                        {
-                            this.Invoke(new Action(() =>
-                            {
-                                label3.Text = face.person.name;//+ "-" + (int)face.data.person.confidence;
-                                showFace(image);
-                            }));
-                        }
-                        else
-                        {
-                            showFace(image);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("异常->" + ex.Message);
+                        showFace(face_old.person.name, face_old.data.face.image);
                     }
                 }
+
+                if (radioButton2.Checked)
+                {
+                    //新协议
+                    var face_new = js.Deserialize<FaceRecognized_New>(e.Data);
+                    if (face_new.type == RecognizeState.recognized.ToString())
+                    {
+                        showFace(face_new.person.name, face_new.data.face.image);
+                    }
+                }
+            }
+        }
+
+        private void showFace(string name, string base64)
+        {
+            try
+            {
+                var buffer = Convert.FromBase64String(base64);
+                var ms = new MemoryStream(buffer);
+                var image = Image.FromStream(ms);
+                this.Invoke(new Action(() =>
+                {
+                    label3.Text = name;//+ "-" + (int)face.data.person.confidence;
+                    showFace(image);
+                }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("异常->" + ex.Message);
             }
         }
 
@@ -102,7 +113,6 @@ namespace WindowsFormsApplication1
                 lblState.Text = "连接成功，请进行人脸识别";
             }));
             Debug.WriteLine("hz:连接成功");
-            //pictureBox1.ImageLocation = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg";
         }
 
         private void Ws_OnClose(object sender, CloseEventArgs e)
