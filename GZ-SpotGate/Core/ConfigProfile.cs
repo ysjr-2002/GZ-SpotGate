@@ -49,12 +49,12 @@ namespace GZ_SpotGate.Core
             if (ConfigurationManager.AppSettings.AllKeys.Contains(key))
             {
                 var val = ConfigurationManager.AppSettings[key];
-                log.Debug(string.Format("[{0}]={1}", key, val));
+                MyConsole.Current.Log(string.Format("[{0}]={1}", key, val));
                 return val;
             }
             else
             {
-                log.Debug(string.Format("[{0}]项不存在", key));
+                MyConsole.Current.Log(string.Format("[{0}]项不存在", key));
                 return string.Empty;
             }
         }

@@ -20,6 +20,7 @@ namespace GZ_SpotGate.Face
         private Action<FaceRecognized> _callback = null;
 
         private const int sleep = 30 * 1000;
+        private static readonly ILog log4 = log4net.LogManager.GetLogger("FaceSocket");
         public FaceSocket(string koalaIp, string cameraIp, Action<FaceRecognized> callback)
         {
             _koalaIp = koalaIp;
@@ -63,7 +64,7 @@ namespace GZ_SpotGate.Face
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
             _open = false;
-            MyConsole.Current.Log("Websocket关闭->" + _koalaIp);
+            log4.Debug("Websocket关闭->" + _koalaIp);
             if (!_appclose)
             {
                 Task.Factory.StartNew(() =>
@@ -83,7 +84,7 @@ namespace GZ_SpotGate.Face
         private void _socket_OnOpen(object sender, EventArgs e)
         {
             _open = true;
-            MyConsole.Current.Log("Websocket成功->" + _koalaIp);
+            log4.Debug("Websocket成功->" + _koalaIp);
         }
 
         private void Dispose()

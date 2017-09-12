@@ -67,14 +67,18 @@ namespace GZ_SpotGate.Core
                     sb.Append(prefix + line + "\r");
                 }
 
-                lock (_sync)
-                {
+                //lock (_sync)
+                //{
                     Application.Current.Dispatcher.Invoke(() =>
                     {
+                        if (_textbox.LineCount >= 500)
+                        {
+                            _textbox.Clear();
+                        }
                         _textbox.AppendText(sb.ToString());
                         _textbox.ScrollToEnd();
                     });
-                };
+                //};
             }
             catch (Exception ex)
             {

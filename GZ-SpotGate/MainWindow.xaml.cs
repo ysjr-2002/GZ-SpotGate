@@ -35,11 +35,14 @@ namespace GZ_SpotGate
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            MyConsole.Current.Init(txtConsole);
+
+            ConfigProfile.Current.ReadConfig();
+            Channels.Load();
+
             bool auto = (ConfigProfile.Current.AutoRun == 1);
             string appPath = System.Windows.Forms.Application.ExecutablePath;
             Util.RunWhenStart(auto, appname, appPath);
-
-            MyConsole.Current.Init(txtConsole);
 
             mc = new MainController();
             mc.Start();

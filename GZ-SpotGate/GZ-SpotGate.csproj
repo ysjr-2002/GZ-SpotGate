@@ -217,11 +217,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Document\koala.html" />
     <Content Include="Document\Voice\no.mp3" />
     <Content Include="Document\Voice\yes.mp3" />
     <Resource Include="server.ico" />
     <None Include="channels.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
     <Content Include="Document\face-api.html" />

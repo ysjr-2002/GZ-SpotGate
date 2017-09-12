@@ -29,6 +29,7 @@ namespace GZ_SpotGate.Core
 
         public MainController()
         {
+
         }
 
         public void Start()

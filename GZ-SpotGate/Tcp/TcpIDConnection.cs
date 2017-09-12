@@ -2,6 +2,7 @@
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -272,7 +273,6 @@ namespace GZ_SpotGate.Tcp
                         IDData = true
                     };
                     _callback?.BeginInvoke(args, null, null);
-                    Console.WriteLine(idno);
                 }
                 //Console.WriteLine(array.Length);
                 //array.ToList().ForEach((s) =>
@@ -295,11 +295,13 @@ namespace GZ_SpotGate.Tcp
         {
             //Regex regex = new Regex(@"\d+");
             //Regex regex = new Regex(@"\d+(X|x)?");
+            Debug.WriteLine("hz:字符串->" + str);
             Regex regex = new Regex(@"\d+(X)?", RegexOptions.IgnoreCase);
             Match match = regex.Match(str);
             if (regex.IsMatch(str))
             {
                 var no = match.Value;
+                Debug.WriteLine("hz:证件号->" + no);
                 return no;
             }
             else

@@ -31,7 +31,7 @@ namespace GZ_SpotGate.Core
 
         public static void Load()
         {
-            var filename = "channels.xml";
+            var filename = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "channels.xml");
             var root = XElement.Load(filename);
             foreach (var item in root.Elements("channel"))
             {

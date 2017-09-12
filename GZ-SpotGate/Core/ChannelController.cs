@@ -106,7 +106,7 @@ namespace GZ_SpotGate.Core
             {
                 await _request.Calc(this._model.ChannelVirualIp, "F");
             }
-            MyConsole.Current.Log(string.Format("[{0}]通道上报通行人次->", _model.No));
+            MyConsole.Current.Log(string.Format("[{0}]通道上报通行人次", _model.No));
         }
 
         public async void Work(DataEventArgs args)

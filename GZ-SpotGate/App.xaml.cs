@@ -31,8 +31,7 @@ namespace GZ_SpotGate
             if (bnew)
             {
                 Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
-                ConfigProfile.Current.ReadConfig();
-                Channels.Load();
+               
                 var window = new MainWindow();
                 window.ShowDialog();
                 mutex.WaitOne();

@@ -86,8 +86,9 @@ namespace GZ_SpotGate.Tcp
                     var buffer = Read();
                     Parse(buffer, true);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    log.Fatal("处理数据异常->" + ex.Message);
                 }
             }
         }
@@ -99,11 +100,19 @@ namespace GZ_SpotGate.Tcp
             var count = buffer.Length;
             while (true)
             {
-                var read = _nws.Read(buffer, pos, count);
-                pos += read;
-                count -= read;
-                if (pos == buffer.Length)
+                try
                 {
+                    var read = _nws.Read(buffer, pos, count);
+                    pos += read;
+                    count -= read;
+                    if (pos == buffer.Length)
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Fatal("读取流异常->" + ex.Message);
                     break;
                 }
             }

@@ -90,7 +90,7 @@ namespace GZ_SpotGate.WS
 
         private void Debug(string content)
         {
-            log.Debug(content);
+            MyConsole.Current.Log(content);
         }
 
         public void Stop()

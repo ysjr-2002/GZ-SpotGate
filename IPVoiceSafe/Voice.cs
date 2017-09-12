@@ -46,6 +46,10 @@ namespace IPVoice
                 var len = LCAudioThrDll.lc_get_duration(playHandle);
                 len = len / 1000;
             }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("初始化失败！");
+            }
         }
     }
 }

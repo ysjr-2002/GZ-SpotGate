@@ -41,7 +41,7 @@ namespace IPVoice
                 IP = ip,
                 SourcType = 0,
                 CastMode = 0,
-                Volume = 95
+                Volume = 100
             };
             return PlayParam;
         }
