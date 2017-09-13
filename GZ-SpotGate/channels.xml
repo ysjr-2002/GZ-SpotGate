@@ -16,9 +16,9 @@
     <!--出人脸服务器-->
     <faceOutip>172.21.5.191</faceOutip>
     <!--入摄像机-->
-    <faceInCameraip>172.21.5.152</faceInCameraip>
+    <faceInCameraip>172.21.5.153</faceInCameraip>
     <!--出摄像机-->
-    <faceOutCameraip>172.21.5.153</faceOutCameraip>
+    <faceOutCameraip>172.21.5.152</faceOutCameraip>
     <!--闸机串口服务器-->
     <gatecomserverip>172.21.5.2</gatecomserverip>
     <!--是否启用-->

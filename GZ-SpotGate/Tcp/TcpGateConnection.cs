@@ -84,6 +84,10 @@ namespace GZ_SpotGate.Tcp
                 try
                 {
                     var buffer = Read();
+                    if (buffer == null)
+                    {
+                        break;
+                    }
                     Parse(buffer, true);
                 }
                 catch (Exception ex)
@@ -91,6 +95,10 @@ namespace GZ_SpotGate.Tcp
                     log.Fatal("处理数据异常->" + ex.Message);
                 }
             }
+
+            _running = false;
+            _tcp?.Close();
+            _tcp = null;
         }
 
         private byte[] Read()
@@ -112,8 +120,8 @@ namespace GZ_SpotGate.Tcp
                 }
                 catch (Exception ex)
                 {
-                    log.Fatal("读取流异常->" + ex.Message);
-                    break;
+                    log.Fatal("读取流异常->" + _ipEndPoint.Address.ToString() + " " + ex.Message);
+                    return null;
                 }
             }
             return buffer;
