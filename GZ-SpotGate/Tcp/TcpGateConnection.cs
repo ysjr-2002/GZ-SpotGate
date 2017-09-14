@@ -56,7 +56,10 @@ namespace GZ_SpotGate.Tcp
         {
             AskGateState();
             var buffer = Read();
-            Parse(buffer, false);
+            if (buffer != null)
+            {
+                Parse(buffer, false);
+            }
         }
 
         public void SetCallback(Action<DataEventArgs> act)
@@ -97,6 +100,7 @@ namespace GZ_SpotGate.Tcp
             }
 
             _running = false;
+            _nws = null;
             _tcp?.Close();
             _tcp = null;
         }
@@ -129,6 +133,9 @@ namespace GZ_SpotGate.Tcp
 
         public void Parse(byte[] buffer, bool fire)
         {
+            if (buffer == null)
+                return;
+
             var checksum = getCheckSum(buffer);
             if (buffer[3] != 0x12 || checksum != buffer.Last())
                 return;
@@ -179,6 +186,7 @@ namespace GZ_SpotGate.Tcp
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
+            MyConsole.Current.Log("发送入开闸指令");
         }
 
         /// <summary>
@@ -208,6 +216,7 @@ namespace GZ_SpotGate.Tcp
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
+            MyConsole.Current.Log("发送出开闸指令");
         }
 
         public void ExitHoldOpen()
