@@ -49,7 +49,6 @@ namespace GZ_SpotGate.Core
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = contentBuffer.Length;
-            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 var requestStream = await request.GetRequestStreamAsync();
@@ -74,8 +73,6 @@ namespace GZ_SpotGate.Core
             }
             finally
             {
-                sw.Stop();
-                MyConsole.Current.Log("验证耗时->" + sw.ElapsedMilliseconds + "ms");
             }
         }
 

@@ -6,6 +6,7 @@ using IPVoice;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -160,7 +161,9 @@ namespace GZ_SpotGate.Core
             else if (checkInType == IDType.Face)
                 listlog.Add(string.Format("人脸={0}", uniqueId));
 
+            Stopwatch sw = Stopwatch.StartNew();
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
+            sw.Stop();
             //content = new Model.FeedBack();
             //content.code = 100;
             //content.personCount = "1";
@@ -185,46 +188,48 @@ namespace GZ_SpotGate.Core
                 //禁止通行
                 listlog.Add(content?.message ?? "禁止通行");
             }
+            listlog.Add("验证耗时->" + sw.ElapsedMilliseconds + "ms");
+            MyConsole.Current.Log(listlog.ToArray());
 
             if (intentType == IntentType.In && content?.code == 100)
             {
+                //声音
+                Voice.Speak(voice_ok, playHandle_in);
                 //进入-成功
                 GateConnectionPool.EnterOpen(this._model.GateComServerIp, personCount);
                 am.Line1 = In_Ok;
                 am.Line2 = Line2_Ok_Tip;
                 _ws.Pass(_model.AndroidInIp, am);
-                //声音
-                Voice.Speak(voice_ok, playHandle_in);
             }
             if (intentType == IntentType.In && content?.code != 100)
             {
+                //声音
+                Voice.Speak(voice_no, playHandle_in);
+
                 //进入-失败
                 am.Line1 = In_Failure;
                 am.Line2 = Line2_Failure_Tip;
                 _ws.Pass(_model.AndroidInIp, am);
-                //声音
-                Voice.Speak(voice_no, playHandle_in);
             }
             if (intentType == IntentType.Out && content?.code == 100)
             {
+                //声音
+                Voice.Speak(voice_ok, playHandle_out);
                 //离开-成功
                 GateConnectionPool.ExitOpen(this._model.GateComServerIp, personCount);
                 am.Line1 = Out_Ok;
                 am.Line2 = Line2_Ok_Tip;
                 _ws.Pass(_model.AndroidOutIp, am);
-                //声音
-                Voice.Speak(voice_ok, playHandle_out);
             }
             if (intentType == IntentType.Out && content?.code != 100)
             {
+                //声音
+                Voice.Speak(voice_no, playHandle_out);
                 //离开-失败
                 am.Line1 = Out_Failure;
                 am.Line2 = Line2_Failure_Tip;
                 _ws.Pass(_model.AndroidOutIp, am);
-                //声音
-                Voice.Speak(voice_no, playHandle_out);
             }
-            MyConsole.Current.Log(listlog.ToArray());
         }
 
         public void Stop()
