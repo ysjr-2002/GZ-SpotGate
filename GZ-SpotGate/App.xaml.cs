@@ -31,7 +31,7 @@ namespace GZ_SpotGate
             if (bnew)
             {
                 Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
-               
+                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                 var window = new MainWindow();
                 window.ShowDialog();
                 mutex.WaitOne();
@@ -41,6 +41,12 @@ namespace GZ_SpotGate
                 MessageBox.Show("系统已运行！");
                 Application.Current.Shutdown();
             }
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var msg = "发生异常->" + e.ExceptionObject;
+            log.Fatal(msg);
         }
 
         private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

@@ -181,7 +181,14 @@ namespace GZ_SpotGate.Tcp
 
         private void AcceptData(DataEventArgs data)
         {
-            OnMessageInComming?.Invoke(null, data);
+            try
+            {
+                OnMessageInComming?.Invoke(null, data);
+            }
+            catch (Exception ex)
+            {
+                log.Error("AcceptData->" + ex.StackTrace);
+            }
         }
 
         public void Stop()
