@@ -106,7 +106,7 @@ namespace GZ_SpotGate.Core
         private void RestartApp()
         {
             var now = DateTime.Now.ToString("HH:mm:ss");
-            if (now == "18:10:00")
+            if (now == "18:11:00")
             {
                 System.Windows.Forms.Application.Restart();
             }
