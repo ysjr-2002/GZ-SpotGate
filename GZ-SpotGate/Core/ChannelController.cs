@@ -72,9 +72,6 @@ namespace GZ_SpotGate.Core
             voice_ok = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "yes.mp3");
             voice_no = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "no.mp3");
 
-            //var connect1 = false;
-            //var connect2 = false;
-
             _faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
             var cameratask1 = _faceInSocket.Connect();
 

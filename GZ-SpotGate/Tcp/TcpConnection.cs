@@ -71,23 +71,6 @@ namespace GZ_SpotGate.Tcp
             {
                 try
                 {
-                    #region OLD
-                    //byte b = 0;
-                    //List<byte> buffer = new List<byte>();
-                    //while ((b = (byte)_nws.ReadByte()) > 0)
-                    //{
-                    //    if (b == 13)
-                    //    {
-                    //        NotifySubscribe(buffer.ToArray());
-                    //        buffer.Clear();
-                    //    }
-                    //    else
-                    //    {
-                    //        buffer.Add(b);
-                    //    }
-                    //}
-                    #endregion
-
                     byte[] buffer = new byte[256];
                     var len = _nws.Read(buffer, 0, buffer.Length);
                     if (len > 0)
@@ -151,11 +134,18 @@ namespace GZ_SpotGate.Tcp
 
         public void Stop()
         {
-            _running = false;
-            _tcp?.Close();
-            _tcp = null;
-            _thread?.Join(100);
-            _thread = null;
+            try
+            {
+                _running = false;
+                _nws?.Close();
+                _tcp?.Close();
+                _tcp = null;
+                _thread?.Join(50);
+                _thread = null;
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

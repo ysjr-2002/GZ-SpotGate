@@ -98,8 +98,8 @@ namespace GZ_SpotGate.Tcp
                     log.Fatal("处理数据异常->" + ex.Message);
                 }
             }
-
             _running = false;
+            _nws?.Close();
             _nws = null;
             _tcp?.Close();
             _tcp = null;
@@ -124,7 +124,10 @@ namespace GZ_SpotGate.Tcp
                 }
                 catch (Exception ex)
                 {
-                    log.Fatal("读取流异常->" + _ipEndPoint.Address.ToString() + " " + ex.Message);
+                    if (_running)
+                    {
+                        log.Fatal("读取流异常->" + _ipEndPoint.Address.ToString() + " " + ex.Message);
+                    }
                     return null;
                 }
             }
@@ -262,11 +265,16 @@ namespace GZ_SpotGate.Tcp
 
         private void Send(byte[] buffer)
         {
-            _nws.Write(buffer, 0, buffer.Length);
+            if (buffer == null)
+                return;
+            _nws?.Write(buffer, 0, buffer.Length);
         }
 
         private static byte getCheckSum(byte[] data)
         {
+            if (data == null)
+                return 0;
+
             int sum = 0;
             for (int i = 1; i < data.Length - 1; i++)
             {
@@ -289,11 +297,19 @@ namespace GZ_SpotGate.Tcp
 
         private void StopInternal()
         {
-            _running = false;
-            _tcp?.Close();
-            _tcp = null;
-            _thread.Join(100);
-            _thread = null;
+            try
+            {
+                _running = false;
+                _nws?.Close();
+                _nws = null;
+                _tcp?.Close();
+                _tcp = null;
+                _thread.Join(50);
+                _thread = null;
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

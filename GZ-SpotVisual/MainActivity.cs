@@ -29,6 +29,12 @@ namespace GZ_SpotVisual
         private const int p_width = 700;
         private const int p_height = 500;
 
+        public const int WEBSOCKET_OK = 2000;
+        public const int WEBSOCKET_CLOSE = 2001;
+        public const int WEBSOCKET_ERROR = 2002;
+
+        public static Handler handler = null;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -49,6 +55,11 @@ namespace GZ_SpotVisual
                 Intent intent = new Intent(this, typeof(SettingActivity));
                 StartActivity(intent);
             };
+        }
+
+        private void ShowToast(string info)
+        {
+            Toast.MakeText(this, info, ToastLength.Short).Show();
         }
 
         public String GetHostIp()
@@ -79,6 +90,19 @@ namespace GZ_SpotVisual
             tvWelcome.Text = Config.Profile.Welcome;
             var address = GetHostIp();
             tvCopyright.Text = "终端：" + address + "  版本：V1.0 ";
+
+            handler = new Handler((message) =>
+            {
+                switch (message.What)
+                {
+                    case WEBSOCKET_OK:
+                        ShowToast("连接成功");
+                        break;
+                    case WEBSOCKET_CLOSE:
+                        ShowToast("连接失败");
+                        break;
+                }
+            });
         }
 
         protected override void OnPause()

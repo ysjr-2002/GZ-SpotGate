@@ -64,9 +64,9 @@ namespace GZ_SpotGate.Face
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
             _open = false;
-            log4.Debug("Websocket关闭->" + _koalaIp);
             if (!_appclose)
             {
+                log4.Debug("Websocket关闭->" + _koalaIp);
                 Task.Factory.StartNew(() =>
                 {
                     Thread.Sleep(sleep);

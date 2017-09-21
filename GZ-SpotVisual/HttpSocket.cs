@@ -23,7 +23,7 @@ namespace GZ_SpotVisual
         private Action<string> callback = null;
 
         private Context _activity = null;
-        private const int Reconnect_Interval = 30000;
+        private const int Reconnect_Interval = 10 * 1000;
 
         public HttpSocket(Context activity)
         {
@@ -74,18 +74,23 @@ namespace GZ_SpotVisual
         private void Socket_OnClose(object sender, CloseEventArgs e)
         {
             //Config.Log(koalaIp + " Websocket close");
-            Reconnect();
-            Thread.Sleep(Reconnect_Interval);
+            MainActivity.handler?.SendEmptyMessage(MainActivity.WEBSOCKET_CLOSE);
+            Close();
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(Reconnect_Interval);
+                Reconnect();
+            });
         }
 
         private void Socket_OnOpen(object sender, EventArgs e)
         {
             Dialog("WebSocket connect ok");
+            MainActivity.handler?.SendEmptyMessage(MainActivity.WEBSOCKET_OK);
         }
 
         private void Reconnect()
         {
-            Close();
             Connect(serverIp);
         }
 
@@ -94,14 +99,17 @@ namespace GZ_SpotVisual
             if (ws == null)
                 return;
 
-            if (ws.ReadyState == WebSocketState.Open)
-                ws.Close();
+            if (ws?.ReadyState == WebSocketState.Open)
+                ws?.Close();
 
-            ws.OnOpen -= Socket_OnOpen;
-            ws.OnClose -= Socket_OnClose;
-            ws.OnError -= Socket_OnError;
-            ws.OnMessage -= Socket_OnMessage;
-            ws = null;
+            if (ws != null)
+            {
+                ws.OnOpen -= Socket_OnOpen;
+                ws.OnClose -= Socket_OnClose;
+                ws.OnError -= Socket_OnError;
+                ws.OnMessage -= Socket_OnMessage;
+                ws = null;
+            }
         }
 
         private void Dialog(string msg)

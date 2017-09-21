@@ -10,7 +10,6 @@ namespace GZ_SpotGate.Tcp
     static class GateConnectionPool
     {
         private const int Gate_Port = 1005;
-
         private static Dictionary<string, IGateTcpConnection> gateClientCollection = new Dictionary<string, IGateTcpConnection>();
 
         /// <summary>
@@ -68,6 +67,9 @@ namespace GZ_SpotGate.Tcp
             gateClientCollection.Add(key, gate);
         }
 
+        /// <summary>
+        /// 关闭闸机连接
+        /// </summary>
         public static void Dispose()
         {
             foreach (var item in gateClientCollection)

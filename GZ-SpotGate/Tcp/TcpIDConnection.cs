@@ -66,11 +66,19 @@ namespace GZ_SpotGate.Tcp
 
         public void Stop()
         {
-            _running = false;
-            _tcp?.Close();
-            _tcp = null;
-            Thread.Sleep(200);
-            _thread = null;
+            try
+            {
+                _running = false;
+                _nws?.Close();
+                _nws = null;
+                _tcp?.Close();
+                _tcp = null;
+                Thread.Sleep(50);
+                _thread = null;
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         public void SetCallback(Action<DataEventArgs> callback)

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -49,10 +50,26 @@ namespace GZ_SpotGate.Core
                 _channels.Add(cc);
             }
 
-            timer.Interval = 1000;
-            timer.Elapsed += delegate { RestartApp(); };
-            timer.Start();
+            //timer.Interval = 1000;
+            //timer.Elapsed += delegate { RestartApp(); };
+            //timer.Start();
             MyConsole.Current.Log("系统启动");
+
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    _webServer.Pass("192.168.2.175", new AndroidMessage
+                    {
+                        CheckInType = Model.IDType.ID,
+                        Line1 = "欢迎光临,请入园",
+                        Line2 = "验证成功",
+                        Delay = 3000,
+                        Code = 100
+                    });
+                    Thread.Sleep(5000);
+                }
+            });
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -97,6 +114,7 @@ namespace GZ_SpotGate.Core
             _webServer.Stop();
             foreach (var channel in _channels)
             {
+                //关闭websocket
                 channel.Stop();
             }
             GateConnectionPool.Dispose();

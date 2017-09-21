@@ -39,25 +39,29 @@ namespace GZ_SpotVisual
             base.OnStart();
 
             var content = Intent.GetStringExtra("am");
-            var am = Newtonsoft.Json.JsonConvert.DeserializeObject<AndroidMessage>(content);
-            if (am?.Code == 100)
+            AndroidMessage am = null;
+            try
             {
-                if (am.CheckInType == CheckIntype.Face)
-                    ShowFace(am.Avatar);
+                am = Newtonsoft.Json.JsonConvert.DeserializeObject<AndroidMessage>(content);
+                if (am?.Code == 100)
+                {
+                    if (am.CheckInType == CheckIntype.Face)
+                        ShowFace(am.Avatar);
+                    else
+                    {
+                        faceImage.SetImageResource(Resource.Drawable.yes);
+                    }
+                }
                 else
                 {
-                    faceImage.SetImageResource(Resource.Drawable.yes);
+                    faceImage.SetImageResource(Resource.Drawable.no);
                 }
+                tvWelcome.Text = am?.Line1;
+                tvState.Text = am?.Line2;
             }
-            else
-            {
-                faceImage.SetImageResource(Resource.Drawable.no);
-            }
+            catch { }
 
-            tvWelcome.Text = am?.Line1;
-            tvState.Text = am?.Line2;
-
-            System.Threading.Tasks.Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() =>
             {
                 System.Threading.Thread.Sleep(am?.Delay ?? 1000);
                 StartActivity(typeof(MainActivity));
