@@ -55,21 +55,21 @@ namespace GZ_SpotGate.Core
             //timer.Start();
             MyConsole.Current.Log("系统启动");
 
-            Task.Factory.StartNew(() =>
-            {
-                while (true)
-                {
-                    _webServer.Pass("192.168.2.175", new AndroidMessage
-                    {
-                        CheckInType = Model.IDType.ID,
-                        Line1 = "欢迎光临,请入园",
-                        Line2 = "验证成功",
-                        Delay = 3000,
-                        Code = 100
-                    });
-                    Thread.Sleep(5000);
-                }
-            });
+            //Task.Factory.StartNew(() =>
+            //{
+            //    while (true)
+            //    {
+            //        _webServer.Pass("192.168.2.175", new AndroidMessage
+            //        {
+            //            CheckInType = Model.IDType.ID,
+            //            Line1 = "欢迎光临,请入园",
+            //            Line2 = "验证成功",
+            //            Delay = 3000,
+            //            Code = 100
+            //        });
+            //        Thread.Sleep(5000);
+            //    }
+            //});
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)

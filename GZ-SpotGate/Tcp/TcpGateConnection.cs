@@ -12,7 +12,7 @@ using System.Threading;
 namespace GZ_SpotGate.Tcp
 {
     /// <summary>
-    /// 闸机连接
+    /// 闸机连接 netstat -ano|findstar "9871"
     /// </summary>
     class TcpGateConnection : IGateTcpConnection
     {
@@ -170,7 +170,11 @@ namespace GZ_SpotGate.Tcp
                     GateOpen = true,
                     PersonIn = false,
                 };
-                _callback.BeginInvoke(arg, null, null);
+
+                Task.Factory.StartNew(() =>
+                {
+                    _callback.Invoke(arg);
+                });
             }
             pre_in_count = incount;
             pre_out_count = outcount;

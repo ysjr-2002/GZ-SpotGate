@@ -61,24 +61,35 @@ namespace GZ_SpotGate.WS
             if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
             {
                 MyConsole.Current.Log("发送至平板->" + androidClient);
-                MyConsole.Current.Log("已连接平板数量1->" + host.Sessions.IDs.Count());
-                MyConsole.Current.Log("已连接平板数量2->" + host.Sessions.ActiveIDs.Count());
+                MyConsole.Current.Log("连接平板数量->" + host.Sessions.IDs.Count());
+                //MyConsole.Current.Log("已连接平板数量2->" + host.Sessions.ActiveIDs.Count());
                 //foreach (var sID in host.Sessions.IDs)
                 //{
                 //    var remoteIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
                 //    MyConsole.Current.Log("UnActive已连接平板->" + remoteIp);
                 //}
 
-                foreach (var sID in host.Sessions.IDs)
+                try
                 {
-                    var remoteIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
-                    MyConsole.Current.Log("已连接平板->" + remoteIp);
-                    if (remoteIp == androidClient && host.Sessions[sID].State == WebSocketSharp.WebSocketState.Open)
+                    foreach (var sID in host.Sessions.IDs)
                     {
-                        var json = Util.ToJson(message);
-                        host.Sessions[sID].Context.WebSocket.Send(json);
-                        MyConsole.Current.Log("Android发送成功");
+                        var webSocketContext = host.Sessions[sID].Context;
+                        if (webSocketContext != null)
+                        {
+                            var remoteIp = webSocketContext.UserEndPoint.Address.ToString();
+                            MyConsole.Current.Log("已连接平板->" + remoteIp);
+                            if (remoteIp == androidClient && host.Sessions[sID].State == WebSocketSharp.WebSocketState.Open)
+                            {
+                                var json = Util.ToJson(message);
+                                webSocketContext.WebSocket.Send(json);
+                                MyConsole.Current.Log("Android发送成功");
+                            }
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    log.Fatal("发送数据异常->" + ex.StackTrace);
                 }
             }
         }
