@@ -30,7 +30,6 @@ namespace GZ_SpotGate.Core
 
         public MainController()
         {
-
         }
 
         public void Start()
@@ -50,11 +49,9 @@ namespace GZ_SpotGate.Core
                 _channels.Add(cc);
             }
 
-            //timer.Interval = 1000;
-            //timer.Elapsed += delegate { RestartApp(); };
-            //timer.Start();
             MyConsole.Current.Log("系统启动");
 
+            #region Test
             //Task.Factory.StartNew(() =>
             //{
             //    while (true)
@@ -70,6 +67,7 @@ namespace GZ_SpotGate.Core
             //        Thread.Sleep(5000);
             //    }
             //});
+            #endregion
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -109,7 +107,6 @@ namespace GZ_SpotGate.Core
 
         public void Dispose()
         {
-            timer.Stop();
             _tcpServer.Stop();
             _webServer.Stop();
             foreach (var channel in _channels)
@@ -118,16 +115,6 @@ namespace GZ_SpotGate.Core
                 channel.Stop();
             }
             GateConnectionPool.Dispose();
-        }
-
-        System.Timers.Timer timer = new System.Timers.Timer();
-        private void RestartApp()
-        {
-            var now = DateTime.Now.ToString("HH:mm:ss");
-            if (now == "18:11:00")
-            {
-                System.Windows.Forms.Application.Restart();
-            }
         }
     }
 }
