@@ -83,6 +83,7 @@ namespace GZ_SpotGate.WS
                                 var json = Util.ToJson(message);
                                 webSocketContext.WebSocket.Send(json);
                                 MyConsole.Current.Log("Android发送成功");
+                                break;
                             }
                         }
                     }

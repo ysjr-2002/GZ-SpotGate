@@ -1,4 +1,5 @@
-﻿using IPVoice;
+﻿using GZ_SpotGate.Core;
+using IPVoice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,41 +15,19 @@ namespace IPVoice
     /// </summary>
     public static class Voice
     {
-        public static void Speak(IntPtr ptr, string ip, string filename)
+        public static void Speak(string filename, IntPtr playHandle)
         {
-            IntPtr playHandle = IntPtr.Zero;
             try
             {
-                var PlayParam = LCAudioThrDll.GetPlayPlayParam(ptr, ip);
-                int size = Marshal.SizeOf(PlayParam);
-                playHandle = Marshal.AllocHGlobal(size);
-                Marshal.StructureToPtr(PlayParam, playHandle, false);
                 var init = LCAudioThrDll.lc_init(filename, playHandle);
                 if (init == 0)
                 {
                     var playId = LCAudioThrDll.lc_play(playHandle);
-                    var len = LCAudioThrDll.lc_get_duration(playHandle);
-                    len = len / 1000;
                 }
             }
-            finally
+            catch (Exception ex)
             {
-                //Marshal.FreeHGlobal(playHandle);
-            }
-        }
-
-        public static void Speak(string filename, IntPtr playHandle)
-        {
-            var init = LCAudioThrDll.lc_init(filename, playHandle);
-            if (init == 0)
-            {
-                var playId = LCAudioThrDll.lc_play(playHandle);
-                var len = LCAudioThrDll.lc_get_duration(playHandle);
-                len = len / 1000;
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show("初始化失败！");
+                MyConsole.Current.Log("语音播放失败->" + ex.Message);
             }
         }
     }
