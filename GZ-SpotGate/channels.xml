@@ -8,7 +8,7 @@
     <!--串口服务器-->
     <comserverip>172.21.5.1</comserverip>
     <!--入平板-->
-    <androidInip>192.168.66.101</androidInip>
+    <androidInip>172.21.5.25</androidInip>
     <!--出平板-->
     <androidOutip>172.21.5.26</androidOutip>
     <!--入人脸服务器-->
@@ -22,7 +22,12 @@
     <!--闸机串*口服务器-->
     <gatecomserverip>172.21.5.2</gatecomserverip>
     <!--是否启用-->
+    <!--入声音设备-->
+    <invoiceip>172.21.5.217</invoiceip>
+    <!--出声音设备-->
+    <outvoiceip>172.21.5.218</outvoiceip> 
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道2-->
   <channel>
@@ -36,7 +41,12 @@
     <faceInCameraip>172.21.5.150</faceInCameraip>
     <faceOutCameraip>172.21.5.151</faceOutCameraip>
     <gatecomserverip>172.21.5.4</gatecomserverip>
+     <!--入声音设备-->
+    <invoiceip>172.21.5.215</invoiceip>
+    <!--出声音设备-->
+    <outvoiceip>172.21.5.216</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道3-->
   <channel>
@@ -55,6 +65,7 @@
     <!--出声音设备-->
     <outvoiceip>172.21.5.212</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道4-->
   <channel>
@@ -68,7 +79,12 @@
     <faceInCameraip>172.21.5.160</faceInCameraip>
     <faceOutCameraip>172.21.5.161</faceOutCameraip>
     <gatecomserverip>172.21.5.8</gatecomserverip>
+     <!--入声音设备-->
+    <invoiceip>172.21.5.220</invoiceip>
+    <!--出声音设备-->
+    <outvoiceip>172.21.5.219</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道5-->
   <channel>
@@ -82,13 +98,12 @@
     <faceInCameraip>172.21.5.158</faceInCameraip>
     <faceOutCameraip>172.21.5.159</faceOutCameraip>
     <gatecomserverip>172.21.5.10</gatecomserverip>
-
    <!--入声音设备-->
     <invoiceip>172.21.5.204</invoiceip>
     <!--出声音设备-->
     <outvoiceip>172.21.5.203</outvoiceip>
-
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道6-->
   <channel>
@@ -102,7 +117,12 @@
     <faceInCameraip>172.21.5.157</faceInCameraip>
     <faceOutCameraip>172.21.5.156</faceOutCameraip>
     <gatecomserverip>172.21.5.12</gatecomserverip>
+     <!--入声音设备-->
+    <invoiceip>172.21.5.221</invoiceip>
+    <!--出声音设备-->
+    <outvoiceip>172.21.5.222</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道7-->
   <channel>
@@ -121,6 +141,7 @@
     <!--出声音设备-->
     <outvoiceip>172.21.5.202</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道8-->
   <channel>
@@ -133,12 +154,13 @@
     <faceOutip>172.21.5.195</faceOutip>
     <faceInCameraip>172.21.5.164</faceInCameraip>
     <faceOutCameraip>172.21.5.165</faceOutCameraip>
-    <gatecomserverip>172.21.5.16</gatecomserverip>
+     <gatecomserverip>172.21.5.16</gatecomserverip>
      <!--入声音设备-->
     <invoiceip>172.21.5.214</invoiceip>
     <!--出声音设备-->
     <outvoiceip>172.21.5.213</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道9-->
   <channel>
@@ -157,6 +179,7 @@
     <!--出声音设备-->
     <outvoiceip>172.21.5.208</outvoiceip> 
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道10-->
   <channel>
@@ -170,7 +193,12 @@
     <faceInCameraip>172.21.5.168</faceInCameraip>
     <faceOutCameraip>172.21.5.169</faceOutCameraip>
     <gatecomserverip>172.21.5.20</gatecomserverip>
+     <!--入声音设备-->
+    <invoiceip>172.21.5.223</invoiceip>
+    <!--出声音设备-->
+    <outvoiceip>172.21.5.224</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道11-->
   <channel>
@@ -189,6 +217,7 @@
     <!--出声音设备-->
     <outvoiceip>172.21.5.210</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
   <!--通道12-->
   <channel>
@@ -207,5 +236,6 @@
     <!--出声音设备-->
     <outvoiceip>172.21.5.206</outvoiceip>
     <enable>1</enable>
+    <holdopen>0</holdopen>
   </channel>
 </channels>

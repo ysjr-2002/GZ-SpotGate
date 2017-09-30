@@ -142,6 +142,12 @@ namespace GZ_SpotGate.Core
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
+            if (_model.GateHoleOpen)
+            {
+                MyConsole.Current.Log(string.Format("[{0}]通道常开模式", _model.No));
+                return;
+            }
+
             var listlog = new List<string>();
             listlog.Add(string.Format("[{0}]通道", _model.No));
             if (intentType == IntentType.In)

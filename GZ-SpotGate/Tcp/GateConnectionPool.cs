@@ -47,6 +47,46 @@ namespace GZ_SpotGate.Tcp
             }
         }
 
+        public static void EnterHoldOpen(string gatecomIp)
+        {
+            var key = string.Concat(gatecomIp, ":", Gate_Port);
+            if (gateClientCollection.ContainsKey(key))
+            {
+                var tcp = gateClientCollection[key];
+                tcp.EnterHoldOpen();
+            }
+        }
+
+        public static void ExitHoldOpen(string gatecomIp)
+        {
+            var key = string.Concat(gatecomIp, ":", Gate_Port);
+            if (gateClientCollection.ContainsKey(key))
+            {
+                var tcp = gateClientCollection[key];
+                tcp.ExitHoldOpen();
+            }
+        }
+
+        public static void EnterClose(string gatecomIp)
+        {
+            var key = string.Concat(gatecomIp, ":", Gate_Port);
+            if (gateClientCollection.ContainsKey(key))
+            {
+                var tcp = gateClientCollection[key];
+                tcp.EnterClose();
+            }
+        }
+
+        public static void ExitClose(string gatecomIp)
+        {
+            var key = string.Concat(gatecomIp, ":", Gate_Port);
+            if (gateClientCollection.ContainsKey(key))
+            {
+                var tcp = gateClientCollection[key];
+                tcp.ExitClose();
+            }
+        }
+
         public static bool ContainsKey(string key)
         {
             return gateClientCollection.ContainsKey(key);

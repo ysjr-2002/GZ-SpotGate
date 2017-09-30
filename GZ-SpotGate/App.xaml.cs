@@ -45,14 +45,14 @@ namespace GZ_SpotGate
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            var msg = "发生异常->" + e.ExceptionObject;
+            var msg = "UnhandledException发生异常->" + e.ExceptionObject;
             log.Fatal(msg);
         }
 
         private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            var msg = "发生异常->" + e.Exception.StackTrace;
+            var msg = "DispatcherUnhandledException发生异常->" + e.Exception.StackTrace;
             log.Fatal(msg);
         }
     }

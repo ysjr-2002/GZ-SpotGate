@@ -10,11 +10,69 @@
         Icon="server.ico"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d">
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="Button.Default.Brush" Color="#FF2E69C5" />
+        <SolidColorBrush x:Key="Button.Default.MouseOverBrush" Color="#FF3E83D1" />
+        <SolidColorBrush x:Key="Button.Default.ClickBrush" Color="#FF649BDE" />
+
+        <SolidColorBrush x:Key="Button.Unable.Foreground" Color="#FFCCCCCC" />
+        <SolidColorBrush x:Key="Button.Unable.Background" Color="#FFEBF0F1" />
+        <SolidColorBrush x:Key="Button.Unable.BorderBrush" Color="#FFE4E4E4" />
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="border"
+                              Background="{StaticResource Button.Default.Brush}"
+                              SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Default.MouseOverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Default.ClickBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Unable.Background}" />
+                                <Setter Property="Foreground" Value="{StaticResource Button.Unable.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="45" />
             <RowDefinition />
         </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Name="btnOpen"
+                    Width="180"
+                    Margin="5"
+                    Click="btnOpen_Click"
+                    Content="打开通道常开模式" />
+
+            <Button Name="btnClose"
+                    Width="180"
+                    Margin="5"
+                    Click="btnClose_Click"
+                    Content="关闭通道常开模式" />
+        </StackPanel>
 
         <TextBox Name="txtConsole"
                  Grid.Row="1"

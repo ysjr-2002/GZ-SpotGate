@@ -127,6 +127,7 @@ namespace GZ_SpotGate.Tcp
                     if (_running)
                     {
                         log.Fatal("读取流异常->" + _ipEndPoint.Address.ToString() + " " + ex.Message);
+                        log.Fatal("读取流异常->" + ex.StackTrace);
                     }
                     return null;
                 }
@@ -170,11 +171,7 @@ namespace GZ_SpotGate.Tcp
                     GateOpen = true,
                     PersonIn = false,
                 };
-
-                Task.Factory.StartNew(() =>
-                {
-                    _callback.Invoke(arg);
-                });
+                _callback.BeginInvoke(arg, null, null);
             }
             pre_in_count = incount;
             pre_out_count = outcount;
@@ -193,7 +190,7 @@ namespace GZ_SpotGate.Tcp
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
-            MyConsole.Current.Log("发送入开闸指令");
+            MyConsole.Current.Log("发送进向开闸指令");
         }
 
         /// <summary>
@@ -223,9 +220,27 @@ namespace GZ_SpotGate.Tcp
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
-            MyConsole.Current.Log("发送出开闸指令");
+            MyConsole.Current.Log("发送出向开闸指令");
         }
 
+        /// <summary>
+        /// 进向开闸保持
+        /// </summary>
+        public void EnterHoldOpen()
+        {
+            byte cid1 = 0x02;
+            byte cid2 = 0x00;
+            byte len = 0x08;
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, 00, 00, 00, 00, 00, 00, 00, 00 };
+            var check = getCheckSum(buffer);
+            buffer[buffer.Length - 1] = check;
+            Send(buffer);
+            MyConsole.Current.Log("发送进向开闸保持");
+        }
+
+        /// <summary>
+        /// 出向开闸保持
+        /// </summary>
         public void ExitHoldOpen()
         {
             byte cid1 = 0x02;
@@ -235,6 +250,7 @@ namespace GZ_SpotGate.Tcp
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);
+            MyConsole.Current.Log("发送出向开闸保持");
         }
 
         /// <summary>
@@ -271,7 +287,15 @@ namespace GZ_SpotGate.Tcp
         {
             if (buffer == null)
                 return;
-            _nws?.Write(buffer, 0, buffer.Length);
+
+            try
+            {
+                _nws?.Write(buffer, 0, buffer.Length);
+            }
+            catch (Exception ex)
+            {
+                log.Error("发送指令错误->" + ex.Message);
+            }
         }
 
         private static byte getCheckSum(byte[] data)

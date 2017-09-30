@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using GZ_SpotGate.Model;
+using GZ_SpotGate.Tcp;
 
 namespace GZ_SpotGate
 {
@@ -53,6 +54,9 @@ namespace GZ_SpotGate
                 await request.CheckIn("127.0.0.1", IDType.BarCode, "test");
             });
             txtConsole.Focus();
+
+            btnOpen.IsEnabled = false;
+            btnClose.IsEnabled = false;
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -66,6 +70,38 @@ namespace GZ_SpotGate
             mc.Dispose();
             MyConsole.Current.Log("系统退出");
             base.OnClosing(e);
+        }
+
+        private async void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
+                foreach (var c in enableChannels)
+                {
+                    GateConnectionPool.EnterHoldOpen(c.GateComServerIp);
+                    Thread.Sleep(100);
+                    GateConnectionPool.ExitHoldOpen(c.GateComServerIp);
+                }
+            });
+            btnOpen.IsEnabled = false;
+            btnClose.IsEnabled = true;
+        }
+
+        private async void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
+                foreach (var c in enableChannels)
+                {
+                    GateConnectionPool.EnterClose(c.GateComServerIp);
+                    Thread.Sleep(100);
+                    GateConnectionPool.ExitClose(c.GateComServerIp);
+                }
+            });
+            btnOpen.IsEnabled = true;
+            btnClose.IsEnabled = false;
         }
     }
 }

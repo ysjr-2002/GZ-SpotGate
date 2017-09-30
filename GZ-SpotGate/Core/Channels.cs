@@ -65,7 +65,8 @@ namespace GZ_SpotGate.Core
                     GateComServerIp = item.Element("gatecomserverip").Value,
                     InVoiceIp = item.Element("invoiceip")?.Value,
                     OutVoiceIp = item.Element("outvoiceip")?.Value,
-                    IsEnable = item.Element("enable").Value.ToInt32() == 1
+                    IsEnable = item.Element("enable").Value.ToInt32() == 1,
+                    GateHoleOpen = EValue(item, "holdopen").ToInt32() == 1
                 };
                 ChannelList.Add(cm);
             }
@@ -73,7 +74,15 @@ namespace GZ_SpotGate.Core
 
         public static string EValue(XElement e, string name)
         {
-            return e.Element(name).Value;
+            try
+            {
+                return e.Element(name).Value;
+            }
+            catch
+            {
+                MyConsole.Current.Log("读取项[" + name + "]错误");
+                return string.Empty;
+            }
         }
     }
 }

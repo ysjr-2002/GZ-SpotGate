@@ -65,5 +65,9 @@ namespace GZ_SpotGate.Core
         /// 是否启用
         /// </summary>
         public bool IsEnable { get; set; }
+        /// <summary>
+        /// 保持常开
+        /// </summary>
+        public bool GateHoleOpen { get; set; }
     }
 }

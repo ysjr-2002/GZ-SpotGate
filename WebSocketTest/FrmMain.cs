@@ -41,8 +41,24 @@ namespace WindowsFormsApplication1
             var url = "ws://" + textBox1.Text + ":9000/video";
             var rtsp = textBox2.Text;
             rtsp = HttpUtility.UrlEncode(rtsp);
-            var all = string.Concat(url, "?url=", rtsp);
-            ws = new WebSocket(all);
+            if (radioButton1.Checked)
+            {
+                var all = string.Concat(url, "?url=", rtsp);
+                ws = new WebSocket(all);
+            }
+            if( radioButton2.Checked)
+            {
+                var all = string.Concat(url, "?url=", rtsp);
+                ws = new WebSocket(all);
+            }
+            if(radioButton3.Checked)
+            {
+                WSMethod method = new WSMethod();
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var json = js.Serialize(method);
+                var all = string.Format(url + "?url={0}&method={1}", rtsp, json);
+                ws = new WebSocket(all);
+            }
             ws.OnError += Ws_OnError1;
             ws.OnClose += Ws_OnClose;
             ws.OnOpen += Ws_OnOpen;
@@ -126,7 +142,7 @@ namespace WindowsFormsApplication1
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            ws.Close();
+            ws?.Close();
             base.OnClosing(e);
         }
     }

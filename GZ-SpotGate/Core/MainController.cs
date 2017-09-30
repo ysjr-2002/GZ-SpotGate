@@ -51,7 +51,7 @@ namespace GZ_SpotGate.Core
 
             MyConsole.Current.Log("系统启动");
 
-            #region Test
+            #region Android Test
             //Task.Factory.StartNew(() =>
             //{
             //    while (true)
