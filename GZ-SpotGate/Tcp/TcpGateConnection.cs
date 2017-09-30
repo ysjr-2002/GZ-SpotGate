@@ -231,7 +231,7 @@ namespace GZ_SpotGate.Tcp
             byte cid1 = 0x02;
             byte cid2 = 0x00;
             byte len = 0x08;
-            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, 00, 00, 00, 00, 00, 00, 00, 00 };
+            byte[] buffer = new byte[] { 0xAA, 0x00, source_add, cid1, cid2, denst_add, len, 00, 01, 00, 00, 00, 00, 00, 00, 00 };
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
             Send(buffer);

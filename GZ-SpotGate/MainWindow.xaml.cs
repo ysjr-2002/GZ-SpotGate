@@ -55,7 +55,7 @@ namespace GZ_SpotGate
             });
             txtConsole.Focus();
 
-            btnOpen.IsEnabled = false;
+            btnOpen.IsEnabled = true;
             btnClose.IsEnabled = false;
         }
 
@@ -79,11 +79,15 @@ namespace GZ_SpotGate
                 var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
                 foreach (var c in enableChannels)
                 {
-                    GateConnectionPool.EnterHoldOpen(c.GateComServerIp);
-                    Thread.Sleep(100);
-                    GateConnectionPool.ExitHoldOpen(c.GateComServerIp);
+                    if (c.GateHoleOpen)
+                    {
+                        GateConnectionPool.EnterHoldOpen(c.GateComServerIp);
+                        Thread.Sleep(100);
+                        GateConnectionPool.ExitHoldOpen(c.GateComServerIp);
+                    }
                 }
             });
+
             btnOpen.IsEnabled = false;
             btnClose.IsEnabled = true;
         }
@@ -95,9 +99,12 @@ namespace GZ_SpotGate
                 var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
                 foreach (var c in enableChannels)
                 {
-                    GateConnectionPool.EnterClose(c.GateComServerIp);
-                    Thread.Sleep(100);
-                    GateConnectionPool.ExitClose(c.GateComServerIp);
+                    if (c.GateHoleOpen)
+                    {
+                        GateConnectionPool.EnterClose(c.GateComServerIp);
+                        Thread.Sleep(100);
+                        GateConnectionPool.ExitClose(c.GateComServerIp);
+                    }
                 }
             });
             btnOpen.IsEnabled = true;
