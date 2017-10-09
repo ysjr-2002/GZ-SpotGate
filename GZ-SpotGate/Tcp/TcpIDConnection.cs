@@ -312,5 +312,71 @@ namespace GZ_SpotGate.Tcp
             //ms.Dispose();
             //bp.Dispose();
         }
+
+        private void ResolveData(byte[] bytes)
+        {
+            byte[] photo_bs = new byte[1024];
+            //prefix 5
+            //len    2
+            //status 3
+            //txtlen 2
+            //piclen 4
+            //txtlen 256
+            //总计   270
+            Array.Copy(bytes, 270, photo_bs, 0, photo_bs.Length);
+            //photo_bs = getPhotoBytes(photo_bs);
+            byte[] name_bs = new byte[30];
+            byte[] sex_bs = new byte[2];
+            byte[] nation_bs = new byte[4];
+            byte[] time_bs = new byte[16];
+            byte[] address_bs = new byte[70];
+            byte[] id_bs = new byte[36];
+            byte[] office_bs = new byte[30];
+            byte[] start_bs = new byte[16];
+            byte[] stop_bs = new byte[16];
+            byte[] newaddress_bs = new byte[36];
+
+            //prefix 5
+            //len    2
+            //status 3
+            //txtlen 2
+            //piclen 4
+            //总计   14
+            Array.Copy(bytes, 14, name_bs, 0, 30);
+            Array.Copy(bytes, 44, sex_bs, 0, 2);
+            Array.Copy(bytes, 46, nation_bs, 0, 4);
+            Array.Copy(bytes, 50, time_bs, 0, 16);
+            Array.Copy(bytes, 66, address_bs, 0, 70);
+            Array.Copy(bytes, 136, id_bs, 0, 36);
+            Array.Copy(bytes, 172, office_bs, 0, 30);
+            Array.Copy(bytes, 202, start_bs, 0, 16);
+            Array.Copy(bytes, 218, stop_bs, 0, 16);
+            Array.Copy(bytes, 234, newaddress_bs, 0, 36);
+        }
+
+        private string BufferToString(byte[] bytes)
+        {
+            var str = Encoding.UTF8.GetString(bytes);
+            str = str.TrimEnd('\0');
+            return str;
+        }
+
+        private byte[] getDataBytes(byte[] data)
+        {
+            byte b = 0;
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    b = data[i];
+                    data[i] = data[i + 1];
+                }
+                else
+                {
+                    data[i] = b;
+                }
+            }
+            return data;
+        }
     }
 }
