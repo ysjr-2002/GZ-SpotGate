@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace GZ_SpotGate.Tcp
 {
     /// <summary>
-    /// 身份证阅读器连接
+    /// 身份证读取
     /// </summary>
     internal class TcpIDConnection : ITcpConnection
     {
@@ -241,7 +241,7 @@ namespace GZ_SpotGate.Tcp
 
             var lenByte = new byte[] { b6, b7 };
             Array.Reverse(lenByte);
-            var datalen = b6 * 256 + b7; //BitConverter.ToInt16(lenByte, 0);
+            var datalen = b6 * 256 + b7;
             var pos = 0;
             var recBuffer = new byte[datalen];
             var size = datalen;
@@ -282,20 +282,6 @@ namespace GZ_SpotGate.Tcp
                     };
                     _callback?.BeginInvoke(args, null, null);
                 }
-                //Console.WriteLine(array.Length);
-                //array.ToList().ForEach((s) =>
-                //{
-                //    Console.WriteLine(s);
-                //});
-
-                //var picBuffer = new byte[picLen];
-                //Array.Copy(list.ToArray(), 7 + temp.Length, picBuffer, 0, picBuffer.Length);
-
-                //MemoryStream ms = new MemoryStream(picBuffer);
-                //var bp = Bitmap.FromStream(ms);
-                //bp.Save("c:\\zp.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                //ms.Dispose();
-                //bp.Dispose();
             }
         }
 
@@ -314,6 +300,17 @@ namespace GZ_SpotGate.Tcp
             }
             else
                 return string.Empty;
+        }
+
+        private void Test()
+        {
+            //var picBuffer = new byte[picLen];
+            //Array.Copy(list.ToArray(), 7 + temp.Length, picBuffer, 0, picBuffer.Length);
+            //MemoryStream ms = new MemoryStream(picBuffer);
+            //var bp = Bitmap.FromStream(ms);
+            //bp.Save("c:\\zp.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            //ms.Dispose();
+            //bp.Dispose();
         }
     }
 }
