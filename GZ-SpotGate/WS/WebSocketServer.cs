@@ -62,12 +62,6 @@ namespace GZ_SpotGate.WS
             {
                 MyConsole.Current.Log("发送至平板->" + androidClient);
                 MyConsole.Current.Log("连接平板数量->" + host.Sessions.IDs.Count());
-                //MyConsole.Current.Log("已连接平板数量2->" + host.Sessions.ActiveIDs.Count());
-                //foreach (var sID in host.Sessions.IDs)
-                //{
-                //    var remoteIp = host.Sessions[sID].Context.UserEndPoint.Address.ToString();
-                //    MyConsole.Current.Log("UnActive已连接平板->" + remoteIp);
-                //}
 
                 try
                 {
