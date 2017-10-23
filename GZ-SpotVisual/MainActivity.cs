@@ -32,6 +32,7 @@ namespace GZ_SpotVisual
         public const int WEBSOCKET_OK = 2000;
         public const int WEBSOCKET_CLOSE = 2001;
         public const int WEBSOCKET_ERROR = 2002;
+        public const int WEBSOCKET_DATA = 2003;
 
         public static Handler handler = null;
 
@@ -95,6 +96,9 @@ namespace GZ_SpotVisual
             {
                 switch (message.What)
                 {
+                    case WEBSOCKET_DATA:
+                        //ShowToast("来数据了");
+                        break;
                     case WEBSOCKET_OK:
                         ShowToast("连接成功");
                         break;
@@ -109,79 +113,6 @@ namespace GZ_SpotVisual
         {
             //转后台后，触发OnPause事件
             base.OnPause();
-        }
-
-        private void ReceiveFromServer(AndroidMessage am)
-        {
-            //Bitmap faceImage = null;
-            //if (!string.IsNullOrEmpty(am.Avatar))
-            //{
-            //    var url = am.Avatar;
-            //    faceImage = getFaceBitmap(url);
-            //}
-            //Delay = am.Delay;
-            //ShowFace(am, faceImage);
-        }
-
-        private void ShowFace(AndroidMessage am, Bitmap faceImage)
-        {
-            RunOnUiThread(() =>
-            {
-                var lp = vistor.LayoutParameters;
-                lp.Width = p_width;
-                lp.Height = p_height;
-                vistor.LayoutParameters = lp;
-
-                tvName.Text = am.Line1;
-                tvName.SetTextColor(Color.Rgb(255, 106, 00));
-
-                ivFace.SetImageBitmap(faceImage);
-                faceImage.Dispose();
-                var sa = AnimationUtils.LoadAnimation(this, Resource.Animation.scale);
-                sa.AnimationEnd += Sa_AnimationEnd;
-                vistor.StartAnimation(sa);
-            });
-        }
-
-        private void Sa_AnimationEnd(object sender, Animation.AnimationEndEventArgs e)
-        {
-            Thread.Sleep(Delay);
-            var sa = AnimationUtils.LoadAnimation(this, Resource.Animation.translate);
-            vistor.StartAnimation(sa);
-        }
-
-        private byte[] DownImage(string url)
-        {
-            WebClient webclient = new WebClient();
-            return webclient.DownloadData(url);
-        }
-
-        private Bitmap getFaceBitmap(string url)
-        {
-            var data = DownImage(url);
-            var bitmap = BitmapFactory.DecodeByteArray(data, 0, data.Length);
-            return bitmap;
-        }
-
-        private void StartTimer()
-        {
-            timer = new System.Timers.Timer();
-            timer.Interval = 1000;
-            timer.Start();
-            timer.Elapsed += Timer_Elapsed;
-        }
-
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            Showtime();
-        }
-
-        private void Showtime()
-        {
-            RunOnUiThread(new Action(() =>
-            {
-                tvTime.Text = DateTime.Now.ToString("HH:mm:ss");
-            }));
         }
 
         protected override void OnDestroy()

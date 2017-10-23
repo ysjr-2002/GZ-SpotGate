@@ -57,23 +57,21 @@ namespace GZ_SpotVisual
 
         private void Socket_OnMessage(object sender, MessageEventArgs e)
         {
+            MainActivity.handler?.SendEmptyMessage(MainActivity.WEBSOCKET_DATA);
             if (e.IsText)
             {
                 var content = e.Data;
-                //var entity = JsonConvert.DeserializeObject<AndroidMessage>(content);
                 callback?.Invoke(content);
             }
         }
 
         private void Socket_OnError(object sender, ErrorEventArgs e)
         {
-            //Config.Log(koalaIp + " Websocket error");
             Dialog("WebSocket connection error");
         }
 
         private void Socket_OnClose(object sender, CloseEventArgs e)
         {
-            //Config.Log(koalaIp + " Websocket close");
             MainActivity.handler?.SendEmptyMessage(MainActivity.WEBSOCKET_CLOSE);
             Close();
             Task.Factory.StartNew(() =>
