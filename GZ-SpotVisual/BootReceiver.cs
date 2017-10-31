@@ -16,7 +16,7 @@ namespace GZ_SpotVisual
     /// 开机启动-必须设置IntentFilter
     /// </summary>
     [BroadcastReceiver]
-    [IntentFilter(new[] { Android.Content.Intent.ActionBootCompleted }, Categories = new[] { Android.Content.Intent.CategoryDefault })]
+    [IntentFilter(new[] { Intent.ActionBootCompleted }, Categories = new[] { Intent.CategoryDefault })]
     class BootReceiver : BroadcastReceiver
     {
         public override void OnReceive(Context context, Intent intent)

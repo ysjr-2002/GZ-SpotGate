@@ -70,7 +70,6 @@ namespace GZ_SpotGate.WS
                         if (webSocketContext != null)
                         {
                             var remoteIp = webSocketContext.UserEndPoint.Address.ToString();
-                            //MyConsole.Current.Log("已连接平板->" + remoteIp);
                             if (remoteIp == androidClient && host.Sessions[sID].State == WebSocketSharp.WebSocketState.Open)
                             {
                                 var json = Util.ToJson(message);

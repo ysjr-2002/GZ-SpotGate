@@ -22,6 +22,8 @@ namespace GZ_SpotGate.Core
 
         public int WebSocketListenPort { get; set; }
 
+        public string AutoRestartTime { get; set; }
+
         private ILog log = LogManager.GetLogger("ConfigProfile");
 
         private ConfigProfile()
@@ -42,6 +44,7 @@ namespace GZ_SpotGate.Core
             CheckInServerUrl = GetKey("checkInServerUrl");
             TcpComListenPort = Int32.Parse(GetKey("tcpComListenPort"));
             WebSocketListenPort = Int32.Parse(GetKey("webSocketListenPort"));
+            AutoRestartTime = GetKey("autorestart");
         }
 
         private string GetKey(string key)

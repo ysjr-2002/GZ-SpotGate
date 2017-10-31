@@ -111,7 +111,6 @@
     <Compile Include="Tcp\GateConnectionPool.cs" />
     <Compile Include="Tcp\ITcpConnection.cs" />
     <Compile Include="Tcp\TcpGateConnection.cs" />
-    <Compile Include="Udp\UdpComServer.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
     <Compile Include="Face\FaceRecognized.cs" />
     <Compile Include="Core\IReader.cs" />

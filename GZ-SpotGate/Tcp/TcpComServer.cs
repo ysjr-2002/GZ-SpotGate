@@ -47,60 +47,71 @@ namespace GZ_SpotGate.Tcp
             {
                 return;
             }
-            BeginAccept();
-
-            var ep = (IPEndPoint)tcpClient.Client.RemoteEndPoint;
-            var rp = ep.Port;
-
-            ITcpConnection connection = null;
-            if (rp == 1001)
+            finally
             {
-                //入二维码、IC卡
-                connection = new TcpConnection(ep, tcpClient);
-            }
-            else if (rp == 1002)
-            {
-                //入身份证证
-                connection = new TcpIDConnection(ep, tcpClient);
-            }
-            else if (rp == 1003)
-            {
-                //出二维码、IC卡
-                connection = new TcpConnection(ep, tcpClient);
-            }
-            else if (rp == 1004)
-            {
-                //出身份证
-                connection = new TcpIDConnection(ep, tcpClient);
+                BeginAccept();
             }
 
-            var key = ep.ToString();
-            log.Debug("端口连接->" + key);
-            if (rp == 1005)
+
+            try
             {
-                //闸机串口
-                connection = new TcpGateConnection(ep, tcpClient);
-                if (GateConnectionPool.ContainsKey(key))
+                var ep = (IPEndPoint)tcpClient.Client.RemoteEndPoint;
+                var rp = ep.Port;
+
+                ITcpConnection connection = null;
+                if (rp == 1001)
                 {
-                    var old = GateConnectionPool.GetGateTcp(key);
-                    GateConnectionPool.RemoveGateTcp(key);
-                    old.StopAsync();
+                    //入二维码、IC卡
+                    connection = new TcpConnection(ep, tcpClient);
                 }
-                connection.SetCallback(AcceptData);
-                connection.Start();
-                GateConnectionPool.Add(key, (IGateTcpConnection)connection);
-            }
-            else
-            {
-                if (clientCollection.ContainsKey(key))
+                else if (rp == 1002)
                 {
-                    var old = clientCollection[key];
-                    old.Stop();
-                    clientCollection.Remove(key);
+                    //入身份证证
+                    connection = new TcpIDConnection(ep, tcpClient);
                 }
-                connection.SetCallback(AcceptData);
-                connection.Start();
-                clientCollection.Add(key, connection);
+                else if (rp == 1003)
+                {
+                    //出二维码、IC卡
+                    connection = new TcpConnection(ep, tcpClient);
+                }
+                else if (rp == 1004)
+                {
+                    //出身份证
+                    connection = new TcpIDConnection(ep, tcpClient);
+                }
+
+                var key = ep.ToString();
+                log.Debug("端口连接->" + key);
+                if (rp == 1005)
+                {
+                    //闸机串口
+                    connection = new TcpGateConnection(ep, tcpClient);
+                    if (GateConnectionPool.ContainsKey(key))
+                    {
+                        var old = GateConnectionPool.GetGateTcp(key);
+                        GateConnectionPool.RemoveGateTcp(key);
+                        old.StopAsync();
+                    }
+                    connection.SetCallback(AcceptData);
+                    connection.Start();
+                    GateConnectionPool.Add(key, (IGateTcpConnection)connection);
+                }
+                else
+                {
+                    if (clientCollection.ContainsKey(key))
+                    {
+                        var old = clientCollection[key];
+                        old.Stop();
+                        clientCollection.Remove(key);
+                    }
+                    connection.SetCallback(AcceptData);
+                    connection.Start();
+                    clientCollection.Add(key, connection);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Fatal("异常->" + ex.StackTrace);
             }
         }
 

@@ -4,6 +4,7 @@ using GZ_SpotGate.WS;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,11 +23,10 @@ namespace GZ_SpotGate.Core
     class MainController
     {
         private static readonly ILog log = LogManager.GetLogger("MainController");
-
         private WebSocketServer _webServer = null;
         private TcpComServer _tcpServer = null;
-
         private List<ChannelController> _channels = new List<ChannelController>();
+        private System.Timers.Timer timer = new System.Timers.Timer();
 
         public MainController()
         {
@@ -34,6 +34,10 @@ namespace GZ_SpotGate.Core
 
         public void Start()
         {
+            timer.Interval = 1000;
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
+
             _tcpServer = new TcpComServer(ConfigProfile.Current.TcpComListenPort);
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
             _tcpServer.Start();
@@ -50,24 +54,17 @@ namespace GZ_SpotGate.Core
             }
 
             MyConsole.Current.Log("系统启动");
+        }
 
-            #region Android Test
-            //Task.Factory.StartNew(() =>
-            //{
-            //    while (true)
-            //    {
-            //        _webServer.Pass("192.168.2.175", new AndroidMessage
-            //        {
-            //            CheckInType = Model.IDType.ID,
-            //            Line1 = "欢迎光临,请入园",
-            //            Line2 = "验证成功",
-            //            Delay = 3000,
-            //            Code = 100
-            //        });
-            //        Thread.Sleep(5000);
-            //    }
-            //});
-            #endregion
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            var curTime = DateTime.Now.ToString("HHmmss");
+            if (curTime == ConfigProfile.Current.AutoRestartTime)
+            {
+                log.Info("执行自动重启->" + curTime);
+                timer.Stop();
+                restart();
+            }
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -107,14 +104,22 @@ namespace GZ_SpotGate.Core
 
         public void Dispose()
         {
-            _tcpServer.Stop();
-            _webServer.Stop();
+            _tcpServer?.Stop();
+            _webServer?.Stop();
             foreach (var channel in _channels)
             {
                 //关闭websocket
                 channel.Stop();
             }
             GateConnectionPool.Dispose();
+        }
+
+        private void restart()
+        {
+            string exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            string strPath = exePath.Replace(".vshost", "");
+            System.Diagnostics.Process.Start(strPath, "0");
+            Environment.Exit(0);//关闭当前进程
         }
     }
 }
