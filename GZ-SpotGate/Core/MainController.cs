@@ -65,6 +65,10 @@ namespace GZ_SpotGate.Core
                 timer.Stop();
                 restart();
             }
+            else
+            {
+                Debug.WriteLine("hz:" + curTime);
+            }
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -116,9 +120,9 @@ namespace GZ_SpotGate.Core
 
         private void restart()
         {
-            string exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            string exePath = Process.GetCurrentProcess().MainModule.FileName;
             string strPath = exePath.Replace(".vshost", "");
-            System.Diagnostics.Process.Start(strPath, "0");
+            Process.Start(strPath, "0");
             Environment.Exit(0);//关闭当前进程
         }
     }

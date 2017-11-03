@@ -72,43 +72,45 @@ namespace GZ_SpotGate
             base.OnClosing(e);
         }
 
-        private async void btnOpen_Click(object sender, RoutedEventArgs e)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
-                foreach (var c in enableChannels)
-                {
-                    if (c.GateHoleOpen)
-                    {
-                        GateConnectionPool.EnterHoldOpen(c.GateComServerIp);
-                        Thread.Sleep(100);
-                        GateConnectionPool.ExitHoldOpen(c.GateComServerIp);
-                    }
-                }
-            });
+        #region 测试
+        //private async void btnOpen_Click(object sender, RoutedEventArgs e)
+        //{
+        //    await Task.Factory.StartNew(() =>
+        //    {
+        //        var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
+        //        foreach (var c in enableChannels)
+        //        {
+        //            if (c.GateHoleOpen)
+        //            {
+        //                GateConnectionPool.EnterHoldOpen(c.GateComServerIp);
+        //                Thread.Sleep(100);
+        //                GateConnectionPool.ExitHoldOpen(c.GateComServerIp);
+        //            }
+        //        }
+        //    });
 
-            btnOpen.IsEnabled = false;
-            btnClose.IsEnabled = true;
-        }
+        //    btnOpen.IsEnabled = false;
+        //    btnClose.IsEnabled = true;
+        //}
 
-        private async void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
-                foreach (var c in enableChannels)
-                {
-                    if (c.GateHoleOpen)
-                    {
-                        GateConnectionPool.EnterClose(c.GateComServerIp);
-                        Thread.Sleep(100);
-                        GateConnectionPool.ExitClose(c.GateComServerIp);
-                    }
-                }
-            });
-            btnOpen.IsEnabled = true;
-            btnClose.IsEnabled = false;
-        }
+        //private async void btnClose_Click(object sender, RoutedEventArgs e)
+        //{
+        //    await Task.Factory.StartNew(() =>
+        //    {
+        //        var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
+        //        foreach (var c in enableChannels)
+        //        {
+        //            if (c.GateHoleOpen)
+        //            {
+        //                GateConnectionPool.EnterClose(c.GateComServerIp);
+        //                Thread.Sleep(100);
+        //                GateConnectionPool.ExitClose(c.GateComServerIp);
+        //            }
+        //        }
+        //    });
+        //    btnOpen.IsEnabled = true;
+        //    btnClose.IsEnabled = false;
+        //} 
+        #endregion
     }
 }
