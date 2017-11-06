@@ -42,7 +42,7 @@
                     android:layout_height="0dp"
                     android:id="@+id/tvWelcome"
                     android:layout_weight="1"
-                    android:textSize="110sp"
+                    android:textSize="@dimen/popup_welcome_text_size"
                     android:textColor="@color/face"
                     android:gravity="center_horizontal|center_vertical" />
             <!--时间-->
@@ -62,45 +62,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvCopyright"
                     android:gravity="right" />
-            </LinearLayout>
-        </RelativeLayout>
-    <!--android:background="@drawable/popupbg"-->
-        <RelativeLayout
-            android:id="@+id/rl"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:id="@+id/alter"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                android:background="#ffffff"
-                android:orientation="vertical"
-                android:layout_centerInParent="true">
-                <GZ_SpotVisual.ImageViewPlus
-                    android:id="@+id/faceImage"
-                    android:layout_marginTop="24dip"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    android:layout_gravity="center_horizontal" />
-            <!--<TextView
-                    android:gravity="center_horizontal"
-                    android:id="@+id/tvWecomeEmp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/face"
-                    android:textSize="@dimen/popup_welcome_text_size" />-->
-                <TextView
-                    android:gravity="center_horizontal"
-                    android:id="@+id/tvName"
-                    android:textColor="@color/face"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="24dip"
-                    android:layout_marginBottom="12dip"
-                    android:textSize="@dimen/popup_name_text_size" />
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

@@ -136,6 +136,7 @@
     <Compile Include="Tcp\TcpIDConnection.cs" />
     <Compile Include="WS\AndroidBehavior.cs" />
     <Compile Include="WS\AndroidMessage.cs" />
+    <Compile Include="WS\Udp.cs" />
     <Compile Include="WS\WebSocketServer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -100,6 +100,9 @@ namespace GZ_SpotVisual
 		public partial class Dimension
 		{
 			
+			// aapt resource value: 0x7f060002
+			public const int popup_face_size = 2131099650;
+			
 			// aapt resource value: 0x7f060001
 			public const int popup_name_text_size = 2131099649;
 			
@@ -150,29 +153,23 @@ namespace GZ_SpotVisual
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090008
-			public const int alter = 2131296264;
-			
 			// aapt resource value: 0x7f090000
 			public const int backTextView = 2131296256;
 			
-			// aapt resource value: 0x7f09000e
-			public const int btnSave = 2131296270;
-			
-			// aapt resource value: 0x7f090009
-			public const int faceImage = 2131296265;
+			// aapt resource value: 0x7f09000a
+			public const int btnSave = 2131296266;
 			
 			// aapt resource value: 0x7f09000b
-			public const int include = 2131296267;
+			public const int faceImage = 2131296267;
 			
-			// aapt resource value: 0x7f09000c
-			public const int koalaEditText = 2131296268;
+			// aapt resource value: 0x7f090007
+			public const int include = 2131296263;
+			
+			// aapt resource value: 0x7f090008
+			public const int koalaEditText = 2131296264;
 			
 			// aapt resource value: 0x7f090002
 			public const int linearLayout1 = 2131296258;
-			
-			// aapt resource value: 0x7f090007
-			public const int rl = 2131296263;
 			
 			// aapt resource value: 0x7f090003
 			public const int settingTextView = 2131296259;
@@ -183,11 +180,8 @@ namespace GZ_SpotVisual
 			// aapt resource value: 0x7f090006
 			public const int tvCopyright = 2131296262;
 			
-			// aapt resource value: 0x7f09000a
-			public const int tvName = 2131296266;
-			
-			// aapt resource value: 0x7f09000f
-			public const int tvState = 2131296271;
+			// aapt resource value: 0x7f09000c
+			public const int tvState = 2131296268;
 			
 			// aapt resource value: 0x7f090005
 			public const int tvTime = 2131296261;
@@ -195,8 +189,8 @@ namespace GZ_SpotVisual
 			// aapt resource value: 0x7f090004
 			public const int tvWelcome = 2131296260;
 			
-			// aapt resource value: 0x7f09000d
-			public const int welcomeEditText1 = 2131296269;
+			// aapt resource value: 0x7f090009
+			public const int welcomeEditText1 = 2131296265;
 			
 			static Id()
 			{

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace GZ_SpotGate.Core
@@ -53,22 +54,40 @@ namespace GZ_SpotGate.Core
                 _channels.Add(cc);
             }
 
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    _webServer.Pass("192.168.66.101", new AndroidMessage
+                    {
+                        Delay = 5 * 1000,
+                        IntentType = ChannelController.IntentType.In,
+                        Line1 = "Welcome",
+                        Line2 = "Hello",
+                        CheckInType = Model.IDType.IC,
+                        Code = 100,
+                        Result = true
+                    });
+                    Thread.Sleep(8 * 1000);
+                }
+            });
+
             MyConsole.Current.Log("系统启动");
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var curTime = DateTime.Now.ToString("HHmmss");
-            if (curTime == ConfigProfile.Current.AutoRestartTime)
-            {
-                log.Info("执行自动重启->" + curTime);
-                timer.Stop();
-                restart();
-            }
-            else
-            {
-                Debug.WriteLine("hz:" + curTime);
-            }
+            //var curTime = DateTime.Now.ToString("HHmmss");
+            //if (curTime == ConfigProfile.Current.AutoRestartTime)
+            //{
+            //    log.Info("执行自动重启->" + curTime);
+            //    timer.Stop();
+            //    restart();
+            //}
+            //else
+            //{
+            //    Debug.WriteLine("hz:" + curTime);
+            //}
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -108,14 +127,21 @@ namespace GZ_SpotGate.Core
 
         public void Dispose()
         {
-            _tcpServer?.Stop();
-            _webServer?.Stop();
-            foreach (var channel in _channels)
+            try
             {
-                //关闭websocket
-                channel.Stop();
+                _tcpServer?.Stop();
+                _webServer?.Stop();
+                foreach (var channel in _channels)
+                {
+                    //关闭websocket
+                    channel.Stop();
+                }
+                GateConnectionPool.Dispose();
             }
-            GateConnectionPool.Dispose();
+            catch (Exception e)
+            {
+                MessageBox.Show("退出异常->" + e.Message);
+            }
         }
 
         private void restart()

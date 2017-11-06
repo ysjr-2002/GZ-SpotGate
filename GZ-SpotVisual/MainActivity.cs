@@ -46,9 +46,9 @@ namespace GZ_SpotVisual
             tvWelcome = this.FindViewById<TextView>(Resource.Id.tvWelcome);
             tvTime = this.FindViewById<TextView>(Resource.Id.tvTime);
             tvCopyright = this.FindViewById<TextView>(Resource.Id.tvCopyright);
-            vistor = this.FindViewById<LinearLayout>(Resource.Id.alter);
+            //vistor = this.FindViewById<LinearLayout>(Resource.Id.alter);
             ivFace = this.FindViewById<ImageView>(Resource.Id.faceImage);
-            tvName = this.FindViewById<TextView>(Resource.Id.tvName);
+            //tvName = this.FindViewById<TextView>(Resource.Id.tvName);
 
             var settingTextView = FindViewById<TextView>(Resource.Id.settingTextView);
             settingTextView.Click += delegate
@@ -56,6 +56,10 @@ namespace GZ_SpotVisual
                 Intent intent = new Intent(this, typeof(SettingActivity));
                 StartActivity(intent);
             };
+
+            tvWelcome.Text = Config.Profile.Welcome;
+            var address = GetHostIp();
+            tvCopyright.Text = "终端：" + address + "  版本：V1.0 ";
         }
 
         private void ShowToast(string info)
@@ -88,25 +92,21 @@ namespace GZ_SpotVisual
         {
             base.OnStart();
 
-            tvWelcome.Text = Config.Profile.Welcome;
-            var address = GetHostIp();
-            tvCopyright.Text = "终端：" + address + "  版本：V1.0 ";
-
-            handler = new Handler((message) =>
-            {
-                switch (message.What)
-                {
-                    case WEBSOCKET_DATA:
-                        //ShowToast("来数据了");
-                        break;
-                    case WEBSOCKET_OK:
-                        ShowToast("连接成功");
-                        break;
-                    case WEBSOCKET_CLOSE:
-                        ShowToast("连接失败");
-                        break;
-                }
-            });
+            //handler = new Handler((message) =>
+            //{
+            //    switch (message.What)
+            //    {
+            //        case WEBSOCKET_DATA:
+            //            //ShowToast("来数据了");
+            //            break;
+            //        case WEBSOCKET_OK:
+            //            //ShowToast("连接成功");
+            //            break;
+            //        case WEBSOCKET_CLOSE:
+            //            //ShowToast("连接失败");
+            //            break;
+            //    }
+            //});
         }
 
         protected override void OnPause()

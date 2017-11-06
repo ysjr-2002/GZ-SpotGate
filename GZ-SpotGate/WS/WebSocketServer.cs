@@ -57,6 +57,7 @@ namespace GZ_SpotGate.WS
             if (wssv == null)
                 return;
 
+            var json = Util.ToJson(message);
             WebSocketServiceHost host = null;
             if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
             {
@@ -72,7 +73,6 @@ namespace GZ_SpotGate.WS
                             var remoteIp = webSocketContext.UserEndPoint.Address.ToString();
                             if (remoteIp == androidClient && host.Sessions[sID].State == WebSocketSharp.WebSocketState.Open)
                             {
-                                var json = Util.ToJson(message);
                                 webSocketContext.WebSocket.Send(json);
                                 MyConsole.Current.Log("android发送成功");
                             }
@@ -84,6 +84,7 @@ namespace GZ_SpotGate.WS
                     log.Fatal("发送数据异常->" + ex.StackTrace);
                 }
             }
+            Udp.send(androidClient, json);
         }
 
         private static void send(string ip, WebSocketServiceHost host)

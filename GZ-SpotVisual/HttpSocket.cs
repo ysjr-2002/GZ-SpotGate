@@ -67,7 +67,6 @@ namespace GZ_SpotVisual
 
         private void Socket_OnError(object sender, ErrorEventArgs e)
         {
-            Dialog("WebSocket connection error");
         }
 
         private void Socket_OnClose(object sender, CloseEventArgs e)
@@ -83,7 +82,6 @@ namespace GZ_SpotVisual
 
         private void Socket_OnOpen(object sender, EventArgs e)
         {
-            Dialog("WebSocket connect ok");
             MainActivity.handler?.SendEmptyMessage(MainActivity.WEBSOCKET_OK);
         }
 
@@ -108,14 +106,6 @@ namespace GZ_SpotVisual
                 ws.OnMessage -= Socket_OnMessage;
                 ws = null;
             }
-        }
-
-        private void Dialog(string msg)
-        {
-            //_activity.RunOnUiThread(() =>
-            //{
-            //    Toast.MakeText(Application.Context, msg, ToastLength.Short).Show();
-            //});
         }
     }
 }

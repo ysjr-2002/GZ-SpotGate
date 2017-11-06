@@ -52,7 +52,6 @@ namespace GZ_SpotGate.Tcp
                 BeginAccept();
             }
 
-
             try
             {
                 var ep = (IPEndPoint)tcpClient.Client.RemoteEndPoint;
@@ -117,7 +116,7 @@ namespace GZ_SpotGate.Tcp
 
         private void BeginAccept()
         {
-            _tcpListener.BeginAcceptTcpClient(EndAccept, null);
+            _tcpListener?.BeginAcceptTcpClient(EndAccept, null);
         }
 
         private void AcceptData(DataEventArgs data)

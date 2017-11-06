@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <dimen name="popup_welcome_text_size">32sp</dimen>
-  <dimen name="popup_name_text_size">52sp</dimen>
+  <dimen name="popup_welcome_text_size">110sp</dimen>
+  <dimen name="popup_name_text_size">80sp</dimen>
+  <dimen name="popup_face_size">400dp</dimen>
 </resources>

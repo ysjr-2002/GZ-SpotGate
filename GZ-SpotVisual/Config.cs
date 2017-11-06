@@ -69,7 +69,7 @@ namespace GZ_SpotVisual
         public Profile()
         {
             ServerIp = "172.21.5.88";
-            Welcome = "欢迎光临天潭河";
+            Welcome = "欢迎光临天河潭";
         }
 
         public string ServerIp { get; set; }
