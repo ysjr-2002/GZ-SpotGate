@@ -61,7 +61,7 @@ namespace GZ_SpotGate.WS
             WebSocketServiceHost host = null;
             if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
             {
-                MyConsole.Current.Log("连接平板数量->" + host.Sessions.IDs.Count());
+                //MyConsole.Current.Log("连接平板数量->" + host.Sessions.IDs.Count());
                 MyConsole.Current.Log("发送平板->" + androidClient);
                 try
                 {
