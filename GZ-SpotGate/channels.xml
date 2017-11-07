@@ -86,7 +86,7 @@
     <enable>1</enable>
     <holdopen>0</holdopen>
   </channel>
-  <!--通道5-->
+  <!--通道5 主入口-->
   <channel>
     <no>5</no>
     <channelvirtualip>172.21.4.104</channelvirtualip>
@@ -162,7 +162,7 @@
     <enable>1</enable>
     <holdopen>0</holdopen>
   </channel>
-  <!--通道9-->
+  <!--通道9 主入口-->
   <channel>
     <no>9</no>
     <channelvirtualip>172.21.4.108</channelvirtualip>
@@ -200,7 +200,7 @@
     <enable>1</enable>
     <holdopen>0</holdopen>
   </channel>
-  <!--通道11-->
+  <!--通道11 主入口-->
   <channel>
     <no>11</no>
     <channelvirtualip>172.21.4.110</channelvirtualip>
@@ -219,7 +219,7 @@
     <enable>1</enable>
     <holdopen>0</holdopen>
   </channel>
-  <!--通道12-->
+  <!--通道12 主入口-->
   <channel>
     <no>12</no>
     <channelvirtualip>172.21.4.111</channelvirtualip>

@@ -84,7 +84,7 @@ namespace GZ_SpotGate.WS
                     log.Fatal("发送数据异常->" + ex.StackTrace);
                 }
             }
-            Udp.send(androidClient, json);
+            Udp.SendToAndroid(androidClient, json);
         }
 
         private static void send(string ip, WebSocketServiceHost host)

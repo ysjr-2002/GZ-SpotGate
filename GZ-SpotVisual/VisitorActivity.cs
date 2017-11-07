@@ -81,16 +81,24 @@ namespace GZ_SpotVisual
                 return;
 
             facebm = await getFaceBitmap(url);
-            faceImage.SetImageBitmap(facebm);
+            if (facebm != null)
+                faceImage.SetImageBitmap(facebm);
         }
 
         private Task<Bitmap> getFaceBitmap(string url)
         {
             return Task.Factory.StartNew(() =>
             {
-                var data = DownImage(url);
-                var bitmap = BitmapFactory.DecodeByteArray(data, 0, data.Length);
-                return bitmap;
+                try
+                {
+                    var data = DownImage(url);
+                    var bitmap = BitmapFactory.DecodeByteArray(data, 0, data.Length);
+                    return bitmap;
+                }
+                catch
+                {
+                    return null;
+                }
             });
         }
 
