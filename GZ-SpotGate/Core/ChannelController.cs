@@ -164,6 +164,13 @@ namespace GZ_SpotGate.Core
             else if (checkInType == IDType.Face)
                 listlog.Add(string.Format("人脸={0}", uniqueId));
 
+            if (string.IsNullOrEmpty(uniqueId))
+            {
+                listlog.Add("人脸编号为空->" + name);
+                MyConsole.Current.Log(listlog.ToArray());
+                return;
+            }
+
             Stopwatch sw = Stopwatch.StartNew();
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
             sw.Stop();
