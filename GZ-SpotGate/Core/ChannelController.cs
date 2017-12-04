@@ -92,6 +92,7 @@ namespace GZ_SpotGate.Core
                 MyConsole.Current.Log(string.Format("[{0}]通道初始化失败", _model.No));
                 return false;
             }
+            //return true;
         }
 
         public async void Report(DataEventArgs data)

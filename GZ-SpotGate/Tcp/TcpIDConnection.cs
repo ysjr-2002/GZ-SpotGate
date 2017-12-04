@@ -91,13 +91,17 @@ namespace GZ_SpotGate.Tcp
             while (_running)
             {
                 var find = FindID();
-                if (find)
+                if (find == 1)
                 {
                     var select = SelectID();
                     if (select)
                     {
                         ReadMessage();
                     }
+                }
+                else if (find == 3 || find == 4)
+                {
+                    Stop();
                 }
                 Thread.Sleep(CHECK_INTERVAL);
             }
@@ -113,7 +117,7 @@ namespace GZ_SpotGate.Tcp
             return xor;
         }
 
-        private bool FindID()
+        private int FindID()
         {
             var len = new byte[] { 0x00, 0x03 };
             var cmd = new byte[] { 0x20, 0x01 };
@@ -131,7 +135,15 @@ namespace GZ_SpotGate.Tcp
             try
             {
                 _nws.Write(package.ToArray(), 0, package.Count);
-
+            }
+            catch (Exception ex)
+            {
+                MyConsole.Current.Log("find异常->" + ex.Message);
+                MyConsole.Current.Log("find异常->" + _ipEndPoint.ToString());
+                return 4;
+            }
+            try
+            {
                 byte b1 = (byte)_nws.ReadByte();
                 byte b2 = (byte)_nws.ReadByte();
                 byte b3 = (byte)_nws.ReadByte();
@@ -152,21 +164,21 @@ namespace GZ_SpotGate.Tcp
 
                 if (recBuffer[2] == 0x9f)
                 {
-                    return true;
+                    return 1;
                 }
                 else if (recBuffer[2] == 0x80)
                 {
                     //寻找身份证失败
-                    return false;
+                    return 2;
                 }
                 else
                 {
-                    return false;
+                    return 2;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                return 3;
             }
         }
 
