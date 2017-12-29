@@ -25,6 +25,7 @@ namespace GZ_SpotGate.Tcp
         private Action<DataEventArgs> _callback;
 
         private const int CHECK_INTERVAL = 100;
+        private const int READ_TIME_OUT = 5000;
         private static readonly byte[] prefix = new byte[] { 0xAA, 0xAA, 0xAA, 0x96, 0x69 };
 
         private static ILog log = LogManager.GetLogger("TcpIDConnection");
@@ -52,6 +53,7 @@ namespace GZ_SpotGate.Tcp
             _ipEndPoint = endPoint;
             _tcp = tcp;
             _nws = tcp.GetStream();
+            _nws.ReadTimeout = READ_TIME_OUT;
         }
 
         public void Start()
@@ -131,15 +133,13 @@ namespace GZ_SpotGate.Tcp
             package.AddRange(prefix);
             package.AddRange(data);
             package.Add(xor);
-
             try
             {
                 _nws.Write(package.ToArray(), 0, package.Count);
             }
             catch (Exception ex)
             {
-                MyConsole.Current.Log("find异常->" + ex.Message);
-                MyConsole.Current.Log("find异常->" + _ipEndPoint.ToString());
+                log.Debug(_ipEndPoint + "发送寻卡指令异常->" + ex.Message);
                 return 4;
             }
             try
@@ -149,7 +149,6 @@ namespace GZ_SpotGate.Tcp
                 byte b3 = (byte)_nws.ReadByte();
                 byte b4 = (byte)_nws.ReadByte();
                 byte b5 = (byte)_nws.ReadByte();
-
                 byte b6 = (byte)_nws.ReadByte();
                 byte b7 = (byte)_nws.ReadByte();
 
@@ -176,10 +175,28 @@ namespace GZ_SpotGate.Tcp
                     return 2;
                 }
             }
-            catch (Exception ex)
+            catch (System.IO.IOException ex)
             {
+                //读取超时
+                if (ex.InnerException != null)
+                {
+                    if (ex.InnerException.GetType().FullName == "System.Net.Sockets.SocketException")
+                    {
+                        return 2;
+                    }
+                }
                 return 3;
             }
+            catch (Exception ex)
+            {
+                MyConsole.Current.Log("读取数据异常->" + ex.Message);
+                return 3;
+            }
+        }
+
+        private byte readtimeout()
+        {
+            return 1;
         }
 
         private bool SelectID()
@@ -197,31 +214,63 @@ namespace GZ_SpotGate.Tcp
             package.AddRange(prefix);
             package.AddRange(data);
             package.Add(sum);
-            _nws.Write(package.ToArray(), 0, package.Count);
-
-            byte b1 = (byte)_nws.ReadByte();
-            byte b2 = (byte)_nws.ReadByte();
-            byte b3 = (byte)_nws.ReadByte();
-            byte b4 = (byte)_nws.ReadByte();
-            byte b5 = (byte)_nws.ReadByte();
-
-            byte b6 = (byte)_nws.ReadByte();
-            byte b7 = (byte)_nws.ReadByte();
-
-            var i = 0;
-            List<byte> recBuffer = new List<byte>();
-            while (i < b7)
+            try
             {
-                byte b = (byte)_nws.ReadByte();
-                recBuffer.Add(b);
-                i++;
+                _nws.Write(package.ToArray(), 0, package.Count);
             }
-            if (recBuffer[2] == 0x90)
+            catch (Exception ex)
             {
-                return true;
+                return false;
             }
-            else
+
+            try
             {
+                byte b1 = (byte)_nws.ReadByte();
+                byte b2 = (byte)_nws.ReadByte();
+                byte b3 = (byte)_nws.ReadByte();
+                byte b4 = (byte)_nws.ReadByte();
+                if (b1 == 65 && b2 == 65 && b3 == 65 && b4 == 65)
+                {
+                    //心跳
+                    return false;
+                }
+                byte b5 = (byte)_nws.ReadByte();
+
+                byte b6 = (byte)_nws.ReadByte();
+                byte b7 = (byte)_nws.ReadByte();
+
+                var i = 0;
+                List<byte> recBuffer = new List<byte>();
+                while (i < b7)
+                {
+                    byte b = (byte)_nws.ReadByte();
+                    recBuffer.Add(b);
+                    i++;
+                }
+                if (recBuffer[2] == 0x90)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (System.IO.IOException ex)
+            {
+                //读取超时
+                if (ex.InnerException != null)
+                {
+                    if (ex.InnerException.GetType().FullName == "System.Net.Sockets.SocketException")
+                    {
+                        return false;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MyConsole.Current.Log("读取数据异常->" + ex.Message);
                 return false;
             }
         }
@@ -240,60 +289,73 @@ namespace GZ_SpotGate.Tcp
             package.AddRange(prefix);
             package.AddRange(data);
             package.Add(xor);
-            _nws.Write(package.ToArray(), 0, package.Count);
-
-            byte b1 = (byte)_nws.ReadByte();
-            byte b2 = (byte)_nws.ReadByte();
-            byte b3 = (byte)_nws.ReadByte();
-            byte b4 = (byte)_nws.ReadByte();
-            byte b5 = (byte)_nws.ReadByte();
-
-            byte b6 = (byte)_nws.ReadByte();
-            byte b7 = (byte)_nws.ReadByte();
-
-            var lenByte = new byte[] { b6, b7 };
-            Array.Reverse(lenByte);
-            var datalen = b6 * 256 + b7;
-            var pos = 0;
-            var recBuffer = new byte[datalen];
-            var size = datalen;
-            while (true)
+            try
             {
-                var read = _nws.Read(recBuffer, pos, size);
-                pos += read;
-                size -= read;
-                if (pos == datalen)
+                _nws.Write(package.ToArray(), 0, package.Count);
+            }
+            catch
+            {
+                return;
+            }
+
+            try
+            {
+                byte b1 = (byte)_nws.ReadByte();
+                byte b2 = (byte)_nws.ReadByte();
+                byte b3 = (byte)_nws.ReadByte();
+                byte b4 = (byte)_nws.ReadByte();
+                byte b5 = (byte)_nws.ReadByte();
+
+                byte b6 = (byte)_nws.ReadByte();
+                byte b7 = (byte)_nws.ReadByte();
+
+                var lenByte = new byte[] { b6, b7 };
+                Array.Reverse(lenByte);
+                var datalen = b6 * 256 + b7;
+                var pos = 0;
+                var recBuffer = new byte[datalen];
+                var size = datalen;
+                while (true)
                 {
-                    break;
+                    var read = _nws.Read(recBuffer, pos, size);
+                    pos += read;
+                    size -= read;
+                    if (pos == datalen)
+                    {
+                        break;
+                    }
+                }
+                var list = recBuffer.ToList();
+                if (list[2] == 0x90)
+                {
+                    var txtLen = list[3] * 256 + list[4];
+                    var picLen = list[5] * 256 + list[6];
+
+                    var temp = new byte[txtLen];
+                    //数据区从第7为开始
+                    Array.Copy(list.ToArray(), 7, temp, 0, temp.Length);
+                    var txt = Encoding.UTF8.GetString(temp);
+                    var un = Encoding.Unicode.GetString(temp);
+                    var gb = Encoding.Default.GetString(temp);
+
+                    var array = un.Split(' ');
+                    array = array.Where(s => s.Length > 0).ToArray();
+                    if (array.Length > 2)
+                    {
+                        var idno = getIDNO(array[2]);
+                        DataEventArgs args = new DataEventArgs
+                        {
+                            Name = array[0],
+                            Data = idno,
+                            IPEndPoint = _ipEndPoint,
+                            IDData = true
+                        };
+                        _callback?.BeginInvoke(args, null, null);
+                    }
                 }
             }
-            var list = recBuffer.ToList();
-            if (list[2] == 0x90)
+            catch
             {
-                var txtLen = list[3] * 256 + list[4];
-                var picLen = list[5] * 256 + list[6];
-
-                var temp = new byte[txtLen];
-                //数据区从第7为开始
-                Array.Copy(list.ToArray(), 7, temp, 0, temp.Length);
-                var txt = Encoding.UTF8.GetString(temp);
-                var un = Encoding.Unicode.GetString(temp);
-                var gb = Encoding.Default.GetString(temp);
-
-                var array = un.Split(' ');
-                array = array.Where(s => s.Length > 0).ToArray();
-                if (array.Length > 2)
-                {
-                    var idno = getIDNO(array[2]);
-                    DataEventArgs args = new DataEventArgs
-                    {
-                        Name = array[0],
-                        Data = idno,
-                        IPEndPoint = _ipEndPoint,
-                        IDData = true
-                    };
-                    _callback?.BeginInvoke(args, null, null);
-                }
             }
         }
 

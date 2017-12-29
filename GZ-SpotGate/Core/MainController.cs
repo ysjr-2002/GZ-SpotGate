@@ -27,7 +27,7 @@ namespace GZ_SpotGate.Core
         private WebSocketServer _webServer = null;
         private TcpComServer _tcpServer = null;
         private List<ChannelController> _channels = new List<ChannelController>();
-        private System.Timers.Timer timer = new System.Timers.Timer();
+       
 
         public MainController()
         {
@@ -35,10 +35,6 @@ namespace GZ_SpotGate.Core
 
         public void Start()
         {
-            timer.Interval = 1000;
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
-
             _tcpServer = new TcpComServer(ConfigProfile.Current.TcpComListenPort);
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
             _tcpServer.Start();
@@ -73,21 +69,6 @@ namespace GZ_SpotGate.Core
             //});
 
             MyConsole.Current.Log("系统启动");
-        }
-
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            //var curTime = DateTime.Now.ToString("HHmmss");
-            //if (curTime == ConfigProfile.Current.AutoRestartTime)
-            //{
-            //    log.Info("执行自动重启->" + curTime);
-            //    timer.Stop();
-            //    restart();
-            //}
-            //else
-            //{
-            //    Debug.WriteLine("hz:" + curTime);
-            //}
         }
 
         private void ComServer_OnMessageInComming(object sender, DataEventArgs e)
