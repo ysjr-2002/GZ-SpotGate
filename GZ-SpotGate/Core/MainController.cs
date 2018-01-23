@@ -49,25 +49,6 @@ namespace GZ_SpotGate.Core
                 cc.Init(c, _webServer);
                 _channels.Add(cc);
             }
-
-            //Task.Factory.StartNew(() =>
-            //{
-            //    while (true)
-            //    {
-            //        _webServer.Pass("192.168.66.101", new AndroidMessage
-            //        {
-            //            Delay = 5 * 1000,
-            //            IntentType = ChannelController.IntentType.In,
-            //            Line1 = "Welcome",
-            //            Line2 = "Hello",
-            //            CheckInType = Model.IDType.IC,
-            //            Code = 100,
-            //            Result = true
-            //        });
-            //        Thread.Sleep(8 * 1000);
-            //    }
-            //});
-
             MyConsole.Current.Log("系统启动");
         }
 
