@@ -1,5 +1,6 @@
 ﻿using GZ_SpotGate.Core;
 using GZ_SpotGate.Tcp;
+using GZ_SpotGate.Udp;
 using GZ_SpotGate.WS;
 using log4net;
 using System;
@@ -26,6 +27,7 @@ namespace GZ_SpotGate.Core
         private static readonly ILog log = LogManager.GetLogger("MainController");
         private WebSocketServer _webServer = null;
         private TcpComServer _tcpServer = null;
+        private UdpComServer _udpServer = null;
         private List<ChannelController> _channels = new List<ChannelController>();
         private System.Timers.Timer timer = new System.Timers.Timer();
 
@@ -43,8 +45,12 @@ namespace GZ_SpotGate.Core
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
             _tcpServer.Start();
 
-            _webServer = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
-            _webServer.Start();
+            //_webServer = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
+            //_webServer.Start();
+
+            _udpServer = new UdpComServer(9876);
+            _udpServer.ReceiveAsync();
+            _udpServer.OnMessageInComming += ComServer_OnMessageInComming;
 
             var enableChannels = Channels.ChannelList.Where(s => s.IsEnable == true).ToList();
             foreach (var c in enableChannels)
@@ -53,27 +59,9 @@ namespace GZ_SpotGate.Core
                 cc.Init(c, _webServer);
                 _channels.Add(cc);
             }
-
-            //Task.Factory.StartNew(() =>
-            //{
-            //    while (true)
-            //    {
-            //        _webServer.Pass("192.168.66.101", new AndroidMessage
-            //        {
-            //            Delay = 5 * 1000,
-            //            IntentType = ChannelController.IntentType.In,
-            //            Line1 = "Welcome",
-            //            Line2 = "Hello",
-            //            CheckInType = Model.IDType.IC,
-            //            Code = 100,
-            //            Result = true
-            //        });
-            //        Thread.Sleep(8 * 1000);
-            //    }
-            //});
-
             MyConsole.Current.Log("系统启动");
         }
+
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -130,7 +118,8 @@ namespace GZ_SpotGate.Core
             try
             {
                 _tcpServer?.Stop();
-                _webServer?.Stop();
+                //_webServer?.Stop();
+                _udpServer?.Stop();
                 foreach (var channel in _channels)
                 {
                     //关闭websocket

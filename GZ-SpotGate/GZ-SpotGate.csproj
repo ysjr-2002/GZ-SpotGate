@@ -134,6 +134,7 @@
       <DependentUpon>DeviceTestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tcp\TcpIDConnection.cs" />
+    <Compile Include="Udp\UdpComServer.cs" />
     <Compile Include="WS\AndroidBehavior.cs" />
     <Compile Include="WS\AndroidMessage.cs" />
     <Compile Include="WS\Udp.cs" />
