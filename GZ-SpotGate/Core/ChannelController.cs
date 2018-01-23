@@ -215,7 +215,6 @@ namespace GZ_SpotGate.Core
             {
                 //声音
                 Voice.Speak(voice_no, playHandle_in);
-
                 //进入-失败
                 am.Line1 = In_Failure;
                 am.Line2 = Line2_Failure_Tip;

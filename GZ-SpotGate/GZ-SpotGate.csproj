@@ -105,6 +105,7 @@
     <Compile Include="Core\LCAudioThrDll.cs" />
     <Compile Include="Core\MyConsole.cs" />
     <Compile Include="Core\GateReader.cs" />
+    <Compile Include="Core\Reboot.cs" />
     <Compile Include="Core\Voice.cs" />
     <Compile Include="Model\FeedBack.cs" />
     <Compile Include="Model\IDType.cs" />

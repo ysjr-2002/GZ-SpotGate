@@ -123,7 +123,7 @@ namespace GZ_SpotGate.Tcp
         {
             try
             {
-                OnMessageInComming?.Invoke(this, data);
+                OnMessageInComming(this, data);
             }
             catch (Exception ex)
             {

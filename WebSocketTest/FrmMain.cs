@@ -46,12 +46,12 @@ namespace WindowsFormsApplication1
                 var all = string.Concat(url, "?url=", rtsp);
                 ws = new WebSocket(all);
             }
-            if( radioButton2.Checked)
+            if (radioButton2.Checked)
             {
                 var all = string.Concat(url, "?url=", rtsp);
                 ws = new WebSocket(all);
             }
-            if(radioButton3.Checked)
+            if (radioButton3.Checked)
             {
                 WSMethod method = new WSMethod();
                 JavaScriptSerializer js = new JavaScriptSerializer();
@@ -75,6 +75,7 @@ namespace WindowsFormsApplication1
         {
             if (e.IsText)
             {
+                Debug.WriteLine("hz:" + e.Data);
                 var js = new JavaScriptSerializer();
                 if (radioButton1.Checked)
                 {
@@ -85,7 +86,6 @@ namespace WindowsFormsApplication1
                         showFace(face_old.person.name, face_old.data.face.image);
                     }
                 }
-
                 if (radioButton2.Checked)
                 {
                     //新协议

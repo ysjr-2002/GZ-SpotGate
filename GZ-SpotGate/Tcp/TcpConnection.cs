@@ -67,29 +67,29 @@ namespace GZ_SpotGate.Tcp
 
         private void Work()
         {
+            int len = 0;
             while (_running)
             {
+                byte[] buffer = new byte[256];
                 try
                 {
-                    byte[] buffer = new byte[256];
-                    var len = _nws.Read(buffer, 0, buffer.Length);
-                    if (len > 0)
-                    {
-                        var data = new byte[len - 1];
-                        Array.Copy(buffer, data, data.Length);
-                        NotifySubscribe(data);
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    len = _nws.Read(buffer, 0, buffer.Length);
                 }
-                catch (Exception)
+                catch
                 {
+                }
+                if (len > 0)
+                {
+                    var data = new byte[len - 1];
+                    Array.Copy(buffer, data, data.Length);
+                    NotifySubscribe(data);
+                }
+                else
+                {
+                    //客户端关闭
                     break;
                 }
             }
-
             //客户端关闭
             Stop();
         }
@@ -99,37 +99,44 @@ namespace GZ_SpotGate.Tcp
             if (buffer.Length < 2)
                 return;
 
-            var len = buffer.Length;
-            var code = "";
-            var prefix = Encoding.UTF8.GetString(buffer, 0, 2);
-            var ic = false;
-            var qr = false;
-            if (prefix == qr_prefiex)
+            try
             {
-                //二维码数据
-                qr = true;
-                ic = false;
-                code = Encoding.UTF8.GetString(buffer, 2, len - 2);
+                var len = buffer.Length;
+                var code = "";
+                var prefix = Encoding.UTF8.GetString(buffer, 0, 2);
+                var ic = false;
+                var qr = false;
+                if (prefix == qr_prefiex)
+                {
+                    //二维码数据
+                    qr = true;
+                    ic = false;
+                    code = Encoding.UTF8.GetString(buffer, 2, len - 2);
+                }
+                else if (prefix == ic_prefiex)
+                {
+                    //IC卡
+                    qr = false;
+                    ic = true;
+                    code = BitConverter.ToInt32(buffer, 2).ToString();
+                }
+                else
+                {
+                    return;
+                }
+                var data = new DataEventArgs
+                {
+                    IPEndPoint = _ipEndPoint,
+                    Data = code,
+                    ICData = ic,
+                    QRData = qr
+                };
+                _callback?.BeginInvoke(data, null, null);
             }
-            else if (prefix == ic_prefiex)
+            catch (Exception ex)
             {
-                //IC卡
-                qr = false;
-                ic = true;
-                code = BitConverter.ToInt32(buffer, 2).ToString();
+                log.Error("二合一异常->" + ex.Message);
             }
-            else
-            {
-                return;
-            }
-            var data = new DataEventArgs
-            {
-                IPEndPoint = _ipEndPoint,
-                Data = code,
-                ICData = ic,
-                QRData = qr
-            };
-            _callback?.BeginInvoke(data, null, null);
         }
 
         public void Stop()

@@ -29,7 +29,7 @@ namespace GZ_SpotGate.Core
         private TcpComServer _tcpServer = null;
         private UdpComServer _udpServer = null;
         private List<ChannelController> _channels = new List<ChannelController>();
-        private System.Timers.Timer timer = new System.Timers.Timer();
+       
 
         public MainController()
         {
@@ -37,10 +37,6 @@ namespace GZ_SpotGate.Core
 
         public void Start()
         {
-            timer.Interval = 1000;
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
-
             _tcpServer = new TcpComServer(ConfigProfile.Current.TcpComListenPort);
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
             _tcpServer.Start();
@@ -61,7 +57,6 @@ namespace GZ_SpotGate.Core
             }
             MyConsole.Current.Log("系统启动");
         }
-
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
