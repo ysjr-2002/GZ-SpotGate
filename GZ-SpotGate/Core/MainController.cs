@@ -41,8 +41,8 @@ namespace GZ_SpotGate.Core
             _tcpServer.OnMessageInComming += ComServer_OnMessageInComming;
             _tcpServer.Start();
 
-            //_webServer = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
-            //_webServer.Start();
+            _webServer = new WebSocketServer(ConfigProfile.Current.WebSocketListenPort);
+            _webServer.Start();
 
             _udpServer = new UdpComServer(9876);
             _udpServer.ReceiveAsync();
@@ -113,7 +113,7 @@ namespace GZ_SpotGate.Core
             try
             {
                 _tcpServer?.Stop();
-                //_webServer?.Stop();
+                _webServer?.Stop();
                 _udpServer?.Stop();
                 foreach (var channel in _channels)
                 {

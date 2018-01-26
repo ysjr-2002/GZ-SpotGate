@@ -29,18 +29,18 @@ namespace GZ_SpotGate.WS
 
         public void Start()
         {
-            wssv = new WebSocketSharp.Server.WebSocketServer(_port);
-            wssv.Log.Level = WebSocketSharp.LogLevel.Fatal;
-            wssv.AddWebSocketService<AndroidBehavior>(SERVICE_PATH, InitAndroid);
-            wssv.Start();
-            if (wssv.IsListening)
-            {
-                Debug("Web server start,port->" + wssv.Port);
-                foreach (var path in wssv.WebSocketServices.Paths)
-                {
-                    Debug(path);
-                }
-            }
+            //wssv = new WebSocketSharp.Server.WebSocketServer(_port);
+            //wssv.Log.Level = WebSocketSharp.LogLevel.Fatal;
+            //wssv.AddWebSocketService<AndroidBehavior>(SERVICE_PATH, InitAndroid);
+            //wssv.Start();
+            //if (wssv.IsListening)
+            //{
+            //    Debug("Web server start,port->" + wssv.Port);
+            //    foreach (var path in wssv.WebSocketServices.Paths)
+            //    {
+            //        Debug(path);
+            //    }
+            //}
         }
 
         private AndroidBehavior InitAndroid()
@@ -54,36 +54,35 @@ namespace GZ_SpotGate.WS
             if (message == null)
                 return;
 
-            if (wssv == null)
-                return;
+            //if (wssv == null)
+            //    return;
 
             var json = Util.ToJson(message);
-            WebSocketServiceHost host = null;
-            if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
-            {
-                //MyConsole.Current.Log("连接平板数量->" + host.Sessions.IDs.Count());
-                MyConsole.Current.Log("发送平板->" + androidClient);
-                try
-                {
-                    foreach (var sID in host.Sessions.IDs)
-                    {
-                        var webSocketContext = host.Sessions[sID].Context;
-                        if (webSocketContext != null)
-                        {
-                            var remoteIp = webSocketContext.UserEndPoint.Address.ToString();
-                            if (remoteIp == androidClient && host.Sessions[sID].State == WebSocketSharp.WebSocketState.Open)
-                            {
-                                webSocketContext.WebSocket.Send(json);
-                                MyConsole.Current.Log("android发送成功");
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    log.Fatal("发送数据异常->" + ex.StackTrace);
-                }
-            }
+            //WebSocketServiceHost host = null;
+            //if (wssv.WebSocketServices.TryGetServiceHost(SERVICE_PATH, out host))
+            //{
+            //    try
+            //    {
+            //        foreach (var sID in host.Sessions.IDs)
+            //        {
+            //            var webSocketContext = host.Sessions[sID].Context;
+            //            if (webSocketContext != null)
+            //            {
+            //                var remoteIp = webSocketContext.UserEndPoint.Address.ToString();
+            //                if (remoteIp == androidClient && host.Sessions[sID].State == WebSocketSharp.WebSocketState.Open)
+            //                {
+            //                    webSocketContext.WebSocket.Send(json);
+            //                    MyConsole.Current.Log("android发送成功");
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        log.Fatal("发送数据异常->" + ex.StackTrace);
+            //    }
+            //}
+            MyConsole.Current.Log("发送平板->" + androidClient);
             Udp.SendToAndroid(androidClient, json);
         }
 

@@ -174,15 +174,11 @@ namespace GZ_SpotGate.Core
             Stopwatch sw = Stopwatch.StartNew();
             var content = await _request.CheckIn(this._model.ChannelVirualIp, checkInType, uniqueId);
             sw.Stop();
-            //content = new Model.FeedBack();
-            //content.code = 100;
-            //content.personCount = "1";
             //允许通行
             AndroidMessage am = new AndroidMessage()
             {
                 CheckInType = checkInType,
                 IntentType = intentType,
-                //Avatar = "https://o7rv4xhdy.qnssl.com/@/static/upload/avatar/2017-04-07/741757cb9c5e19f00c8f6ac9a56057d27aab2857.jpg",
                 Avatar = avatar,
                 Delay = Delay,
                 Code = content?.code ?? 0
