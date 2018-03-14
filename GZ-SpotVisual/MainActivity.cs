@@ -58,34 +58,14 @@ namespace GZ_SpotVisual
             };
 
             tvWelcome.Text = Config.Profile.Welcome;
-            var address = GetHostIp();
+            var address = IPUtil.GetHostIp();
+            var address1 = IPUtil.getIP(this);
             tvCopyright.Text = "终端：" + address + "  版本：V1.0 ";
         }
 
         private void ShowToast(string info)
         {
             Toast.MakeText(this, info, ToastLength.Short).Show();
-        }
-
-        public String GetHostIp()
-        {
-            try
-            {
-                var hostname = Dns.GetHostName();
-                IPAddress[] ipaddresses = Dns.GetHostAddresses(hostname);
-                if (ipaddresses == null)
-                    return string.Empty;
-
-                foreach (IPAddress address in ipaddresses)
-                {
-                    if (address.AddressFamily == AddressFamily.InterNetwork)
-                        return address.ToString();
-                }
-            }
-            catch (Exception e)
-            {
-            }
-            return string.Empty;
         }
 
         protected override void OnStart()
