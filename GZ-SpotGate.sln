@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketTest", "WebSocketT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebootTool", "RebootTool\RebootTool.csproj", "{279B6220-29EE-42F2-93B5-696C574796BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZ-SpotGateEx", "GZ-SpotGateEx\GZ-SpotGateEx.csproj", "{63640E42-EAF2-478C-9019-A92BED66A6B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,14 @@ Global
 		{279B6220-29EE-42F2-93B5-696C574796BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{279B6220-29EE-42F2-93B5-696C574796BC}.Release|x86.ActiveCfg = Release|Any CPU
 		{279B6220-29EE-42F2-93B5-696C574796BC}.Release|x86.Build.0 = Release|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Debug|x86.Build.0 = Debug|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Release|x86.ActiveCfg = Release|Any CPU
+		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

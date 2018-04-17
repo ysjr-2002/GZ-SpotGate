@@ -59,18 +59,6 @@ namespace GZ_SpotGate.Core
             _model = model;
             _request = new Request();
 
-            playParam_in = LCAudioThrDll.GetPlayPlayParam(IntPtr.Zero, model.InVoiceIp);
-            playParam_out = LCAudioThrDll.GetPlayPlayParam(IntPtr.Zero, model.OutVoiceIp);
-
-            int size = Marshal.SizeOf(typeof(PlayParam));
-            playHandle_in = Marshal.AllocHGlobal(size);
-            playHandle_out = Marshal.AllocHGlobal(size);
-
-            Marshal.StructureToPtr(playParam_in, playHandle_in, false);
-            Marshal.StructureToPtr(playParam_out, playHandle_out, false);
-
-            voice_ok = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "yes.mp3");
-            voice_no = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "no.mp3");
 
             _faceInSocket = new FaceSocket(model.FaceInIp, model.FaceInCameraIp, FaceIn);
             var cameratask1 = _faceInSocket.Connect();
@@ -84,27 +72,27 @@ namespace GZ_SpotGate.Core
 
             if (connect1 && connect2)
             {
-                MyConsole.Current.Log(string.Format("[{0}]通道初始化成功", _model.No));
+                //MyConsole.Current.Log(string.Format("[{0}]通道初始化成功", _model.No));
                 return true;
             }
             else
             {
-                MyConsole.Current.Log(string.Format("[{0}]通道初始化失败", _model.No));
+                //MyConsole.Current.Log(string.Format("[{0}]通道初始化失败", _model.No));
                 return false;
             }
         }
 
         public async void Report(DataEventArgs data)
         {
-            if (data.PersonIn)
-            {
-                await _request.Calc(this._model.ChannelVirualIp, "Z");
-            }
-            else
-            {
-                await _request.Calc(this._model.ChannelVirualIp, "F");
-            }
-            MyConsole.Current.Log(string.Format("[{0}]通道上报通行人次", _model.No));
+            //if (data.PersonIn)
+            //{
+            //    await _request.Calc(this._model.ChannelVirualIp, "Z");
+            //}
+            //else
+            //{
+            //    await _request.Calc(this._model.ChannelVirualIp, "F");
+            //}
+            //MyConsole.Current.Log(string.Format("[{0}]通道上报通行人次", _model.No));
         }
 
         public async void Work(DataEventArgs args)

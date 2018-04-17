@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Xml.Linq;
 
-namespace GZ_SpotGate.Core
+namespace GZ_SpotGateEx.Core
 {
     static class Util
     {
@@ -30,6 +30,11 @@ namespace GZ_SpotGate.Core
         public static byte[] ToBuffer(this string content)
         {
             return Encoding.UTF8.GetBytes(content);
+        }
+
+        public static string ToStandard(this DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         public static string HMS(this DateTime dt)

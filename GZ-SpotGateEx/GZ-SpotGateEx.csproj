@@ -4,18 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{27408243-3AAB-4B40-B492-A61ADBCEB2F1}</ProjectGuid>
+    <ProjectGuid>{63640E42-EAF2-478C-9019-A92BED66A6B3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GZ_SpotGate</RootNamespace>
-    <AssemblyName>GZ-SpotGate</AssemblyName>
+    <RootNamespace>GZ_SpotGateEx</RootNamespace>
+    <AssemblyName>GZ_SpotGateEx</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -33,52 +33,41 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>server.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Iaspec.Net.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Iaspec.Net.Common.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\GZ-SpotVisual\dll\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -88,9 +77,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+    <Reference Include="websocket-sharp">
       <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -101,48 +89,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\ChannelController.cs" />
-    <Compile Include="Core\ChannelModel.cs" />
     <Compile Include="Core\ConfigProfile.cs" />
-    <Compile Include="Core\Channels.cs" />
-    <Compile Include="Core\LCAudioThrDll.cs" />
-    <Compile Include="Core\MyConsole.cs" />
-    <Compile Include="Core\GateReader.cs" />
-    <Compile Include="Core\Reboot.cs" />
-    <Compile Include="Core\Voice.cs" />
+    <Compile Include="Core\DataEventArgs.cs" />
+    <Compile Include="Core\Request.cs" />
+    <Compile Include="ItemControl.xaml.cs">
+      <DependentUpon>ItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Kernal\MyStandardKernel.cs" />
     <Compile Include="Model\FeedBack.cs" />
     <Compile Include="Model\IDType.cs" />
-    <Compile Include="Tcp\GateConnectionPool.cs" />
-    <Compile Include="Tcp\ITcpConnection.cs" />
-    <Compile Include="Tcp\TcpGateConnection.cs" />
-    <Compile Include="Core\DataEventArgs.cs" />
-    <Compile Include="Face\FaceRecognized.cs" />
-    <Compile Include="Core\IReader.cs" />
-    <Compile Include="Core\MainController.cs" />
-    <Compile Include="Core\MegviiGate.cs" />
-    <Compile Include="Face\RecognizeState.cs" />
-    <Compile Include="Tcp\TcpConnection.cs" />
-    <Compile Include="Tcp\TcpComServer.cs" />
-    <Compile Include="Core\ZKIDReader.cs" />
-    <Compile Include="Core\Util.cs" />
-    <Compile Include="Core\Request.cs" />
-    <Compile Include="Face\FaceSocket.cs" />
-    <Compile Include="Core\WGReader.cs" />
-    <Compile Include="Manage\ChannelNew.xaml.cs">
-      <DependentUpon>ChannelNew.xaml</DependentUpon>
+    <Compile Include="Model\Record.cs" />
+    <Compile Include="UCChannel.xaml.cs">
+      <DependentUpon>UCChannel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Manage\ChannelWindow.xaml.cs">
-      <DependentUpon>ChannelWindow.xaml</DependentUpon>
+    <Compile Include="UCChannelSetting.xaml.cs">
+      <DependentUpon>UCChannelSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Manage\DeviceTestWindow.xaml.cs">
-      <DependentUpon>DeviceTestWindow.xaml</DependentUpon>
+    <Compile Include="UCSystemSetting.xaml.cs">
+      <DependentUpon>UCSystemSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tcp\TcpIDConnection.cs" />
-    <Compile Include="Udp\UdpComServer.cs" />
-    <Compile Include="WS\AndroidBehavior.cs" />
-    <Compile Include="WS\AndroidMessage.cs" />
+    <Compile Include="UIControls\ImageButton.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="WS\Udp.cs" />
-    <Compile Include="WS\WebSocketServer.cs" />
+    <Page Include="ItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -151,21 +123,38 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\ChannelControler.cs" />
+    <Compile Include="Core\Channel.cs" />
+    <Compile Include="Core\Channels.cs" />
+    <Compile Include="Core\Util.cs" />
+    <Compile Include="Face\FaceRecognized.cs" />
+    <Compile Include="Face\FaceSocket.cs" />
+    <Compile Include="Face\RecognizeState.cs" />
+    <Compile Include="http\CheckResult.cs" />
+    <Compile Include="http\HttpHandler.cs" />
+    <Compile Include="http\HttpConstrant.cs" />
+    <Compile Include="http\HttpServer.cs" />
+    <Compile Include="http\InitResult.cs" />
+    <Compile Include="http\HeartbeatResult.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Manage\ChannelNew.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Styles\ImageButton.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Manage\ChannelWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UCChannel.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Manage\DeviceTestWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UCChannelSetting.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UCSystemSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -187,14 +176,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <None Include="Document\GA467-2013 居民身份证验证安全控制模块接口技术规范.pdf" />
-    <None Include="Document\Voice\NAManager%283.2.12%29.rar" />
-    <None Include="Document\Voice\NAManger使用说明%283.2.11%29.docx" />
-    <None Include="Document\三辊闸485协议17.04.10.pdf" />
-    <None Include="Document\人脸接口说明.docx" />
-    <None Include="Document\接口.docx" />
-    <None Include="Document\设备连接说明.docx" />
-    <None Include="Document\通讯协议 V3.2_CN.doc" />
+    <None Include="document\下位机接口.docx" />
+    <None Include="log4.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -206,28 +192,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Device\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Document\remark.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="log4.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Document\koala.html" />
-    <Content Include="Document\Voice\no.mp3" />
-    <Content Include="Document\Voice\yes.mp3" />
-    <Resource Include="server.ico" />
+    <Content Include="dll\System.Windows.Interactivity.dll" />
+    <Resource Include="Images\bg.png" />
+    <Resource Include="Images\channel_hover.png" />
+    <Resource Include="Images\channel_normal.png" />
+    <Resource Include="Images\close.png" />
+    <Resource Include="Images\closehover.png" />
+    <Resource Include="Images\face.png" />
+    <Resource Include="Images\gate.ico" />
+    <Resource Include="Images\qr.png" />
+    <Resource Include="Images\setting_hover.png" />
+    <Resource Include="Images\setting_normal.png" />
+    <Resource Include="Images\window_max.png" />
+    <Resource Include="Images\window_max_hover.png" />
+    <Resource Include="Images\window_normal.png" />
+    <Resource Include="Images\window_normal_hover.png" />
     <None Include="channels.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Document\face-api.html" />
+    <Content Include="dll\Common.dll" />
+    <Content Include="dll\Iaspec.Net.Common.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

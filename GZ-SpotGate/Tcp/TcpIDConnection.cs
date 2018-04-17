@@ -363,13 +363,11 @@ namespace GZ_SpotGate.Tcp
         {
             //Regex regex = new Regex(@"\d+");
             //Regex regex = new Regex(@"\d+(X|x)?");
-            Debug.WriteLine("hz:字符串->" + str);
             Regex regex = new Regex(@"\d+(X)?", RegexOptions.IgnoreCase);
             Match match = regex.Match(str);
             if (regex.IsMatch(str))
             {
                 var no = match.Value;
-                Debug.WriteLine("hz:证件号->" + no);
                 return no;
             }
             else

@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="GZ_SpotGateEx.UCChannelSetting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GZ_SpotGateEx"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinWidth="1024"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+
+    <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+        <ScrollViewer
+                            x:Name="scrolls"
+                            HorizontalScrollBarVisibility="Disabled"
+                            VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Content>
+                <StackPanel
+            Name="stackpanelchannel"
+            Orientation="Vertical" />
+            </ScrollViewer.Content>
+        </ScrollViewer>
+
+        <Button
+            Width="80"
+            Height="28"
+            Margin="0,10,0,0"
+            Click="btnSave_Click"
+            Content="保存"
+            Style="{StaticResource Button.Default.Style}" />
+    </StackPanel>
+</UserControl>
