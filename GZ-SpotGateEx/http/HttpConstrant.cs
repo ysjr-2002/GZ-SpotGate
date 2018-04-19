@@ -13,21 +13,28 @@ namespace GZ_SpotGateEx.http
         public const string suffix_calccount = "/api/v1/calccount/";
         public const string suffix_heartbeat = "/api/v1/heartbeat/";
         /// <summary>
-        /// ip=?
+        /// 参数url:ip=?
         /// </summary>
         public static string url_init = "http://192.168.2.165:10000" + suffix_init;
         /// <summary>
-        /// channelno=?&idtype=?&code=?
+        /// 参数url:channelno=?&idtype=?&inouttype=?&code=?
+        /// idtype->
+        /// 0:ic
+        /// 1:身份证
+        /// 2:人脸
+        /// 3:二维码
         /// </summary>
         public static string url_verify = "http://192.168.2.165:10000" + suffix_verify;
 
         /// <summary>
-        /// channelno=?&inouttype=0
+        /// 参数url:channelno=?&inouttype=0
+        /// 0:入
+        /// 1:出
         /// </summary>
         public static string url_calccount = "http://192.168.2.165:10000" + suffix_calccount;
 
         /// <summary>
-        /// channelno=?
+        /// 参数url:channelno=?
         /// </summary>
         public static string url_heartbeat = "http://192.168.2.165:10000" + suffix_heartbeat;
     }

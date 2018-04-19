@@ -15,6 +15,6 @@ namespace GZ_SpotGateEx.Model
         public string Time { get; set; }
         public string CheckTime { get; set; }
         public int StatuCode { get; set; }
-        public ImageSource TypeImageSource { get; set; }
+        public string TypeImageSourceUrl { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,10 +28,6 @@ namespace GZ_SpotGateEx.ViewModel
 
         private const int MAX_COUNT = 100;
 
-        private static ImageSource QR_ImageSource = new BitmapImage(new Uri("/GZ_SpotGateEx;component/Images/qr.png", UriKind.Relative));
-
-        private static ImageSource FACE_ImageSource = new BitmapImage(new Uri("/GZ_SpotGateEx;component/Images/face.png", UriKind.Relative));
-
         private List<ChannelControler> controlers = new List<ChannelControler>();
 
         public int TabSelecteIndex
@@ -39,9 +36,20 @@ namespace GZ_SpotGateEx.ViewModel
             set { this.SetValue(s => s.TabSelecteIndex, value); }
         }
 
-        public MainViewModel(StackPanel container)
+        public StackPanel Container
         {
-            this.container = container;
+            get
+            {
+                return this.container;
+            }
+            set
+            {
+                this.container = value;
+            }
+        }
+
+        public MainViewModel()
+        {
             InitCommand();
         }
 
@@ -88,25 +96,35 @@ namespace GZ_SpotGateEx.ViewModel
             //Util.runWhenStart(auto, "DHServer", System.Windows.Forms.Application.ExecutablePath);
         }
 
-        private void Append(Record data)
+        public ChannelControler getChannelControler(string no)
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                try
-                {
-                    if (container.Children.Count >= MAX_COUNT)
-                    {
-                        container.Children.Clear();
-                    }
-                    ItemControl item = new ItemControl();
-                    item.DataContext = data;
-                    container.Children.Insert(0, item);
-                }
-                catch
-                {
+            return controlers.FirstOrDefault(s => s.Channel.No == no);
+        }
 
-                }
-            });
+        static object sync = new object();
+        public void Append(Record data)
+        {
+            lock (sync)
+            {
+                Console.WriteLine("thread id->" + Thread.CurrentThread.ManagedThreadId);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    try
+                    {
+                        if (container.Children.Count >= MAX_COUNT)
+                        {
+                            container.Children.Clear();
+                        }
+                        ItemControl item = new ItemControl();
+                        item.DataContext = data;
+                        container.Children.Insert(0, item);
+                    }
+                    catch
+                    {
+
+                    }
+                });
+            }
         }
 
         private void Max()

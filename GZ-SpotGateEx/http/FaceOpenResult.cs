@@ -6,18 +6,10 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGateEx.http
 {
-    class CheckResult
+    class FaceOpenResult
     {
         public int code { get; set; }
 
         public string message { get; set; }
-
-        public int entrycount { get; set; }
-
-        public CheckResult()
-        {
-            message = "";
-            entrycount = 1;
-        }
     }
 }

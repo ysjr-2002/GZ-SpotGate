@@ -7,7 +7,7 @@
     <!--通道虚拟IP，因为验证需要-->
     <channelvirtualip>172.21.4.100</channelvirtualip>
     <!--工控机-->
-    <clientip>192.168.2.175</clientip>
+    <clientip>192.168.2.165</clientip>
     <!--入平板-->
     <androidInip>172.21.5.25</androidInip>
     <!--出平板-->

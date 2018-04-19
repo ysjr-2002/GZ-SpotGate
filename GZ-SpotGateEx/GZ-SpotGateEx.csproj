@@ -91,7 +91,10 @@
     </ApplicationDefinition>
     <Compile Include="Core\ConfigProfile.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
+    <Compile Include="Core\IntentType.cs" />
     <Compile Include="Core\Request.cs" />
+    <Compile Include="http\FaceOpenResult.cs" />
+    <Compile Include="http\ImageConstrant.cs" />
     <Compile Include="ItemControl.xaml.cs">
       <DependentUpon>ItemControl.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,7 @@
     </Compile>
     <Compile Include="UIControls\ImageButton.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="WS\AndroidMessage.cs" />
     <Compile Include="WS\Udp.cs" />
     <Page Include="ItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -189,7 +193,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="dll\System.Windows.Interactivity.dll" />

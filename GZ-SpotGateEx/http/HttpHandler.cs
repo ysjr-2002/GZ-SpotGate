@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Ninject;
+using GZ_SpotGateEx.ViewModel;
+using GZ_SpotGateEx.Model;
 
 namespace GZ_SpotGateEx.http
 {
@@ -38,11 +41,33 @@ namespace GZ_SpotGateEx.http
                 {
                     var channelno = request.QueryString["channelno"];
                     var idtype = request.QueryString["idtype"];
+                    var inouttype = request.QueryString["inouttype"];
                     var code = request.QueryString["code"];
                     Console.WriteLine("channelno->" + channelno);
                     Console.WriteLine("idtype->" + idtype);
+                    Console.WriteLine("inouttype->" + inouttype);
                     Console.WriteLine("code->" + code);
-                    var bytes = getLoginBytes();
+                    var channelcontroller = MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno);
+
+                    byte[] bytes = null;
+                    if (channelcontroller != null)
+                    {
+                        var a = (IDType)idtype.ToInt32();
+                        var b = (IntentType)inouttype.ToInt32();
+                        var feedback = channelcontroller.Check(b, a, code).Result;
+                        if (feedback?.code == 100)
+                        {
+                            bytes = getLoginBytes();
+                        }
+                        else
+                        {
+                            bytes = getLoginBytes(feedback.code, feedback.message, feedback.personCount.ToInt32());
+                        }
+                    }
+                    else
+                    {
+                        bytes = getLoginBytes(-1, "为找到编号对应的通道");
+                    }
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
                 }
@@ -52,6 +77,7 @@ namespace GZ_SpotGateEx.http
                     var inouttype = request.QueryString["inouttype"];
                     Console.WriteLine("channelno->" + channelno);
                     Console.WriteLine("inouttype->" + inouttype);
+                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.Report(inouttype);
                     var bytes = getLoginBytes();
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
@@ -88,9 +114,9 @@ namespace GZ_SpotGateEx.http
             return Encoding.UTF8.GetBytes(json);
         }
 
-        private static byte[] getLoginBytes()
+        private static byte[] getLoginBytes(int code = 0, string message = "ok", int personcount = 0)
         {
-            CheckResult back = new CheckResult { code = 0, message = "ok" };
+            CheckResult back = new CheckResult { code = code, message = message, entrycount = personcount };
             string json = JsonConvert.SerializeObject(back);
             return Encoding.UTF8.GetBytes(json);
         }

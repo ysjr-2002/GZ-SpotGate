@@ -28,6 +28,7 @@ namespace GZ_SpotGateEx
             if (bnew)
             {
                 InitIOC();
+                ConfigProfile.Current.ReadConfig();
                 Channels.Load();
                 Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
                 AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;

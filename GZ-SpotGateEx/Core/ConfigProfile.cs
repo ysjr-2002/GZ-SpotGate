@@ -16,11 +16,8 @@ namespace GZ_SpotGateEx.Core
 
         public string CheckInServerUrl { get; set; }
 
-        public int UdpComListenPort { get; set; }
+        public string ClientOpenGateUrl { get; set; }
 
-        public int TcpComListenPort { get; set; }
-
-        public int WebSocketListenPort { get; set; }
 
         public string AutoRestartTime { get; set; }
 
@@ -42,9 +39,7 @@ namespace GZ_SpotGateEx.Core
         {
             AutoRun = GetKey("auto").ToInt32();
             CheckInServerUrl = GetKey("checkInServerUrl");
-            TcpComListenPort = Int32.Parse(GetKey("tcpComListenPort"));
-            WebSocketListenPort = Int32.Parse(GetKey("webSocketListenPort"));
-            AutoRestartTime = GetKey("autorestart");
+            ClientOpenGateUrl = GetKey("clientGateUrl");
         }
 
         private string GetKey(string key)
@@ -52,12 +47,10 @@ namespace GZ_SpotGateEx.Core
             if (ConfigurationManager.AppSettings.AllKeys.Contains(key))
             {
                 var val = ConfigurationManager.AppSettings[key];
-                //MyConsole.Current.Log(string.Format("[{0}]={1}", key, val));
                 return val;
             }
             else
             {
-                //MyConsole.Current.Log(string.Format("[{0}]项不存在", key));
                 return string.Empty;
             }
         }

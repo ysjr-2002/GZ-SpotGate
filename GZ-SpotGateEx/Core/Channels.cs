@@ -51,8 +51,8 @@ namespace GZ_SpotGateEx.Core
                 Channel cm = new Channel
                 {
                     No = no,
-                    Name = item.Element("clientip").Value,
-                    ChannelVirualIp = item.Element("name").Value,
+                    Name = item.Element("name").Value,
+                    ChannelVirualIp = item.Element("channelvirtualip").Value,
                     ClientIp = item.Element("clientip").Value,
                     PadInIp = item.Element("androidInip").Value,
                     PadOutIp = item.Element("androidOutip").Value,

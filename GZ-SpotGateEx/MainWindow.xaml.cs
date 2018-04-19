@@ -28,6 +28,7 @@ namespace GZ_SpotGateEx
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             this.DataContext = MyStandardKernel.Instance.Get<MainViewModel>();
+            MyStandardKernel.Instance.Get<MainViewModel>().Container = this.container;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

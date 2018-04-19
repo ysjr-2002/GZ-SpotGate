@@ -9,6 +9,9 @@ using GZ_SpotGateEx.Model;
 using log4net;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
+using GZ_SpotGateEx.http;
+using Newtonsoft.Json;
 
 namespace GZ_SpotGateEx.Core
 {
@@ -27,6 +30,30 @@ namespace GZ_SpotGateEx.Core
             var content = await doRequest(url, postData);
             var feedback = content.Deserlizer<FeedBack>();
             return feedback;
+        }
+
+        public async Task<FaceOpenResult> Open(string url)
+        {
+            try
+            {
+                WebRequest request = WebRequest.Create(url);
+                var response = await request.GetResponseAsync();
+                var stream = response.GetResponseStream();
+                var reader = new StreamReader(stream, Encoding.UTF8);
+                var content = await reader.ReadToEndAsync();
+                if (content.IsEmpty())
+                {
+                    return new FaceOpenResult { code = -1, message = "返回值为空" };
+                }
+                else
+                {
+                    return JsonConvert.DeserializeObject<FaceOpenResult>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new FaceOpenResult { code = -1, message = ex.StackTrace };
+            }
         }
 
         public async Task<string> Calc(string doorIp, string direction = "Z", string code = "900")

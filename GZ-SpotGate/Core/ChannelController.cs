@@ -72,27 +72,27 @@ namespace GZ_SpotGate.Core
 
             if (connect1 && connect2)
             {
-                //MyConsole.Current.Log(string.Format("[{0}]通道初始化成功", _model.No));
+                MyConsole.Current.Log(string.Format("[{0}]通道初始化成功", _model.No));
                 return true;
             }
             else
             {
-                //MyConsole.Current.Log(string.Format("[{0}]通道初始化失败", _model.No));
+                MyConsole.Current.Log(string.Format("[{0}]通道初始化失败", _model.No));
                 return false;
             }
         }
 
         public async void Report(DataEventArgs data)
         {
-            //if (data.PersonIn)
-            //{
-            //    await _request.Calc(this._model.ChannelVirualIp, "Z");
-            //}
-            //else
-            //{
-            //    await _request.Calc(this._model.ChannelVirualIp, "F");
-            //}
-            //MyConsole.Current.Log(string.Format("[{0}]通道上报通行人次", _model.No));
+            if (data.PersonIn)
+            {
+                await _request.Calc(this._model.ChannelVirualIp, "Z");
+            }
+            else
+            {
+                await _request.Calc(this._model.ChannelVirualIp, "F");
+            }
+            MyConsole.Current.Log(string.Format("[{0}]通道上报通行人次", _model.No));
         }
 
         public async void Work(DataEventArgs args)
