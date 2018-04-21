@@ -27,6 +27,7 @@ namespace GZ_SpotGateEx
             var mutex = new Mutex(true, appname, out bnew);
             if (bnew)
             {
+                System.Net.ServicePointManager.DefaultConnectionLimit = 12;
                 InitIOC();
                 ConfigProfile.Current.ReadConfig();
                 Channels.Load();

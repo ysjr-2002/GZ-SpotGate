@@ -12,5 +12,7 @@ namespace GZ_SpotGateEx.http
     {
         public static string QR_ImageSource = "/GZ_SpotGateEx;component/Images/qr.png";
         public static string FACE_ImageSource = "/GZ_SpotGateEx;component/Images/face.png";
+
+        public static string UPLOAD_ImageSource = "/GZ_SpotGateEx;component/Images/upload.png";
     }
 }

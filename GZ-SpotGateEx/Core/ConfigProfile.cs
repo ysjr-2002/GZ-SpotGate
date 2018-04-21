@@ -16,7 +16,9 @@ namespace GZ_SpotGateEx.Core
 
         public string CheckInServerUrl { get; set; }
 
-        public string ClientOpenGateUrl { get; set; }
+        public string OpenGateUrl { get; set; }
+
+        public string RebootGateUrl { get; set; }
 
         public string AutoRestartTime { get; set; }
 
@@ -38,7 +40,18 @@ namespace GZ_SpotGateEx.Core
         {
             AutoRun = GetKey("auto").ToInt32();
             CheckInServerUrl = GetKey("checkInServerUrl");
-            ClientOpenGateUrl = GetKey("clientGateUrl");
+            OpenGateUrl = GetKey("clientGateUrl");
+            RebootGateUrl = GetKey("rebootGateUrl");
+        }
+
+        public void Save()
+        {
+            Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            cfg.AppSettings.Settings["auto"].Value = AutoRun.ToString();
+            cfg.AppSettings.Settings["checkInServerUrl"].Value = CheckInServerUrl.ToString();
+            cfg.AppSettings.Settings["clientGateUrl"].Value = OpenGateUrl.ToString();
+            cfg.AppSettings.Settings["rebootGateUrl"].Value = RebootGateUrl.ToString();
+            cfg.Save();
         }
 
         private string GetKey(string key)

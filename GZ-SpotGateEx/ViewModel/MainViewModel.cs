@@ -82,12 +82,7 @@ namespace GZ_SpotGateEx.ViewModel
             AutoRun();
             CheckHeartBeat();
 
-            //Task.Factory.StartNew(() =>
-            //{
-            //    long temp = 0;
-            //    var error = "";
-            //    var result = WXVerifyService.Check(url, "67890", out temp, out error);
-            //});
+            var result = new Request().CheckIn("127.0.0.1", IDType.IC, "test");
         }
 
         static void AutoRun()

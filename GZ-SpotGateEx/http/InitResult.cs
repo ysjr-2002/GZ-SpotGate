@@ -17,11 +17,7 @@ namespace GZ_SpotGateEx.http
         /// <summary>
         /// 1:常开 0:否
         /// </summary>
-        public int inhold { get; set; }
-        /// <summary>
-        /// 1:常开 0:否
-        /// </summary>
-        public int outhold { get; set; }
+        public int holdopen { get; set; }
         /// <summary>
         /// true:启用 false:否
         /// </summary>

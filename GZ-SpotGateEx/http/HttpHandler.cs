@@ -57,19 +57,16 @@ namespace GZ_SpotGateEx.http
                 {
                     var channelno = request.QueryString["channelno"];
                     var idtype = request.QueryString["idtype"];
-                    var inouttype = request.QueryString["inouttype"];
                     var code = request.QueryString["code"];
                     Console.WriteLine("channelno->" + channelno);
                     Console.WriteLine("idtype->" + idtype);
-                    Console.WriteLine("inouttype->" + inouttype);
                     Console.WriteLine("code->" + code);
                     var channelcontroller = MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno);
                     byte[] bytes = null;
                     if (channelcontroller != null)
                     {
                         var a = (IDType)idtype.ToInt32();
-                        var b = (IntentType)inouttype.ToInt32();
-                        var feedback = channelcontroller.Check(b, a, code).Result;
+                        var feedback = channelcontroller.Check(a, code).Result;
                         if (feedback?.code == 100)
                         {
                             bytes = getLoginBytes();
@@ -92,7 +89,7 @@ namespace GZ_SpotGateEx.http
                     var inouttype = request.QueryString["inouttype"];
                     Console.WriteLine("channelno->" + channelno);
                     Console.WriteLine("inouttype->" + inouttype);
-                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.Report(inouttype);
+                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.Report();
                     var bytes = getLoginBytes();
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
@@ -121,7 +118,7 @@ namespace GZ_SpotGateEx.http
             InitResult result = null;
             if (channel != null)
             {
-                result = new InitResult { code = 0, channelno = channel.No, inhold = channel.HoldIn ? 1 : 0, outhold = channel.HoldOut ? 1 : 0, datetime = DateTime.Now.ToStandard(), shutdowntime = "12:00:00" };
+                result = new InitResult { code = 0, channelno = channel.No, holdopen = channel.HoldOpen ? 1 : 0, datetime = DateTime.Now.ToStandard(), shutdowntime = "12:00:00" };
             }
             else
             {

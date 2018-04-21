@@ -29,15 +29,20 @@ namespace GZ_SpotGateEx
 
         private void UCSystemSetting_Loaded(object sender, RoutedEventArgs e)
         {
-            //ckbAuto.IsChecked = Config.Current.AutoRun == "1";
-            //txtServer.Text = Config.Current.VerifyServer;
+            ckbAuto.IsChecked = ConfigProfile.Current.AutoRun == 1;
+            txtServer.Text = ConfigProfile.Current.CheckInServerUrl;
+            txtOpen.Text = ConfigProfile.Current.OpenGateUrl;
+            txtReboot.Text = ConfigProfile.Current.RebootGateUrl;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            //Config.Current.AutoRun = (ckbAuto.IsChecked.GetValueOrDefault() ? "1" : "0");
-            //Config.Current.VerifyServer = txtServer.Text;
-            //Config.Current.Save();
+            ConfigProfile.Current.AutoRun = (ckbAuto.IsChecked.GetValueOrDefault() ? 1 : 0);
+            ConfigProfile.Current.CheckInServerUrl = txtServer.Text;
+            ConfigProfile.Current.OpenGateUrl = txtOpen.Text;
+            ConfigProfile.Current.RebootGateUrl = txtReboot.Text;
+            ConfigProfile.Current.Save();
+            Common.CMessageBox.Show("保存成功！");
         }
     }
 }

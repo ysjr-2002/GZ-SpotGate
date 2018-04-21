@@ -17,14 +17,15 @@ namespace GZ_SpotGateEx.http
         public HttpServer()
         {
             listener = new HttpListener();
-            listener.Prefixes.Add(HttpConstrant.url_init);
-            listener.Prefixes.Add(HttpConstrant.url_verify);
-            listener.Prefixes.Add(HttpConstrant.url_calccount);
-            listener.Prefixes.Add(HttpConstrant.url_heartbeat);
         }
 
         public void start()
         {
+            string ip = Common.Utility.GetHostIpAddress();
+            listener.Prefixes.Add(string.Format(HttpConstrant.url_init, ip));
+            listener.Prefixes.Add(string.Format(HttpConstrant.url_verify, ip));
+            listener.Prefixes.Add(string.Format(HttpConstrant.url_calccount, ip));
+            listener.Prefixes.Add(string.Format(HttpConstrant.url_heartbeat, ip));
             listener.Start();
             thread = new Thread(accept);
             thread.Start();

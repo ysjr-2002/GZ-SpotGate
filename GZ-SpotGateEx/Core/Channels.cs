@@ -13,7 +13,7 @@ namespace GZ_SpotGateEx.Core
     internal class Channels
     {
         private static readonly ILog log = LogManager.GetLogger("Channels");
-        static string filename = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "channels.xml");
+        static string filename = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "config.xml");
         private Channels()
         {
         }
@@ -36,13 +36,13 @@ namespace GZ_SpotGateEx.Core
             {
                 var no = item.Element("no").Value;
                 if (item.SubElement("no").IsEmpty() ||
-                    item.SubElement("channelvirtualip").IsEmpty() ||
-                    item.SubElement("androidInip").IsEmpty() ||
-                    item.SubElement("androidOutip").IsEmpty() ||
-                    item.SubElement("faceInip").IsEmpty() ||
-                    item.SubElement("faceOutip").IsEmpty() ||
-                    item.SubElement("faceInCameraip").IsEmpty() ||
-                    item.SubElement("faceOutCameraip").IsEmpty())
+                    item.SubElement("virtualip").IsEmpty() ||
+                    item.SubElement("padip").IsEmpty() ||
+                    item.SubElement("clientip").IsEmpty() ||
+                    item.SubElement("face").IsEmpty() ||
+                    item.SubElement("camera").IsEmpty() ||
+                    item.SubElement("holdopen").IsEmpty() ||
+                    item.SubElement("inouttype").IsEmpty())
                 {
                     log.DebugFormat("{0}通道信息配置不完整", no);
                     continue;
@@ -52,16 +52,13 @@ namespace GZ_SpotGateEx.Core
                 {
                     No = no,
                     Name = item.Element("name").Value,
-                    ChannelVirualIp = item.Element("channelvirtualip").Value,
+                    VirtualIp = item.Element("virtualip").Value,
                     ClientIp = item.Element("clientip").Value,
-                    PadInIp = item.Element("androidInip").Value,
-                    PadOutIp = item.Element("androidOutip").Value,
-                    FaceInIp = item.Element("faceInip").Value,
-                    FaceOutIp = item.Element("faceOutip").Value,
-                    CameraInIp = item.Element("faceInCameraip").Value,
-                    CameraOutIp = item.Element("faceOutCameraip").Value,
-                    IsEnable = item.Element("enable").Value.ToInt32() == 1,
-                    HoldIn = EValue(item, "holdopen").ToInt32() == 1,
+                    PadIp = item.Element("padip").Value,
+                    FaceIp = item.Element("face").Value,
+                    CameraIp = item.Element("camera").Value,
+                    HoldOpen = EValue(item, "holdopen").ToInt32() == 1,
+                    Inouttype = item.Element("inouttype").Value,
                     LastHeartbeat = DateTime.Now.ToStandard()
                 };
                 ChannelList.Add(cm);

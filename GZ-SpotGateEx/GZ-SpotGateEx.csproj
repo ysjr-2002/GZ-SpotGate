@@ -91,6 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="Core\ConfigProfile.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
+    <Compile Include="Core\InouttypeConverter.cs" />
     <Compile Include="Core\IntentType.cs" />
     <Compile Include="Core\Request.cs" />
     <Compile Include="http\FaceOpenResult.cs" />
@@ -198,6 +199,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\upload.png" />
+    <None Include="config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="dll\System.Windows.Interactivity.dll" />
     <Resource Include="Images\bg.png" />
     <Resource Include="Images\channel_hover.png" />

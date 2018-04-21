@@ -1,14 +1,13 @@
-﻿<UserControl
-    x:Class="GZ_SpotGateEx.UCChannel"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GZ_SpotGateEx"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Height="50"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
-    mc:Ignorable="d">
+﻿<UserControl x:Class="GZ_SpotGateEx.UCChannel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GZ_SpotGateEx"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Height="50"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="24" />
@@ -33,37 +32,61 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
+        <local:InouttypeConverter x:Key="inoutconvert" />
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">
 
         <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
 
-            <TextBlock
-                Width="50"
-                VerticalAlignment="Center"
-                Text="{Binding No}" />
+            <TextBlock Width="50"
+                       VerticalAlignment="Center"
+                       Text="{Binding No}" />
 
             <TextBox Width="120" Text="{Binding Name}" />
 
             <TextBlock VerticalAlignment="Center" Text="{Binding ClientIp}" />
 
-            <TextBlock Text="{Binding FaceInIp}" />
+            <TextBlock Text="{Binding VirtualIp}" />
 
-            <TextBlock Text="{Binding CameraInIp}" />
+            <TextBlock Text="{Binding FaceIp}" />
 
-            <TextBlock Text="{Binding PadInIp}" />
+            <TextBlock Text="{Binding CameraIp}" />
 
-            <TextBlock Text="{Binding FaceOutIp}" />
-
-            <TextBlock Text="{Binding CameraOutIp}" />
-
-            <TextBlock Text="{Binding PadOutIp}" />
+            <TextBlock Text="{Binding PadIp}" />
 
             <CheckBox />
 
-            <CheckBox />
+            <TextBlock Width="60" Text="{Binding Inouttype, Converter={StaticResource inoutconvert}}" />
 
-            <TextBlock Width="130" Text="{Binding LastHeartbeat}">
+            <Button Width="80"
+                    Height="24"
+                    Click="btnReboot_Click"
+                    Content="重启">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border"
+                                            BorderBrush="Green"
+                                            BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter TargetName="border" Property="Background" Value="#f3f3f3" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <TextBlock Width="130"
+                       Margin="10,0,0,0"
+                       Text="{Binding LastHeartbeat}">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="VerticalAlignment" Value="Center" />

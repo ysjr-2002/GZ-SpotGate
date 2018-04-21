@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GZ_SpotGateEx.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace GZ_SpotGateEx
         public UCChannel()
         {
             InitializeComponent();
+        }
+
+        private async void btnReboot_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = Common.CMessageBox.Confirm("确认重启主机？");
+            if (dialog == System.Windows.Forms.DialogResult.Yes)
+            {
+                var channel = this.DataContext as Channel;
+                var request = new Request();
+                var url = string.Format(ConfigProfile.Current.RebootGateUrl, channel.ClientIp);
+                var result = await request.Open(url);
+            }
         }
     }
 }

@@ -24,8 +24,7 @@ namespace GZ_SpotGateEx.Core
     {
         private Channel channel;
         private string openGateUrl = "";
-        private FaceSocket _faceInSocket;
-        private FaceSocket _faceOutSocket;
+        private FaceSocket _faceSocket;
 
         private Request _request;
 
@@ -38,6 +37,8 @@ namespace GZ_SpotGateEx.Core
 
         private const string Line2_Ok_Tip = "验证成功";
         private const string Line2_Failure_Tip = "验证失败";
+
+        private IntentType intentType;
 
         private static readonly ILog log = LogManager.GetLogger("ChannelControler");
 
@@ -57,57 +58,40 @@ namespace GZ_SpotGateEx.Core
         public async Task<bool> Init()
         {
             _request = new Request();
-            openGateUrl = string.Format(ConfigProfile.Current.ClientOpenGateUrl, this.channel.ClientIp);
-            //_faceInSocket = new FaceSocket(channel.FaceInIp, channel.CameraInIp, FaceIn);
-            //var cameratask1 = _faceInSocket.Connect();
+            openGateUrl = string.Format(ConfigProfile.Current.OpenGateUrl, this.channel.ClientIp);
+            _faceSocket = new FaceSocket(channel.FaceIp, channel.CameraIp, FaceIn);
+            //var cameratask1 = _faceSocket.Connect();
 
-            //_faceOutSocket = new FaceSocket(channel.FaceOutIp, channel.CameraOutIp, FaceOut);
-            //var cameratask2 = _faceOutSocket.Connect();
-
-            //await Task.WhenAll(cameratask1, cameratask2);
-            //var connect1 = cameratask1.Result;
-            //var connect2 = cameratask2.Result;
-
-            //if (connect1 && connect2)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-            return false;
-        }
-
-        public async void Report(DataEventArgs data)
-        {
-            if (data.PersonIn)
-            {
-                await _request.Calc(this.channel.ChannelVirualIp, "Z");
-            }
+            if (channel.Inouttype == "0")
+                intentType = IntentType.In;
             else
-            {
-                await _request.Calc(this.channel.ChannelVirualIp, "F");
-            }
+                intentType = IntentType.Out;
+            return false;
         }
 
         public void Stop()
         {
             //释放websocket资源
-            _faceInSocket?.Disconnect();
-            _faceOutSocket?.Disconnect();
+            _faceSocket?.Disconnect();
         }
 
-        public async void Report(string inouttype)
+        public async void Report()
         {
-            if (inouttype == "0")
+            Record record = new Record();
+            record.Channel = this.channel.Name;
+            record.TypeImageSourceUrl = ImageConstrant.UPLOAD_ImageSource;
+            record.CheckTime = DateTime.Now.ToStandard();
+            if (intentType == IntentType.In)
             {
-                await _request.Calc(this.channel.ChannelVirualIp, "Z");
+                await _request.Calc(this.channel.VirtualIp, "Z");
+                record.Status = "入上传人次";
             }
             else
             {
-                await _request.Calc(this.channel.ChannelVirualIp, "F");
+                await _request.Calc(this.channel.VirtualIp, "F");
+                record.Status = "出上传人次";
             }
+            MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
         }
 
         public void UpdateHeartbeat()
@@ -115,7 +99,7 @@ namespace GZ_SpotGateEx.Core
             this.channel.LastHeartbeat = DateTime.Now.ToStandard();
         }
 
-        public async Task<FeedBack> Check(IntentType intentType, IDType idType, string uniqueId, string name = "", string avatar = "")
+        public async Task<FeedBack> Check(IDType idType, string uniqueId, string name = "", string avatar = "")
         {
             var listlog = new List<string>();
             listlog.Add(string.Format("[{0}]通道", channel.No));
@@ -148,7 +132,7 @@ namespace GZ_SpotGateEx.Core
             }
 
             Stopwatch sw = Stopwatch.StartNew();
-            var feedback = await _request.CheckIn(this.channel.ChannelVirualIp, idType, uniqueId);
+            var feedback = await _request.CheckIn(this.channel.VirtualIp, idType, uniqueId);
             sw.Stop();
             AndroidMessage am = new AndroidMessage()
             {
@@ -168,7 +152,7 @@ namespace GZ_SpotGateEx.Core
                 //开闸
                 am.Line1 = In_Ok;
                 am.Line2 = Line2_Ok_Tip;
-                Udp.SendToAndroid(channel.PadInIp, am);
+                Udp.SendToAndroid(channel.PadIp, am);
 
                 if (idType == IDType.Face)
                 {
@@ -180,14 +164,14 @@ namespace GZ_SpotGateEx.Core
                 //进入-失败
                 am.Line1 = In_Failure;
                 am.Line2 = Line2_Failure_Tip;
-                Udp.SendToAndroid(channel.PadInIp, am);
+                Udp.SendToAndroid(channel.PadIp, am);
             }
             if (intentType == IntentType.Out && feedback?.code == 100)
             {
                 //离开-成功
                 am.Line1 = Out_Ok;
                 am.Line2 = Line2_Ok_Tip;
-                Udp.SendToAndroid(channel.PadOutIp, am);
+                Udp.SendToAndroid(channel.PadIp, am);
                 if (idType == IDType.Face)
                 {
                     var open = await _request.Open(openGateUrl + "1&canIncount=" + personCount);
@@ -198,7 +182,7 @@ namespace GZ_SpotGateEx.Core
                 //离开-失败
                 am.Line1 = Out_Failure;
                 am.Line2 = Line2_Failure_Tip;
-                Udp.SendToAndroid(channel.PadOutIp, am);
+                Udp.SendToAndroid(channel.PadIp, am);
             }
 
             MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
@@ -210,15 +194,7 @@ namespace GZ_SpotGateEx.Core
             var name = face.person.name;
             var code = face.person.job_number;
             var avatar = face.person.avatar;
-            await Check(IntentType.In, IDType.Face, code, name, avatar);
-        }
-
-        private async void FaceOut(FaceRecognized face)
-        {
-            var name = face.person.name;
-            var code = face.person.job_number;
-            var avatar = face.person.avatar;
-            await Check(IntentType.Out, IDType.Face, code, name, avatar);
+            await Check(IDType.Face, code, name, avatar);
         }
     }
 }
