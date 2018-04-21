@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Ninject;
 using GZ_SpotGateEx.ViewModel;
 using GZ_SpotGateEx.Model;
+using System.IO;
 
 namespace GZ_SpotGateEx.http
 {
@@ -21,6 +22,20 @@ namespace GZ_SpotGateEx.http
             this.httpContext = httpContext;
         }
 
+        public string getInputStream(Stream stream)
+        {
+            if (stream != null)
+            {
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string content = reader.ReadToEnd();
+                return content;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         public Task RunAsync()
         {
             return Task.Factory.StartNew(() =>
@@ -31,6 +46,7 @@ namespace GZ_SpotGateEx.http
                 string rawUrl = request.RawUrl;
                 if (rawUrl.StartsWith(HttpConstrant.suffix_init))
                 {
+                    var content = getInputStream(request.InputStream);
                     var clientIp = request.QueryString["ip"];
                     var channel = getChannelByIp(clientIp);
                     var bytes = getInitBytes(channel);
@@ -48,7 +64,6 @@ namespace GZ_SpotGateEx.http
                     Console.WriteLine("inouttype->" + inouttype);
                     Console.WriteLine("code->" + code);
                     var channelcontroller = MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno);
-
                     byte[] bytes = null;
                     if (channelcontroller != null)
                     {
@@ -86,6 +101,8 @@ namespace GZ_SpotGateEx.http
                 {
                     var channelno = request.QueryString["channelno"];
                     Console.WriteLine("channelno->" + channelno);
+                    //更新心跳
+                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.UpdateHeartbeat();
                     var bytes = getHeartbeatBytes();
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();

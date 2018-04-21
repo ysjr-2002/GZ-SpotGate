@@ -107,5 +107,20 @@ namespace GZ_SpotGateEx.Core
             get { return this.GetValue(s => s.HoldOut); }
             set { this.SetValue(s => s.HoldOut, value); }
         }
+
+        /// <summary>
+        /// 最近心跳
+        /// </summary>
+        public string LastHeartbeat
+        {
+            get { return this.GetValue(s => s.LastHeartbeat); }
+            set { this.SetValue(s => s.LastHeartbeat, value); }
+        }
+
+        public bool IsTimeOut
+        {
+            get { return this.GetValue(s => s.IsTimeOut); }
+            set { this.SetValue(s => s.IsTimeOut, value); }
+        }
     }
 }

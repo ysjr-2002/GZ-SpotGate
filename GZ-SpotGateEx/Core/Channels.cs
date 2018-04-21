@@ -61,10 +61,16 @@ namespace GZ_SpotGateEx.Core
                     CameraInIp = item.Element("faceInCameraip").Value,
                     CameraOutIp = item.Element("faceOutCameraip").Value,
                     IsEnable = item.Element("enable").Value.ToInt32() == 1,
-                    HoldIn = EValue(item, "holdopen").ToInt32() == 1
+                    HoldIn = EValue(item, "holdopen").ToInt32() == 1,
+                    LastHeartbeat = DateTime.Now.ToStandard()
                 };
                 ChannelList.Add(cm);
             }
+        }
+
+        public static void Save()
+        {
+
         }
 
         public static string EValue(XElement e, string name)

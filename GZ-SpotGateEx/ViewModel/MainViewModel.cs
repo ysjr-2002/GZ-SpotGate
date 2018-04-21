@@ -23,7 +23,6 @@ namespace GZ_SpotGateEx.ViewModel
         public ICommand LoadedCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand MaxCommand { get; set; }
-
         public ICommand SwitchCommand { get; set; }
 
         private const int MAX_COUNT = 100;
@@ -81,6 +80,7 @@ namespace GZ_SpotGateEx.ViewModel
             }
 
             AutoRun();
+            CheckHeartBeat();
 
             //Task.Factory.StartNew(() =>
             //{
@@ -92,8 +92,8 @@ namespace GZ_SpotGateEx.ViewModel
 
         static void AutoRun()
         {
-            //var auto = Config.Current.AutoRun == "1";
-            //Util.runWhenStart(auto, "DHServer", System.Windows.Forms.Application.ExecutablePath);
+            var auto = ConfigProfile.Current.AutoRun == 1;
+            Util.RunWhenStart(auto, "GZ_GateSpot", System.Windows.Forms.Application.ExecutablePath);
         }
 
         public ChannelControler getChannelControler(string no)
@@ -106,7 +106,6 @@ namespace GZ_SpotGateEx.ViewModel
         {
             lock (sync)
             {
-                Console.WriteLine("thread id->" + Thread.CurrentThread.ManagedThreadId);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     try
@@ -142,6 +141,39 @@ namespace GZ_SpotGateEx.ViewModel
         private void WindowClose()
         {
             Environment.Exit(Environment.ExitCode);
+        }
+
+        CancellationTokenSource cts = new CancellationTokenSource();
+        private void CheckHeartBeat()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                while (cts.IsCancellationRequested == false)
+                {
+                    foreach (var item in Channels.ChannelList)
+                    {
+                        var ts = DateTime.Now - item.LastHeartbeat.ToDateTime();
+                        if (ts.TotalSeconds > 10)
+                        {
+                            item.IsTimeOut = true;
+                        }
+                        else
+                        {
+                            item.IsTimeOut = false;
+                        }
+                    }
+                    Thread.Sleep(5 * 1000);
+                }
+            });
+        }
+
+        public void Dispose()
+        {
+            cts.Cancel();
+            foreach (var item in controlers)
+            {
+                item.Stop();
+            }
         }
     }
 }

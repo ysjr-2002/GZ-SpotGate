@@ -41,7 +41,7 @@ namespace GZ_SpotGateEx
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            //Channels.Save();
+            Channels.Save();
         }
     }
 }

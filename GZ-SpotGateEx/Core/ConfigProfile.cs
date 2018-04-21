@@ -18,7 +18,6 @@ namespace GZ_SpotGateEx.Core
 
         public string ClientOpenGateUrl { get; set; }
 
-
         public string AutoRestartTime { get; set; }
 
         private ILog log = LogManager.GetLogger("ConfigProfile");

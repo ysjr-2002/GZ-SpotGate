@@ -9,16 +9,33 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+    </UserControl.Resources>
 
     <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+            <Label Width="50" Content="通道" />
+            <Label Width="120" Content="名称" />
+            <Label Width="80" Content="工控机" />
+            <Label Width="80" Content="人脸(入)" />
+            <Label Width="80" Content="摄像机(入)" />
+            <Label Width="80" Content="平板(入)" />
+            <Label Width="80" Content="人脸(出)" />
+            <Label Width="80" Content="摄像机(出)" />
+            <Label Width="80" Content="平板(出)" />
+            <Label Width="60" Content="入(常开)" />
+            <Label Width="60" Content="出(常开)" />
+            <Label Width="130" Content="最近数据" />
+        </StackPanel>
         <ScrollViewer
-                            x:Name="scrolls"
-                            HorizontalScrollBarVisibility="Disabled"
-                            VerticalScrollBarVisibility="Auto">
+            x:Name="scrolls"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
             <ScrollViewer.Content>
-                <StackPanel
-            Name="stackpanelchannel"
-            Orientation="Vertical" />
+                <StackPanel Name="stackpanelchannel" Orientation="Vertical" />
             </ScrollViewer.Content>
         </ScrollViewer>
 

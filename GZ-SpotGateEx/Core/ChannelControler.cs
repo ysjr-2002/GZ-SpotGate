@@ -110,6 +110,11 @@ namespace GZ_SpotGateEx.Core
             }
         }
 
+        public void UpdateHeartbeat()
+        {
+            this.channel.LastHeartbeat = DateTime.Now.ToStandard();
+        }
+
         public async Task<FeedBack> Check(IntentType intentType, IDType idType, string uniqueId, string name = "", string avatar = "")
         {
             var listlog = new List<string>();
@@ -130,17 +135,21 @@ namespace GZ_SpotGateEx.Core
             else if (idType == IDType.Face)
                 record.TypeImageSourceUrl = ImageConstrant.FACE_ImageSource;
 
+            record.BarCode = uniqueId;
+            record.Time = "0ms";
+            record.CheckTime = DateTime.Now.ToStandard();
+
             if (string.IsNullOrEmpty(uniqueId))
             {
                 listlog.Add("人脸编号为空->" + name);
-                //MyConsole.Current.Log(listlog.ToArray());
+                record.Status = "人脸编号为空";
+                MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
                 return null;
             }
 
             Stopwatch sw = Stopwatch.StartNew();
             var feedback = await _request.CheckIn(this.channel.ChannelVirualIp, idType, uniqueId);
             sw.Stop();
-            //允许通行
             AndroidMessage am = new AndroidMessage()
             {
                 CheckInType = idType,
@@ -150,23 +159,10 @@ namespace GZ_SpotGateEx.Core
                 Code = feedback?.code ?? 0
             };
 
-            record.BarCode = uniqueId;
             record.Status = feedback?.message;
-            record.CheckTime = DateTime.Now.ToStandard();
+            record.Time = sw.ElapsedMilliseconds + "ms";
 
             byte personCount = feedback?.personCount.ToByte() ?? 0;
-            if (feedback?.code == 100)
-            {
-                listlog.Add(string.Format("请通行->{0}人次", personCount));
-            }
-            else
-            {
-                //禁止通行
-                listlog.Add(feedback?.message ?? "禁止通行");
-            }
-
-            listlog.Add("验证耗时->" + sw.ElapsedMilliseconds + "ms");
-
             if (intentType == IntentType.In && feedback?.code == 100)
             {
                 //开闸
@@ -176,8 +172,7 @@ namespace GZ_SpotGateEx.Core
 
                 if (idType == IDType.Face)
                 {
-                    //入
-                    var open = await _request.Open(openGateUrl + "0");
+                    var open = await _request.Open(openGateUrl + "0&canIncount=" + personCount);
                 }
             }
             if (intentType == IntentType.In && feedback?.code != 100)
@@ -193,16 +188,13 @@ namespace GZ_SpotGateEx.Core
                 am.Line1 = Out_Ok;
                 am.Line2 = Line2_Ok_Tip;
                 Udp.SendToAndroid(channel.PadOutIp, am);
-
                 if (idType == IDType.Face)
                 {
-                    //出
-                    var open = await _request.Open(openGateUrl + "1");
+                    var open = await _request.Open(openGateUrl + "1&canIncount=" + personCount);
                 }
             }
             if (intentType == IntentType.Out && feedback?.code != 100)
             {
-                //声音
                 //离开-失败
                 am.Line1 = Out_Failure;
                 am.Line2 = Line2_Failure_Tip;

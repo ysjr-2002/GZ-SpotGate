@@ -27,8 +27,14 @@ namespace GZ_SpotGateEx
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
+            this.Closing += MainWindow_Closing;
             this.DataContext = MyStandardKernel.Instance.Get<MainViewModel>();
             MyStandardKernel.Instance.Get<MainViewModel>().Container = this.container;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MyStandardKernel.Instance.Get<MainViewModel>().Dispose();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="24" />
+            <Setter Property="Margin" Value="10,0,0,0" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
@@ -22,6 +23,13 @@
 
         <Style TargetType="TextBlock">
             <Setter Property="Width" Value="80" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Width" Value="60" />
+            <Setter Property="Margin" Value="10,0,0,0" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
@@ -29,41 +37,44 @@
     <StackPanel Orientation="Vertical">
 
         <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-            <Label Content="通道:" />
+
             <TextBlock
-                Width="30"
+                Width="50"
                 VerticalAlignment="Center"
                 Text="{Binding No}" />
 
-            <Label Content="名称:" />
             <TextBox Width="120" Text="{Binding Name}" />
 
-            <Label Content="工控机:" />
             <TextBlock VerticalAlignment="Center" Text="{Binding ClientIp}" />
 
-            <Label Content="人脸(入):" />
             <TextBlock Text="{Binding FaceInIp}" />
 
-            <Label Content="摄像机(入):" />
             <TextBlock Text="{Binding CameraInIp}" />
 
-            <Label Content="平板(入):" />
             <TextBlock Text="{Binding PadInIp}" />
 
-            <Label Content="人脸(出):" />
             <TextBlock Text="{Binding FaceOutIp}" />
 
-            <Label Content="摄像机(出):" />
-            <TextBlock Width="100" Text="{Binding CameraOutIp}" />
+            <TextBlock Text="{Binding CameraOutIp}" />
 
-            <Label Content="平板(出):" />
             <TextBlock Text="{Binding PadOutIp}" />
 
-            <Label Content="入(常开):" />
             <CheckBox />
 
-            <Label Content="出(常开):" />
             <CheckBox />
+
+            <TextBlock Width="130" Text="{Binding LastHeartbeat}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsTimeOut}" Value="true">
+                                <Setter Property="Background" Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
 
         </StackPanel>
         <Separator Margin="0,8,0,0" Background="#FFCCCCCC" />
