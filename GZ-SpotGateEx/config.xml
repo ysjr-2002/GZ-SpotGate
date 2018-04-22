@@ -4,7 +4,7 @@
     <no>1</no>
     <name>大门第一通道入</name>
     <virtualip>172.21.4.100</virtualip>
-    <clientip>192.168.2.165</clientip>
+    <clientip>192.168.0.8</clientip>
     <padip>172.21.5.25</padip>
     <face>172.21.5.190</face>
     <camera>172.21.5.152</camera>
@@ -14,9 +14,9 @@
   </channel>
   <channel>
     <no>2</no>
-    <name>2</name>
+    <name>大门第一通道出</name>
     <virtualip>172.21.4.100</virtualip>
-    <clientip>192.168.2.165</clientip>
+    <clientip>192.168.0.8</clientip>
     <padip>172.21.5.25</padip>
     <face>172.21.5.190</face>
     <camera>172.21.5.152</camera>

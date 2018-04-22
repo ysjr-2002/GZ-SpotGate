@@ -148,7 +148,7 @@ namespace GZ_SpotGateEx.ViewModel
                     foreach (var item in Channels.ChannelList)
                     {
                         var ts = DateTime.Now - item.LastHeartbeat.ToDateTime();
-                        if (ts.TotalSeconds > 10)
+                        if (ts.TotalSeconds > 15)
                         {
                             item.IsTimeOut = true;
                         }

@@ -35,7 +35,8 @@
                 <Label Width="80" Content="平板" />
                 <Label Width="60" Content="常开" />
                 <Label Width="60" Content="类型" />
-                <Label Width="80" Content="控制" />
+                <Label Width="80" Content="重启" />
+                <Label Width="80" Content="开闸" />
                 <Label Width="130" Content="最近数据" />
             </StackPanel>
         </StackPanel>

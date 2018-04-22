@@ -15,7 +15,7 @@ namespace GZ_SpotGateEx.http
         /// <summary>
         /// 参数url:ip=?
         /// </summary>
-        public static string url_init = "http://{0}:8088" + suffix_init;
+        public static string url_init = "http://{0}:10001" + suffix_init;
         /// <summary>
         /// 参数url:channelno=?&idtype=?&code=?
         /// idtype->
@@ -24,16 +24,16 @@ namespace GZ_SpotGateEx.http
         /// 2:人脸
         /// 3:二维码
         /// </summary>
-        public static string url_verify = "http://{0}:8088" + suffix_verify;
+        public static string url_verify = "http://{0}:10001" + suffix_verify;
 
         /// <summary>
         /// 参数url:channelno=?
         /// </summary>
-        public static string url_calccount = "http://{0}:8088" + suffix_calccount;
+        public static string url_calccount = "http://{0}:10001" + suffix_calccount;
 
         /// <summary>
         /// 参数url:channelno=?
         /// </summary>
-        public static string url_heartbeat = "http://{0}:8088" + suffix_heartbeat;
+        public static string url_heartbeat = "http://{0}:10001" + suffix_heartbeat;
     }
 }

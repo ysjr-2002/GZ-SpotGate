@@ -94,8 +94,11 @@
     <Compile Include="Core\InouttypeConverter.cs" />
     <Compile Include="Core\IntentType.cs" />
     <Compile Include="Core\Request.cs" />
+    <Compile Include="http\ChannelQuery.cs" />
     <Compile Include="http\FaceOpenResult.cs" />
     <Compile Include="http\ImageConstrant.cs" />
+    <Compile Include="http\InitQuery.cs" />
+    <Compile Include="http\VerifyQuery.cs" />
     <Compile Include="ItemControl.xaml.cs">
       <DependentUpon>ItemControl.xaml</DependentUpon>
     </Compile>
@@ -180,7 +183,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.manifest" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="document\下位机接口.docx" />
     <None Include="log4.config">
       <SubType>Designer</SubType>

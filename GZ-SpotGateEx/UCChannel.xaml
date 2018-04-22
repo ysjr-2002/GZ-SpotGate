@@ -84,8 +84,37 @@
                 </Button.Style>
             </Button>
 
+            <Button Width="80"
+                    Height="24"
+                    Margin="10,0,0,0"
+                    Click="btnOpen_Click"
+                    Content="开闸">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border"
+                                            BorderBrush="Green"
+                                            BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter TargetName="border" Property="Background" Value="#f3f3f3" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
             <TextBlock Width="130"
                        Margin="10,0,0,0"
+                       VerticalAlignment="Center"
+                       Foreground="White"
                        Text="{Binding LastHeartbeat}">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
@@ -93,6 +122,9 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsTimeOut}" Value="true">
                                 <Setter Property="Background" Value="Red" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsTimeOut}" Value="false">
+                                <Setter Property="Background" Value="Green" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

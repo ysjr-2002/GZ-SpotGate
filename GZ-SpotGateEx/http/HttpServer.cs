@@ -17,11 +17,13 @@ namespace GZ_SpotGateEx.http
         public HttpServer()
         {
             listener = new HttpListener();
+            //listener.AuthenticationSchemes = AuthenticationSchemes.Anonymous;
         }
 
         public void start()
         {
             string ip = Common.Utility.GetHostIpAddress();
+            ip = "192.168.0.7";
             listener.Prefixes.Add(string.Format(HttpConstrant.url_init, ip));
             listener.Prefixes.Add(string.Format(HttpConstrant.url_verify, ip));
             listener.Prefixes.Add(string.Format(HttpConstrant.url_calccount, ip));

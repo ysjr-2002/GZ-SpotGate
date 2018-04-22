@@ -22,17 +22,53 @@ namespace GZ_SpotGateEx.http
             this.httpContext = httpContext;
         }
 
-        public string getInputStream(Stream stream)
+        public string getInitClientIp(HttpListenerRequest request)
         {
-            if (stream != null)
+            if (request.HttpMethod == "POST")
             {
+                var stream = request.InputStream;
                 StreamReader reader = new StreamReader(stream, Encoding.UTF8);
                 string content = reader.ReadToEnd();
-                return content;
+                InitQuery temp = JsonConvert.DeserializeObject<InitQuery>(content);
+                return temp.ip;
             }
             else
             {
                 return string.Empty;
+            }
+        }
+
+        public string getChannelNo(HttpListenerRequest request)
+        {
+            if (request.HttpMethod == "POST")
+            {
+                var stream = request.InputStream;
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string content = reader.ReadToEnd();
+                ChannelQuery temp = JsonConvert.DeserializeObject<ChannelQuery>(content);
+                return temp.channelno;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+
+
+        public VerifyQuery getVerifyParam(HttpListenerRequest request)
+        {
+            if (request.HttpMethod == "POST")
+            {
+                var stream = request.InputStream;
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string content = reader.ReadToEnd();
+                VerifyQuery temp = JsonConvert.DeserializeObject<VerifyQuery>(content);
+                return temp;
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -46,8 +82,7 @@ namespace GZ_SpotGateEx.http
                 string rawUrl = request.RawUrl;
                 if (rawUrl.StartsWith(HttpConstrant.suffix_init))
                 {
-                    var content = getInputStream(request.InputStream);
-                    var clientIp = request.QueryString["ip"];
+                    var clientIp = getInitClientIp(request);
                     var channel = getChannelByIp(clientIp);
                     var bytes = getInitBytes(channel);
                     response.OutputStream.Write(bytes, 0, bytes.Length);
@@ -55,9 +90,10 @@ namespace GZ_SpotGateEx.http
                 }
                 else if (rawUrl.StartsWith(HttpConstrant.suffix_verify))
                 {
-                    var channelno = request.QueryString["channelno"];
-                    var idtype = request.QueryString["idtype"];
-                    var code = request.QueryString["code"];
+                    var verify = getVerifyParam(request);
+                    var channelno = verify.channelno;
+                    var idtype = verify.idtype;
+                    var code = verify.code;
                     Console.WriteLine("channelno->" + channelno);
                     Console.WriteLine("idtype->" + idtype);
                     Console.WriteLine("code->" + code);
@@ -78,17 +114,15 @@ namespace GZ_SpotGateEx.http
                     }
                     else
                     {
-                        bytes = getLoginBytes(-1, "为找到编号对应的通道");
+                        bytes = getLoginBytes(-1, "未找到编号对应的通道");
                     }
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
                 }
                 else if (rawUrl.StartsWith(HttpConstrant.suffix_calccount))
                 {
-                    var channelno = request.QueryString["channelno"];
-                    var inouttype = request.QueryString["inouttype"];
+                    var channelno = getChannelNo(request);
                     Console.WriteLine("channelno->" + channelno);
-                    Console.WriteLine("inouttype->" + inouttype);
                     MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.Report();
                     var bytes = getLoginBytes();
                     response.OutputStream.Write(bytes, 0, bytes.Length);
@@ -96,7 +130,7 @@ namespace GZ_SpotGateEx.http
                 }
                 else if (rawUrl.StartsWith(HttpConstrant.suffix_heartbeat))
                 {
-                    var channelno = request.QueryString["channelno"];
+                    var channelno = getChannelNo(request);
                     Console.WriteLine("channelno->" + channelno);
                     //更新心跳
                     MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.UpdateHeartbeat();

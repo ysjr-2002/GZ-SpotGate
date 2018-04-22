@@ -35,6 +35,34 @@ namespace GZ_SpotGateEx
                 var request = new Request();
                 var url = string.Format(ConfigProfile.Current.RebootGateUrl, channel.ClientIp);
                 var result = await request.Open(url);
+                if (result?.code == 0)
+                {
+                    Common.CMessageBox.Show("ok");
+                }
+                else
+                {
+                    Common.CMessageBox.Show("error->" + result?.message);
+                }
+            }
+        }
+
+        private async void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = Common.CMessageBox.Confirm("确认开闸？");
+            if (dialog == System.Windows.Forms.DialogResult.Yes)
+            {
+                var channel = this.DataContext as Channel;
+                var request = new Request();
+                var url = string.Format(ConfigProfile.Current.OpenGateUrl, channel.ClientIp);
+                var result = await request.Open(url);
+                if (result?.code == 0)
+                {
+                    Common.CMessageBox.Show("ok");
+                }
+                else
+                {
+                    Common.CMessageBox.Show("error->" + result?.message);
+                }
             }
         }
     }
