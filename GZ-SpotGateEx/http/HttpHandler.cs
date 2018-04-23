@@ -152,7 +152,7 @@ namespace GZ_SpotGateEx.http
             InitResult result = null;
             if (channel != null)
             {
-                result = new InitResult { code = 0, channelno = channel.No, holdopen = channel.HoldOpen ? 1 : 0, datetime = DateTime.Now.ToStandard(), shutdowntime = "12:00:00" };
+                result = new InitResult { code = 0, channelno = channel.No, holdopen = channel.HoldOpen ? 1 : 0, datetime = DateTime.Now.ToStandard(), shutdowntime = ConfigProfile.Current.ShutdownTime };
             }
             else
             {

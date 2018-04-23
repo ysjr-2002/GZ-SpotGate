@@ -22,6 +22,8 @@ namespace GZ_SpotGateEx.Core
 
         public string AutoRestartTime { get; set; }
 
+        public string ShutdownTime { get; set; }
+
         private ILog log = LogManager.GetLogger("ConfigProfile");
 
         private ConfigProfile()
@@ -42,15 +44,17 @@ namespace GZ_SpotGateEx.Core
             CheckInServerUrl = GetKey("checkInServerUrl");
             OpenGateUrl = GetKey("clientGateUrl");
             RebootGateUrl = GetKey("rebootGateUrl");
+            ShutdownTime = GetKey("rebootTime");
         }
 
         public void Save()
         {
             Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             cfg.AppSettings.Settings["auto"].Value = AutoRun.ToString();
-            cfg.AppSettings.Settings["checkInServerUrl"].Value = CheckInServerUrl.ToString();
-            cfg.AppSettings.Settings["clientGateUrl"].Value = OpenGateUrl.ToString();
-            cfg.AppSettings.Settings["rebootGateUrl"].Value = RebootGateUrl.ToString();
+            cfg.AppSettings.Settings["checkInServerUrl"].Value = CheckInServerUrl;
+            cfg.AppSettings.Settings["clientGateUrl"].Value = OpenGateUrl;
+            cfg.AppSettings.Settings["rebootGateUrl"].Value = RebootGateUrl;
+            cfg.AppSettings.Settings["gateshutdownTime"].Value = ShutdownTime;
             cfg.Save();
         }
 
