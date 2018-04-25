@@ -51,7 +51,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" VerticalContentAlignment="Center">
                 <TextBlock
-                    Text="{Binding CheckTime}"
+                    Text="{Binding PassTime}"
                     TextAlignment="Center"
                     TextWrapping="Wrap" />
             </Label>
@@ -75,7 +75,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="{Binding BarCode}" />
+                <Label Grid.Row="0" Content="{Binding Code}" />
                 <Label Grid.Row="1" Content="{Binding Status}">
                     <Label.Style>
                         <Style TargetType="Label">

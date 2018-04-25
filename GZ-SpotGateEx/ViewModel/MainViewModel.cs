@@ -27,7 +27,7 @@ namespace GZ_SpotGateEx.ViewModel
 
         private const int MAX_COUNT = 100;
 
-        private List<ChannelControler> controlers = new List<ChannelControler>();
+        private List<ChannelController> controlers = new List<ChannelController>();
 
         public int TabSelecteIndex
         {
@@ -74,7 +74,7 @@ namespace GZ_SpotGateEx.ViewModel
         {
             foreach (var item in Channels.ChannelList)
             {
-                ChannelControler controller = new ChannelControler(item);
+                ChannelController controller = new ChannelController(item);
                 controller.Init();
                 controlers.Add(controller);
             }
@@ -91,7 +91,7 @@ namespace GZ_SpotGateEx.ViewModel
             Util.RunWhenStart(auto, "GZ_GateSpot", System.Windows.Forms.Application.ExecutablePath);
         }
 
-        public ChannelControler getChannelControler(string no)
+        public ChannelController getChannelController(string no)
         {
             return controlers.FirstOrDefault(s => s.Channel.No == no);
         }
@@ -112,6 +112,8 @@ namespace GZ_SpotGateEx.ViewModel
                         ItemControl item = new ItemControl();
                         item.DataContext = data;
                         container.Children.Insert(0, item);
+                        //输出日志
+                        data.Output();
                     }
                     catch
                     {

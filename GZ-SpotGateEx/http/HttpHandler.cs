@@ -34,7 +34,7 @@ namespace GZ_SpotGateEx.http
             }
             else
             {
-                return string.Empty;
+                return request.QueryString["channelno"];
             }
         }
 
@@ -50,11 +50,9 @@ namespace GZ_SpotGateEx.http
             }
             else
             {
-                return string.Empty;
+                return request.QueryString["channelno"];
             }
         }
-
-
 
         public VerifyQuery getVerifyParam(HttpListenerRequest request)
         {
@@ -68,7 +66,12 @@ namespace GZ_SpotGateEx.http
             }
             else
             {
-                return null;
+                return new VerifyQuery
+                {
+                    channelno = request.QueryString["channelno"],
+                    code = request.QueryString["code"],
+                    idtype = request.QueryString["idtype"]
+                };
             }
         }
 
@@ -97,7 +100,7 @@ namespace GZ_SpotGateEx.http
                     Console.WriteLine("channelno->" + channelno);
                     Console.WriteLine("idtype->" + idtype);
                     Console.WriteLine("code->" + code);
-                    var channelcontroller = MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno);
+                    var channelcontroller = MyStandardKernel.Instance.Get<MainViewModel>().getChannelController(channelno);
                     byte[] bytes = null;
                     if (channelcontroller != null)
                     {
@@ -123,7 +126,7 @@ namespace GZ_SpotGateEx.http
                 {
                     var channelno = getChannelNo(request);
                     Console.WriteLine("channelno->" + channelno);
-                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.Report();
+                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelController(channelno)?.Report();
                     var bytes = getLoginBytes();
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
@@ -133,7 +136,7 @@ namespace GZ_SpotGateEx.http
                     var channelno = getChannelNo(request);
                     Console.WriteLine("channelno->" + channelno);
                     //更新心跳
-                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelControler(channelno)?.UpdateHeartbeat();
+                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelController(channelno)?.UpdateHeartbeat();
                     var bytes = getHeartbeatBytes();
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
@@ -152,11 +155,22 @@ namespace GZ_SpotGateEx.http
             InitResult result = null;
             if (channel != null)
             {
-                result = new InitResult { code = 0, channelno = channel.No, holdopen = channel.HoldOpen ? 1 : 0, datetime = DateTime.Now.ToStandard(), shutdowntime = ConfigProfile.Current.ShutdownTime };
+                result = new InitResult
+                {
+                    code = 0,
+                    channelno = channel.No,
+                    holdopen = channel.HoldOpen ? 1 : 0,
+                    datetime = DateTime.Now.ToStandard(),
+                    shutdowntime = ConfigProfile.Current.ShutdownTime
+                };
             }
             else
             {
-                result = new InitResult { code = -1, message = "通道不存在" };
+                result = new InitResult
+                {
+                    code = -1,
+                    message = "通道不存在"
+                };
             }
             string json = JsonConvert.SerializeObject(result);
             return Encoding.UTF8.GetBytes(json);

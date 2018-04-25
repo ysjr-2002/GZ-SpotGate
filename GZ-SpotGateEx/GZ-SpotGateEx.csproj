@@ -93,6 +93,7 @@
     <Compile Include="Core\DataEventArgs.cs" />
     <Compile Include="Core\InouttypeConverter.cs" />
     <Compile Include="Core\IntentType.cs" />
+    <Compile Include="Core\MyLog.cs" />
     <Compile Include="Core\Request.cs" />
     <Compile Include="http\ChannelQuery.cs" />
     <Compile Include="http\FaceOpenResult.cs" />
@@ -131,7 +132,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\ChannelControler.cs" />
+    <Compile Include="Core\ChannelController.cs" />
     <Compile Include="Core\Channel.cs" />
     <Compile Include="Core\Channels.cs" />
     <Compile Include="Core\Util.cs" />

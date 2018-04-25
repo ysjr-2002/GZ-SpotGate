@@ -20,7 +20,7 @@ namespace GZ_SpotGateEx.Core
     /// <summary>
     /// 通道控制器
     /// </summary>
-    class ChannelControler
+    class ChannelController
     {
         private Channel channel;
         private string openGateUrl = "";
@@ -42,7 +42,7 @@ namespace GZ_SpotGateEx.Core
 
         private static readonly ILog log = LogManager.GetLogger("ChannelControler");
 
-        public ChannelControler(Channel channel)
+        public ChannelController(Channel channel)
         {
             this.channel = channel;
         }
@@ -77,10 +77,10 @@ namespace GZ_SpotGateEx.Core
 
         public async void Report()
         {
-            Record record = new Record();
+            Record record = Record.getRecord();
+            record.IntentType = this.intentType;
             record.Channel = this.channel.Name;
             record.TypeImageSourceUrl = ImageConstrant.UPLOAD_ImageSource;
-            record.CheckTime = DateTime.Now.ToStandard();
             if (intentType == IntentType.In)
             {
                 await _request.Calc(this.channel.VirtualIp, "Z");
@@ -103,29 +103,14 @@ namespace GZ_SpotGateEx.Core
         {
             var listlog = new List<string>();
             listlog.Add(string.Format("[{0}]通道", channel.No));
-            Record record = new Record();
-            if (intentType == IntentType.In)
-                listlog.Add("进入");
-            else
-                listlog.Add("离开");
-
+            Record record = Record.getRecord();
             record.Channel = channel.Name;
-            if (idType == IDType.IC)
-                record.TypeImageSourceUrl = ImageConstrant.QR_ImageSource;
-            else if (idType == IDType.ID)
-                record.TypeImageSourceUrl = ImageConstrant.QR_ImageSource;
-            else if (idType == IDType.BarCode)
-                record.TypeImageSourceUrl = ImageConstrant.QR_ImageSource;
-            else if (idType == IDType.Face)
-                record.TypeImageSourceUrl = ImageConstrant.FACE_ImageSource;
-
-            record.BarCode = uniqueId;
+            record.IDType = idType;
+            record.Code = uniqueId;
             record.Time = "0ms";
-            record.CheckTime = DateTime.Now.ToStandard();
 
             if (string.IsNullOrEmpty(uniqueId))
             {
-                listlog.Add("人脸编号为空->" + name);
                 record.Status = "人脸编号为空";
                 MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
                 return null;

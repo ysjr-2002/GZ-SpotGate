@@ -15,5 +15,6 @@ namespace GZ_SpotGateEx.Model
         ID,
         Face,
         BarCode,
+        Upload,
     }
 }
