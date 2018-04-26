@@ -59,7 +59,7 @@ namespace GZ_SpotGateEx.Core
         {
             _request = new Request();
             openGateUrl = string.Format(ConfigProfile.Current.OpenGateUrl, this.channel.ClientIp);
-            _faceSocket = new FaceSocket(channel.FaceIp, channel.CameraIp, FaceIn);
+            _faceSocket = new FaceSocket(channel.FaceIp, channel.CameraIp, OnFaceRecognize);
             //var cameratask1 = _faceSocket.Connect();
 
             if (channel.Inouttype == "0")
@@ -174,7 +174,7 @@ namespace GZ_SpotGateEx.Core
             return feedback;
         }
 
-        private async void FaceIn(FaceRecognized face)
+        private async void OnFaceRecognize(FaceRecognized face)
         {
             var name = face.person.name;
             var code = face.person.job_number;
