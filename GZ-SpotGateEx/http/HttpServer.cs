@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GZ_SpotGateEx.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -22,7 +23,8 @@ namespace GZ_SpotGateEx.http
         public void start()
         {
             string ip = Common.Utility.GetHostIpAddress();
-            ip = "192.168.2.165";
+            MyLog.debug("服务器Ip->" + ip);
+            //ip = "192.168.2.165";
             listener.Prefixes.Add(string.Format(HttpConstrant.url_init, ip));
             listener.Prefixes.Add(string.Format(HttpConstrant.url_verify, ip));
             listener.Prefixes.Add(string.Format(HttpConstrant.url_calccount, ip));

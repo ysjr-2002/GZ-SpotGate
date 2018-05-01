@@ -37,6 +37,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>server.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -91,8 +94,10 @@
     </ApplicationDefinition>
     <Compile Include="Core\ConfigProfile.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
+    <Compile Include="Core\IHoldConverter.cs" />
     <Compile Include="Core\InouttypeConverter.cs" />
-    <Compile Include="Core\IntentType.cs" />
+    <Compile Include="http\CalcQuery.cs" />
+    <Compile Include="Model\InOutType.cs" />
     <Compile Include="Core\MyLog.cs" />
     <Compile Include="Core\Request.cs" />
     <Compile Include="http\ChannelQuery.cs" />
@@ -205,10 +210,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="server.ico" />
+    <Resource Include="Images\transfer_hover.png" />
+    <Resource Include="Images\transfer_normal.png" />
+    <Resource Include="Images\id.png" />
+    <Resource Include="Images\ic.png" />
     <Resource Include="Images\upload.png" />
-    <None Include="config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="config.xml" />
     <Content Include="dll\System.Windows.Interactivity.dll" />
     <Resource Include="Images\bg.png" />
     <Resource Include="Images\channel_hover.png" />

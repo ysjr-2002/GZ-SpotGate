@@ -61,17 +61,40 @@ namespace GZ_SpotGateEx.http
                 var stream = request.InputStream;
                 StreamReader reader = new StreamReader(stream, Encoding.UTF8);
                 string content = reader.ReadToEnd();
-                VerifyQuery temp = JsonConvert.DeserializeObject<VerifyQuery>(content);
-                return temp;
+                VerifyQuery query = JsonConvert.DeserializeObject<VerifyQuery>(content);
+                return query;
             }
             else
             {
-                return new VerifyQuery
-                {
-                    channelno = request.QueryString["channelno"],
-                    code = request.QueryString["code"],
-                    idtype = request.QueryString["idtype"]
-                };
+                //return new VerifyQuery
+                //{
+                //    channelno = request.QueryString["channelno"],
+                //    code = request.QueryString["code"],
+                //    idtype = request.QueryString["idtype"]
+                //};
+                return null;
+            }
+        }
+
+        public CalcQuery getCalcParam(HttpListenerRequest request)
+        {
+            if (request.HttpMethod == "POST")
+            {
+                var stream = request.InputStream;
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string content = reader.ReadToEnd();
+                CalcQuery query = JsonConvert.DeserializeObject<CalcQuery>(content);
+                return query;
+            }
+            else
+            {
+                //return new VerifyQuery
+                //{
+                //    channelno = request.QueryString["channelno"],
+                //    code = request.QueryString["code"],
+                //    idtype = request.QueryString["idtype"]
+                //};
+                return null;
             }
         }
 
@@ -104,8 +127,7 @@ namespace GZ_SpotGateEx.http
                     byte[] bytes = null;
                     if (channelcontroller != null)
                     {
-                        var a = (IDType)idtype.ToInt32();
-                        var feedback = channelcontroller.Check(a, code).Result;
+                        var feedback = channelcontroller.Check(verify.idtype, verify.inouttype, code).Result;
                         if (feedback?.code == 100)
                         {
                             bytes = getLoginBytes();
@@ -117,16 +139,20 @@ namespace GZ_SpotGateEx.http
                     }
                     else
                     {
-                        bytes = getLoginBytes(-1, "未找到编号对应的通道");
+                        var error = "未找到编号对应的通道->" + channelno;
+                        bytes = getLoginBytes(-1, error);
+                        Record record = Record.getUpLoadRecord();
+                        record.Status = error;
+                        record.StatuCode = 1;
+                        MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
                     }
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
                 }
                 else if (rawUrl.StartsWith(HttpConstrant.suffix_calccount))
                 {
-                    var channelno = getChannelNo(request);
-                    Console.WriteLine("channelno->" + channelno);
-                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelController(channelno)?.Report();
+                    var query = getCalcParam(request);
+                    MyStandardKernel.Instance.Get<MainViewModel>().getChannelController(query.channelno)?.Report(query.inouttype);
                     var bytes = getLoginBytes();
                     response.OutputStream.Write(bytes, 0, bytes.Length);
                     response.Close();
@@ -159,7 +185,8 @@ namespace GZ_SpotGateEx.http
                 {
                     code = 0,
                     channelno = channel.No,
-                    holdopen = channel.HoldOpen ? 1 : 0,
+                    inhold = channel.InHold,
+                    outhold = channel.OutHold,
                     datetime = DateTime.Now.ToStandard(),
                     shutdowntime = ConfigProfile.Current.ShutdownTime
                 };

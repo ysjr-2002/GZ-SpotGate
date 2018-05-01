@@ -26,7 +26,6 @@ namespace GZ_SpotGateEx
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
             this.DataContext = MyStandardKernel.Instance.Get<MainViewModel>();
             MyStandardKernel.Instance.Get<MainViewModel>().Container = this.container;
@@ -35,12 +34,6 @@ namespace GZ_SpotGateEx
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MyStandardKernel.Instance.Get<MainViewModel>().Dispose();
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            HttpServer server = new HttpServer();
-            server.start();
         }
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

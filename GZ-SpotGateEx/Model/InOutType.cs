@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GZ_SpotGateEx.Core
+namespace GZ_SpotGateEx.Model
 {
     /// <summary>
-    /// 意图类型
+    /// 入、出类型
     /// </summary>
-    public enum IntentType
+    public enum InOutType : int
     {
-        In,
-        Out,
+        //入 
+        In = 0,
+        //出
+        Out = 1,
     }
 }

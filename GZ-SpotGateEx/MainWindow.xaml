@@ -1,20 +1,19 @@
-﻿<Window
-    x:Class="GZ_SpotGateEx.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:GZ_SpotGateEx.UIControls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:local="clr-namespace:GZ_SpotGateEx"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="系统"
-    Width="1280"
-    Height="720"
-    AllowsTransparency="True"
-    ResizeMode="NoResize"
-    WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
-    mc:Ignorable="d">
+﻿<Window x:Class="GZ_SpotGateEx.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:GZ_SpotGateEx.UIControls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:GZ_SpotGateEx"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="通道闸控制软件"
+        Width="1280"
+        Height="720"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        mc:Ignorable="d">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -39,68 +38,61 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
-                    <Label
-                        Grid.Column="0"
-                        VerticalContentAlignment="Center"
-                        Content="系统"
-                        FontSize="18" />
+                    <Label Grid.Column="0"
+                           VerticalContentAlignment="Center"
+                           Content="通道闸控制软件"
+                           FontSize="18" />
                 </Grid>
 
-                <controls:ImageButton
-                    x:Name="btnA"
-                    Grid.Column="1"
-                    Width="120"
-                    Height="40"
-                    Click="btnA_Click"
-                    Command="{Binding SwitchCommand}"
-                    CommandParameter="0"
-                    HoverImage="images/setting_hover.png"
-                    NormalImage="images/setting_normal.png"
-                    Text="Real monitor" />
+                <controls:ImageButton x:Name="btnA"
+                                      Grid.Column="1"
+                                      Width="120"
+                                      Height="40"
+                                      Click="btnA_Click"
+                                      Command="{Binding SwitchCommand}"
+                                      CommandParameter="0"
+                                      HoverImage="images/transfer_hover.png"
+                                      NormalImage="images/transfer_normal.png"
+                                      Text="实时监控" />
 
-                <controls:ImageButton
-                    x:Name="btnB"
-                    Grid.Column="2"
-                    Width="110"
-                    Height="40"
-                    Click="btnB_Click"
-                    Command="{Binding SwitchCommand}"
-                    CommandParameter="1"
-                    HoverImage="images/channel_hover.png"
-                    NormalImage="images/channel_normal.png"
-                    Text="通道设置" />
+                <controls:ImageButton x:Name="btnB"
+                                      Grid.Column="2"
+                                      Width="110"
+                                      Height="40"
+                                      Click="btnB_Click"
+                                      Command="{Binding SwitchCommand}"
+                                      CommandParameter="1"
+                                      HoverImage="images/channel_hover.png"
+                                      NormalImage="images/channel_normal.png"
+                                      Text="通道设置" />
 
-                <controls:ImageButton
-                    x:Name="btnC"
-                    Grid.Column="3"
-                    Width="110"
-                    Height="40"
-                    Click="btnC_Click"
-                    Command="{Binding SwitchCommand}"
-                    CommandParameter="2"
-                    HoverImage="images/setting_hover.png"
-                    NormalImage="images/setting_normal.png"
-                    Text="系统设置" />
+                <controls:ImageButton x:Name="btnC"
+                                      Grid.Column="3"
+                                      Width="110"
+                                      Height="40"
+                                      Click="btnC_Click"
+                                      Command="{Binding SwitchCommand}"
+                                      CommandParameter="2"
+                                      HoverImage="images/setting_hover.png"
+                                      NormalImage="images/setting_normal.png"
+                                      Text="系统设置" />
 
-                <ToggleButton
-                    Grid.Column="4"
-                    Margin="10,0,0,0"
-                    Command="{Binding MaxCommand}">
+                <ToggleButton Grid.Column="4"
+                              Margin="10,0,0,0"
+                              Command="{Binding MaxCommand}">
                     <ToggleButton.Style>
                         <Style TargetType="ToggleButton">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                        <Grid
-                                            x:Name="Bd"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
-                                            <Image
-                                                x:Name="img"
-                                                Width="24"
-                                                Height="24"
-                                                Source="Images/window_normal.png"
-                                                UseLayoutRounding="True" />
+                                        <Grid x:Name="Bd"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center">
+                                            <Image x:Name="img"
+                                                   Width="24"
+                                                   Height="24"
+                                                   Source="Images/window_normal.png"
+                                                   UseLayoutRounding="True" />
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsChecked" Value="True">
@@ -151,11 +143,10 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Image
-                                            Name="img"
-                                            Width="24"
-                                            Height="24"
-                                            Source="images/close.png" />
+                                        <Image Name="img"
+                                               Width="24"
+                                               Height="24"
+                                               Source="images/close.png" />
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="true">
                                                 <Setter TargetName="img" Property="Source" Value="images/closehover.png" />
@@ -169,22 +160,19 @@
                 </Button>
             </Grid>
 
-            <TabControl
-                Grid.Row="1"
-                BorderThickness="0"
-                SelectedIndex="{Binding TabSelecteIndex}">
+            <TabControl Grid.Row="1"
+                        BorderThickness="0"
+                        SelectedIndex="{Binding TabSelecteIndex}">
                 <TabItem Header="1" Visibility="Collapsed">
                     <Grid>
-                        <ScrollViewer
-                            x:Name="scrolls"
-                            HorizontalScrollBarVisibility="Disabled"
-                            VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer x:Name="scrolls"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto">
                             <ScrollViewer.Content>
                                 <!--  Background="#f3f3ff"  -->
-                                <StackPanel
-                                    x:Name="container"
-                                    Orientation="Vertical"
-                                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <StackPanel x:Name="container"
+                                            Orientation="Vertical"
+                                            ScrollViewer.VerticalScrollBarVisibility="Auto">
                                     <!--<StackPanel.Background>
                             <ImageBrush ImageSource="images/bg.png" Stretch="Uniform" />
                         </StackPanel.Background>-->

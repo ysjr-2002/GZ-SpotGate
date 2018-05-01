@@ -12,7 +12,7 @@ namespace GZ_SpotGateEx.WS
     {
         public IDType CheckInType { get; set; }
 
-        public IntentType IntentType { get; set; }
+        public InOutType IntentType { get; set; }
 
         public bool Result { get; set; }
 

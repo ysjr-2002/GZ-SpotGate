@@ -1,6 +1,7 @@
 ﻿using Common;
 using Common.NotifyBase;
 using GZ_SpotGateEx.Core;
+using GZ_SpotGateEx.http;
 using GZ_SpotGateEx.Model;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace GZ_SpotGateEx.ViewModel
         private const int MAX_COUNT = 100;
 
         private List<ChannelController> controlers = new List<ChannelController>();
+
+        HttpServer httpserver = null;
 
         public int TabSelecteIndex
         {
@@ -72,6 +75,9 @@ namespace GZ_SpotGateEx.ViewModel
 
         private void WindowLoad()
         {
+            httpserver = new HttpServer();
+            httpserver.start();
+
             foreach (var item in Channels.ChannelList)
             {
                 ChannelController controller = new ChannelController(item);
@@ -137,6 +143,7 @@ namespace GZ_SpotGateEx.ViewModel
 
         private void WindowClose()
         {
+            httpserver.Stop();
             Environment.Exit(Environment.ExitCode);
         }
 

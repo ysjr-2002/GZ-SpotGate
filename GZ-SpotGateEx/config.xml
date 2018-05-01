@@ -8,6 +8,7 @@
     <padip>172.21.5.25</padip>
     <face>172.21.5.190</face>
     <camera>172.21.5.152</camera>
+    <!--1:常开 0:正常-->
     <holdopen>0</holdopen>
     <!--入、出类型 0:进 1:出-->
     <inouttype>0</inouttype>
@@ -17,240 +18,251 @@
     <name>大门第一通道出</name>
     <virtualip>172.21.4.100</virtualip>
     <clientip>192.168.0.8</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.26</padip>
+    <face>172.21.5.191</face>
+    <camera>172.21.5.153</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道二-->
   <channel>
     <no>3</no>
     <name>3</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.101</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
+    <padip>172.21.5.27</padip>
     <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <camera>172.21.5.150</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>4</no>
     <name>4</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.101</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
+    <padip>172.21.5.28</padip>
     <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <camera>172.21.5.151</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道三-->
   <channel>
     <no>5</no>
     <name>5</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.102</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.29</padip>
+    <face>172.21.5.191</face>
+    <camera>172.21.5.154</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>6</no>
     <name>6</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.102</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.30</padip>
+    <face>172.21.5.191</face>
+    <camera>172.21.5.155</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道四-->
   <channel>
     <no>7</no>
     <name>7</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.103</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.31</padip>
+    <face>172.21.5.193</face>
+    <camera>172.21.5.160</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>8</no>
     <name>8</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.103</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.32</padip>
+    <face>172.21.5.193</face>
+    <camera>172.21.5.161</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道五-->
   <channel>
     <no>9</no>
     <name>9</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.104</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.33</padip>
+    <face>172.21.5.192</face>
+    <camera>172.21.5.158</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>10</no>
     <name>10</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.104</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.34</padip>
+    <face>172.21.5.193</face>
+    <camera>172.21.5.159</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道六-->
   <channel>
     <no>11</no>
     <name>11</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.105</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.35</padip>
+    <face>172.21.5.192</face>
+    <camera>172.21.5.157</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>12</no>
     <name>12</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.105</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.36</padip>
+    <face>172.21.5.192</face>
+    <camera>172.21.5.156</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道七-->
   <channel>
     <no>13</no>
     <name>13</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.106</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.38</padip>
+    <face>172.21.5.194</face>
+    <camera>172.21.5.162</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>14</no>
     <name>14</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.106</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.37</padip>
+    <face>172.21.5.194</face>
+    <camera>172.21.5.163</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道八-->
   <channel>
     <no>15</no>
     <name>15</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.107</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.39</padip>
+    <face>172.21.5.194</face>
+    <camera>172.21.5.164</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>16</no>
     <name>16</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.107</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.40</padip>
+    <face>172.21.5.195</face>
+    <camera>172.21.5.165</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道九-->
   <channel>
     <no>17</no>
     <name>17</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.108</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.41</padip>
+    <face>172.21.5.195</face>
+    <camera>172.21.5.166</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>18</no>
     <name>18</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.108</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.42</padip>
+    <face>172.21.5.195</face>
+    <camera>172.21.5.167</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道十-->
   <channel>
     <no>19</no>
     <name>19</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.109</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.43</padip>
+    <face>172.21.5.196</face>
+    <camera>172.21.5.168</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>20</no>
     <name>20</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.109</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.44</padip>
+    <face>172.21.5.196</face>
+    <camera>172.21.5.169</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道11-->
   <channel>
     <no>21</no>
     <name>21</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.110</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.45</padip>
+    <face>172.21.5.196</face>
+    <camera>172.21.5.170</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>
   <channel>
     <no>22</no>
     <name>22</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.110</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.46</padip>
+    <face>172.21.5.197</face>
+    <camera>172.21.5.171</camera>
     <holdopen>0</holdopen>
     <inouttype>1</inouttype>
   </channel>
+  <!--通道12-->
   <channel>
     <no>23</no>
     <name>23</name>
-    <virtualip>172.21.4.100</virtualip>
+    <virtualip>172.21.4.111</virtualip>
     <clientip>192.168.2.165</clientip>
-    <padip>172.21.5.25</padip>
-    <face>172.21.5.190</face>
-    <camera>172.21.5.152</camera>
+    <padip>172.21.5.47</padip>
+    <face>172.21.5.197</face>
+    <camera>172.21.5.172</camera>
     <holdopen>0</holdopen>
     <inouttype>0</inouttype>
   </channel>

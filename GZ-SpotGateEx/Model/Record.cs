@@ -12,7 +12,6 @@ namespace GZ_SpotGateEx.Model
     class Record
     {
         private IDType idType;
-
         public string Channel { get; set; }
         public IDType IDType
         {
@@ -21,16 +20,16 @@ namespace GZ_SpotGateEx.Model
             {
                 idType = value;
                 if (idType == IDType.IC)
-                    this.TypeImageSourceUrl = ImageConstrant.QR_ImageSource;
+                    this.TypeImageSourceUrl = ImageConstrant.IC_ImageSource;
                 else if (idType == IDType.ID)
-                    this.TypeImageSourceUrl = ImageConstrant.QR_ImageSource;
+                    this.TypeImageSourceUrl = ImageConstrant.ID_ImageSource;
                 else if (idType == IDType.BarCode)
                     this.TypeImageSourceUrl = ImageConstrant.QR_ImageSource;
                 else if (idType == IDType.Face)
                     this.TypeImageSourceUrl = ImageConstrant.FACE_ImageSource;
             }
         }
-        public IntentType IntentType { get; set; }
+        public InOutType IntentType { get; set; }
         /// <summary>
         /// 凭证编号
         /// </summary>
@@ -45,7 +44,15 @@ namespace GZ_SpotGateEx.Model
         {
         }
 
-        public static Record getRecord()
+        public static Record GetInitRecrod()
+        {
+            Record record = new Record();
+            record.IDType = IDType.Init;
+            record.PassTime = DateTime.Now.ToStandard();
+            return record;
+        }
+
+        public static Record getUpLoadRecord()
         {
             Record record = new Record();
             record.IDType = IDType.Upload;
@@ -54,10 +61,19 @@ namespace GZ_SpotGateEx.Model
             return record;
         }
 
+        public static Record getRecord(Channel channel)
+        {
+            Record record = new Record();
+            record.Channel = channel.Name;
+            record.PassTime = DateTime.Now.ToStandard();
+            record.Time = "0ms";
+            return record;
+        }
+
         public void Output()
         {
             string name = "通道:" + Channel;
-            string action = IntentType == IntentType.In ? "进入" : "离开";
+            string action = IntentType == InOutType.In ? "进入" : "离开";
             string type = "";
             string code = "编号:" + Code;
             string time = "时间:" + PassTime;
@@ -73,6 +89,11 @@ namespace GZ_SpotGateEx.Model
                 type = "人脸";
             else if (IDType == IDType.Upload)
                 type = "计数";
+            else if (IDType == IDType.Init)
+            {
+                MyLog.debug(Status);
+                return;
+            }
 
             MyLog.debug(name);
             MyLog.debug(action);

@@ -24,7 +24,8 @@ namespace GZ_SpotGateEx.Core
     {
         private Channel channel;
         private string openGateUrl = "";
-        private FaceSocket _faceSocket;
+        private FaceSocket faceInSocket;
+        private FaceSocket faceOutSocket;
 
         private Request _request;
 
@@ -37,10 +38,6 @@ namespace GZ_SpotGateEx.Core
 
         private const string Line2_Ok_Tip = "验证成功";
         private const string Line2_Failure_Tip = "验证失败";
-
-        private IntentType intentType;
-
-        private static readonly ILog log = LogManager.GetLogger("ChannelControler");
 
         public ChannelController(Channel channel)
         {
@@ -59,29 +56,36 @@ namespace GZ_SpotGateEx.Core
         {
             _request = new Request();
             openGateUrl = string.Format(ConfigProfile.Current.OpenGateUrl, this.channel.ClientIp);
-            _faceSocket = new FaceSocket(channel.FaceIp, channel.CameraIp, OnFaceRecognize);
-            //var cameratask1 = _faceSocket.Connect();
-
-            if (channel.Inouttype == "0")
-                intentType = IntentType.In;
-            else
-                intentType = IntentType.Out;
+            faceInSocket = new FaceSocket(channel.FaceInIp, channel.CameraInIp, OnFaceOutRecognize);
+            faceOutSocket = new FaceSocket(channel.FaceOutIp, channel.CameraOutIp, OnFaceOutRecognize);
+            var cameratask1 = await faceInSocket.Connect();
+            //var cameratask2 = await faceOutSocket.Connect();
+            //Record record = Record.GetInitRecrod();
+            //if (cameratask1 && cameratask2)
+            //{
+            //    record.Status = this.channel.Name + "初始化成功";
+            //}
+            //else
+            //{
+            //    record.Status = this.channel.Name + "初始化失败";
+            //}
+            //MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
             return false;
         }
 
         public void Stop()
         {
             //释放websocket资源
-            _faceSocket?.Disconnect();
+            faceInSocket?.Disconnect();
+            faceOutSocket?.Disconnect();
         }
 
-        public async void Report()
+        public async void Report(InOutType inouttype)
         {
-            Record record = Record.getRecord();
-            record.IntentType = this.intentType;
+            Record record = Record.getUpLoadRecord();
+            record.IntentType = inouttype;
             record.Channel = this.channel.Name;
-            record.TypeImageSourceUrl = ImageConstrant.UPLOAD_ImageSource;
-            if (intentType == IntentType.In)
+            if (inouttype == InOutType.In)
             {
                 await _request.Calc(this.channel.VirtualIp, "Z");
                 record.Status = "入上传人次";
@@ -99,13 +103,11 @@ namespace GZ_SpotGateEx.Core
             this.channel.LastHeartbeat = DateTime.Now.ToStandard();
         }
 
-        public async Task<FeedBack> Check(IDType idType, string uniqueId, string name = "", string avatar = "")
+        public async Task<FeedBack> Check(IDType idType, InOutType inouttype, string uniqueId, string name = "", string avatar = "")
         {
-            var listlog = new List<string>();
-            listlog.Add(string.Format("[{0}]通道", channel.No));
-            Record record = Record.getRecord();
-            record.Channel = channel.Name;
+            Record record = Record.getRecord(channel);
             record.IDType = idType;
+            record.IntentType = inouttype;
             record.Code = uniqueId;
             record.Time = "0ms";
 
@@ -119,67 +121,102 @@ namespace GZ_SpotGateEx.Core
             Stopwatch sw = Stopwatch.StartNew();
             var feedback = await _request.CheckIn(this.channel.VirtualIp, idType, uniqueId);
             sw.Stop();
-            AndroidMessage am = new AndroidMessage()
+            if (feedback == null)
             {
-                CheckInType = idType,
-                IntentType = intentType,
-                Avatar = avatar,
-                Delay = Delay,
-                Code = feedback?.code ?? 0
-            };
-
-            record.Status = feedback?.message;
-            record.Time = sw.ElapsedMilliseconds + "ms";
-
-            byte personCount = feedback?.personCount.ToByte() ?? 0;
-            if (intentType == IntentType.In && feedback?.code == 100)
+                record.Status = "服务器访问失败,请查看日志";
+                record.StatuCode = 1;
+            }
+            else
             {
-                //开闸
-                am.Line1 = In_Ok;
-                am.Line2 = Line2_Ok_Tip;
-                Udp.SendToAndroid(channel.PadIp, am);
-
-                if (idType == IDType.Face)
+                feedback.code = 100;
+                AndroidMessage am = new AndroidMessage()
                 {
-                    var open = await _request.Open(openGateUrl + "0&canIncount=" + personCount);
+                    CheckInType = idType,
+                    IntentType = inouttype,
+                    Avatar = avatar,
+                    Delay = Delay,
+                    Code = feedback.code
+                };
+
+                record.Status = feedback.message;
+                record.Time = sw.ElapsedMilliseconds + "ms";
+
+                byte personCount = feedback.personCount.ToByte();
+                feedback.code = 100;
+                if (inouttype == InOutType.In && feedback.code == 100)
+                {
+                    //开闸
+                    am.Line1 = In_Ok;
+                    am.Line2 = Line2_Ok_Tip;
+                    Udp.SendToAndroid(channel.PadInIp, am);
+
+                    if (idType == IDType.Face)
+                    {
+                        var param = string.Format(HttpConstrant.url_client_opentgate, (int)inouttype, personCount);
+                        var open = await _request.Open(openGateUrl + param);
+                        if (open.code == 0)
+                        {
+                            record.Status = feedback.message + "\r\n开闸成功";
+                        }
+                        else
+                        {
+                            record.Status = feedback.message + "\r\n" + open.message;
+                        }
+                    }
+                }
+                if (inouttype == InOutType.In && feedback.code != 100)
+                {
+                    //进入-失败
+                    am.Line1 = In_Failure;
+                    am.Line2 = Line2_Failure_Tip;
+                    Udp.SendToAndroid(channel.PadInIp, am);
+                }
+                if (inouttype == InOutType.Out && feedback.code == 100)
+                {
+                    //离开-成功
+                    am.Line1 = Out_Ok;
+                    am.Line2 = Line2_Ok_Tip;
+                    Udp.SendToAndroid(channel.PadInIp, am);
+                    if (idType == IDType.Face)
+                    {
+                        var param = string.Format(HttpConstrant.url_client_opentgate, (int)inouttype, personCount);
+                        var open = await _request.Open(openGateUrl + param);
+                        if (open.code == 0)
+                        {
+                            record.Status = feedback.message + "\r\n开闸成功";
+                        }
+                        else
+                        {
+                            record.Status = feedback.message + "\r\n" + open.message;
+                        }
+                    }
+                }
+                if (inouttype == InOutType.Out && feedback.code != 100)
+                {
+                    //离开-失败
+                    am.Line1 = Out_Failure;
+                    am.Line2 = Line2_Failure_Tip;
+                    Udp.SendToAndroid(channel.PadInIp, am);
                 }
             }
-            if (intentType == IntentType.In && feedback?.code != 100)
-            {
-                //进入-失败
-                am.Line1 = In_Failure;
-                am.Line2 = Line2_Failure_Tip;
-                Udp.SendToAndroid(channel.PadIp, am);
-            }
-            if (intentType == IntentType.Out && feedback?.code == 100)
-            {
-                //离开-成功
-                am.Line1 = Out_Ok;
-                am.Line2 = Line2_Ok_Tip;
-                Udp.SendToAndroid(channel.PadIp, am);
-                if (idType == IDType.Face)
-                {
-                    var open = await _request.Open(openGateUrl + "1&canIncount=" + personCount);
-                }
-            }
-            if (intentType == IntentType.Out && feedback?.code != 100)
-            {
-                //离开-失败
-                am.Line1 = Out_Failure;
-                am.Line2 = Line2_Failure_Tip;
-                Udp.SendToAndroid(channel.PadIp, am);
-            }
-
             MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
             return feedback;
         }
 
-        private async void OnFaceRecognize(FaceRecognized face)
+        private async void OnFaceInRecognize(FaceRecognized face)
         {
             var name = face.person.name;
             var code = face.person.job_number;
             var avatar = face.person.avatar;
-            await Check(IDType.Face, code, name, avatar);
+            await Check(IDType.Face, InOutType.In, code, name, avatar);
+        }
+
+        private async void OnFaceOutRecognize(FaceRecognized face)
+        {
+            var name = face.person.name;
+            var code = face.person.job_number;
+            var avatar = face.person.avatar;
+            await Check(IDType.Face, InOutType.Out, code, name, avatar);
         }
     }
 }

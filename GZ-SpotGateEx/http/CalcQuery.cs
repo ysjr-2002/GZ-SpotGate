@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace GZ_SpotGateEx.http
 {
-    class VerifyQuery
+    /// <summary>
+    /// 上报通行人次
+    /// </summary>
+    class CalcQuery
     {
         public string channelno { get; set; }
 
-        public IDType idtype { get; set; }
-
         public InOutType inouttype { get; set; }
-
-        public string code { get; set; }
     }
 }

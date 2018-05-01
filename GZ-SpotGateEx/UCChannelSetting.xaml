@@ -12,7 +12,6 @@
         <Style TargetType="Label">
             <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
-
     </UserControl.Resources>
 
     <Grid>
@@ -27,16 +26,21 @@
                     Orientation="Vertical">
             <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                 <Label Width="50" Content="通道" />
-                <Label Width="120" Content="名称" />
+                <Label Width="130"
+                       Margin="0"
+                       Content="名称" />
                 <Label Width="80" Content="工控机" />
                 <Label Width="80" Content="虚拟IP" />
-                <Label Width="80" Content="人脸" />
-                <Label Width="80" Content="摄像机" />
-                <Label Width="80" Content="平板" />
-                <Label Width="60" Content="常开" />
-                <Label Width="60" Content="类型" />
-                <Label Width="80" Content="重启" />
-                <Label Width="80" Content="开闸" />
+                <Label Width="80" Content="人脸(入)" />
+                <Label Width="80" Content="摄像机(入)" />
+                <Label Width="80" Content="平板(入)" />
+                <Label Width="60" Content="常开(入)" />
+                <Label Width="80" Content="人脸(出)" />
+                <Label Width="80" Content="摄像机(出)" />
+                <Label Width="80" Content="平板(出)" />
+                <Label Width="60" Content="常开(出)" />
+                <Label Width="50" Content="重启" />
+                <Label Width="120" Content="开闸" />
                 <Label Width="130" Content="最近数据" />
             </StackPanel>
         </StackPanel>
@@ -44,7 +48,7 @@
         <ScrollViewer x:Name="scrolls"
                       Grid.Row="1"
                       HorizontalAlignment="Center"
-                      HorizontalScrollBarVisibility="Disabled"
+                      HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto">
             <ScrollViewer.Content>
                 <StackPanel Name="stackpanelchannel" Orientation="Vertical" />

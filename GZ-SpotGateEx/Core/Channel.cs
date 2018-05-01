@@ -38,46 +38,73 @@ namespace GZ_SpotGateEx.Core
         /// <summary>
         /// 平板入
         /// </summary>
-        public string PadIp
+        public string PadInIp
         {
-            get { return this.GetValue(s => s.PadIp); }
-            set { this.SetValue(s => s.PadIp, value); }
-        }
-       
-        /// <summary>
-        /// 考拉
-        /// </summary>
-        public string FaceIp
-        {
-            get { return this.GetValue(s => s.FaceIp); }
-            set { this.SetValue(s => s.FaceIp, value); }
-        }
-        
-        /// <summary>
-        /// 摄像机
-        /// </summary>
-        public string CameraIp
-        {
-            get { return this.GetValue(s => s.CameraIp); }
-            set { this.SetValue(s => s.CameraIp, value); }
+            get { return this.GetValue(s => s.PadInIp); }
+            set { this.SetValue(s => s.PadInIp, value); }
         }
 
         /// <summary>
-        /// 保持常开
+        /// 平板出
         /// </summary>
-        public string Inouttype
+        public string PadOutIp
         {
-            get { return this.GetValue(s => s.Inouttype); }
-            set { this.SetValue(s => s.Inouttype, value); }
+            get { return this.GetValue(s => s.PadOutIp); }
+            set { this.SetValue(s => s.PadOutIp, value); }
         }
 
         /// <summary>
-        /// 保持常开
+        /// 考拉入
         /// </summary>
-        public bool HoldOpen
+        public string FaceInIp
         {
-            get { return this.GetValue(s => s.HoldOpen); }
-            set { this.SetValue(s => s.HoldOpen, value); }
+            get { return this.GetValue(s => s.FaceInIp); }
+            set { this.SetValue(s => s.FaceInIp, value); }
+        }
+
+        /// <summary>
+        /// 考拉出
+        /// </summary>
+        public string FaceOutIp
+        {
+            get { return this.GetValue(s => s.FaceOutIp); }
+            set { this.SetValue(s => s.FaceOutIp, value); }
+        }
+
+        /// <summary>
+        /// 摄像机入
+        /// </summary>
+        public string CameraInIp
+        {
+            get { return this.GetValue(s => s.CameraInIp); }
+            set { this.SetValue(s => s.CameraInIp, value); }
+        }
+
+        /// <summary>
+        /// 摄像机入
+        /// </summary>
+        public string CameraOutIp
+        {
+            get { return this.GetValue(s => s.CameraOutIp); }
+            set { this.SetValue(s => s.CameraOutIp, value); }
+        }
+
+        /// <summary>
+        /// 保持常开(入)
+        /// </summary>
+        public int InHold
+        {
+            get { return this.GetValue(s => s.InHold); }
+            set { this.SetValue(s => s.InHold, value); }
+        }
+
+        /// <summary>
+        /// 保持常开(出)
+        /// </summary>
+        public int OutHold
+        {
+            get { return this.GetValue(s => s.OutHold); }
+            set { this.SetValue(s => s.OutHold, value); }
         }
 
         /// <summary>

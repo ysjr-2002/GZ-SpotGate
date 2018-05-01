@@ -9,12 +9,17 @@ namespace GZ_SpotGateEx.Model
     /// <summary>
     /// 凭证类型
     /// </summary>
-    public enum IDType
+    public enum IDType : int
     {
-        IC,
-        ID,
-        Face,
-        BarCode,
+        //IC卡
+        IC = 0,
+        //身份证
+        ID = 1,
+        //人脸
+        Face = 2,
+        //二维码
+        BarCode = 3,
         Upload,
+        Init,
     }
 }

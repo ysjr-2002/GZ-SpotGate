@@ -1,29 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <channels>
   <!--通道1-->
-  <channel>
+  <!--<channel>
     <no>1</no>
-    <name>1</name>
-    <!--通道虚拟IP，因为验证需要-->
+    <name>测试</name>
+    --><!--通道虚拟IP，因为验证需要--><!--
     <channelvirtualip>172.21.4.100</channelvirtualip>
-    <!--工控机-->
-    <clientip>192.168.2.165</clientip>
-    <!--入平板-->
+    --><!--工控机--><!--
+    <clientip>172.21.5.2</clientip>
+    --><!--入平板--><!--
     <androidInip>172.21.5.25</androidInip>
-    <!--出平板-->
+    --><!--出平板--><!--
     <androidOutip>172.21.5.26</androidOutip>
-    <!--入人脸服务器-->
+    --><!--入人脸服务器--><!--
     <faceInip>172.21.5.190</faceInip>
-    <!--出人脸服务器-->
+    --><!--出人脸服务器--><!--
     <faceOutip>172.21.5.191</faceOutip>
-    <!--入摄像机-->
+    --><!--入摄像机--><!--
     <faceInCameraip>172.21.5.152</faceInCameraip>
-    <!--出摄像机-->
+    --><!--出摄像机--><!--
     <faceOutCameraip>172.21.5.153</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    --><!--1:常开 0:正常--><!--
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道2-->
+  --><!--通道2--><!--
   <channel>
     <no>2</no>
     <name>2</name>
@@ -35,10 +36,10 @@
     <faceOutip>172.21.5.190</faceOutip>
     <faceInCameraip>172.21.5.150</faceInCameraip>
     <faceOutCameraip>172.21.5.151</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道3-->
+  --><!--通道3--><!--
   <channel>
     <no>3</no>
     <name>3</name>
@@ -50,10 +51,10 @@
     <faceOutip>172.21.5.191</faceOutip>
     <faceInCameraip>172.21.5.154</faceInCameraip>
     <faceOutCameraip>172.21.5.155</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道4-->
+  --><!--通道4--><!--
   <channel>
     <no>4</no>
     <name>4</name>
@@ -65,10 +66,10 @@
     <faceOutip>172.21.5.193</faceOutip>
     <faceInCameraip>172.21.5.160</faceInCameraip>
     <faceOutCameraip>172.21.5.161</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道5 主入口-->
+  --><!--通道5 主入口--><!--
   <channel>
     <no>5</no>
     <name>5</name>
@@ -80,10 +81,10 @@
     <faceOutip>172.21.5.193</faceOutip>
     <faceInCameraip>172.21.5.158</faceInCameraip>
     <faceOutCameraip>172.21.5.159</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道6-->
+  --><!--通道6--><!--
   <channel>
     <no>6</no>
     <name>6</name>
@@ -95,10 +96,10 @@
     <faceOutip>172.21.5.192</faceOutip>
     <faceInCameraip>172.21.5.157</faceInCameraip>
     <faceOutCameraip>172.21.5.156</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道7-->
+  --><!--通道7--><!--
   <channel>
     <no>7</no>
     <name>7</name>
@@ -110,10 +111,10 @@
     <faceOutip>172.21.5.194</faceOutip>
     <faceInCameraip>172.21.5.162</faceInCameraip>
     <faceOutCameraip>172.21.5.163</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道8-->
+  --><!--通道8--><!--
   <channel>
     <no>8</no>
     <name>8</name>
@@ -125,10 +126,10 @@
     <faceOutip>172.21.5.195</faceOutip>
     <faceInCameraip>172.21.5.164</faceInCameraip>
     <faceOutCameraip>172.21.5.165</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道9 主入口-->
+  --><!--通道9 主入口--><!--
   <channel>
     <no>9</no>
     <name>9</name>
@@ -140,10 +141,10 @@
     <faceOutip>172.21.5.195</faceOutip>
     <faceInCameraip>172.21.5.166</faceInCameraip>
     <faceOutCameraip>172.21.5.167</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道10-->
+  --><!--通道10--><!--
   <channel>
     <no>10</no>
     <name>10</name>
@@ -155,10 +156,10 @@
     <faceOutip>172.21.5.196</faceOutip>
     <faceInCameraip>172.21.5.168</faceInCameraip>
     <faceOutCameraip>172.21.5.169</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
-  <!--通道11 主入口-->
+  --><!--通道11 主入口--><!--
   <channel>
     <no>11</no>
     <name>11</name>
@@ -170,22 +171,22 @@
     <faceOutip>172.21.5.197</faceOutip>
     <faceInCameraip>172.21.5.170</faceInCameraip>
     <faceOutCameraip>172.21.5.171</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
-  </channel>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
+  </channel>-->
   <!--通道12 主入口-->
   <channel>
     <no>12</no>
-    <name>12</name>
+    <name>机房测试</name>
     <channelvirtualip>172.21.4.111</channelvirtualip>
-    <clientip>172.21.5.23</clientip>
-    <androidInip>172.21.5.47</androidInip>
+    <clientip>172.21.5.12</clientip>
+    <androidInip>172.21.5.29</androidInip>
     <androidOutip>172.21.5.48</androidOutip>
-    <faceInip>172.21.5.197</faceInip>
+    <faceInip>172.21.5.194</faceInip>
     <faceOutip>172.21.5.197</faceOutip>
-    <faceInCameraip>172.21.5.172</faceInCameraip>
+    <faceInCameraip>172.21.5.162</faceInCameraip>
     <faceOutCameraip>172.21.5.173</faceOutCameraip>
-    <enable>1</enable>
-    <holdopen>0</holdopen>
+    <inhold>0</inhold>
+    <outhold>0</outhold>
   </channel>
 </channels>

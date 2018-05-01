@@ -1,4 +1,5 @@
 ﻿using GZ_SpotGateEx.Core;
+using GZ_SpotGateEx.http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace GZ_SpotGateEx
                 var result = await request.Open(url);
                 if (result?.code == 0)
                 {
-                    Common.CMessageBox.Show("ok");
+                    Common.CMessageBox.Show("重启成功！");
                 }
                 else
                 {
@@ -53,11 +54,19 @@ namespace GZ_SpotGateEx
             {
                 var channel = this.DataContext as Channel;
                 var request = new Request();
+                var inouttype = 0;
+                if (rbIn.IsChecked.GetValueOrDefault())
+                    inouttype = 0;
+                if (rbOut.IsChecked.GetValueOrDefault())
+                    inouttype = 1;
+
+                var param = string.Format(HttpConstrant.url_client_opentgate, (int)inouttype, 1);
                 var url = string.Format(ConfigProfile.Current.OpenGateUrl, channel.ClientIp);
+                url = url + param;
                 var result = await request.Open(url);
                 if (result?.code == 0)
                 {
-                    Common.CMessageBox.Show("ok");
+                    Common.CMessageBox.Show("开闸成功！");
                 }
                 else
                 {
