@@ -52,7 +52,7 @@ namespace GZ_SpotGateEx.Core
             }
             catch (Exception ex)
             {
-                return new FaceOpenResult { code = -1, message = ex.StackTrace };
+                return new FaceOpenResult { code = -1, message = ex.Message };
             }
         }
 

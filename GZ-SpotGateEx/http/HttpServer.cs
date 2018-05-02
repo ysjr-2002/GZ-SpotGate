@@ -43,8 +43,9 @@ namespace GZ_SpotGateEx.http
                     var context = listener.GetContext();
                     new HttpHandler(context).RunAsync();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    MyLog.debug("http请求处理异常->" + ex.Message);
                 }
             }
         }
