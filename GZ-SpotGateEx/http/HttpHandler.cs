@@ -130,7 +130,7 @@ namespace GZ_SpotGateEx.http
                         var feedback = channelcontroller.Check(verify.idtype, verify.inouttype, code).Result;
                         if (feedback?.code == 100)
                         {
-                            bytes = getLoginBytes();
+                            bytes = getLoginBytes(0, "ok", feedback.personCount.ToInt32());
                         }
                         else
                         {
@@ -203,7 +203,7 @@ namespace GZ_SpotGateEx.http
             return Encoding.UTF8.GetBytes(json);
         }
 
-        private static byte[] getLoginBytes(int code = 0, string message = "ok", int personcount = 0)
+        private static byte[] getLoginBytes(int code = 0, string message = "ok", int personcount = 1)
         {
             CheckResult back = new CheckResult { code = code, message = message, entrycount = personcount };
             string json = JsonConvert.SerializeObject(back);

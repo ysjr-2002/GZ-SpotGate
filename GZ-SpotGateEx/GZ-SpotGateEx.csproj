@@ -210,6 +210,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\min.png" />
+    <Resource Include="Images\minhover.png" />
     <Resource Include="server.ico" />
     <Resource Include="Images\transfer_hover.png" />
     <Resource Include="Images\transfer_normal.png" />

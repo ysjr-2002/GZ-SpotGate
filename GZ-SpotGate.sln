@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebootTool", "RebootTool\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZ-SpotGateEx", "GZ-SpotGateEx\GZ-SpotGateEx.csproj", "{63640E42-EAF2-478C-9019-A92BED66A6B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceCore", "FaceCore\FaceCore.csproj", "{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDemo", "FaceDemo\FaceDemo.csproj", "{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +99,22 @@ Global
 		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Release|x86.ActiveCfg = Release|Any CPU
 		{63640E42-EAF2-478C-9019-A92BED66A6B3}.Release|x86.Build.0 = Release|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{3ED805F1-1AB4-4A84-85FC-9A18D935C6F7}.Release|x86.Build.0 = Release|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Debug|x86.Build.0 = Debug|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB372930-6BED-48E7-9E99-CEFA48BE6B1A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

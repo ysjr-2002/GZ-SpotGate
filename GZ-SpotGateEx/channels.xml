@@ -135,8 +135,8 @@
     <name>工控机IP为10</name>
     <channelvirtualip>172.21.4.108</channelvirtualip>
     <clientip>172.21.5.10</clientip>
-    <androidInip>172.21.5.41</androidInip>
-    <androidOutip>172.21.5.42</androidOutip>
+    <androidInip>172.21.5.46</androidInip>
+    <androidOutip>172.21.5.46</androidOutip>
     <faceInip>172.21.5.194</faceInip>
     <faceOutip>172.21.5.195</faceOutip>
     <faceInCameraip>172.21.5.163</faceInCameraip>

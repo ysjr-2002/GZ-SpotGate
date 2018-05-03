@@ -29,7 +29,7 @@
                         <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="10" />
                         <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="30" />
                         <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70" />
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="90" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="100" />
                     </DoubleAnimationUsingKeyFrames>
                 </Storyboard>
             </BeginStoryboard>
@@ -75,8 +75,14 @@
                     <RowDefinition />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="{Binding Code}" />
-                <Label Grid.Row="1" Content="{Binding Status}">
+                <Label
+                    Grid.Row="0"
+                    VerticalContentAlignment="Center"
+                    Content="{Binding Code}" />
+                <Label
+                    Grid.Row="1"
+                    VerticalContentAlignment="Center"
+                    Content="{Binding Status}">
                     <Label.Style>
                         <Style TargetType="Label">
                             <Style.Triggers>
@@ -90,7 +96,10 @@
                         </Style>
                     </Label.Style>
                 </Label>
-                <Label Grid.Row="2" Content="{Binding Time}" />
+                <Label
+                    Grid.Row="2"
+                    VerticalContentAlignment="Center"
+                    Content="{Binding Time}" />
             </Grid>
         </Grid>
         <Border.Style>

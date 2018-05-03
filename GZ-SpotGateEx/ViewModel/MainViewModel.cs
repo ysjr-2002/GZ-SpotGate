@@ -22,14 +22,14 @@ namespace GZ_SpotGateEx.ViewModel
         StackPanel container;
 
         public ICommand LoadedCommand { get; set; }
-        public ICommand CloseCommand { get; set; }
+        public ICommand MinCommand { get; set; }
         public ICommand MaxCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
         public ICommand SwitchCommand { get; set; }
 
         private const int MAX_COUNT = 100;
 
         private List<ChannelController> controlers = new List<ChannelController>();
-
         HttpServer httpserver = null;
 
         public int TabSelecteIndex
@@ -58,8 +58,9 @@ namespace GZ_SpotGateEx.ViewModel
         private void InitCommand()
         {
             LoadedCommand = new DelegateCommand(WindowLoad);
-            CloseCommand = new DelegateCommand(WindowClose);
+            MinCommand = new DelegateCommand(Min);
             MaxCommand = new DelegateCommand(Max);
+            CloseCommand = new DelegateCommand(WindowClose);
             SwitchCommand = new DelegateCommand<string>(Switch);
         }
 
@@ -129,6 +130,11 @@ namespace GZ_SpotGateEx.ViewModel
             }
         }
 
+        private void Min()
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
         private void Max()
         {
             if (Application.Current.MainWindow.WindowState == WindowState.Normal)
@@ -143,8 +149,12 @@ namespace GZ_SpotGateEx.ViewModel
 
         private void WindowClose()
         {
-            httpserver.Stop();
-            Environment.Exit(Environment.ExitCode);
+            var dialog = CMessageBox.Confirm("确认关闭软件码？");
+            if (dialog == System.Windows.Forms.DialogResult.Yes)
+            {
+                httpserver.Stop();
+                Environment.Exit(Environment.ExitCode);
+            }
         }
 
         CancellationTokenSource cts = new CancellationTokenSource();
