@@ -34,7 +34,7 @@ namespace GZ_SpotGateEx.http
             }
             else
             {
-                return request.QueryString["channelno"];
+                return request.QueryString["ip"];
             }
         }
 
@@ -104,6 +104,9 @@ namespace GZ_SpotGateEx.http
             {
                 var request = httpContext.Request;
                 var response = httpContext.Response;
+                response.ContentEncoding = Encoding.UTF8;
+                response.ContentType = "application/json";
+
                 var url = request.Url;
                 string rawUrl = request.RawUrl;
                 if (rawUrl.StartsWith(HttpConstrant.suffix_init))
@@ -188,6 +191,7 @@ namespace GZ_SpotGateEx.http
                     inhold = channel.InHold,
                     outhold = channel.OutHold,
                     datetime = DateTime.Now.ToStandard(),
+                    enableshutdown = true,
                     shutdowntime = ConfigProfile.Current.ShutdownTime
                 };
             }

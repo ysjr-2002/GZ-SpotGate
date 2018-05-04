@@ -37,9 +37,10 @@ namespace GZ_SpotGateEx.http
 
         public InitResult()
         {
+            channelno = "";
             datetime = DateTime.Now.ToStandard();
             shutdowntime = "21:00:00";
-            enableshutdown = true;
+            enableshutdown = false;
             message = "";
         }
     }
