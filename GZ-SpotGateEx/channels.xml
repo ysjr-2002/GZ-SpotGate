@@ -13,9 +13,9 @@
     <!--出平板-->
     <androidOutip>172.21.5.16</androidOutip>
     <!--入识别服务器-->
-    <faceInip>172.21.5.190</faceInip>
+    <faceInip>172.21.5.192</faceInip>
     <!--出识别服务器-->
-    <faceOutip>172.21.5.190</faceOutip>
+    <faceOutip>172.21.5.193</faceOutip>
     <!--入摄像机-->
     <faceInCameraip>172.21.5.158</faceInCameraip>
     <!--出摄像机-->

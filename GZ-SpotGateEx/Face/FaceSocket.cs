@@ -66,11 +66,11 @@ namespace GZ_SpotGateEx.Face
             if (!_appclose)
             {
                 MyLog.debug("Websocket关闭->" + _koalaIp);
-                Task.Factory.StartNew(() =>
-                {
-                    Thread.Sleep(sleep);
-                    Connect();
-                });
+                //Task.Factory.StartNew(() =>
+                //{
+                //    Thread.Sleep(sleep);
+                //    Connect();
+                //});
             }
         }
 
@@ -83,7 +83,7 @@ namespace GZ_SpotGateEx.Face
         private void _socket_OnOpen(object sender, EventArgs e)
         {
             _open = true;
-            MyLog.debug("Websocket成功->" + _koalaIp);
+            //MyLog.debug("Websocket成功->" + _koalaIp);
         }
 
         private void Dispose()

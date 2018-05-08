@@ -29,7 +29,20 @@ namespace GZ_SpotGateEx.Model
                     this.TypeImageSourceUrl = ImageConstrant.FACE_ImageSource;
             }
         }
-        public InOutType IntentType { get; set; }
+        private InOutType _intenttype;
+        public InOutType IntentType
+        {
+            get { return _intenttype; }
+            set
+            {
+                _intenttype = value;
+                if (value == InOutType.In)
+                    IntentTypeString = "入";
+                else
+                    IntentTypeString = "出";
+            }
+        }
+        public string IntentTypeString { get; set; }
         /// <summary>
         /// 凭证编号
         /// </summary>
@@ -37,6 +50,9 @@ namespace GZ_SpotGateEx.Model
         public string Status { get; set; }
         public string Time { get; set; }
         public string PassTime { get; set; }
+        /// <summary>
+        /// 0:正常 1:错误
+        /// </summary>
         public int StatuCode { get; set; }
         public string TypeImageSourceUrl { get; set; }
 
@@ -47,6 +63,7 @@ namespace GZ_SpotGateEx.Model
         public static Record GetInitRecrod()
         {
             Record record = new Record();
+            record.StatuCode = 1;
             record.IDType = IDType.Init;
             record.PassTime = DateTime.Now.ToStandard();
             return record;

@@ -46,7 +46,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="48" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" VerticalContentAlignment="Center">
@@ -62,14 +63,20 @@
                 VerticalContentAlignment="Center"
                 Content="{Binding Channel}" />
 
-            <Image
+            <Label
                 Grid.Column="2"
-                Width="32"
-                Height="32"
-                HorizontalAlignment="Center"
-                Source="{Binding TypeImageSourceUrl}" />
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="{Binding IntentTypeString}" />
 
-            <Grid Grid.Column="3">
+            <Image
+                Grid.Column="3"
+                Width="32"
+                HorizontalAlignment="Center"
+                Source="{Binding TypeImageSourceUrl}"
+                Stretch="Uniform" />
+
+            <Grid Grid.Column="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition />
@@ -86,11 +93,13 @@
                     <Label.Style>
                         <Style TargetType="Label">
                             <Style.Triggers>
+                                <!--  红色  -->
                                 <DataTrigger Binding="{Binding StatuCode}" Value="0">
-                                    <Setter Property="Foreground" Value="#ec1b20" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding StatuCode}" Value="1">
                                     <Setter Property="Foreground" Value="#38b64a" />
+                                </DataTrigger>
+                                <!--  绿色  -->
+                                <DataTrigger Binding="{Binding StatuCode}" Value="1">
+                                    <Setter Property="Foreground" Value="#ec1b20" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

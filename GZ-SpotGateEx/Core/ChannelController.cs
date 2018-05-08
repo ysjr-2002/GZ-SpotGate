@@ -59,17 +59,19 @@ namespace GZ_SpotGateEx.Core
             faceInSocket = new FaceSocket(channel.FaceInIp, channel.CameraInIp, OnFaceOutRecognize);
             faceOutSocket = new FaceSocket(channel.FaceOutIp, channel.CameraOutIp, OnFaceOutRecognize);
             var cameratask1 = await faceInSocket.Connect();
-            //var cameratask2 = await faceOutSocket.Connect();
-            //Record record = Record.GetInitRecrod();
-            //if (cameratask1 && cameratask2)
-            //{
-            //    record.Status = this.channel.Name + "初始化成功";
-            //}
-            //else
-            //{
-            //    record.Status = this.channel.Name + "初始化失败";
-            //}
-            //MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
+            var cameratask2 = await faceOutSocket.Connect();
+            Record record = Record.GetInitRecrod();
+            record.Channel = this.Channel.Name;
+            if (cameratask1 && cameratask2)
+            {
+                record.StatuCode = 0;
+                record.Status = "初始化成功";
+            }
+            else
+            {
+                record.Status = "初始化失败";
+            }
+            MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
             return false;
         }
 
@@ -176,7 +178,7 @@ namespace GZ_SpotGateEx.Core
                     //离开-成功
                     am.Line1 = Out_Ok;
                     am.Line2 = Line2_Ok_Tip;
-                    Udp.SendToAndroid(channel.PadInIp, am);
+                    Udp.SendToAndroid(channel.PadOutIp, am);
                     if (idType == IDType.Face)
                     {
                         var param = string.Format(HttpConstrant.url_client_opentgate, (int)inouttype, personCount);
@@ -196,7 +198,7 @@ namespace GZ_SpotGateEx.Core
                     //离开-失败
                     am.Line1 = Out_Failure;
                     am.Line2 = Line2_Failure_Tip;
-                    Udp.SendToAndroid(channel.PadInIp, am);
+                    Udp.SendToAndroid(channel.PadOutIp, am);
                 }
             }
             MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
