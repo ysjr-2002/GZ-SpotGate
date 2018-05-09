@@ -49,7 +49,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(158, 21);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "192.168.50.2";
+            this.textBox1.Text = "172.21.5.190";
             // 
             // textBox2
             // 
@@ -58,7 +58,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(464, 21);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "rtsp://192.168.50.3/user=admin&password=&channel=1&stream=0.sdp";
+            this.textBox2.Text = "rtsp://172.21.5.150/user=admin&password=&channel=1&stream=0.sdp";
             // 
             // button1
             // 
@@ -123,7 +123,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(306, 17);
+            this.radioButton1.Location = new System.Drawing.Point(306, 21);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(59, 16);
@@ -135,24 +135,26 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(364, 17);
+            this.radioButton2.Location = new System.Drawing.Point(370, 21);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 9;
             this.radioButton2.Text = "新版本";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.Visible = false;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(427, 16);
+            this.radioButton3.Location = new System.Drawing.Point(433, 21);
             this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(125, 16);
             this.radioButton3.TabIndex = 10;
             this.radioButton3.Text = "新版本（带method)";
             this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.Visible = false;
             // 
             // FrmMain
             // 

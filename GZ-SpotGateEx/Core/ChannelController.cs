@@ -130,6 +130,11 @@ namespace GZ_SpotGateEx.Core
             }
             else
             {
+                record.Status = feedback.message;
+                record.Time = sw.ElapsedMilliseconds + "ms";
+                //测试
+                feedback.code = 100;
+                feedback.personCount = "1";
                 AndroidMessage am = new AndroidMessage()
                 {
                     CheckInType = idType,
@@ -138,12 +143,6 @@ namespace GZ_SpotGateEx.Core
                     Delay = Delay,
                     Code = feedback.code
                 };
-
-                record.Status = feedback.message;
-                record.Time = sw.ElapsedMilliseconds + "ms";
-                //测试
-                feedback.code = 100;
-                feedback.personCount = "1";
                 byte personCount = feedback.personCount.ToByte();
                 if (inouttype == InOutType.In && feedback.code == 100)
                 {
