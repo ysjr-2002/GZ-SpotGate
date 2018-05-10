@@ -121,5 +121,17 @@ namespace GZ_SpotGateEx.Core
             get { return this.GetValue(s => s.IsTimeOut); }
             set { this.SetValue(s => s.IsTimeOut, value); }
         }
+
+        public bool IsWsIn
+        {
+            get { return this.GetValue(s => s.IsWsIn); }
+            set { this.SetValue(s => s.IsWsIn, value); }
+        }
+
+        public bool IsWsOut
+        {
+            get { return this.GetValue(s => s.IsWsOut); }
+            set { this.SetValue(s => s.IsWsOut, value); }
+        }
     }
 }

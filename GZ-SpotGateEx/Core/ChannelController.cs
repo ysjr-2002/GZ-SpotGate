@@ -56,8 +56,8 @@ namespace GZ_SpotGateEx.Core
         {
             _request = new Request();
             openGateUrl = string.Format(ConfigProfile.Current.OpenGateUrl, this.channel.ClientIp);
-            faceInSocket = new FaceSocket(channel.FaceInIp, channel.CameraInIp, OnFaceOutRecognize);
-            faceOutSocket = new FaceSocket(channel.FaceOutIp, channel.CameraOutIp, OnFaceOutRecognize);
+            faceInSocket = new FaceSocket(channel.FaceInIp, channel.CameraInIp, InOutType.In, channel, OnFaceInRecognize);
+            faceOutSocket = new FaceSocket(channel.FaceOutIp, channel.CameraOutIp, InOutType.Out, channel, OnFaceOutRecognize);
             var cameratask1 = await faceInSocket.Connect();
             var cameratask2 = await faceOutSocket.Connect();
             Record record = Record.GetInitRecrod();

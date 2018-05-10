@@ -1,4 +1,5 @@
 ﻿using GZ_SpotGateEx.Core;
+using GZ_SpotGateEx.Model;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,19 @@ namespace GZ_SpotGateEx.Face
         private string _cameraIp = "";
         private bool _open = false;
         private WebSocket _socket = null;
+        private Channel _channel;
+        private InOutType _inouttype;
         private Action<FaceRecognized> _callback = null;
 
         private const int sleep = 30 * 1000;
-        public FaceSocket(string koalaIp, string cameraIp, Action<FaceRecognized> callback)
+
+        public FaceSocket(string koalaIp, string cameraIp, InOutType inouttype, Channel channel, Action<FaceRecognized> callback)
         {
             _koalaIp = koalaIp;
             _cameraIp = cameraIp;
             _callback = callback;
+            _inouttype = inouttype;
+            _channel = channel;
         }
 
         public Task<bool> Connect()
@@ -63,14 +69,18 @@ namespace GZ_SpotGateEx.Face
         private void _socket_OnClose(object sender, CloseEventArgs e)
         {
             _open = false;
+            if (_inouttype == InOutType.In)
+                _channel.IsWsIn = false;
+            else
+                _channel.IsWsOut = false;
             if (!_appclose)
             {
                 MyLog.debug("Websocket关闭->" + _koalaIp);
-                //Task.Factory.StartNew(() =>
-                //{
-                //    Thread.Sleep(sleep);
-                //    Connect();
-                //});
+                Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(sleep);
+                    Connect();
+                });
             }
         }
 
@@ -84,6 +94,11 @@ namespace GZ_SpotGateEx.Face
         {
             _open = true;
             //MyLog.debug("Websocket成功->" + _koalaIp);
+            if (_inouttype == InOutType.In)
+                _channel.IsWsIn = true;
+            else
+                _channel.IsWsOut = true;
+
         }
 
         private void Dispose()
