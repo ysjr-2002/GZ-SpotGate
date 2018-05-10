@@ -190,10 +190,12 @@ namespace GZ_SpotGateEx.http
                     channelno = channel.No,
                     inhold = channel.InHold,
                     outhold = channel.OutHold,
-                    datetime = DateTime.Now.ToStandard(),
-                    enableshutdown = true,
-                    shutdowntime = ConfigProfile.Current.ShutdownTime
+                    datetime = DateTime.Now.ToStandard()
                 };
+                if (ConfigProfile.Current.ShutdownTime != "00:00:00")
+                    result.enableshutdown = true;
+                else
+                    result.enableshutdown = false;
             }
             else
             {
