@@ -44,7 +44,7 @@ namespace GZ_SpotGateEx.Core
             CheckInServerUrl = GetKey("checkInServerUrl");
             OpenGateUrl = GetKey("clientGateUrl");
             RebootGateUrl = GetKey("rebootGateUrl");
-            ShutdownTime = GetKey("rebootTime");
+            ShutdownTime = GetKey("gateshutdownTime");
         }
 
         public void Save()

@@ -10,6 +10,7 @@ using Ninject;
 using GZ_SpotGateEx.ViewModel;
 using GZ_SpotGateEx.Model;
 using System.IO;
+using System.Diagnostics;
 
 namespace GZ_SpotGateEx.http
 {
@@ -192,6 +193,7 @@ namespace GZ_SpotGateEx.http
                     outhold = channel.OutHold,
                     datetime = DateTime.Now.ToStandard()
                 };
+                result.shutdowntime = ConfigProfile.Current.ShutdownTime;
                 if (ConfigProfile.Current.ShutdownTime != "00:00:00")
                     result.enableshutdown = true;
                 else
