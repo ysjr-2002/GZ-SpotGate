@@ -175,7 +175,7 @@ namespace GZ_SpotGateEx.Core
                     Udp.SendToAndroid(channel.PadInIp, am);
 
                     //语音播报
-                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code);
+                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code, (int)inouttype);
                     var open = await _request.Open(gateSoundUrl + param);
                 }
                 if (inouttype == InOutType.Out && feedback.code == 100)
@@ -206,7 +206,7 @@ namespace GZ_SpotGateEx.Core
                     Udp.SendToAndroid(channel.PadOutIp, am);
 
                     //语音播报
-                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code);
+                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code, (int)inouttype);
                     var open = await _request.Open(gateSoundUrl + param);
                 }
             }

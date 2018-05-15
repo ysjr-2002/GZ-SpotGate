@@ -36,6 +36,8 @@ namespace RebootTool
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             datafile = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, datafile);
+            if (System.IO.File.Exists(datafile) == false)
+                return;
             time = System.IO.File.ReadAllText(datafile);
             AutoRun();
             StartTimer();
@@ -46,6 +48,7 @@ namespace RebootTool
             txtHour.Text = hour;
             txtMinute.Text = minute;
             txtSecond.Text = second;
+            this.WindowState = WindowState.Minimized;
         }
 
         private void StartTimer()

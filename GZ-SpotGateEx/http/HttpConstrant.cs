@@ -38,6 +38,6 @@ namespace GZ_SpotGateEx.http
 
         public static string url_client_opentgate = "?inouttype={0}&canIncount={1}";
 
-        public static string url_client_sound = "?code={0}";
+        public static string url_client_sound = "?code={0}&inouttype={1}";
     }
 }
