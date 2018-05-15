@@ -24,6 +24,7 @@ namespace GZ_SpotGateEx.Core
     {
         private Channel channel;
         private string openGateUrl = "";
+        private string gateSoundUrl = "";
         private FaceSocket faceInSocket;
         private FaceSocket faceOutSocket;
 
@@ -56,6 +57,7 @@ namespace GZ_SpotGateEx.Core
         {
             _request = new Request();
             openGateUrl = string.Format(ConfigProfile.Current.OpenGateUrl, this.channel.ClientIp);
+            gateSoundUrl = string.Format(ConfigProfile.Current.GateSoundUrl, this.Channel.ClientIp);
             faceInSocket = new FaceSocket(channel.FaceInIp, channel.CameraInIp, InOutType.In, channel, OnFaceInRecognize);
             faceOutSocket = new FaceSocket(channel.FaceOutIp, channel.CameraOutIp, InOutType.Out, channel, OnFaceOutRecognize);
             var cameratask1 = await faceInSocket.Connect();
@@ -133,8 +135,8 @@ namespace GZ_SpotGateEx.Core
                 record.Status = feedback.message;
                 record.Time = sw.ElapsedMilliseconds + "ms";
                 //测试
-                feedback.code = 100;
-                feedback.personCount = "1";
+                //feedback.code = 100;
+                //feedback.personCount = "1";
                 AndroidMessage am = new AndroidMessage()
                 {
                     CheckInType = idType,
@@ -171,6 +173,10 @@ namespace GZ_SpotGateEx.Core
                     am.Line1 = In_Failure;
                     am.Line2 = Line2_Failure_Tip;
                     Udp.SendToAndroid(channel.PadInIp, am);
+
+                    //语音播报
+                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code);
+                    var open = await _request.Open(gateSoundUrl + param);
                 }
                 if (inouttype == InOutType.Out && feedback.code == 100)
                 {
@@ -198,6 +204,10 @@ namespace GZ_SpotGateEx.Core
                     am.Line1 = Out_Failure;
                     am.Line2 = Line2_Failure_Tip;
                     Udp.SendToAndroid(channel.PadOutIp, am);
+
+                    //语音播报
+                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code);
+                    var open = await _request.Open(gateSoundUrl + param);
                 }
             }
             MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
@@ -218,6 +228,32 @@ namespace GZ_SpotGateEx.Core
             var code = face.person.job_number;
             var avatar = face.person.avatar;
             await Check(IDType.Face, InOutType.Out, code, name, avatar);
+        }
+
+        public void Error()
+        {
+            //-101:"验票失败"
+            //-201:"未排队";
+            //-205:"还未到该排队码，请耐心等候";
+            //-203:"暂停刷票";
+            //-111：”未支付”;
+            //-112：”已使用”;
+            //-113：”无效票号”;
+            //-114：”已过期”;
+            //-115：”当日未购票”;
+            //-116：”无购票信息”（刷身份证时返回的信息）
+
+            List<int> codes = new List<int>();
+            codes.Add(-101);
+            codes.Add(-201);
+            codes.Add(-205);
+            codes.Add(-203);
+            codes.Add(-111);
+            codes.Add(-112);
+            codes.Add(-113);
+            codes.Add(-114);
+            codes.Add(-115);
+            codes.Add(-116);
         }
     }
 }

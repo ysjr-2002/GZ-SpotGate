@@ -20,6 +20,8 @@ namespace GZ_SpotGateEx.Core
 
         public string RebootGateUrl { get; set; }
 
+        public string GateSoundUrl { get; set; }
+
         public string AutoRestartTime { get; set; }
 
         public string ShutdownTime { get; set; }
@@ -44,6 +46,7 @@ namespace GZ_SpotGateEx.Core
             CheckInServerUrl = GetKey("checkInServerUrl");
             OpenGateUrl = GetKey("clientGateUrl");
             RebootGateUrl = GetKey("rebootGateUrl");
+            GateSoundUrl = GetKey("gatesoundUrl");
             ShutdownTime = GetKey("gateshutdownTime");
         }
 

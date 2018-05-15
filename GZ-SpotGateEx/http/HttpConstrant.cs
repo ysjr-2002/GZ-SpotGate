@@ -37,5 +37,7 @@ namespace GZ_SpotGateEx.http
         public static string url_heartbeat = "http://{0}:10001" + suffix_heartbeat;
 
         public static string url_client_opentgate = "?inouttype={0}&canIncount={1}";
+
+        public static string url_client_sound = "?code={0}";
     }
 }
