@@ -174,9 +174,7 @@ namespace GZ_SpotGateEx.Core
                     am.Line2 = Line2_Failure_Tip;
                     Udp.SendToAndroid(channel.PadInIp, am);
 
-                    //语音播报
-                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code, (int)inouttype);
-                    var open = await _request.Open(gateSoundUrl + param);
+                    PlaySound(feedback.code, inouttype);
                 }
                 if (inouttype == InOutType.Out && feedback.code == 100)
                 {
@@ -205,13 +203,18 @@ namespace GZ_SpotGateEx.Core
                     am.Line2 = Line2_Failure_Tip;
                     Udp.SendToAndroid(channel.PadOutIp, am);
 
-                    //语音播报
-                    var param = string.Format(HttpConstrant.url_client_sound, feedback.code, (int)inouttype);
-                    var open = await _request.Open(gateSoundUrl + param);
+                    PlaySound(feedback.code, inouttype);
                 }
             }
             MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
             return feedback;
+        }
+
+        public async void PlaySound(int code, InOutType inouttype)
+        {
+            //语音播报
+            var param = string.Format(HttpConstrant.url_client_sound, code, (int)inouttype);
+            var open = await _request.Open(gateSoundUrl + param);
         }
 
         private async void OnFaceInRecognize(FaceRecognized face)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Ninject;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GZ_SpotGateEx.Core;
+using GZ_SpotGateEx.ViewModel;
 
 namespace GZ_SpotGateEx
 {
@@ -41,6 +43,7 @@ namespace GZ_SpotGateEx
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            //MyStandardKernel.Instance.Get<MainViewModel>().getChannelController("2").PlaySound(101, Model.InOutType.In);
             var bRet = Channels.Save();
             if (bRet)
             {

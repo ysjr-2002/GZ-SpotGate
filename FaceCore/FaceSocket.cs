@@ -14,9 +14,9 @@ namespace FaceCore
 {
     public class FaceSocket
     {
+        private bool _open = false;
         private string _koalaIp = "";
         private string _cameraIp = "";
-        private bool _open = false;
         private WebSocket _socket = null;
         private Action<FaceRecognize> _callback = null;
         private const int sleep = 30 * 1000;
@@ -37,22 +37,22 @@ namespace FaceCore
         {
             return Task.Factory.StartNew(() =>
             {
-                var url = string.Format("ws://{0}:9000/video", _koalaIp.Trim());
+                var wsurl = string.Format("ws://{0}:9000/video", _koalaIp.Trim());
                 //var rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp?", _cameraIp.Trim());
                 var rtsp = HttpUtility.UrlEncode(_cameraIp);
-                var all = string.Concat(url, "?url=", rtsp);
+                var url = string.Concat(wsurl, "?url=", rtsp);
 
-                _socket = new WebSocket(all);
-                _socket.OnOpen += _socket_OnOpen;
-                _socket.OnError += _socket_OnError;
-                _socket.OnClose += _socket_OnClose;
-                _socket.OnMessage += _socket_OnMessage;
+                _socket = new WebSocket(url);
+                _socket.OnOpen += socket_OnOpen;
+                _socket.OnError += socket_OnError;
+                _socket.OnClose += socket_OnClose;
+                _socket.OnMessage += socket_OnMessage;
                 _socket.Connect();
                 return _open;
             });
         }
 
-        private void _socket_OnMessage(object sender, MessageEventArgs e)
+        private void socket_OnMessage(object sender, MessageEventArgs e)
         {
             try
             {
@@ -67,13 +67,13 @@ namespace FaceCore
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("回调异常->" + ex.Message);
+                Debug.WriteLine("callback->" + ex.Message);
             }
         }
 
-        private void _socket_OnClose(object sender, CloseEventArgs e)
+        private void socket_OnClose(object sender, CloseEventArgs e)
         {
-            Debug.WriteLine("Websocket close->" + _koalaIp);
+            Debug.WriteLine(string.Format("ws close->koalaIp:{0} cameraIp:{1}", _koalaIp, _cameraIp));
             _open = false;
             if (!_appclose)
             {
@@ -83,15 +83,15 @@ namespace FaceCore
             }
         }
 
-        private void _socket_OnError(object sender, ErrorEventArgs e)
+        private void socket_OnError(object sender, ErrorEventArgs e)
         {
-            Debug.WriteLine("Websocket error->" + _koalaIp);
+            Debug.WriteLine(string.Format("ws error->koalaIp:{0} cameraIp:{1}", _koalaIp, _cameraIp));
             _open = false;
         }
 
-        private void _socket_OnOpen(object sender, EventArgs e)
+        private void socket_OnOpen(object sender, EventArgs e)
         {
-            Debug.WriteLine("Websocket success->" + _koalaIp);
+            Debug.WriteLine(string.Format("ws open->koalaIp:{0} cameraIp:{1}", _koalaIp, _cameraIp));
             _open = true;
         }
 
@@ -103,10 +103,10 @@ namespace FaceCore
             if (_socket.ReadyState == WebSocketState.Open)
                 _socket.Close();
 
-            _socket.OnOpen -= _socket_OnOpen;
-            _socket.OnClose -= _socket_OnClose;
-            _socket.OnError -= _socket_OnError;
-            _socket.OnMessage -= _socket_OnMessage;
+            _socket.OnOpen -= socket_OnOpen;
+            _socket.OnClose -= socket_OnClose;
+            _socket.OnError -= socket_OnError;
+            _socket.OnMessage -= socket_OnMessage;
             _socket = null;
         }
 
