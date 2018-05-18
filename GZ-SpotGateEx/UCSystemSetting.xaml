@@ -17,6 +17,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -59,6 +60,12 @@
             Grid.Row="5"
             Grid.Column="1"
             HorizontalContentAlignment="Right"
+            Content="语音服务：" />
+
+        <Label
+            Grid.Row="6"
+            Grid.Column="1"
+            HorizontalContentAlignment="Right"
             Content="闸机关机时间：" />
 
         <TextBox
@@ -75,15 +82,21 @@
             Grid.Column="2" />
 
         <TextBox
-            Name="txtRebootTime"
+            Name="txtSound"
             Grid.Row="5"
+            Grid.Column="2"
+            />
+
+        <TextBox
+            Name="txtRebootTime"
+            Grid.Row="6"
             Grid.Column="2"
             Width="60"
             HorizontalAlignment="Left"
             Text="00:00:00" />
 
         <Button
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.ColumnSpan="4"
             Width="80"
             Height="28"

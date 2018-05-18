@@ -33,6 +33,8 @@ namespace GZ_SpotGateEx
             txtServer.Text = ConfigProfile.Current.CheckInServerUrl;
             txtOpen.Text = ConfigProfile.Current.OpenGateUrl;
             txtReboot.Text = ConfigProfile.Current.RebootGateUrl;
+            txtSound.Text = ConfigProfile.Current.GateSoundUrl;
+            txtRebootTime.Text = ConfigProfile.Current.ShutdownTime;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -41,6 +43,8 @@ namespace GZ_SpotGateEx
             ConfigProfile.Current.CheckInServerUrl = txtServer.Text;
             ConfigProfile.Current.OpenGateUrl = txtOpen.Text;
             ConfigProfile.Current.RebootGateUrl = txtReboot.Text;
+            ConfigProfile.Current.GateSoundUrl = txtSound.Text;
+            ConfigProfile.Current.ShutdownTime = txtRebootTime.Text;
             ConfigProfile.Current.Save();
             Common.CMessageBox.Show("保存成功！");
         }

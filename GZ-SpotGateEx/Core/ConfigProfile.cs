@@ -57,6 +57,7 @@ namespace GZ_SpotGateEx.Core
             cfg.AppSettings.Settings["checkInServerUrl"].Value = CheckInServerUrl;
             cfg.AppSettings.Settings["clientGateUrl"].Value = OpenGateUrl;
             cfg.AppSettings.Settings["rebootGateUrl"].Value = RebootGateUrl;
+            cfg.AppSettings.Settings["gatesoundUrl"].Value = GateSoundUrl;
             cfg.AppSettings.Settings["gateshutdownTime"].Value = ShutdownTime;
             cfg.Save();
         }
