@@ -121,5 +121,10 @@ namespace FaceAPI
         private void FrmMain_Load(object sender, EventArgs e)
         {
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            api.CreateVisitor(txtPhoto.Text);
+        }
     }
 }

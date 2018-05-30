@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -137,5 +138,29 @@ namespace FaceAPI
 
         public int code { get; set; }
         public List<SubjectData> data { get; set; }
+    }
+
+    public class Visitor
+    {
+        public Visitor()
+        {
+            ///0: 其他, 1: 面试, 2: 商务, 3: 亲友, 4: 快递送货
+            purpose = 1;
+            interviewee = "总经理";
+            var st = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
+            start_time = (int)((DateTime.Now - st).TotalSeconds);
+            end_time = (int)((DateTime.Now - st).TotalSeconds);
+            name = "ysj";
+        }
+        public string come_from { get; set; }
+        public string description { get; set; }
+        public int end_time { get; set; }
+        public string interviewee { get; set; }
+        public string name { get; set; }
+        public string photo { get; set; }
+        public int purpose { get; set; }
+        public string remark { get; set; }
+        public int start_time { get; set; }
+        public string vip { get; set; }
     }
 }

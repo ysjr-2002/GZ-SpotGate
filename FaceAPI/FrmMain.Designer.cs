@@ -45,14 +45,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(32, 16);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(24, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 32);
+            this.button1.Size = new System.Drawing.Size(80, 24);
             this.button1.TabIndex = 0;
             this.button1.Text = "登录";
             this.button1.UseVisualStyleBackColor = true;
@@ -60,48 +60,43 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(240, 20);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(180, 15);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(175, 22);
+            this.textBox1.Size = new System.Drawing.Size(132, 21);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "szdds@126.com";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(505, 20);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Location = new System.Drawing.Point(379, 15);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(132, 22);
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = "7758258";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(177, 27);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(133, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 17);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "账号：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(443, 25);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(332, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 17);
+            this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 4;
             this.label2.Text = "密码：";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(36, 92);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(27, 69);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 32);
+            this.button2.Size = new System.Drawing.Size(80, 24);
             this.button2.TabIndex = 5;
             this.button2.Text = "人脸检测";
             this.button2.UseVisualStyleBackColor = true;
@@ -109,10 +104,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(32, 169);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Location = new System.Drawing.Point(24, 127);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 32);
+            this.button3.Size = new System.Drawing.Size(80, 24);
             this.button3.TabIndex = 6;
             this.button3.Text = "创建用户";
             this.button3.UseVisualStyleBackColor = true;
@@ -120,10 +114,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(595, 92);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Location = new System.Drawing.Point(446, 69);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(52, 35);
+            this.button5.Size = new System.Drawing.Size(39, 26);
             this.button5.TabIndex = 13;
             this.button5.Text = "...";
             this.button5.UseVisualStyleBackColor = true;
@@ -131,57 +124,51 @@
             // 
             // txtPhoto
             // 
-            this.txtPhoto.Location = new System.Drawing.Point(240, 96);
-            this.txtPhoto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPhoto.Location = new System.Drawing.Point(180, 72);
             this.txtPhoto.Name = "txtPhoto";
-            this.txtPhoto.Size = new System.Drawing.Size(349, 22);
+            this.txtPhoto.Size = new System.Drawing.Size(263, 21);
             this.txtPhoto.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(151, 100);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(113, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 17);
+            this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 11;
             this.label3.Text = "识别照片：";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(343, 179);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(257, 134);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 17);
+            this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 17;
             this.label4.Text = "唯一编号：";
             // 
             // txtJobNumber
             // 
-            this.txtJobNumber.Location = new System.Drawing.Point(432, 173);
-            this.txtJobNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtJobNumber.Location = new System.Drawing.Point(324, 130);
             this.txtJobNumber.Name = "txtJobNumber";
-            this.txtJobNumber.Size = new System.Drawing.Size(131, 22);
+            this.txtJobNumber.Size = new System.Drawing.Size(99, 21);
             this.txtJobNumber.TabIndex = 16;
             this.txtJobNumber.Text = "001";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(180, 179);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(135, 134);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 17);
+            this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 15;
             this.label6.Text = "姓名：";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(237, 173);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Location = new System.Drawing.Point(178, 130);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(88, 22);
+            this.txtName.Size = new System.Drawing.Size(67, 21);
             this.txtName.TabIndex = 14;
             this.txtName.Text = "旅游1";
             // 
@@ -189,19 +176,17 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(568, 179);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(426, 134);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(134, 17);
+            this.label5.Size = new System.Drawing.Size(113, 12);
             this.label5.TabIndex = 18;
             this.label5.Text = "人脸验证的唯一编号";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(32, 228);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Location = new System.Drawing.Point(24, 171);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(107, 32);
+            this.button4.Size = new System.Drawing.Size(80, 24);
             this.button4.TabIndex = 19;
             this.button4.Text = "删除用户";
             this.button4.UseVisualStyleBackColor = true;
@@ -209,19 +194,30 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(32, 267);
-            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button6.Location = new System.Drawing.Point(24, 214);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(107, 32);
+            this.button6.Size = new System.Drawing.Size(80, 24);
             this.button6.TabIndex = 20;
             this.button6.Text = "获取所有";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
- 
-       
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(137, 171);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(80, 24);
+            this.button7.TabIndex = 21;
+            this.button7.Text = "创建访客";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // FrmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(783, 341);
+            this.ClientSize = new System.Drawing.Size(587, 256);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label5);
@@ -239,7 +235,6 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "接口测试";
@@ -268,6 +263,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 

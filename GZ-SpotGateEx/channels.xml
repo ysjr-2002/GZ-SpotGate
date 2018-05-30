@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <channels>
   <!--通道1-->
   <channel>
     <no>1</no>
     <name>主入口第一通道</name>
     <!--通道虚拟IP-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
+    <channelvirtualip>172.21.4.110</channelvirtualip>
     <!--工控机-->
     <clientip>172.21.5.2</clientip>
     <!--入平板-->
@@ -28,7 +28,7 @@
   <channel>
     <no>2</no>
     <name>主入口第二通道</name>
-    <channelvirtualip>172.21.4.101</channelvirtualip>
+    <channelvirtualip>172.21.4.108</channelvirtualip>
     <clientip>172.21.5.3</clientip>
     <androidInip>172.21.5.17</androidInip>
     <androidOutip>172.21.5.18</androidOutip>
@@ -43,7 +43,7 @@
   <channel>
     <no>3</no>
     <name>主入口第三通道</name>
-    <channelvirtualip>172.21.4.102</channelvirtualip>
+    <channelvirtualip>172.21.4.111</channelvirtualip>
     <clientip>172.21.5.4</clientip>
     <androidInip>172.21.5.19</androidInip>
     <androidOutip>172.21.5.20</androidOutip>
@@ -58,7 +58,7 @@
   <channel>
     <no>4</no>
     <name>主入口第四通道</name>
-    <channelvirtualip>172.21.4.103</channelvirtualip>
+    <channelvirtualip>172.21.4.104</channelvirtualip>
     <clientip>172.21.5.5</clientip>
     <androidInip>172.21.5.21</androidInip>
     <androidOutip>172.21.5.22</androidOutip>
@@ -73,7 +73,7 @@
   <channel>
     <no>5</no>
     <name>长廊</name>
-    <channelvirtualip>172.21.4.104</channelvirtualip>
+    <channelvirtualip>172.21.4.101</channelvirtualip>
     <clientip>172.21.5.6</clientip>
     <androidInip>172.21.5.27</androidInip>
     <androidOutip>172.21.5.28</androidOutip>
@@ -119,7 +119,7 @@
     <no>8</no>
     <name>旱洞出口</name>
     <channelvirtualip>172.21.4.107</channelvirtualip>
-    <clientip>172.21.5.9</clientip>
+    <clientip>172.21.5.14</clientip>
     <androidInip>172.21.5.31</androidInip>
     <androidOutip>172.21.5.32</androidOutip>
     <faceInip>172.21.5.193</faceInip>
@@ -148,7 +148,7 @@
   <channel>
     <no>10</no>
     <name>次入口一通道</name>
-    <channelvirtualip>172.21.4.109</channelvirtualip>
+    <channelvirtualip>172.21.4.102</channelvirtualip>
     <clientip>172.21.5.11</clientip>
     <androidInip>172.21.5.35</androidInip>
     <androidOutip>172.21.5.36</androidOutip>
@@ -163,7 +163,7 @@
   <channel>
     <no>11</no>
     <name>次入口二通道</name>
-    <channelvirtualip>172.21.4.110</channelvirtualip>
+    <channelvirtualip>172.21.4.103</channelvirtualip>
     <clientip>172.21.5.12</clientip>
     <androidInip>172.21.5.37</androidInip>
     <androidOutip>172.21.5.38</androidOutip>
@@ -178,10 +178,10 @@
   <channel>
     <no>13</no>
     <name>码头</name>
-    <channelvirtualip>172.21.4.111</channelvirtualip>
+    <channelvirtualip>172.21.4.100</channelvirtualip>
     <clientip>172.21.5.13</clientip>
-    <androidInip>172.21.5.26</androidInip>
-    <androidOutip>172.21.5.25</androidOutip>
+    <androidInip>172.21.5.25</androidInip>
+    <androidOutip>172.21.5.26</androidOutip>
     <faceInip>172.21.5.196</faceInip>
     <faceOutip>172.21.5.196</faceOutip>
     <faceInCameraip>172.21.5.168</faceInCameraip>

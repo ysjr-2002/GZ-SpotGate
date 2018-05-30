@@ -18,6 +18,7 @@ namespace FaceAPI
         static string subjectphoto_url = root + "/subject/photo";
         static string avatar_url = root + "/subject/avatar";
         static string event_url = root + "/event/user";
+        static string padvisitor_url = root + "/pad/add-visitor";
 
         string session = "";
 
@@ -128,6 +129,35 @@ namespace FaceAPI
             var request = new HttpRequest();
             var responseStr = request.Get(event_url, session);
             return responseStr;
+        }
+
+        public string CreateVisitor(string filepath)
+        {
+            var st = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
+            var start_time = (int)((DateTime.Now.AddHours(-1) - st).TotalSeconds);
+            var end_time = (int)((DateTime.Now.AddHours(1) - st).TotalSeconds);
+
+            var bytes = filepath.FileToByte();
+            Dictionary<string, string> dicts = new Dictionary<string, string>();
+            dicts.Add("come_from", "come_from");
+            dicts.Add("description", "description");
+            dicts.Add("end_time", end_time.ToString());
+            dicts.Add("interviewee", "interviewee");
+            dicts.Add("name", "name");
+            dicts.Add("purpose", "1");
+            dicts.Add("remark", "remark");
+            dicts.Add("start_time", start_time.ToString());
+
+            var request = new HttpRequest();
+            var responseStr = request.PostPhoto(padvisitor_url, "photo", bytes, session, dicts);
+            if (responseStr.IsEmpty())
+            {
+                return string.Empty;
+            }
+            return responseStr;
+            //var error = responseStr.Deserialize<error>();
+            //var json = responseStr.Deserialize<Subject>();
+            //return json.data.id;
         }
     }
 }
