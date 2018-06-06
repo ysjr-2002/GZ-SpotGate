@@ -1,5 +1,4 @@
-﻿using GZ_SpotGate.Core;
-using IPVoice;
+﻿using IPVoice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +26,6 @@ namespace IPVoice
             }
             catch (Exception ex)
             {
-                MyConsole.Current.Log("语音播放失败->" + ex.Message);
             }
         }
     }
