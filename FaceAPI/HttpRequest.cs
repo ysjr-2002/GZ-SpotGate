@@ -34,6 +34,7 @@ namespace FaceAPI
                 var stream = response.GetResponseStream();
                 StreamReader sr = new StreamReader(stream, System.Text.Encoding.UTF8);
                 var content = sr.ReadToEnd();
+                Console.WriteLine(content);
 
                 var headers = response.Headers;
                 cookie = headers["Set-Cookie"];
