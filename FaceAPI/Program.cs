@@ -14,20 +14,9 @@ namespace FaceAPI
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FrmMain());
-            var task = new API().Login("tengli@megvii.com", "123456");
-            var login = task.Result;
-            if (login)
-            {
-                Console.WriteLine("login ok");
-            }
-            else
-            {
-                Console.WriteLine("login error");
-            }
-            Console.Read();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FrmMain());
         }
     }
 }
