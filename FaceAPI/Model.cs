@@ -72,6 +72,8 @@ namespace FaceAPI
 
         public string department { get; set; }
 
+        public string phone { get; set; }
+
         public int id { get; set; }
 
         public int gender { get; set; }
