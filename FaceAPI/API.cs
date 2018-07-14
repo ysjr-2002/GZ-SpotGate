@@ -10,9 +10,7 @@ namespace FaceAPI
 {
     class API
     {
-
-        //const string root = "https://v2.koalacam.net";
-        const string root = "http://192.168.0.50";
+        const string root = "https://v2.koalacam.net";
         static string login_url = root + "/auth/login";
         static string subjectlist_url = root + "/mobile-admin/subjects";
         static string subject_url = root + "/subject";
@@ -178,9 +176,6 @@ namespace FaceAPI
                 return string.Empty;
             }
             return responseStr;
-            //var error = responseStr.Deserialize<error>();
-            //var json = responseStr.Deserialize<Subject>();
-            //return json.data.id;
         }
     }
 }
