@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -113,14 +114,14 @@ namespace FaceAPI
             }
         }
 
-        public string PostJson(string url, string cookie, object instance)
+        public string PostJson(string url, string method, string cookie, object instance)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var jsonData = js.Serialize(instance);
             var data = jsonData.ToUTF8();
             WebRequest request = WebRequest.Create(url);
             request.ContentType = "application/json";
-            request.Method = "POST";
+            request.Method = method;
             request.Timeout = timeout;
             request.ContentLength = data.Length;
             if (!cookie.IsEmpty())
@@ -138,8 +139,9 @@ namespace FaceAPI
                     responseStr = stream.ReadToEnd();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                var msg = ex.InnerException.Message;
             }
             return responseStr;
         }

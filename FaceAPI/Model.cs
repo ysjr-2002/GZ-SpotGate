@@ -18,7 +18,14 @@ namespace FaceAPI
     {
         public int code { get; set; }
 
+        public temp data { get; set; }
+
         public string desc { get; set; }
+    }
+
+    internal class temp
+    {
+        public string msg { get; set; }
     }
 
     /// <summary>
@@ -78,9 +85,13 @@ namespace FaceAPI
 
         public string name { get; set; }
 
-        public string[] photo_ids { get; set; }
+        public int[] photo_ids { get; set; }
 
         public photo[] photos { get; set; }
+
+        public string phone { get; set; }
+
+        public string email { get; set; }
     }
 
     public class photo

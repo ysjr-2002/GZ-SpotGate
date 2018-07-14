@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -44,7 +45,7 @@ namespace FaceAPI
             });
         }
 
-        public Task<int> CreateSubjectWithPhotos(string name, string uniqueId, string avatarurl, string[] photo_ids)
+        public Task<int> CreateSubjectWithPhotos(string name, string uniqueId, string avatarurl, int[] photo_ids)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -65,7 +66,7 @@ namespace FaceAPI
                 };
 
                 var request = new HttpRequest();
-                var responseStr = request.PostJson(subject_url, session, subject);
+                var responseStr = request.PostJson(subject_url, HttpMethod.Post.ToString(), session, subject);
                 if (responseStr.IsEmpty())
                 {
                     return 0;
@@ -130,6 +131,27 @@ namespace FaceAPI
             var request = new HttpRequest();
             var responseStr = request.Get(event_url, session);
             return responseStr;
+        }
+
+        public Subject GetUser(int id)
+        {
+            var request = new HttpRequest();
+            var url = subject_url + "/" + id;
+            var responseStr = request.Get(url, session);
+            return responseStr.Deserialize<Subject>();
+        }
+
+        public void UpdateUser(SubjectData user)
+        {
+            var request = new HttpRequest();
+            var url = subject_url + "/" + user.id;
+            var responseStr = request.PostJson(url, HttpMethod.Put.ToString(), session, user);
+            if (responseStr.IsEmpty())
+            {
+                return;
+            }
+            var error = responseStr.Deserialize<error>();
+            var json = responseStr.Deserialize<Subject>();
         }
 
         public string CreateVisitor(string filepath)

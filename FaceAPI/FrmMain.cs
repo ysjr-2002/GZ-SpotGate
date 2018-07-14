@@ -87,7 +87,7 @@ namespace FaceAPI
                 return;
             }
 
-            serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, avatarurl, new string[] { photo_id.ToString() });
+            serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, avatarurl, new int[] { photo_id });
             if (serverId > 0)
             {
                 MessageBox.Show("创建用户成功");
@@ -109,12 +109,13 @@ namespace FaceAPI
             }
         }
 
+
         private void button6_Click(object sender, EventArgs e)
         {
             var list = (api.GetSubject()).Deserialize<SubjectList>();
             foreach (var item in list.data)
             {
-                Console.WriteLine(item.name + " " + item.job_number + " " + item.avatar);
+                Console.WriteLine(item.id + " " + item.name + " " + item.job_number + " " + item.avatar);
             }
         }
 
@@ -125,6 +126,23 @@ namespace FaceAPI
         private void button7_Click(object sender, EventArgs e)
         {
             api.CreateVisitor(txtPhoto.Text);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            user.name = "杨绍杰";
+            user.department = "华尊";
+            user.title = "研发工程师";
+            user.phone = "15914112520";
+            user.email = "ysjr-2002@163.com";
+            user.photo_ids = new int[] { user.photos.First().id };
+            api.UpdateUser(user);
+        }
+
+        SubjectData user = null;
+        private void button9_Click(object sender, EventArgs e)
+        {
+            user = api.GetUser(8).data;
         }
     }
 }
