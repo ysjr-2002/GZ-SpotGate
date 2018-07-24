@@ -184,6 +184,7 @@ namespace FaceAPI
                 using (var reader = new StreamReader(response.GetResponseStream()))
                 {
                     content = reader.ReadToEnd();
+                    Console.WriteLine("delete->" + content);
                 }
                 return content;
             }

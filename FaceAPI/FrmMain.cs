@@ -18,11 +18,12 @@ namespace FaceAPI
         {
             InitializeComponent();
             api = new API();
+            comboBox1.SelectedIndex = 1;
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            login = await api.Login(textBox1.Text, textBox2.Text);
+            login = await api.Login(comboBox1.Text, textBox2.Text);
             if (login)
             {
                 MessageBox.Show("登录成功");
@@ -87,24 +88,29 @@ namespace FaceAPI
                 return;
             }
 
-            //await Task.Factory.StartNew(async () =>
+            await Task.Factory.StartNew(async () =>
+            {
+                for (int i = 1; i <= 2000; i++)
+                {
+                    var upload = await api.UpdatePhoto(txtPhoto.Text);
+                    if (upload != null && upload.code == 0)
+                    {
+                        photo_id = upload.data.id;
+                    }
+                    var name = "用户" + string.Format("{0:d3}", i);
+                    serverId = await api.CreateSubjectWithPhotos(name, i.ToString(), avatarurl, new int[] { photo_id });
+                    Console.WriteLine("创建用户->" + serverId);
+                }
+            });
+            //serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, avatarurl, new int[] { photo_id });
+            //if (serverId > 0)
             //{
-            //    for (int i = 1; i <= 500; i++)
-            //    {
-            //        var name = "美女" + i;
-            //        serverId = await api.CreateSubjectWithPhotos(name, i.ToString(), avatarurl, new int[] { photo_id });
-            //        Console.WriteLine("创建用户->" + serverId);
-            //    }
-            //});
-            serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, avatarurl, new int[] { photo_id });
-            if (serverId > 0)
-            {
-                MessageBox.Show("创建用户成功");
-            }
-            else
-            {
-                MessageBox.Show("创建用户失败");
-            }
+            //    MessageBox.Show("创建用户成功");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("创建用户失败");
+            //}
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -145,8 +151,8 @@ namespace FaceAPI
             user.name = "杨绍杰";
             user.department = "华尊";
             user.title = "研发工程师";
-            user.phone = "15914112520";
-            user.email = "ysjr-2002@163.com";
+            user.mobile = "15914112520";
+            //user.email = "ysjr-2002@163.com";
             user.photo_ids = new int[] { user.photos.First().id };
             api.UpdateUser(user);
         }
@@ -155,6 +161,15 @@ namespace FaceAPI
         private void button9_Click(object sender, EventArgs e)
         {
             user = api.GetUser(8).data;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            var start = Convert.ToInt32(textBox1.Text);
+            for (int i = start; i < 9999999; i++)
+            {
+                api.DeleteSubject(i);
+            }
         }
     }
 }

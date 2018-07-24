@@ -11,6 +11,7 @@ namespace FaceAPI
     class API
     {
         const string root = "https://v2.koalacam.net";
+        //const string root = "http://192.168.0.50";
         static string login_url = root + "/auth/login";
         static string subjectlist_url = root + "/mobile-admin/subjects";
         static string subject_url = root + "/subject";
@@ -56,11 +57,11 @@ namespace FaceAPI
                     //avatar = "@" + (avatarurl),
                     department = "研发部",
                     job_number = uniqueId,
-                    photo_ids = photo_ids
-                    //birthday = DateTime.Now.Date.ToUnix(),
-                    //entry_date = DateTime.Now.Date.AddDays(1).ToUnix(),
-                    //start_time = DateTime.Now.Date.ToUnix(),
-                    //end_time = DateTime.Now.Date.AddDays(1).ToUnix()
+                    photo_ids = photo_ids,
+                    birthday = DateTime.Now.Date.ToUnix(),
+                    entry_date = DateTime.Now.Date.AddDays(1).ToUnix(),
+                    start_time = DateTime.Now.Date.ToUnix(),
+                    end_time = DateTime.Now.Date.AddDays(1).ToUnix()
                 };
 
                 var request = new HttpRequest();
@@ -141,15 +142,15 @@ namespace FaceAPI
 
         public void UpdateUser(SubjectData user)
         {
-            var request = new HttpRequest();
-            var url = subject_url + "/" + user.id;
-            var responseStr = request.PostJson(url, HttpMethod.Put.ToString(), session, user);
-            if (responseStr.IsEmpty())
-            {
-                return;
-            }
-            var error = responseStr.Deserialize<error>();
-            var json = responseStr.Deserialize<Subject>();
+            //var request = new HttpRequest();
+            //var url = subject_url + "/" + user.id;
+            //var responseStr = request.PostJson(url, HttpMethod.Put.ToString(), session, user);
+            //if (responseStr.IsEmpty())
+            //{
+            //    return;
+            //}
+            //var error = responseStr.Deserialize<error>();
+            //var json = responseStr.Deserialize<Subject>();
         }
 
         public string CreateVisitor(string name, string filepath)

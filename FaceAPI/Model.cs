@@ -55,9 +55,9 @@ namespace FaceAPI
     /// </summary>
     public class SubjectData
     {
-        public string remark { get; set; }
+        //public string email { get; set; }
 
-        public int subject_type { get; set; }
+        public string remark { get; set; }
 
         public string description { get; set; }
 
@@ -79,19 +79,27 @@ namespace FaceAPI
 
         public string department { get; set; }
 
-        public string phone { get; set; }
-
-        public int id { get; set; }
+        /// <summary>
+        /// 非常操蛋，创建的时候不能带有email字段
+        /// </summary>
+        public string mobile { get; set; }
 
         public int gender { get; set; }
-
-        public string name { get; set; }
 
         public int[] photo_ids { get; set; }
 
         public photo[] photos { get; set; }
 
-        public string email { get; set; }
+        public int subject_type { get; set; }
+
+        public string name { get; set; }
+
+        public int id { get; set; }
+
+        public SubjectData()
+        {
+            //email = "ysjr-2002@163.com";
+        }
     }
 
     public class photo
