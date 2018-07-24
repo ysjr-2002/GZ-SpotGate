@@ -50,17 +50,17 @@ namespace FaceAPI
                 SubjectData subject = new SubjectData
                 {
                     //0:员工 1:访客 2:VIP
-                    subject_type = 1,
+                    subject_type = 0,
                     name = name,
                     gender = 2,
                     //avatar = "@" + (avatarurl),
                     department = "研发部",
-                    description = "",
-                    title = "",
                     job_number = uniqueId,
-                    photo_ids = photo_ids,
-                    birthday = DateTime.Now.Date.ToUnix(),
-                    entry_date = DateTime.Now.Date.AddDays(1).ToUnix()
+                    photo_ids = photo_ids
+                    //birthday = DateTime.Now.Date.ToUnix(),
+                    //entry_date = DateTime.Now.Date.AddDays(1).ToUnix(),
+                    //start_time = DateTime.Now.Date.ToUnix(),
+                    //end_time = DateTime.Now.Date.AddDays(1).ToUnix()
                 };
 
                 var request = new HttpRequest();
@@ -152,7 +152,7 @@ namespace FaceAPI
             var json = responseStr.Deserialize<Subject>();
         }
 
-        public string CreateVisitor(string filepath)
+        public string CreateVisitor(string name, string filepath)
         {
             var st = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1, 0, 0, 0, 0));
             var start_time = (int)((DateTime.Now.AddHours(-1) - st).TotalSeconds);
@@ -164,7 +164,7 @@ namespace FaceAPI
             dicts.Add("description", "description");
             dicts.Add("end_time", end_time.ToString());
             dicts.Add("interviewee", "interviewee");
-            dicts.Add("name", "name");
+            dicts.Add("name", name);
             dicts.Add("purpose", "1");
             dicts.Add("remark", "remark");
             dicts.Add("start_time", start_time.ToString());

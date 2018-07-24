@@ -87,6 +87,15 @@ namespace FaceAPI
                 return;
             }
 
+            //await Task.Factory.StartNew(async () =>
+            //{
+            //    for (int i = 1; i <= 500; i++)
+            //    {
+            //        var name = "美女" + i;
+            //        serverId = await api.CreateSubjectWithPhotos(name, i.ToString(), avatarurl, new int[] { photo_id });
+            //        Console.WriteLine("创建用户->" + serverId);
+            //    }
+            //});
             serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, avatarurl, new int[] { photo_id });
             if (serverId > 0)
             {
@@ -109,7 +118,6 @@ namespace FaceAPI
             }
         }
 
-
         private void button6_Click(object sender, EventArgs e)
         {
             var list = (api.GetSubject()).Deserialize<SubjectList>();
@@ -125,7 +133,11 @@ namespace FaceAPI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            api.CreateVisitor(txtPhoto.Text);
+            for (int i = 1; i <= 500; i++)
+            {
+                var kk = api.CreateVisitor("美女" + i, txtPhoto.Text);
+                Console.WriteLine(kk);
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)

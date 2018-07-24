@@ -75,19 +75,19 @@ namespace WindowsFormsApplication1.Old
 
         public long timestamp { get; set; }
 
-        public int start_time { get; set; }
+        public string start_time { get; set; }
 
         public string avatar { get; set; }
 
         public string job_number { get; set; }
 
-        public object birthday { get; set; }
+        public string birthday { get; set; }
 
-        public object entry_date { get; set; }
+        public string entry_date { get; set; }
 
         public string department { get; set; }
 
-        public int end_time { get; set; }
+        public string end_time { get; set; }
 
         public int id { get; set; }
 

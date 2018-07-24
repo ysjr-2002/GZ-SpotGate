@@ -68,9 +68,10 @@ namespace WindowsFormsApplication1
 
         private void Ws_OnError1(object sender, WebSocketSharp.ErrorEventArgs e)
         {
-            lblState.Text = "连接错误";
+            lblState.Text = "连接错误->" + e.Message + " " + DateTime.Now.ToString("HH:mm:ss");
         }
 
+        int count = 0;
         private void Ws_OnMessage(object sender, MessageEventArgs e)
         {
             if (e.IsText)
@@ -98,6 +99,7 @@ namespace WindowsFormsApplication1
             }
         }
 
+
         private void showFace(string name, string base64)
         {
             try
@@ -105,9 +107,11 @@ namespace WindowsFormsApplication1
                 var buffer = Convert.FromBase64String(base64);
                 var ms = new MemoryStream(buffer);
                 var image = Image.FromStream(ms);
+                count++;
                 this.Invoke(new Action(() =>
                 {
                     label3.Text = name;//+ "-" + (int)face.data.person.confidence;
+                    label4.Text = count.ToString();
                     showFace(image);
                 }));
             }
@@ -128,15 +132,13 @@ namespace WindowsFormsApplication1
             {
                 lblState.Text = "连接成功，请进行人脸识别";
             }));
-            Debug.WriteLine("hz:连接成功");
         }
 
         private void Ws_OnClose(object sender, CloseEventArgs e)
         {
             Invoke(new Action(() =>
             {
-                lblState.Text = "连接关闭";
-                Debug.WriteLine("hz:连接关闭");
+                lblState.Text = "连接关闭" + DateTime.Now.ToString("HH:mm:ss");
             }));
         }
 
