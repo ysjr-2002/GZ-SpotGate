@@ -60,8 +60,8 @@ namespace FaceAPI
                     photo_ids = photo_ids,
                     birthday = DateTime.Now.Date.ToUnix(),
                     entry_date = DateTime.Now.Date.AddDays(1).ToUnix(),
-                    start_time = DateTime.Now.Date.ToUnix(),
-                    end_time = DateTime.Now.Date.AddDays(1).ToUnix()
+                    start_time = DateTime.Now.Date.ToUnix().ToString(),
+                    end_time = DateTime.Now.Date.AddDays(1).ToUnix().ToString()
                 };
 
                 var request = new HttpRequest();

@@ -99,7 +99,6 @@ namespace WindowsFormsApplication1
             }
         }
 
-
         private void showFace(string name, string base64)
         {
             try

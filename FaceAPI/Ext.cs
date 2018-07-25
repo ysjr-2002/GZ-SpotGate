@@ -26,6 +26,7 @@ namespace FaceAPI
         public static T Deserialize<T>(this string input)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
+            serializer.MaxJsonLength = Int32.MaxValue;
             return serializer.Deserialize<T>(input);
         }
 

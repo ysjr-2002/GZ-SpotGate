@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -168,7 +169,10 @@ namespace FaceAPI
             var start = Convert.ToInt32(textBox1.Text);
             for (int i = start; i < 9999999; i++)
             {
+                Stopwatch sw = Stopwatch.StartNew();
                 api.DeleteSubject(i);
+                sw.Stop();
+                Console.WriteLine("time->" + sw.ElapsedMilliseconds);
             }
         }
     }

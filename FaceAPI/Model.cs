@@ -65,9 +65,9 @@ namespace FaceAPI
 
         public long timestamp { get; set; }
 
-        public long start_time { get; set; }
+        public string start_time { get; set; }
 
-        public long end_time { get; set; }
+        public string end_time { get; set; }
 
         public string avatar { get; set; }
 
