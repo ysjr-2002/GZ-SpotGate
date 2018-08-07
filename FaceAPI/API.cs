@@ -44,7 +44,7 @@ namespace FaceAPI
             });
         }
 
-        public Task<int> CreateSubjectWithPhotos(string name, string uniqueId, string avatarurl, int[] photo_ids)
+        public Task<int> CreateSubjectWithPhotos(string name, string jobnumber, string avatarurl, int[] photo_ids)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -55,13 +55,14 @@ namespace FaceAPI
                     name = name,
                     gender = 2,
                     //avatar = "@" + (avatarurl),
-                    department = "研发部",
-                    job_number = uniqueId,
+                    department = "奥比岛安全技术",
+                    job_number = jobnumber,
                     photo_ids = photo_ids,
+                    phone = "13760121111",
                     birthday = DateTime.Now.Date.ToUnix(),
                     entry_date = DateTime.Now.Date.AddDays(1).ToUnix(),
-                    start_time = DateTime.Now.Date.ToUnix().ToString(),
-                    end_time = DateTime.Now.Date.AddDays(1).ToUnix().ToString()
+                    //start_time = DateTime.Now.Date.ToUnix().ToString(),
+                    //end_time = DateTime.Now.Date.AddDays(1).ToUnix().ToString()
                 };
 
                 var request = new HttpRequest();

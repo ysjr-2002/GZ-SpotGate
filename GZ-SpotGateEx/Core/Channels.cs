@@ -64,7 +64,9 @@ namespace GZ_SpotGateEx.Core
                     CameraOutIp = item.Element("faceOutCameraip").Value,
                     InHold = EValue(item, "inhold").ToInt32(),
                     OutHold = EValue(item, "outhold").ToInt32(),
-                    LastHeartbeat = DateTime.Now.ToStandard()
+                    LastHeartbeat = DateTime.Now.ToStandard(),
+                    CIntype = EValue(item, "cintype").ToInt32(),
+                    COutype = EValue(item, "couttype").ToInt32()
                 };
                 ChannelList.Add(cm);
             }

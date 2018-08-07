@@ -23,6 +23,8 @@
     <!--1:常开 0:正常-->
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>2</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道2-->
   <channel>
@@ -38,6 +40,8 @@
     <faceOutCameraip>172.21.5.173</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道3-->
   <channel>
@@ -53,6 +57,8 @@
     <faceOutCameraip>172.21.5.167</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道4-->
   <channel>
@@ -68,6 +74,8 @@
     <faceOutCameraip>172.21.5.171</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道5-->
   <channel>
@@ -83,12 +91,14 @@
     <faceOutCameraip>172.21.5.151</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道6-->
   <channel>
     <no>6</no>
     <name>银河宫</name>
-    <channelvirtualip>172.21.4.105</channelvirtualip>
+    <channelvirtualip>172.21.4.107</channelvirtualip>
     <clientip>172.21.5.7</clientip>
     <androidInip>172.21.5.29</androidInip>
     <androidOutip>172.21.5.30</androidOutip>
@@ -98,13 +108,15 @@
     <faceOutCameraip>172.21.5.153</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道7-->
   <channel>
     <no>7</no>
     <name>溜索</name>
     <channelvirtualip>172.21.4.106</channelvirtualip>
-    <clientip>172.21.5.8</clientip>
+    <clientip>172.21.5.9</clientip>
     <androidInip>172.21.5.33</androidInip>
     <androidOutip>172.21.5.34</androidOutip>
     <faceInip>172.21.5.192</faceInip>
@@ -113,12 +125,14 @@
     <faceOutCameraip>172.21.5.156</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道8-->
   <channel>
     <no>8</no>
     <name>旱洞出口</name>
-    <channelvirtualip>172.21.4.107</channelvirtualip>
+    <channelvirtualip>172.21.4.109</channelvirtualip>
     <clientip>172.21.5.14</clientip>
     <androidInip>172.21.5.31</androidInip>
     <androidOutip>172.21.5.32</androidOutip>
@@ -128,12 +142,14 @@
     <faceOutCameraip>172.21.5.161</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道9-->
   <channel>
     <no>9</no>
     <name>梦草原</name>
-    <channelvirtualip>172.21.4.108</channelvirtualip>
+    <channelvirtualip>172.21.4.105</channelvirtualip>
     <clientip>172.21.5.10</clientip>
     <androidInip>172.21.5.23</androidInip>
     <androidOutip>172.21.5.24</androidOutip>
@@ -143,6 +159,8 @@
     <faceOutCameraip>172.21.5.163</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道10-->
   <channel>
@@ -158,6 +176,8 @@
     <faceOutCameraip>172.21.5.165</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道11-->
   <channel>
@@ -173,6 +193,8 @@
     <faceOutCameraip>172.21.5.155</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
   <!--通道12-->
   <channel>
@@ -188,5 +210,7 @@
     <faceOutCameraip>172.21.5.169</faceOutCameraip>
     <inhold>0</inhold>
     <outhold>0</outhold>
+    <cintype>1</cintype>
+    <couttype>1</couttype>
   </channel>
 </channels>

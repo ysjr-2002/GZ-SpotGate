@@ -82,7 +82,7 @@ namespace FaceAPI
         /// <summary>
         /// 非常操蛋，创建的时候不能带有email字段
         /// </summary>
-        public string mobile { get; set; }
+        public string phone { get; set; }
 
         public int gender { get; set; }
 

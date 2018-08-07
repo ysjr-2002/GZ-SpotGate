@@ -91,17 +91,18 @@ namespace FaceAPI
 
             await Task.Factory.StartNew(async () =>
             {
-                for (int i = 1; i <= 2000; i++)
+                var i = 0;
+                //for (int i = 1; i <= 2000; i++)
+                //{
+                var upload = await api.UpdatePhoto(txtPhoto.Text);
+                if (upload != null && upload.code == 0)
                 {
-                    var upload = await api.UpdatePhoto(txtPhoto.Text);
-                    if (upload != null && upload.code == 0)
-                    {
-                        photo_id = upload.data.id;
-                    }
-                    var name = "用户" + string.Format("{0:d3}", i);
-                    serverId = await api.CreateSubjectWithPhotos(name, i.ToString(), avatarurl, new int[] { photo_id });
-                    Console.WriteLine("创建用户->" + serverId);
+                    photo_id = upload.data.id;
                 }
+                var name = "用户" + string.Format("{0:d3}", i);
+                serverId = await api.CreateSubjectWithPhotos(name, i.ToString(), avatarurl, new int[] { photo_id });
+                Console.WriteLine("创建用户->" + serverId);
+                //}
             });
             //serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, avatarurl, new int[] { photo_id });
             //if (serverId > 0)
@@ -140,11 +141,12 @@ namespace FaceAPI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i <= 500; i++)
-            {
-                var kk = api.CreateVisitor("美女" + i, txtPhoto.Text);
-                Console.WriteLine(kk);
-            }
+            //for (int i = 1; i <= 500; i++)
+            //{
+            var i = 0;
+            var kk = api.CreateVisitor("访客" + i, txtPhoto.Text);
+            Console.WriteLine(kk);
+            //}
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -152,7 +154,7 @@ namespace FaceAPI
             user.name = "杨绍杰";
             user.department = "华尊";
             user.title = "研发工程师";
-            user.mobile = "15914112520";
+            user.phone = "15914112520";
             //user.email = "ysjr-2002@163.com";
             user.photo_ids = new int[] { user.photos.First().id };
             api.UpdateUser(user);

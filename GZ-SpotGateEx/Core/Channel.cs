@@ -133,5 +133,8 @@ namespace GZ_SpotGateEx.Core
             get { return this.GetValue(s => s.IsWsOut); }
             set { this.SetValue(s => s.IsWsOut, value); }
         }
+
+        public int CIntype { get; set; }
+        public int COutype { get; set; }
     }
 }

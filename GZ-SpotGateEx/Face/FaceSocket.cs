@@ -40,7 +40,22 @@ namespace GZ_SpotGateEx.Face
                 Dispose();
 
                 var url = string.Format("ws://{0}:9000/video", _koalaIp.Trim());
-                var rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp.Trim());
+                var rtsp = "";
+                if (_inouttype == InOutType.In)
+                {
+                    if (_channel.CIntype == 1)
+                        rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp.Trim());
+                    else
+                        rtsp = string.Format("rtsp://{0}:8080/h264_ulaw.sdp", _cameraIp.Trim());
+                }
+                if (_inouttype == InOutType.Out)
+                {
+                    if (_channel.COutype == 1)
+                        rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", _cameraIp.Trim());
+                    else
+                        rtsp = string.Format("rtsp://{0}:8080/h264_ulaw.sdp", _cameraIp.Trim());
+                }
+
                 rtsp = HttpUtility.UrlEncode(rtsp);
                 var all = string.Concat(url, "?url=", rtsp);
 
