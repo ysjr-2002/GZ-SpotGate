@@ -220,7 +220,7 @@ namespace GZ_SpotGateEx.Core
         private async void OnFaceInRecognize(FaceRecognized face)
         {
             var name = face.person.name;
-            var code = face.person.job_number;
+            var code = face.person.description;
             var avatar = face.person.avatar;
             await Check(IDType.Face, InOutType.In, code, name, avatar);
         }
@@ -228,7 +228,7 @@ namespace GZ_SpotGateEx.Core
         private async void OnFaceOutRecognize(FaceRecognized face)
         {
             var name = face.person.name;
-            var code = face.person.job_number;
+            var code = face.person.description;
             var avatar = face.person.avatar;
             await Check(IDType.Face, InOutType.Out, code, name, avatar);
         }
