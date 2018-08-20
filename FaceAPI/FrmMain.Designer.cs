@@ -83,7 +83,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(332, 19);
+            this.label2.Location = new System.Drawing.Point(334, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 4;
@@ -237,9 +237,9 @@
             "szxinlikang@163.com",
             "tengli@megvii.com",
             "qudian@qq.com"});
-            this.comboBox1.Location = new System.Drawing.Point(178, 18);
+            this.comboBox1.Location = new System.Drawing.Point(178, 16);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(126, 20);
+            this.comboBox1.Size = new System.Drawing.Size(144, 20);
             this.comboBox1.TabIndex = 24;
             // 
             // button10
