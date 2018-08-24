@@ -32,11 +32,11 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("请输入Koala Ip地址！");
                 return;
             }
-            if (string.IsNullOrEmpty(textBox2.Text) || !textBox2.Text.StartsWith("rtsp:"))
-            {
-                MessageBox.Show("请输入摄像机rtsp地址！");
-                return;
-            }
+            //if (string.IsNullOrEmpty(textBox2.Text) || !textBox2.Text.StartsWith("rtsp:"))
+            //{
+            //    MessageBox.Show("请输入摄像机rtsp地址！");
+            //    return;
+            //}
 
             var url = "ws://" + textBox1.Text + ":9000/video";
             var rtsp = textBox2.Text;
