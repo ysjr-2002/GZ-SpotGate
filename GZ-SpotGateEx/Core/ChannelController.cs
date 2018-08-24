@@ -31,10 +31,10 @@ namespace GZ_SpotGateEx.Core
         private Request _request;
 
         private const int Delay = 3000;
-        private const string In_Ok = "欢迎光临,请入园";
+        private const string In_Ok = "欢迎光临";
         private const string In_Failure = "请重新验证";
 
-        private const string Out_Ok = "欢迎再次光临";
+        private const string Out_Ok = "谢谢光临";
         private const string Out_Failure = "请重新验证";
 
         private const string Line2_Ok_Tip = "验证成功";
@@ -149,7 +149,7 @@ namespace GZ_SpotGateEx.Core
                 if (inouttype == InOutType.In && feedback.code == 100)
                 {
                     //开闸
-                    am.Line1 = In_Ok;
+                    am.Line1 = In_Ok + " " + name;
                     am.Line2 = Line2_Ok_Tip;
                     Udp.SendToAndroid(channel.PadInIp, am);
 
@@ -179,7 +179,7 @@ namespace GZ_SpotGateEx.Core
                 if (inouttype == InOutType.Out && feedback.code == 100)
                 {
                     //离开-成功
-                    am.Line1 = Out_Ok;
+                    am.Line1 = Out_Ok + " " + name;
                     am.Line2 = Line2_Ok_Tip;
                     Udp.SendToAndroid(channel.PadOutIp, am);
                     if (idType == IDType.Face)
