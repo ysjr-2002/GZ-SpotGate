@@ -45,28 +45,25 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(132, 17);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Location = new System.Drawing.Point(176, 23);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(158, 21);
+            this.textBox1.Size = new System.Drawing.Size(209, 22);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "172.21.5.190";
+            this.textBox1.Text = "192.168.0.50";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(132, 46);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox2.Location = new System.Drawing.Point(176, 61);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(464, 21);
+            this.textBox2.Size = new System.Drawing.Size(617, 22);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "rtsp://172.21.5.150/user=admin&password=&channel=1&stream=0.sdp";
+            this.textBox2.Text = "http://192.168.0.15:8080/video";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(132, 77);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(176, 103);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 22);
+            this.button1.Size = new System.Drawing.Size(101, 29);
             this.button1.TabIndex = 2;
             this.button1.Text = "connect";
             this.button1.UseVisualStyleBackColor = true;
@@ -75,20 +72,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(84, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(74, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Koala IP：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 50);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(36, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 12);
+            this.label2.Size = new System.Drawing.Size(116, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "完整的rtsp地址：";
             // 
@@ -96,17 +91,17 @@
             // 
             this.lblState.AutoSize = true;
             this.lblState.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblState.Location = new System.Drawing.Point(219, 79);
-            this.lblState.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblState.Location = new System.Drawing.Point(292, 105);
             this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(0, 19);
+            this.lblState.Size = new System.Drawing.Size(0, 24);
             this.lblState.TabIndex = 5;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(184, 114);
+            this.pictureBox1.Location = new System.Drawing.Point(245, 152);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(264, 265);
+            this.pictureBox1.Size = new System.Drawing.Size(352, 353);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -114,20 +109,18 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(453, 230);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(604, 307);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 28);
+            this.label3.Size = new System.Drawing.Size(163, 37);
             this.label3.TabIndex = 7;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(306, 21);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton1.Location = new System.Drawing.Point(408, 28);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(59, 16);
+            this.radioButton1.Size = new System.Drawing.Size(71, 21);
             this.radioButton1.TabIndex = 8;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "旧版本";
@@ -136,10 +129,9 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(370, 21);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton2.Location = new System.Drawing.Point(493, 28);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(59, 16);
+            this.radioButton2.Size = new System.Drawing.Size(71, 21);
             this.radioButton2.TabIndex = 9;
             this.radioButton2.Text = "新版本";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -148,10 +140,9 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(433, 21);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton3.Location = new System.Drawing.Point(577, 28);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(125, 16);
+            this.radioButton3.Size = new System.Drawing.Size(151, 21);
             this.radioButton3.TabIndex = 10;
             this.radioButton3.Text = "新版本（带method)";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -160,18 +151,19 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(455, 114);
+            this.label4.Location = new System.Drawing.Point(607, 152);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 32);
+            this.label4.Size = new System.Drawing.Size(137, 43);
             this.label4.TabIndex = 11;
             this.label4.Text = "0";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 391);
+            this.ClientSize = new System.Drawing.Size(811, 521);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
@@ -185,7 +177,6 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebSocket Test";
