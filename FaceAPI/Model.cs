@@ -55,40 +55,43 @@ namespace FaceAPI
     /// </summary>
     public class SubjectData
     {
+        /// <summary>
+        /// 非常操蛋，创建的时候不能带有email字段
+        /// </summary>
         //public string email { get; set; }
 
-        public string remark { get; set; }
+        //public string remark { get; set; }
 
-        public string description { get; set; }
+        //public string description { get; set; }
 
-        public string title { get; set; }
+        //public string title { get; set; }
 
-        public long timestamp { get; set; }
+        //public long timestamp { get; set; }
 
         public string start_time { get; set; }
 
         public string end_time { get; set; }
 
-        public string avatar { get; set; }
+        //public string avatar { get; set; }
 
-        public string job_number { get; set; }
+        //public string job_number { get; set; }
 
-        public object birthday { get; set; }
-
-        public object entry_date { get; set; }
-
-        public string department { get; set; }
+        //public object birthday { get; set; }
 
         /// <summary>
-        /// 非常操蛋，创建的时候不能带有email字段
-        /// </summary>
-        public string phone { get; set; }
+        /// 入职时间，创建员工必须填写
+        /// </summary>   
+        public object entry_date { get; set; }
 
-        public int gender { get; set; }
+        //public string department { get; set; }
+
+        //public string phone { get; set; }
+
+        //public int gender { get; set; }
 
         public int[] photo_ids { get; set; }
 
-        public photo[] photos { get; set; }
+        //public photo[] photos { get; set; }
 
         public int subject_type { get; set; }
 
