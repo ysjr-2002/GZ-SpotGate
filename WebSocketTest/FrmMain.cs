@@ -22,6 +22,10 @@ namespace WindowsFormsApplication1
         public FrmMain()
         {
             InitializeComponent();
+            if (cmbrtsp.Items.Count > 0)
+            {
+                cmbrtsp.SelectedIndex = 0;
+            }
         }
 
         WebSocket ws = null;
@@ -39,7 +43,7 @@ namespace WindowsFormsApplication1
             //}
 
             var url = "ws://" + textBox1.Text + ":9000/video";
-            var rtsp = textBox2.Text;
+            var rtsp = cmbrtsp.Text;
             rtsp = HttpUtility.UrlEncode(rtsp);
             if (radioButton1.Checked)
             {

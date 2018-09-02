@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
+            this.cmbrtsp = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,14 +50,6 @@
             this.textBox1.Size = new System.Drawing.Size(209, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "192.168.0.50";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(176, 61);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(617, 22);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "http://192.168.0.15:8080/video";
             // 
             // button1
             // 
@@ -99,7 +91,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(245, 152);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(352, 353);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -159,11 +151,22 @@
             this.label4.Text = "0";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // cmbrtsp
+            // 
+            this.cmbrtsp.FormattingEnabled = true;
+            this.cmbrtsp.Items.AddRange(new object[] {
+            "rtsp://192.168.0.15:8080/h264_ulaw.sdp"});
+            this.cmbrtsp.Location = new System.Drawing.Point(176, 67);
+            this.cmbrtsp.Name = "cmbrtsp";
+            this.cmbrtsp.Size = new System.Drawing.Size(552, 24);
+            this.cmbrtsp.TabIndex = 12;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(811, 521);
+            this.Controls.Add(this.cmbrtsp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
@@ -174,7 +177,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmMain";
@@ -189,7 +191,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -200,6 +201,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbrtsp;
     }
 }
 
