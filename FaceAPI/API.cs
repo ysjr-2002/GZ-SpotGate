@@ -12,9 +12,9 @@ namespace FaceAPI
     {
         const string root = "https://v2.koalacam.net";
         //const string root = "http://192.168.0.50";
-        static string login_url = root + "/auth/login";
+        public static string login_url = root + "/auth/login";
         static string subjectlist_url = root + "/mobile-admin/subjects";
-        static string subject_url = root + "/subject";
+        public static string subject_url = root + "/subject";
         static string subjectdelete_url = root + "/subject/";
         static string subjectphoto_url = root + "/subject/photo";
         static string avatar_url = root + "/subject/avatar";
@@ -44,7 +44,7 @@ namespace FaceAPI
             });
         }
 
-        public Task<int> CreateSubjectWithPhotos(string name, string jobnumber, string avatarurl, int[] photo_ids)
+        public Task<int> CreateSubjectWithPhotos(string name, string jobnumber, string avatarurl, int[] photo_ids, bool isVisitor)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -53,17 +53,24 @@ namespace FaceAPI
                     //0:员工 1:访客 2:VIP
                     subject_type = 0,
                     name = name,
-                    gender = 2,
+                    //gender = 2,
                     //avatar = "@" + (avatarurl),
-                    department = "奥比岛安全技术",
-                    job_number = jobnumber,
+                    //department = "",
+                    //job_number = jobnumber,
                     photo_ids = photo_ids,
-                    phone = "13760121111",
-                    birthday = DateTime.Now.Date.ToUnix(),
+                    //phone = "",
+                    //birthday = DateTime.Now.Date.ToUnix(),
                     entry_date = DateTime.Now.Date.AddDays(1).ToUnix(),
                     //start_time = DateTime.Now.Date.ToUnix().ToString(),
                     //end_time = DateTime.Now.Date.AddDays(1).ToUnix().ToString()
                 };
+
+                if (isVisitor)
+                {
+                    subject.subject_type = 1;
+                    subject.start_time = DateTime.Now.Date.ToUnix().ToString();
+                    subject.end_time = DateTime.Now.Date.AddDays(1).ToUnix().ToString();
+                }
 
                 var request = new HttpRequest();
                 var responseStr = request.PostJson(subject_url, HttpMethod.Post.ToString(), session, subject);

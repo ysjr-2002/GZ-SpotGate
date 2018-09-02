@@ -41,6 +41,8 @@ namespace GZ_SpotGateEx.Core
                 var stream = response.GetResponseStream();
                 var reader = new StreamReader(stream, Encoding.UTF8);
                 var content = await reader.ReadToEndAsync();
+                Debug.WriteLine("hz:url->" + url);
+                Debug.WriteLine("hz:open gate result->" + content);
                 if (content.IsEmpty())
                 {
                     return new FaceOpenResult { code = -1, message = "返回值为空" };

@@ -99,8 +99,7 @@ namespace FaceAPI
                 {
                     photo_id = upload.data.id;
                 }
-                var name = "用户" + string.Format("{0:d3}", i);
-                serverId = await api.CreateSubjectWithPhotos(name, i.ToString(), avatarurl, new int[] { photo_id });
+                serverId = await api.CreateSubjectWithPhotos(txtName.Text, i.ToString(), avatarurl, new int[] { photo_id }, false);
                 Console.WriteLine("创建用户->" + serverId);
                 //}
             });
@@ -128,11 +127,11 @@ namespace FaceAPI
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var list = (api.GetSubject()).Deserialize<SubjectList>();
-            foreach (var item in list.data)
-            {
-                Console.WriteLine(item.id + " " + item.name + " " + item.job_number + " " + item.avatar);
-            }
+            //var list = (api.GetSubject()).Deserialize<SubjectList>();
+            //foreach (var item in list.data)
+            //{
+            //    Console.WriteLine(item.id + " " + item.name + " " + item.job_number + " " + item.avatar);
+            //}
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -141,23 +140,21 @@ namespace FaceAPI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //for (int i = 1; i <= 500; i++)
-            //{
-            var i = 0;
-            var kk = api.CreateVisitor("访客" + i, txtPhoto.Text);
-            Console.WriteLine(kk);
-            //}
+            //var i = 0;
+            //var kk = api.CreateVisitor("访客" + i, txtPhoto.Text);
+            //Console.WriteLine(kk);
+            api.CreateSubjectWithPhotos(txtName.Text, "123", "", new int[] { photo_id }, true);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            user.name = "杨绍杰";
-            user.department = "华尊";
-            user.title = "研发工程师";
-            user.phone = "15914112520";
-            //user.email = "ysjr-2002@163.com";
-            user.photo_ids = new int[] { user.photos.First().id };
-            api.UpdateUser(user);
+            //user.name = "杨绍杰";
+            //user.department = "华尊";
+            //user.title = "研发工程师";
+            //user.phone = "15914112520";
+            ////user.email = "ysjr-2002@163.com";
+            //user.photo_ids = new int[] { user.photos.First().id };
+            //api.UpdateUser(user);
         }
 
         SubjectData user = null;

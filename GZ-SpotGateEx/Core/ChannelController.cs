@@ -62,18 +62,18 @@ namespace GZ_SpotGateEx.Core
             faceOutSocket = new FaceSocket(channel.FaceOutIp, channel.CameraOutIp, InOutType.Out, channel, OnFaceOutRecognize);
             var cameratask1 = await faceInSocket.Connect();
             var cameratask2 = await faceOutSocket.Connect();
-            Record record = Record.GetInitRecrod();
-            record.Channel = this.Channel.Name;
-            if (cameratask1 && cameratask2)
-            {
-                record.StatuCode = 0;
-                record.Status = "初始化成功";
-            }
-            else
-            {
-                record.Status = "初始化失败";
-            }
-            MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
+            //Record record = Record.GetInitRecrod();
+            //record.Channel = this.Channel.Name;
+            //if (cameratask1 && cameratask2)
+            //{
+            //    record.StatuCode = 0;
+            //    record.Status = "初始化成功";
+            //}
+            //else
+            //{
+            //    record.Status = "初始化失败";
+            //}
+            //MyStandardKernel.Instance.Get<MainViewModel>().Append(record);
             return false;
         }
 
