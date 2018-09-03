@@ -26,6 +26,11 @@ namespace FaceAPI
                 comboBox1.Items.AddRange(lines);
                 comboBox1.SelectedIndex = 1;
             }
+
+            if (cmbHost.Items.Count > 0)
+            {
+                cmbHost.SelectedIndex = 0;
+            }
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -35,7 +40,10 @@ namespace FaceAPI
                 tip("请输入账号和密码");
                 return;
             }
-            API.root = "http://" + txtHost.Text;
+            if (cmbHost.Text.Contains("v2"))
+                API.root = "https://" + cmbHost.Text;
+            else
+                API.root = "http://" + cmbHost.Text;
             api = new API();
             login = await api.Login(comboBox1.Text, textBox2.Text);
             if (login)
@@ -200,6 +208,11 @@ namespace FaceAPI
         private void tip(string message)
         {
             MessageBox.Show(message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var content = api.Recognize(txtPhoto.Text);
         }
     }
 }

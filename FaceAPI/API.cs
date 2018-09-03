@@ -20,6 +20,7 @@ namespace FaceAPI
         string avatar_url = root + "/subject/avatar";
         string event_url = root + "/event/user";
         string padvisitor_url = root + "/pad/add-visitor";
+        string recognize_url = root + ":8866/recognize";
 
         string session = "";
 
@@ -185,6 +186,16 @@ namespace FaceAPI
                 return string.Empty;
             }
             return responseStr;
+        }
+
+        public string Recognize(string filepath)
+        {
+            var bytes = System.IO.File.ReadAllBytes(filepath);
+            var request = new HttpRequest();
+            var dicts = new Dictionary<string, string>();
+            dicts.Add("screen_token", "");
+            var content = request.Post(recognize_url, bytes, dicts);
+            return content;
         }
     }
 }
