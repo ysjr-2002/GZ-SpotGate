@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,16 +19,32 @@ namespace FaceAPI
         public FrmMain()
         {
             InitializeComponent();
-            api = new API();
-            comboBox1.SelectedIndex = 1;
+            var filename = "account.txt";
+            if (File.Exists(filename))
+            {
+                var lines = File.ReadAllLines(filename);
+                comboBox1.Items.AddRange(lines);
+                comboBox1.SelectedIndex = 1;
+            }
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(comboBox1.Text) || string.IsNullOrEmpty(textBox2.Text))
+            {
+                tip("请输入账号和密码");
+                return;
+            }
+            API.root = "http://" + txtHost.Text;
+            api = new API();
             login = await api.Login(comboBox1.Text, textBox2.Text);
             if (login)
             {
-                MessageBox.Show("登录成功");
+                tip("登录成功");
+            }
+            else
+            {
+                tip("登录失败");
             }
         }
 
@@ -40,7 +57,7 @@ namespace FaceAPI
 
             if (txtPhoto.Text.IsEmpty())
             {
-                MessageBox.Show("请选择图像");
+                tip("请选择图像");
                 return;
             }
 
@@ -50,11 +67,11 @@ namespace FaceAPI
                 photo_id = upload.data.id;
                 //var avatar = await api.UpdateAvatar(txtPhoto.Text);
                 //avatarurl = avatar.data.url;
-                MessageBox.Show("符合识别要求");
+                tip("符合识别要求");
             }
             else
             {
-                MessageBox.Show("请查看文档对应的错误码->" + upload?.code);
+                tip("请查看文档对应的错误码->" + upload?.code);
             }
         }
 
@@ -66,7 +83,7 @@ namespace FaceAPI
         private string OpenFileDialog()
         {
             var filter = "Jpg文件|*.jpg|Png文件|*.png";
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = false;
             dialog.Filter = filter;
             dialog.Title = "选择文件";
@@ -85,7 +102,7 @@ namespace FaceAPI
 
             if (photo_id == 0)
             {
-                MessageBox.Show("请上传人像");
+                tip("请上传人像");
                 return;
             }
 
@@ -100,17 +117,18 @@ namespace FaceAPI
                     photo_id = upload.data.id;
                 }
                 serverId = await api.CreateSubjectWithPhotos(txtName.Text, i.ToString(), avatarurl, new int[] { photo_id }, false);
-                Console.WriteLine("创建用户->" + serverId);
+                if (serverId > 0)
+                    tip("创建用户->" + serverId);
                 //}
             });
             //serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, avatarurl, new int[] { photo_id });
             //if (serverId > 0)
             //{
-            //    MessageBox.Show("创建用户成功");
+            //    tip("创建用户成功");
             //}
             //else
             //{
-            //    MessageBox.Show("创建用户失败");
+            //    tip("创建用户失败");
             //}
         }
 
@@ -121,7 +139,7 @@ namespace FaceAPI
 
             if (api.DeleteSubject(serverId))
             {
-                MessageBox.Show("删除成功");
+                tip("删除成功");
             }
         }
 
@@ -138,12 +156,16 @@ namespace FaceAPI
         {
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private async void button7_Click(object sender, EventArgs e)
         {
             //var i = 0;
             //var kk = api.CreateVisitor("访客" + i, txtPhoto.Text);
             //Console.WriteLine(kk);
-            api.CreateSubjectWithPhotos(txtName.Text, "123", "", new int[] { photo_id }, true);
+            var serverId = await api.CreateSubjectWithPhotos(txtName.Text, txtJobNumber.Text, "", new int[] { photo_id }, true);
+            if (serverId > 0)
+            {
+                tip("创建访客->" + serverId);
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -173,6 +195,11 @@ namespace FaceAPI
                 sw.Stop();
                 Console.WriteLine("time->" + sw.ElapsedMilliseconds);
             }
+        }
+
+        private void tip(string message)
+        {
+            MessageBox.Show(message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
