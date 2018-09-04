@@ -86,8 +86,9 @@ namespace FaceAPI
                 //文件开始
                 rs.Write(boundarybytes, 0, boundarybytes.Length);
                 //图片
-                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-                string header = string.Format(headerTemplate, pname, "image.jpg", "text/plain");
+                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n";
+                       headerTemplate += "Content-Type: {2}\r\n\r\n";
+                string header = string.Format(headerTemplate, pname, "image.jpg", "application/octet-stream");
                 byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
                 rs.Write(headerbytes, 0, headerbytes.Length);
                 rs.Write(data, 0, data.Length);
