@@ -154,10 +154,10 @@ namespace FaceAPI
         private void button6_Click(object sender, EventArgs e)
         {
             var list = (api.GetSubject()).Deserialize<SubjectList>();
-            //foreach (var item in list.data)
-            //{
-            //    Console.WriteLine(item.id + " " + item.name + " " + item.job_number + " " + item.avatar);
-            //}
+            foreach (var item in list.data)
+            {
+                Console.WriteLine(item.id + " " + item.name + " " + item.job_number + " " + item.avatar);
+            }
         }
 
         private void FrmMain_Load(object sender, EventArgs e)

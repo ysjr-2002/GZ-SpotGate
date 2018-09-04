@@ -72,9 +72,9 @@ namespace FaceAPI
 
         public string end_time { get; set; }
 
-        //public string avatar { get; set; }
+        public string avatar { get; set; }
 
-        //public string job_number { get; set; }
+        public string job_number { get; set; }
 
         //public object birthday { get; set; }
 
