@@ -213,6 +213,7 @@ namespace FaceAPI
         private void button11_Click(object sender, EventArgs e)
         {
             var content = api.Recognize(txtPhoto.Text);
+            richTextBox1.Text = content;
         }
     }
 }

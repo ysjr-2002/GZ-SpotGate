@@ -194,6 +194,7 @@ namespace FaceAPI
             var request = new HttpRequest();
             var dicts = new Dictionary<string, string>();
             dicts.Add("screen_token", "");
+            dicts.Add("fmp_threshold", "0.5");
             var content = request.Post(recognize_url, bytes, dicts);
             return content;
         }
