@@ -150,5 +150,23 @@ namespace WindowsFormsApplication1
             ws?.Close();
             base.OnClosing(e);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            WebSocketSharp.WebSocket ws = new WebSocket("ws://192.168.1.73:8880/VBP_Setting/websocket");
+            ws.OnOpen += Ws_OnOpen1;
+            ws.OnMessage += Ws_OnMessage1;
+            ws.Connect();
+
+        }
+
+        private void Ws_OnMessage1(object sender, MessageEventArgs e)
+        {
+            Console.WriteLine(e.Data);
+        }
+
+        private void Ws_OnOpen1(object sender, EventArgs e)
+        {
+        }
     }
 }
