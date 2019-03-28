@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -190,7 +191,8 @@ namespace FaceAPI
         SubjectData user = null;
         private void button9_Click(object sender, EventArgs e)
         {
-            user = api.GetUser(8).data;
+            //user = api.GetUser(8).data;
+            var tt = api.GetEx("/subject1/abc");
         }
 
         private void button10_Click(object sender, EventArgs e)

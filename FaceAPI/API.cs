@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -197,6 +198,35 @@ namespace FaceAPI
             dicts.Add("fmp_threshold", "0.5");
             var content = request.Post(recognize_url, bytes, dicts);
             return content;
+        }
+
+        public string GetEx(string url)
+        {
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.UseCookies = false;
+            var client = new HttpClient(clientHandler) { BaseAddress = new Uri(API.root) };
+            if (!session.IsEmpty())
+                client.DefaultRequestHeaders.Add("Cookie", session);
+
+            var content = "";
+            var response = client.GetAsync(url).Result;
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                content = response.Content.ReadAsStringAsync().Result;
+                var temp = content.Deserialize<res>();
+            }
+            else
+            {
+
+            }
+            return content;
+        }
+
+        class res
+        {
+            public int code { get; set; }
+
+            public string desc { get; set; }
         }
     }
 }
