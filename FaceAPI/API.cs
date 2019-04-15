@@ -103,11 +103,12 @@ namespace FaceAPI
             });
         }
 
-        public Task<AvatarPhoto> UpdateAvatar(string path)
+        public Task<AvatarPhoto> UpdateAvatar(int subject_id, string path)
         {
             return Task.Factory.StartNew(() =>
             {
                 var dict = new Dictionary<string, string>();
+                dict.Add("subject_id", subject_id.ToString());
                 var image = path.FileToByte();
                 var request = new HttpRequest();
                 var responseStr = request.PostPhoto(avatar_url, "avatar", image, session, dict);

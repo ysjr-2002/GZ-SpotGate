@@ -217,5 +217,19 @@ namespace FaceAPI
             var content = api.Recognize(txtPhoto.Text);
             richTextBox1.Text = content;
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            txtAvatar.Text = OpenFileDialog();
+        }
+
+        private async void button13_Click(object sender, EventArgs e)
+        {
+            var data = await api.UpdateAvatar(serverId, txtAvatar.Text);
+            if (data.code == 0)
+            {
+                var url = data.data.url;
+            }
+        }
     }
 }

@@ -55,6 +55,10 @@
             this.button11 = new System.Windows.Forms.Button();
             this.cmbHost = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.txtAvatar = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -99,7 +103,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 24);
             this.button2.TabIndex = 5;
-            this.button2.Text = "上传照片";
+            this.button2.Text = "识别照片";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -291,17 +295,57 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(19, 270);
+            this.richTextBox1.Location = new System.Drawing.Point(19, 305);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(514, 151);
+            this.richTextBox1.Size = new System.Drawing.Size(514, 116);
             this.richTextBox1.TabIndex = 31;
             this.richTextBox1.Text = "";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(424, 273);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(39, 24);
+            this.button12.TabIndex = 35;
+            this.button12.Text = "...";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // txtAvatar
+            // 
+            this.txtAvatar.Location = new System.Drawing.Point(159, 274);
+            this.txtAvatar.Name = "txtAvatar";
+            this.txtAvatar.Size = new System.Drawing.Size(263, 21);
+            this.txtAvatar.TabIndex = 34;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(115, 277);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "照片：";
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(19, 271);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(80, 24);
+            this.button13.TabIndex = 32;
+            this.button13.Text = "显示头像";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(551, 433);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.txtAvatar);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.cmbHost);
             this.Controls.Add(this.button11);
@@ -369,6 +413,10 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.ComboBox cmbHost;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.TextBox txtAvatar;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button13;
     }
 }
 
