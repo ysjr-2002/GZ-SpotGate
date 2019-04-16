@@ -231,5 +231,12 @@ namespace FaceAPI
                 var url = data.data.url;
             }
         }
+
+        private async void button14_Click(object sender, EventArgs e)
+        {
+            var content = await api.CheckIn(7, txtPhoto.Text);
+            richTextBox1.Text = content;
+            var result = content.Deserialize<error>();
+        }
     }
 }

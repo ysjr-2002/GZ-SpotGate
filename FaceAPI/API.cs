@@ -22,6 +22,8 @@ namespace FaceAPI
         string event_url = root + "/event/user";
         string padvisitor_url = root + "/pad/add-visitor";
         string recognize_url = root + ":8866/recognize";
+        string checkin_url = root + ":8866/checkin";
+        
 
         string session = "";
 
@@ -114,6 +116,19 @@ namespace FaceAPI
                 var responseStr = request.PostPhoto(avatar_url, "avatar", image, session, dict);
                 var json = responseStr.Deserialize<AvatarPhoto>();
                 return json;
+            });
+        }
+
+        public Task<string> CheckIn(int subject_id, string path)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var dict = new Dictionary<string, string>();
+                dict.Add("person_id", subject_id.ToString());
+                var image = path.FileToByte();
+                var request = new HttpRequest();
+                var responseStr = request.PostPhoto(checkin_url, "image", image, session, dict);
+                return responseStr;
             });
         }
 
