@@ -23,7 +23,7 @@ namespace FaceAPI
         string padvisitor_url = root + "/pad/add-visitor";
         string recognize_url = root + ":8866/recognize";
         string checkin_url = root + ":8866/checkin";
-        
+
 
         string session = "";
 
@@ -62,7 +62,8 @@ namespace FaceAPI
                     //department = "",
                     //job_number = jobnumber,
                     photo_ids = photo_ids,
-                    //phone = "",
+                    phone = "123",
+                    remark = "",
                     //birthday = DateTime.Now.Date.ToUnix(),
                     entry_date = DateTime.Now.Date.AddDays(1).ToUnix(),
                     //start_time = DateTime.Now.Date.ToUnix().ToString(),
@@ -72,6 +73,7 @@ namespace FaceAPI
                 if (isVisitor)
                 {
                     subject.subject_type = 1;
+                    subject.entry_date = null;
                     subject.start_time = DateTime.Now.Date.ToUnix().ToString();
                     subject.end_time = DateTime.Now.Date.AddDays(1).ToUnix().ToString();
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -167,8 +168,8 @@ namespace FaceAPI
 
         public string PostJson(string url, string method, string cookie, object instance)
         {
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            var jsonData = js.Serialize(instance);
+            //JavaScriptSerializer js = new JavaScriptSerializer();
+            var jsonData = JsonConvert.SerializeObject(instance);
             Console.WriteLine(jsonData);
             var data = jsonData.ToUTF8();
             WebRequest request = WebRequest.Create(url);

@@ -60,17 +60,15 @@ namespace FaceAPI
         /// </summary>
         //public string email { get; set; }
 
-        //public string remark { get; set; }
+        public string remark { get; set; }
 
-        //public string description { get; set; }
+        public string description { get; set; }
 
-        //public string title { get; set; }
+        public string title { get; set; }
 
-        //public long timestamp { get; set; }
+        public object start_time { get; set; }
 
-        public string start_time { get; set; }
-
-        public string end_time { get; set; }
+        public object end_time { get; set; }
 
         public string avatar { get; set; }
 
@@ -83,15 +81,9 @@ namespace FaceAPI
         /// </summary>   
         public object entry_date { get; set; }
 
-        //public string department { get; set; }
-
-        //public string phone { get; set; }
-
-        //public int gender { get; set; }
+        public string phone { get; set; }
 
         public int[] photo_ids { get; set; }
-
-        //public photo[] photos { get; set; }
 
         public int subject_type { get; set; }
 
