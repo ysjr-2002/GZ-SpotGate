@@ -238,5 +238,12 @@ namespace FaceAPI
             richTextBox1.Text = content;
             var result = content.Deserialize<error>();
         }
+
+        private async void button15_Click(object sender, EventArgs e)
+        {
+            var bytes = txtPhoto.Text.FileToByte();
+            var content = await api.SubjectFile(txtName.Text, bytes);
+            MessageBox.Show(content);
+        }
     }
 }

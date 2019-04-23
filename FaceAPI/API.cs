@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -245,6 +246,28 @@ namespace FaceAPI
             public int code { get; set; }
 
             public string desc { get; set; }
+        }
+
+        public async Task<string> SubjectFile(string name, byte[] photo)
+        {
+            var clientHandler = new HttpClientHandler();
+            clientHandler.UseCookies = false;
+            var client = new HttpClient(clientHandler) { BaseAddress = new Uri(API.root) };
+            if (!session.IsEmpty())
+                client.DefaultRequestHeaders.Add("Cookie", session);
+
+            MultipartFormDataContent part = new MultipartFormDataContent();
+
+            var imageContent1 = new ByteArrayContent(photo);
+            imageContent1.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+            part.Add(imageContent1, "photo", "face.jpg");
+            part.Add(new StringContent("ysj"), "name");
+            part.Add(new StringContent("0"), "subject_type");
+            part.Add(new StringContent(DateTime.Now.Date.ToUnix().ToString()), "entry_date");
+
+            var response = await client.PostAsync("/subject/file", part);
+            var content = await response.Content.ReadAsStringAsync();
+            return content;
         }
     }
 }
