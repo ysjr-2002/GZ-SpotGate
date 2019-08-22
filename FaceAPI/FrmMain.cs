@@ -59,6 +59,7 @@ namespace FaceAPI
 
         int photo_id = -1;
         string avatarurl = "";
+        List<int> photo_ids = new List<int>();
         private async void button2_Click(object sender, EventArgs e)
         {
             if (!login)
@@ -74,6 +75,8 @@ namespace FaceAPI
             if (upload != null && upload.code == 0)
             {
                 photo_id = upload.data.id;
+                photo_ids.Add(photo_id);
+                Append(photo_id.ToString());
                 //var avatar = await api.UpdateAvatar(txtPhoto.Text);
                 //avatarurl = avatar.data.url;
                 tip("符合识别要求");
@@ -125,7 +128,7 @@ namespace FaceAPI
                 {
                     photo_id = upload.data.id;
                 }
-                serverId = await api.CreateSubjectWithPhotos(txtName.Text, i.ToString(), avatarurl, new int[] { photo_id }, false);
+                serverId = await api.CreateSubjectWithPhotos(txtName.Text, i.ToString(), avatarurl, photo_ids.ToArray(), false);
                 if (serverId > 0)
                     tip("创建用户->" + serverId);
                 //}
@@ -237,6 +240,24 @@ namespace FaceAPI
             var content = await api.CheckIn(7, txtPhoto.Text);
             richTextBox1.Text = content;
             var result = content.Deserialize<error>();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            var content = api.GetEx(api.screen_url);
+            richTextBox1.Text = content;
+        }
+
+        void Append(string content)
+        {
+            richTextBox1.AppendText(content);
+            richTextBox1.AppendText(Environment.NewLine);
+        }
+
+        private void Button16_Click(object sender, EventArgs e)
+        {
+            var content = api.DeletePhoto(textBox1.Text);
+            Append(content);
         }
     }
 }

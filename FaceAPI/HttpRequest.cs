@@ -87,7 +87,7 @@ namespace FaceAPI
                 rs.Write(boundarybytes, 0, boundarybytes.Length);
                 //图片
                 string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n";
-                       headerTemplate += "Content-Type: {2}\r\n\r\n";
+                headerTemplate += "Content-Type: {2}\r\n\r\n";
                 string header = string.Format(headerTemplate, pname, "image.jpg", "application/octet-stream");
                 byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
                 rs.Write(headerbytes, 0, headerbytes.Length);
@@ -272,6 +272,38 @@ namespace FaceAPI
             catch (Exception)
             {
                 return string.Empty;
+            }
+        }
+
+        public string PostDelete(string url, string cookie, string data)
+        {
+            try
+            {
+                var request = WebRequest.Create(url);
+                request.Timeout = timeout;
+                request.Method = "DELETE";
+                if (!cookie.IsEmpty())
+                    request.Headers["cookie"] = cookie;
+
+                var bytes = System.Text.Encoding.UTF8.GetBytes(data);
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = bytes.Length;
+                var stream = request.GetRequestStream();
+                stream.Write(bytes, 0, bytes.Length);
+                stream.Close();
+
+                var response = request.GetResponse();
+                var content = "";
+                using (var reader = new StreamReader(response.GetResponseStream()))
+                {
+                    content = reader.ReadToEnd();
+                    Console.WriteLine("delete->" + content);
+                }
+                return content;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
     }

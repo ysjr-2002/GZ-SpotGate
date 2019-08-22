@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows.Forms;
 
 namespace FaceAPI
 {
@@ -20,10 +21,11 @@ namespace FaceAPI
         string subjectphoto_url = root + "/subject/photo";
         string avatar_url = root + "/subject/avatar";
         string event_url = root + "/event/user";
+        public string screen_url = root + "/system/screen";
         string padvisitor_url = root + "/pad/add-visitor";
         string recognize_url = root + ":8866/recognize";
         string checkin_url = root + ":8866/checkin";
-        
+
 
         string session = "";
 
@@ -142,6 +144,17 @@ namespace FaceAPI
             var request = new HttpRequest();
             request.Delete(url, session);
             return true;
+        }
+
+        public string DeletePhoto(string photoId)
+        {
+            //var url = subjectphoto_url + "?photo_id=" + photoId;
+            //MessageBox.Show(url);
+            //MessageBox.Show(session);
+            //var request = new HttpRequest();
+            //return request.Delete(url, session);
+            var request = new HttpRequest();
+            return request.PostDelete(subjectphoto_url, session, "subject_id = " + photoId);
         }
 
         public string GetSubject()
