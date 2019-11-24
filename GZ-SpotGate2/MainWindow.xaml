@@ -1,0 +1,152 @@
+﻿<Window
+    x:Class="GZSpotGate.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFControlLibrary.UIControls;assembly=WPFControlLibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:GZSpotGate"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:GZSpotGate.ViewModel"
+    Name="window"
+    Title="道闸控制器"
+    Width="1000"
+    Height="600"
+    d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
+    AllowsTransparency="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Height="40"
+            Background="#41B1E1"
+            MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{Binding ElementName=window, Path=Title}"
+                FontSize="18"
+                Foreground="Goldenrod" />
+
+            <Grid Grid.Column="1" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <controls:RadioImageButton
+                    Grid.Column="2"
+                    Width="120"
+                    Height="40"
+                    Command="{Binding SwitchCommand}"
+                    CommandParameter="0"
+                    HoverImage="/WPFControlLibrary;component/images/transfer_hover.png"
+                    IsChecked="True"
+                    NormalImage="/WPFControlLibrary;component/images/transfer_normal.png"
+                    Text="实时数据" />
+
+                <controls:RadioImageButton
+                    Grid.Column="3"
+                    Width="120"
+                    Height="40"
+                    Command="{Binding SwitchCommand}"
+                    CommandParameter="1"
+                    HoverImage="/GZ-SpotGate;component/images/channel_hover.png"
+                    NormalImage="/GZ-SpotGate;component/images/channel_normal.png"
+                    Text="通道管理" />
+
+                <controls:RadioImageButton
+                    Grid.Column="5"
+                    Width="110"
+                    Height="40"
+                    Command="{Binding SwitchCommand}"
+                    CommandParameter="2"
+                    HoverImage="/WPFControlLibrary;component/images/setting_hover.png"
+                    NormalImage="/WPFControlLibrary;component/images/setting_normal.png"
+                    Text="系统设置" />
+
+                <controls:WindowButton
+                    Grid.Column="6"
+                    Command="{Binding AuthCommand}"
+                    HoverImage="/WPFControlLibrary;component/Images/auth_hover.png"
+                    NormalImage="/WPFControlLibrary;component/Images/auth_normal.png" />
+
+                <controls:WindowButton
+                    Grid.Column="7"
+                    Command="{Binding MinCommand}"
+                    HoverImage="/WPFControlLibrary;component/Images/minhover.png"
+                    NormalImage="/WPFControlLibrary;component/Images/min.png"
+                    ToolTip="最小化" />
+
+                <ToggleButton
+                    Grid.Column="8"
+                    Margin="10,0"
+                    Command="{Binding MaxCommand}"
+                    Style="{StaticResource windowState}" />
+
+                <controls:WindowButton
+                    Grid.Column="9"
+                    Command="{Binding CloseCommand}"
+                    HoverImage="/WPFControlLibrary;component/Images/closehover.png"
+                    NormalImage="/WPFControlLibrary;component/Images/close.png"
+                    ToolTip="关闭" />
+            </Grid>
+        </Grid>
+        <TabControl
+            Grid.Row="1"
+            BorderThickness="0"
+            SelectedIndex="{Binding TabSelectedIndex}">
+            <TabItem Header="通行" Visibility="Collapsed">
+                <Grid>
+                    <ScrollViewer
+                        x:Name="scrolls"
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer.Content>
+                            <!--  Background="#f3f3ff"  -->
+                            <StackPanel
+                                x:Name="container"
+                                Orientation="Vertical"
+                                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <!--<StackPanel.Background>
+                                    <ImageBrush ImageSource="images/bg.png" Stretch="None" />
+                                </StackPanel.Background>-->
+                            </StackPanel>
+                        </ScrollViewer.Content>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="通道" Visibility="Collapsed">
+                <local:UCChannelSetting />
+            </TabItem>
+            <TabItem Header="配置" Visibility="Collapsed">
+                <local:UCSystemSetting />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

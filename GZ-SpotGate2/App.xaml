@@ -1,0 +1,22 @@
+﻿<Application
+    x:Class="GZSpotGate.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WPFControlLibrary;component/Styles/Brushes.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/common.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/ImageButton.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/ListBoxStyles.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/WindowButtonStyle.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/MyWindow.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/CheckBoxStyles.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/Styles/DataGridStyle.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/RadioImageButton.xaml" />
+                <ResourceDictionary Source="/WPFControlLibrary;component/styles/TextBoxStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
