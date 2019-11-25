@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<channels>
+  <!--通道1-->
+  <channel>
+    <no>1</no>
+    <name>通道1</name>
+    <!--通道虚拟IP，因为验证需要-->
+    <channelvirtualip>172.21.4.100</channelvirtualip>
+    <comserver>192.168.2.175</comserver>
+    <pad>192.168.31.254</pad>
+    <faceserver>172.21.5.190</faceserver>
+    <camera>172.21.5.150</camera>
+  </channel>
+</channels>

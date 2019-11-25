@@ -61,12 +61,20 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.button16 = new System.Windows.Forms.Button();
+=======
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.SuspendLayout();
             // 
             // button1
             // 
+<<<<<<< HEAD
             this.button1.Location = new System.Drawing.Point(19, 51);
+=======
+            this.button1.Location = new System.Drawing.Point(25, 68);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 24);
             this.button1.TabIndex = 0;
@@ -76,7 +84,12 @@
             // 
             // textBox2
             // 
+<<<<<<< HEAD
             this.textBox2.Location = new System.Drawing.Point(360, 54);
+=======
+            this.textBox2.Location = new System.Drawing.Point(480, 72);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(62, 21);
             this.textBox2.TabIndex = 2;
@@ -102,7 +115,12 @@
             // 
             // button2
             // 
+<<<<<<< HEAD
             this.button2.Location = new System.Drawing.Point(19, 89);
+=======
+            this.button2.Location = new System.Drawing.Point(25, 119);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 24);
             this.button2.TabIndex = 5;
@@ -112,7 +130,12 @@
             // 
             // button3
             // 
+<<<<<<< HEAD
             this.button3.Location = new System.Drawing.Point(19, 127);
+=======
+            this.button3.Location = new System.Drawing.Point(25, 169);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(80, 24);
             this.button3.TabIndex = 6;
@@ -122,7 +145,12 @@
             // 
             // button5
             // 
+<<<<<<< HEAD
             this.button5.Location = new System.Drawing.Point(424, 91);
+=======
+            this.button5.Location = new System.Drawing.Point(565, 121);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(39, 24);
             this.button5.TabIndex = 13;
@@ -132,7 +160,12 @@
             // 
             // txtPhoto
             // 
+<<<<<<< HEAD
             this.txtPhoto.Location = new System.Drawing.Point(159, 92);
+=======
+            this.txtPhoto.Location = new System.Drawing.Point(212, 123);
+            this.txtPhoto.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.txtPhoto.Name = "txtPhoto";
             this.txtPhoto.Size = new System.Drawing.Size(263, 21);
             this.txtPhoto.TabIndex = 12;
@@ -157,7 +190,12 @@
             // 
             // txtJobNumber
             // 
+<<<<<<< HEAD
             this.txtJobNumber.Location = new System.Drawing.Point(304, 143);
+=======
+            this.txtJobNumber.Location = new System.Drawing.Point(405, 191);
+            this.txtJobNumber.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.txtJobNumber.MaxLength = 15;
             this.txtJobNumber.Name = "txtJobNumber";
             this.txtJobNumber.Size = new System.Drawing.Size(99, 21);
@@ -175,7 +213,12 @@
             // 
             // txtName
             // 
+<<<<<<< HEAD
             this.txtName.Location = new System.Drawing.Point(158, 143);
+=======
+            this.txtName.Location = new System.Drawing.Point(211, 191);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(67, 21);
             this.txtName.TabIndex = 14;
@@ -183,7 +226,12 @@
             // 
             // button4
             // 
+<<<<<<< HEAD
             this.button4.Location = new System.Drawing.Point(18, 210);
+=======
+            this.button4.Location = new System.Drawing.Point(24, 280);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 24);
             this.button4.TabIndex = 19;
@@ -193,7 +241,12 @@
             // 
             // button6
             // 
+<<<<<<< HEAD
             this.button6.Location = new System.Drawing.Point(18, 240);
+=======
+            this.button6.Location = new System.Drawing.Point(24, 320);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(80, 24);
             this.button6.TabIndex = 20;
@@ -203,7 +256,12 @@
             // 
             // button7
             // 
+<<<<<<< HEAD
             this.button7.Location = new System.Drawing.Point(19, 172);
+=======
+            this.button7.Location = new System.Drawing.Point(25, 229);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(80, 24);
             this.button7.TabIndex = 21;
@@ -213,7 +271,12 @@
             // 
             // button8
             // 
+<<<<<<< HEAD
             this.button8.Location = new System.Drawing.Point(117, 210);
+=======
+            this.button8.Location = new System.Drawing.Point(156, 280);
+            this.button8.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(80, 24);
             this.button8.TabIndex = 22;
@@ -223,7 +286,12 @@
             // 
             // button9
             // 
+<<<<<<< HEAD
             this.button9.Location = new System.Drawing.Point(203, 210);
+=======
+            this.button9.Location = new System.Drawing.Point(271, 280);
+            this.button9.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(80, 24);
             this.button9.TabIndex = 23;
@@ -234,14 +302,24 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+<<<<<<< HEAD
             this.comboBox1.Location = new System.Drawing.Point(159, 55);
+=======
+            this.comboBox1.Location = new System.Drawing.Point(212, 73);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(144, 20);
             this.comboBox1.TabIndex = 24;
             // 
             // button10
             // 
+<<<<<<< HEAD
             this.button10.Location = new System.Drawing.Point(117, 240);
+=======
+            this.button10.Location = new System.Drawing.Point(156, 320);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(80, 24);
             this.button10.TabIndex = 25;
@@ -251,7 +329,12 @@
             // 
             // textBox1
             // 
+<<<<<<< HEAD
             this.textBox1.Location = new System.Drawing.Point(203, 242);
+=======
+            this.textBox1.Location = new System.Drawing.Point(271, 323);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(80, 21);
             this.textBox1.TabIndex = 26;
@@ -277,7 +360,12 @@
             // 
             // button11
             // 
+<<<<<<< HEAD
             this.button11.Location = new System.Drawing.Point(424, 121);
+=======
+            this.button11.Location = new System.Drawing.Point(565, 161);
+            this.button11.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(109, 24);
             this.button11.TabIndex = 29;
@@ -290,16 +378,27 @@
             this.cmbHost.FormattingEnabled = true;
             this.cmbHost.Items.AddRange(new object[] {
             "v2.koalacam.net",
+<<<<<<< HEAD
             "192.168.0.50",
             "192.168.31.55"});
             this.cmbHost.Location = new System.Drawing.Point(158, 22);
+=======
+            "192.168.0.50"});
+            this.cmbHost.Location = new System.Drawing.Point(211, 29);
+            this.cmbHost.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.cmbHost.Name = "cmbHost";
             this.cmbHost.Size = new System.Drawing.Size(144, 20);
             this.cmbHost.TabIndex = 30;
             // 
             // richTextBox1
             // 
+<<<<<<< HEAD
             this.richTextBox1.Location = new System.Drawing.Point(19, 305);
+=======
+            this.richTextBox1.Location = new System.Drawing.Point(25, 407);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(514, 116);
             this.richTextBox1.TabIndex = 31;
@@ -307,7 +406,12 @@
             // 
             // button12
             // 
+<<<<<<< HEAD
             this.button12.Location = new System.Drawing.Point(424, 273);
+=======
+            this.button12.Location = new System.Drawing.Point(565, 364);
+            this.button12.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(39, 24);
             this.button12.TabIndex = 35;
@@ -317,7 +421,12 @@
             // 
             // txtAvatar
             // 
+<<<<<<< HEAD
             this.txtAvatar.Location = new System.Drawing.Point(159, 274);
+=======
+            this.txtAvatar.Location = new System.Drawing.Point(212, 365);
+            this.txtAvatar.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.txtAvatar.Name = "txtAvatar";
             this.txtAvatar.Size = new System.Drawing.Size(263, 21);
             this.txtAvatar.TabIndex = 34;
@@ -333,7 +442,12 @@
             // 
             // button13
             // 
+<<<<<<< HEAD
             this.button13.Location = new System.Drawing.Point(19, 271);
+=======
+            this.button13.Location = new System.Drawing.Point(25, 361);
+            this.button13.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(80, 24);
             this.button13.TabIndex = 32;
@@ -353,6 +467,7 @@
             // 
             // button15
             // 
+<<<<<<< HEAD
             this.button15.Location = new System.Drawing.Point(428, 54);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(80, 24);
@@ -371,12 +486,27 @@
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.Button16_Click);
             // 
+=======
+            this.button15.Location = new System.Drawing.Point(565, 244);
+            this.button15.Margin = new System.Windows.Forms.Padding(4);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(144, 32);
+            this.button15.TabIndex = 37;
+            this.button15.Text = "subject file";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(551, 433);
             this.Controls.Add(this.button16);
+=======
+            this.ClientSize = new System.Drawing.Size(735, 577);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button12);
@@ -411,6 +541,10 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+<<<<<<< HEAD
+=======
+            this.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmMain";
@@ -456,7 +590,10 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
+<<<<<<< HEAD
         private System.Windows.Forms.Button button16;
+=======
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
     }
 }
 

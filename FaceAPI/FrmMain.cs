@@ -242,6 +242,7 @@ namespace FaceAPI
             var result = content.Deserialize<error>();
         }
 
+<<<<<<< HEAD
         private void button15_Click(object sender, EventArgs e)
         {
             var content = api.GetEx(api.screen_url);
@@ -258,6 +259,13 @@ namespace FaceAPI
         {
             var content = api.DeletePhoto(textBox1.Text);
             Append(content);
+=======
+        private async void button15_Click(object sender, EventArgs e)
+        {
+            var bytes = txtPhoto.Text.FileToByte();
+            var content = await api.SubjectFile(txtName.Text, bytes);
+            MessageBox.Show(content);
+>>>>>>> d81d7b7f2741202b90790b0d2a4ec0749a57ae76
         }
     }
 }
