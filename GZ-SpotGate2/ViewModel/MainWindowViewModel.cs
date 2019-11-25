@@ -1,10 +1,13 @@
 ﻿using GZSpotGate.Core;
+using GZSpotGate.IDCard;
 using LL.SenicSpot.Gate.Model;
 using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -74,8 +77,22 @@ namespace GZSpotGate.ViewModel
             foreach (var channel in Channels.ChannelList)
             {
                 var controller = new ChannelController(channel);
+                controller.Start();
                 controllers.Add(controller);
             }
+
+            var bytes = System.IO.File.ReadAllText("id.txt").Split(' ').Select(s => s.FromHexToByte()).ToArray();
+            controllers.First().idreader.ReadID(bytes);
+            byte[] wltbuffer = IDPackage.picbuffer;
+            int ret = wlt2bmp(wltbuffer);
+            var len = (102 * 3 + 2) * 126 + 54;
+            var bmpbuffer = new byte[len];
+            var ptr = Marshal.AllocHGlobal(bmpbuffer.Length);
+            ret = wlt2bmpBuffer(wltbuffer, ptr, bmpbuffer.Length);
+            Marshal.Copy(ptr, bmpbuffer, 0, bmpbuffer.Length);
+            var ms = new MemoryStream(bmpbuffer);
+            var bitmap = System.Drawing.Image.FromStream(ms);
+            bitmap.Save("zp.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
         }
 
         private void UdpServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -120,5 +137,11 @@ namespace GZSpotGate.ViewModel
         public new void Dispose()
         {
         }
+
+        [DllImport("libwlt2bmp.dll")]
+        public static extern int wlt2bmp(byte[] bytes);
+
+        [DllImport("libwlt2bmp.dll")]
+        public static extern int wlt2bmpBuffer(byte[] bytes, IntPtr ptr, int len);
     }
 }

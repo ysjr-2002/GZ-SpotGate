@@ -15,7 +15,7 @@ namespace GZSpotGate.Core
     class ChannelController
     {
         private FaceSocket faceSocket = null;
-        private IDReader idreader = null;
+        public IDReader idreader { get; private set; }
         private Request _request = null;
         public ChannelController(Channel channel)
         {
@@ -54,6 +54,14 @@ namespace GZSpotGate.Core
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
             Record record = null;
+            var error = SecurityHelper.IsAuth();
+            if (!error.IsEmpty())
+            {
+                record = Record.GetError(Channel.name, error);
+                LogHelper.Append(record);
+                return;
+            }
+
             if (uniqueId.IsEmpty())
             {
                 return;
