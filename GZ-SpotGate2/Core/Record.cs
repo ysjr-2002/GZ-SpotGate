@@ -11,9 +11,9 @@ namespace LL.SenicSpot.Gate.Model
 {
     public class Record
     {
-        private static readonly string QR_ImageSource = "/GZ-SpotGate;component/Images/qr.png";
-        private static readonly string FACE_ImageSource = "/GZ-SpotGate;component/Images/face.png";
         private static readonly string ID_ImageSource = "/GZ-SpotGate;component/Images/id.png";
+        private static readonly string FACE_ImageSource = "/GZ-SpotGate;component/Images/face.png";
+        private static readonly string QR_ImageSource = "/GZ-SpotGate;component/Images/qr.png";
 
         /// <summary>
         /// 通道名称

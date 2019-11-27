@@ -16,7 +16,7 @@ namespace GZSpotGate.Core
     {
         private FaceSocket faceSocket = null;
         public IDReader idreader { get; private set; }
-        private Request _request = null;
+        private Request request = null;
         public ChannelController(Channel channel)
         {
             Channel = channel;
@@ -33,7 +33,7 @@ namespace GZSpotGate.Core
             idreader.Run();
             idreader.SetDataCallback(OnReaderID);
 
-            _request = new Request();
+            request = new Request();
         }
 
         internal async void OnReaderID(IDModel model)
@@ -68,7 +68,7 @@ namespace GZSpotGate.Core
             }
 
             Stopwatch sw = Stopwatch.StartNew();
-            var content = await _request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
+            var content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
             sw.Stop();
 
             AndroidMessage am = new AndroidMessage();
@@ -93,23 +93,27 @@ namespace GZSpotGate.Core
             if (content?.code == 100)
             {
                 //listlog.Add(string.Format("请通行->{0}人次", personCount));
-                record.StatuCode = 0;
-            }
-            else
-            {
-                //禁止通行
-                record.StatuCode = 1;
-                record.PostMessage = content.message;
             }
 
             if (intentType == IntentType.In && content?.code == 100)
             {
+                record.StatuCode = 0;
+                Channel.daycount = (Channel.daycount.ToInt32() + 1).ToString();
+                Channels.Save();
                 GateHelper.Open(Channel.comserver);
+
+                am.DayCount = Channel.daycount.ToInt32();
                 PadHelper.SendToPad(Channel.pad, am);
             }
             if (intentType == IntentType.In && content?.code != 100)
             {
+                //禁止通行
+                record.StatuCode = 1;
+                record.PostMessage = content.message;
+
                 am.Status = 1;
+                am.DayCount = Channel.daycount.ToInt32();
+
                 PadHelper.SendToPad(Channel.pad, am);
             }
 

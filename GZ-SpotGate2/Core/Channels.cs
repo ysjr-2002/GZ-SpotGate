@@ -44,6 +44,7 @@ namespace GZSpotGate.Core
                     faceserver = item.Element("faceserver").Value,
                     camera = item.Element("camera").Value,
                     pad = item.Element("pad").Value,
+                    daycount = item.Element("daycount").Value
                 };
                 ChannelList.Add(cm);
             }
@@ -61,6 +62,7 @@ namespace GZSpotGate.Core
                 item.Element("camera").Value = channel.camera;
                 item.Element("pad").Value = channel.pad;
                 item.Element("comserver").Value = channel.comserver;
+                item.Element("daycount").Value = channel.daycount;
             }
             xelement.Save(filepath);
         }

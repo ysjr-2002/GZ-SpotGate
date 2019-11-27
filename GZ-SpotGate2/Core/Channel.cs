@@ -50,6 +50,12 @@ namespace GZSpotGate.Core
             set { this.SetValue(s => s.camera, value); }
         }
 
+        public string daycount
+        {
+            get { return this.GetValue(s => s.daycount); }
+            set { this.SetValue(s => s.daycount, value); }
+        }
+
         public bool wsok
         {
             get { return this.GetValue(s => s.wsok); }

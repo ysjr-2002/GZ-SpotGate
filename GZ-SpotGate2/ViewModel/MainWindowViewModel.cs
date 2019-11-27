@@ -29,6 +29,8 @@ namespace GZSpotGate.ViewModel
         MyUdpComServer udpServer = null;
         private const int qrport = 9876;
 
+        private ResetThread resetThread;
+
         public MainWindowViewModel()
         {
             InitCommand();
@@ -69,6 +71,9 @@ namespace GZSpotGate.ViewModel
         {
             Util.runWhenStart(Config.Instance.Auto == "1", "GZSpotGate", System.Windows.Forms.Application.ExecutablePath);
 
+            resetThread = new ResetThread();
+            resetThread.Start();
+
             controllers = new List<ChannelController>();
             udpServer = new MyUdpComServer(qrport);
             udpServer.ReceiveAsync();
@@ -81,18 +86,21 @@ namespace GZSpotGate.ViewModel
                 controllers.Add(controller);
             }
 
-            var bytes = System.IO.File.ReadAllText("id.txt").Split(' ').Select(s => s.FromHexToByte()).ToArray();
-            controllers.First().idreader.ReadID(bytes);
-            byte[] wltbuffer = IDPackage.picbuffer;
-            int ret = wlt2bmp(wltbuffer);
-            var len = (102 * 3 + 2) * 126 + 54;
-            var bmpbuffer = new byte[len];
-            var ptr = Marshal.AllocHGlobal(bmpbuffer.Length);
-            ret = wlt2bmpBuffer(wltbuffer, ptr, bmpbuffer.Length);
-            Marshal.Copy(ptr, bmpbuffer, 0, bmpbuffer.Length);
-            var ms = new MemoryStream(bmpbuffer);
-            var bitmap = System.Drawing.Image.FromStream(ms);
-            bitmap.Save("zp.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            if (System.IO.File.Exists("id.txt"))
+            {
+                var bytes = System.IO.File.ReadAllText("id.txt").Split(' ').Select(s => s.FromHexToByte()).ToArray();
+                controllers.First().idreader.ReadID(bytes);
+                byte[] wltbuffer = IDPackage.picbuffer;
+                int ret = wlt2bmp(wltbuffer);
+                var len = (102 * 3 + 2) * 126 + 54;
+                var bmpbuffer = new byte[len];
+                var ptr = Marshal.AllocHGlobal(bmpbuffer.Length);
+                ret = wlt2bmpBuffer(wltbuffer, ptr, bmpbuffer.Length);
+                Marshal.Copy(ptr, bmpbuffer, 0, bmpbuffer.Length);
+                var ms = new MemoryStream(bmpbuffer);
+                var bitmap = System.Drawing.Image.FromStream(ms);
+                bitmap.Save("zp.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            }
         }
 
         private void UdpServer_OnMessageInComming(object sender, DataEventArgs e)
@@ -136,6 +144,7 @@ namespace GZSpotGate.ViewModel
 
         public new void Dispose()
         {
+            resetThread?.Stop();
         }
 
         [DllImport("libwlt2bmp.dll")]
@@ -143,5 +152,7 @@ namespace GZSpotGate.ViewModel
 
         [DllImport("libwlt2bmp.dll")]
         public static extern int wlt2bmpBuffer(byte[] bytes, IntPtr ptr, int len);
+
+
     }
 }

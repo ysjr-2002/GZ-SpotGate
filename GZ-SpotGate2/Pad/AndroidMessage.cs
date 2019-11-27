@@ -24,6 +24,8 @@ namespace GZSpotGate.WS
 
         public int Delay { get; set; }
 
+        public int DayCount { get; set; }
+
         public static AndroidMessage GetIDYes(string name, string message = "请入园")
         {
             AndroidMessage temp = new AndroidMessage();
@@ -44,7 +46,7 @@ namespace GZSpotGate.WS
             return temp;
         }
 
-        public static AndroidMessage GetFaceYes( string avatar, string message = "请入园")
+        public static AndroidMessage GetFaceYes(string avatar, string message = "请入园")
         {
             AndroidMessage temp = new AndroidMessage();
             temp.IDType = IDType.Face;

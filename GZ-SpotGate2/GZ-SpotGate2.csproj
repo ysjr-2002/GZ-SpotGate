@@ -104,6 +104,7 @@
     <Compile Include="Core\MyUdpComServer.cs" />
     <Compile Include="Core\Record.cs" />
     <Compile Include="Core\Request.cs" />
+    <Compile Include="Core\ResetThread.cs" />
     <Compile Include="Face\FaceRecognized.cs" />
     <Compile Include="Face\FaceSocket.cs" />
     <Compile Include="Face\RecognizeState.cs" />

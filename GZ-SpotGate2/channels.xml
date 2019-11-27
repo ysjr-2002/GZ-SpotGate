@@ -10,5 +10,6 @@
     <pad>192.168.31.254</pad>
     <faceserver>172.21.5.190</faceserver>
     <camera>172.21.5.150</camera>
+    <daycount>0</daycount>
   </channel>
 </channels>
