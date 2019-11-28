@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,19 +11,16 @@ namespace GZSpotGate.Core
 {
     class MyUdpComServer
     {
-        private int _port = 0;
-        private UdpClient _server = null;
+        private readonly int port = 9876;
+        private readonly UdpClient server = null;
         public event EventHandler<DataEventArgs> OnMessageInComming;
 
         private const string qr_prefiex = "qr";
         private const string ic_prefiex = "ic";
 
-        private bool init = false;
-
-        public MyUdpComServer(int port)
+        public MyUdpComServer()
         {
-            _port = port;
-            _server = new UdpClient(port);
+            server = new UdpClient(this.port);
         }
 
         public void ReceiveAsync()
@@ -32,7 +30,7 @@ namespace GZSpotGate.Core
 
         private void BeginReceive()
         {
-            _server?.BeginReceive(EndReceive, null);
+            server?.BeginReceive(EndReceive, null);
         }
 
         private void EndReceive(IAsyncResult ir)
@@ -40,37 +38,43 @@ namespace GZSpotGate.Core
             try
             {
                 IPEndPoint epSender = null;
-
-                byte[] buffer = _server.EndReceive(ir, ref epSender);
+                byte[] buffer = server.EndReceive(ir, ref epSender);
+                Debug.WriteLine("hz:" + buffer.Length);
                 BeginReceive();
 
-                if (buffer == null || buffer.Length < 2)
-                {
-                    return;
-                }
+                //if (buffer == null || buffer.Length < 2)
+                //{
+                //    return;
+                //}
+                //var len = buffer.Length;
+                //var code = Encoding.UTF8.GetString(buffer);
+                //code = code.Replace('\r', ' ').Replace('\n', ' ').Trim();
+                //var prefix = code.Substring(0, 2);
+                //code = code.Substring(2);
+                //var ic = false;
+                //var qr = false;
+                //if (prefix == qr_prefiex)
+                //{
+                //    //二维码数据
+                //    qr = true;
+                //    ic = false;
+                //}
+                //else if (prefix == ic_prefiex)
+                //{
+                //    //IC卡
+                //    qr = false;
+                //    ic = true;
+                //}
+                //else
+                //{
+                //    return;
+                //}
+
                 var len = buffer.Length;
                 var code = Encoding.UTF8.GetString(buffer);
                 code = code.Replace('\r', ' ').Replace('\n', ' ').Trim();
-                var prefix = code.Substring(0, 2);
-                code = code.Substring(2);
+                var qr = true;
                 var ic = false;
-                var qr = false;
-                if (prefix == qr_prefiex)
-                {
-                    //二维码数据
-                    qr = true;
-                    ic = false;
-                }
-                else if (prefix == ic_prefiex)
-                {
-                    //IC卡
-                    qr = false;
-                    ic = true;
-                }
-                else
-                {
-                    return;
-                }
                 var data = new DataEventArgs
                 {
                     readerIp = epSender.Address.ToString(),
@@ -88,9 +92,9 @@ namespace GZSpotGate.Core
 
         public void Stop()
         {
-            if (_server != null)
+            if (server != null)
             {
-                _server.Close();
+                server.Close();
             }
         }
     }

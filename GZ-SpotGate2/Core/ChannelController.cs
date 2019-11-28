@@ -36,6 +36,11 @@ namespace GZSpotGate.Core
             request = new Request();
         }
 
+        internal async void OnQRCode(string barCode)
+        {
+            await Check(IntentType.In, IDType.BarCode, barCode);
+        }
+
         internal async void OnReaderID(IDModel model)
         {
             await Check(IntentType.In, IDType.ID, model.IDCard, model.Name);
@@ -44,11 +49,6 @@ namespace GZSpotGate.Core
         internal async void OnFaceRecognize(FaceRecognized face)
         {
             await Check(IntentType.In, IDType.Face, face.person.job_number, face.person.name, face.person.avatar);
-        }
-
-        internal async void OnQRCode(string barCode)
-        {
-            await Check(IntentType.In, IDType.BarCode, barCode);
         }
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
@@ -68,7 +68,11 @@ namespace GZSpotGate.Core
             }
 
             Stopwatch sw = Stopwatch.StartNew();
-            var content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
+            //var content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
+            var content = new FeedBack
+            {
+                code = 100
+            };
             sw.Stop();
 
             AndroidMessage am = new AndroidMessage();
@@ -118,6 +122,12 @@ namespace GZSpotGate.Core
             }
 
             LogHelper.Append(record);
+        }
+
+        public void Dispose()
+        {
+            idreader.Close();
+            faceSocket?.Disconnect();
         }
     }
 }

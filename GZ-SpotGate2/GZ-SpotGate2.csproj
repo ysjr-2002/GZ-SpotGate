@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -110,6 +113,7 @@
     <Compile Include="Face\RecognizeState.cs" />
     <Compile Include="IDCard\IDModel.cs" />
     <Compile Include="IDCard\IDPackage.cs" />
+    <Compile Include="IDCard\IDPhotoHelper.cs" />
     <Compile Include="IDCard\IDReader.cs" />
     <Compile Include="ItemControl.xaml.cs">
       <DependentUpon>ItemControl.xaml</DependentUpon>
@@ -183,6 +187,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Document\remark.txt" />
     <Resource Include="Images\face.png" />
     <Resource Include="Images\id.png" />
     <Resource Include="Images\qr.png" />
@@ -193,6 +198,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Resource Include="app.ico" />
     <Content Include="dll\Microsoft.Practices.Prism.dll" />
     <Content Include="dll\Newtonsoft.Json.dll" />
     <Content Include="dll\System.Windows.Interactivity.dll" />

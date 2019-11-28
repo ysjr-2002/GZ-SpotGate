@@ -13,7 +13,9 @@ namespace GZSpotGate.Core
     {
         private const byte source_add = 0x01;
         private const byte denst_add = 0x00;
-        private const int port = 9878;
+        private const int port = 1004;
+
+        private static UdpClient udp = new UdpClient();
 
         public static bool Open(string gateIp)
         {
@@ -25,8 +27,7 @@ namespace GZSpotGate.Core
             var check = getCheckSum(buffer);
             buffer[buffer.Length - 1] = check;
 
-            var remotePoint = new IPEndPoint(IPAddress.Parse(gateIp), 9878);
-            UdpClient udp = new UdpClient();
+            var remotePoint = new IPEndPoint(IPAddress.Parse(gateIp), port);
             udp.Client.ReceiveTimeout = 1 * 1000;
             udp.Send(buffer, buffer.Length, remotePoint);
             try

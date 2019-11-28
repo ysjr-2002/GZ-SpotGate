@@ -21,7 +21,7 @@ namespace GZSpotGate.IDCard
         private IPEndPoint remotePoint;
         private Action<IDModel> OnReadCallback;
         private Thread thread;
-        private const int port = 9877;
+        private const int port = 1002;
 
         public IDReader(string remoteIp)
         {
@@ -62,26 +62,24 @@ namespace GZSpotGate.IDCard
             }
         }
 
-        public void ReadID(byte[] bytes = null)
+        public void ReadID()
         {
             byte[] receive = null;
             try
             {
-                //var senddata = IDPackage.getReadIDPackage();
-                //udp.Send(senddata, senddata.Length, remotePoint);
-                //IPEndPoint epSender = null;
-                //var list = new List<byte>();
-                //var pack1 = udp.Receive(ref epSender);
-                ////串口服务器对包进行了限制单包只能1024字节
-                //var pack2 = udp.Receive(ref epSender);
-                //var a = pack1.Length + pack2.Length;
-                //list.AddRange(pack1);
-                //list.AddRange(pack2);
-                //receive = list.ToArray();
+                var senddata = IDPackage.getReadIDPackage();
+                udp.Send(senddata, senddata.Length, remotePoint);
+                IPEndPoint epSender = null;
+                var list = new List<byte>();
+                var pack1 = udp.Receive(ref epSender);
+                //串口服务器对包进行了限制单包只能1024字节
+                var pack2 = udp.Receive(ref epSender);
+                var a = pack1.Length + pack2.Length;
+                list.AddRange(pack1);
+                list.AddRange(pack2);
+                receive = list.ToArray();
                 //5+2
-                //Console.WriteLine("shit:" + pack1.Length + " " + pack2.Length);
-                receive = bytes;
-                Console.WriteLine("read card->" + receive.Length);
+                Debug.WriteLine("hz:data len=" + pack1.Length + " " + pack2.Length);
                 if (receive.Length >= 7)
                 {
                     var hex = receive.ToHex();
@@ -89,20 +87,21 @@ namespace GZSpotGate.IDCard
                     //去除最后效验
                     byte[] buffers = new byte[len - 1];
                     Array.Copy(receive, 7, buffers, 0, buffers.Length);
-                    if (receive[2] == 0x90)
+                    if (buffers[2] == 0x90)
                     {
                         //读取成功
-                        var txtlen = receive[3] * 256 + receive[4];
-                        var piclen = receive[5] * 256 + receive[6];
+                        var txtlen = buffers[3] * 256 + buffers[4];
+                        var piclen = buffers[5] * 256 + buffers[6];
 
                         var idmsgbuffer = new byte[txtlen];
                         var picbuffer = new byte[piclen];
-                        Array.Copy(receive, 7, idmsgbuffer, 0, idmsgbuffer.Length);
-                        Array.Copy(receive, 7 + txtlen, picbuffer, 0, picbuffer.Length);
+                        Array.Copy(buffers, 7, idmsgbuffer, 0, idmsgbuffer.Length);
+                        Array.Copy(buffers, 7 + txtlen, picbuffer, 0, picbuffer.Length);
 
                         IDModel idmodel = new IDModel();
                         IDPackage.ParseMessage(idmsgbuffer, idmodel);
                         IDPackage.SetPicBuffer(picbuffer);
+                        IDPhotoHelper.Save(idmodel.IDCard, picbuffer);
                         OnReadCallback?.Invoke(idmodel);
                     }
                 }

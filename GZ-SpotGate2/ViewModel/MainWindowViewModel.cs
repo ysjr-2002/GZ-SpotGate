@@ -27,7 +27,6 @@ namespace GZSpotGate.ViewModel
         public static MainWindowViewModel Instance = new MainWindowViewModel();
 
         MyUdpComServer udpServer = null;
-        private const int qrport = 9876;
 
         private ResetThread resetThread;
 
@@ -75,7 +74,7 @@ namespace GZSpotGate.ViewModel
             resetThread.Start();
 
             controllers = new List<ChannelController>();
-            udpServer = new MyUdpComServer(qrport);
+            udpServer = new MyUdpComServer();
             udpServer.ReceiveAsync();
             udpServer.OnMessageInComming += UdpServer_OnMessageInComming;
 
@@ -84,22 +83,6 @@ namespace GZSpotGate.ViewModel
                 var controller = new ChannelController(channel);
                 controller.Start();
                 controllers.Add(controller);
-            }
-
-            if (System.IO.File.Exists("id.txt"))
-            {
-                var bytes = System.IO.File.ReadAllText("id.txt").Split(' ').Select(s => s.FromHexToByte()).ToArray();
-                controllers.First().idreader.ReadID(bytes);
-                byte[] wltbuffer = IDPackage.picbuffer;
-                int ret = wlt2bmp(wltbuffer);
-                var len = (102 * 3 + 2) * 126 + 54;
-                var bmpbuffer = new byte[len];
-                var ptr = Marshal.AllocHGlobal(bmpbuffer.Length);
-                ret = wlt2bmpBuffer(wltbuffer, ptr, bmpbuffer.Length);
-                Marshal.Copy(ptr, bmpbuffer, 0, bmpbuffer.Length);
-                var ms = new MemoryStream(bmpbuffer);
-                var bitmap = System.Drawing.Image.FromStream(ms);
-                bitmap.Save("zp.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
             }
         }
 
@@ -144,15 +127,12 @@ namespace GZSpotGate.ViewModel
 
         public new void Dispose()
         {
+            udpServer?.Stop();
             resetThread?.Stop();
+            foreach (var controller in controllers)
+            {
+                controller.Dispose();
+            }
         }
-
-        [DllImport("libwlt2bmp.dll")]
-        public static extern int wlt2bmp(byte[] bytes);
-
-        [DllImport("libwlt2bmp.dll")]
-        public static extern int wlt2bmpBuffer(byte[] bytes, IntPtr ptr, int len);
-
-
     }
 }
