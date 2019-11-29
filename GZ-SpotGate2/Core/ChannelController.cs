@@ -64,6 +64,8 @@ namespace GZSpotGate.Core
 
             if (uniqueId.IsEmpty())
             {
+                record = Record.GetError(Channel.name, "编号为空");
+                LogHelper.Append(record);
                 return;
             }
 
@@ -80,17 +82,21 @@ namespace GZSpotGate.Core
             {
                 am = AndroidMessage.GetFaceYes(avatar);
                 record = Record.GetFacRecord(Channel.name);
+                record.Code = $"姓名:{name} 号码:{uniqueId}";
             }
             if (checkInType == IDType.ID)
             {
                 am = AndroidMessage.GetIDYes(name);
                 record = Record.GetIDRecord(Channel.name);
+                record.Code = $"姓名:{name} 号码:{uniqueId}";
             }
             if (checkInType == IDType.BarCode)
             {
                 am = AndroidMessage.GetQRYes();
                 record = Record.GetQRRecord(Channel.name);
+                record.Code = uniqueId;
             }
+
             record.Time = sw.ElapsedMilliseconds + "ms";
 
             byte personCount = content?.personCount.ToByte() ?? 0;

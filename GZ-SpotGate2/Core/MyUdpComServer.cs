@@ -39,9 +39,7 @@ namespace GZSpotGate.Core
             {
                 IPEndPoint epSender = null;
                 byte[] buffer = server.EndReceive(ir, ref epSender);
-                Debug.WriteLine("hz:" + buffer.Length);
                 BeginReceive();
-
                 //if (buffer == null || buffer.Length < 2)
                 //{
                 //    return;
@@ -79,8 +77,8 @@ namespace GZSpotGate.Core
                 {
                     readerIp = epSender.Address.ToString(),
                     Data = code,
-                    ICData = ic,
-                    QRData = qr
+                    QRData = qr,
+                    ICData = ic
                 };
                 OnMessageInComming?.Invoke(null, data);
             }

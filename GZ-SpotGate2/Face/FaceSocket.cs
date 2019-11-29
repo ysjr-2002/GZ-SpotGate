@@ -35,7 +35,8 @@ namespace GZSpotGate.Face
             {
                 Dispose();
                 var url = string.Format("ws://{0}:9000/video", koalaIp.Trim());
-                var rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", cameraIp.Trim());
+                //var rtsp = string.Format("rtsp://{0}/user=admin&password=&channel=1&stream=0.sdp", cameraIp.Trim());
+                var rtsp = string.Format("rtsp://admin:admin@{0}/av0_0", cameraIp.Trim());
                 rtsp = HttpUtility.UrlEncode(rtsp);
                 var all = string.Concat(url, "?url=", rtsp);
 

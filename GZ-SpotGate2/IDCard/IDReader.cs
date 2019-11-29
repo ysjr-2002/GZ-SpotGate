@@ -72,14 +72,23 @@ namespace GZSpotGate.IDCard
                 IPEndPoint epSender = null;
                 var list = new List<byte>();
                 var pack1 = udp.Receive(ref epSender);
-                //串口服务器对包进行了限制单包只能1024字节
-                var pack2 = udp.Receive(ref epSender);
-                var a = pack1.Length + pack2.Length;
-                list.AddRange(pack1);
-                list.AddRange(pack2);
-                receive = list.ToArray();
-                //5+2
-                Debug.WriteLine("hz:data len=" + pack1.Length + " " + pack2.Length);
+                if (pack1.Length == 1024)
+                {
+                    Debug.WriteLine("hz:pack1:" + pack1.Length);
+                    //串口服务器对包进行了限制单包只能1024字节
+                    var pack2 = udp.Receive(ref epSender);
+                    Debug.WriteLine("hz:pack2:" + pack1.Length);
+                    var a = pack1.Length + pack2.Length;
+                    list.AddRange(pack1);
+                    list.AddRange(pack2);
+                    receive = list.ToArray();
+                    //5+2
+                    Debug.WriteLine("hz:data len=" + pack1.Length + " " + pack2.Length);
+                }
+                else
+                {
+                    receive = pack1;
+                }
                 if (receive.Length >= 7)
                 {
                     var hex = receive.ToHex();
