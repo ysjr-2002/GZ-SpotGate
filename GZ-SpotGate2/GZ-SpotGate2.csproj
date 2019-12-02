@@ -103,8 +103,9 @@
     <Compile Include="Core\Config.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
     <Compile Include="Core\GateHelper.cs" />
+    <Compile Include="Core\GateUdpComServer.cs" />
     <Compile Include="Core\LogHelper.cs" />
-    <Compile Include="Core\MyUdpComServer.cs" />
+    <Compile Include="Core\QRUdpComServer.cs" />
     <Compile Include="Core\Record.cs" />
     <Compile Include="Core\Request.cs" />
     <Compile Include="Core\ResetThread.cs" />

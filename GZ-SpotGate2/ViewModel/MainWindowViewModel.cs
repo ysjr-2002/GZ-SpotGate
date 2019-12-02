@@ -26,7 +26,7 @@ namespace GZSpotGate.ViewModel
 
         public static MainWindowViewModel Instance = new MainWindowViewModel();
 
-        MyUdpComServer udpServer = null;
+        QRUdpComServer udpServer = null;
 
         private ResetThread resetThread;
 
@@ -74,7 +74,7 @@ namespace GZSpotGate.ViewModel
             resetThread.Start();
 
             controllers = new List<ChannelController>();
-            udpServer = new MyUdpComServer();
+            udpServer = new QRUdpComServer();
             udpServer.ReceiveAsync();
             udpServer.OnMessageInComming += UdpServer_OnMessageInComming;
 
@@ -106,6 +106,18 @@ namespace GZSpotGate.ViewModel
         private void Min()
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        internal void Open(string comIp)
+        {
+            var item = this.controllers.FirstOrDefault(s => s.Channel.comserver == comIp);
+            if (item == null || comIp.IsEmpty())
+            {
+                MsgBox.Warning("Ip不存在");
+                return;
+            }
+
+            item.Open();
         }
 
         private void Max()

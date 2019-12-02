@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace GZSpotGate.Core
 {
-    class MyUdpComServer
+    /// <summary>
+    /// 二维码服务
+    /// </summary>
+    class QRUdpComServer
     {
         private readonly int port = 9876;
         private readonly UdpClient server = null;
@@ -18,7 +21,7 @@ namespace GZSpotGate.Core
         private const string qr_prefiex = "qr";
         private const string ic_prefiex = "ic";
 
-        public MyUdpComServer()
+        public QRUdpComServer()
         {
             server = new UdpClient(this.port);
         }

@@ -89,7 +89,7 @@
                             <ColumnDefinition Width="120" />
                             <ColumnDefinition Width="120" />
                             <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="60" />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="{Binding no}" />
                         <TextBox

@@ -17,6 +17,7 @@ namespace GZSpotGate.Core
         private FaceSocket faceSocket = null;
         public IDReader idreader { get; private set; }
         private Request request = null;
+        private GateUdpComServer gateServer = null;
         public ChannelController(Channel channel)
         {
             Channel = channel;
@@ -26,12 +27,18 @@ namespace GZSpotGate.Core
 
         public void Start()
         {
+            if (Channel.comserver.IsEmpty())
+                return;
+
             faceSocket = new FaceSocket(Channel, OnFaceRecognize);
             faceSocket.Connect();
 
             idreader = new IDReader(Channel.comserver);
             idreader.Run();
             idreader.SetDataCallback(OnReaderID);
+
+            gateServer = new GateUdpComServer(Channel);
+            gateServer.Start();
 
             request = new Request();
         }
@@ -130,9 +137,15 @@ namespace GZSpotGate.Core
             LogHelper.Append(record);
         }
 
+        public void Open()
+        {
+            this.gateServer.EnterOpen(0);
+        }
+
         public void Dispose()
         {
-            idreader.Close();
+            idreader?.Close();
+            gateServer?.Stop();
             faceSocket?.Disconnect();
         }
     }

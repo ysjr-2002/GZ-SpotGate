@@ -1,4 +1,5 @@
 ﻿using GZSpotGate.Core;
+using GZSpotGate.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,15 +45,16 @@ namespace GZSpotGate
             var gateIp = ((FrameworkElement)sender).Tag.ToString();
             if (gateIp != null)
             {
-                var open = GateHelper.Open(gateIp);
-                if (open)
-                {
-                    MessageBox.Show("开闸成功！", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("开闸失败！", "提示", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                //var open = GateHelper.Open(gateIp);
+                //if (open)
+                //{
+                //    MessageBox.Show("开闸成功！", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                //}
+                //else
+                //{
+                //    MessageBox.Show("开闸失败！", "提示", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
+                MainWindowViewModel.Instance.Open(gateIp);
             }
         }
     }
