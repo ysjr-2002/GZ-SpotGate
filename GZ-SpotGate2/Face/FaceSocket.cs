@@ -78,13 +78,13 @@ namespace GZSpotGate.Face
         private void _socket_OnError(object sender, ErrorEventArgs e)
         {
             channel.wsok = false;
-            LogHelper.Log("Websocket错误->" + koalaIp);
+            //LogHelper.Log("Websocket错误->" + koalaIp);
         }
 
         private void _socket_OnOpen(object sender, EventArgs e)
         {
             channel.wsok = true;
-            LogHelper.Log("Websocket成功->" + koalaIp);
+            //LogHelper.Log("Websocket成功->" + koalaIp);
         }
 
         private void Dispose()

@@ -40,6 +40,19 @@ namespace GZSpotGate
         private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             var msg = e.Exception.Message;
+            LogHelper.Log("Source:" + e.Exception.Source);
+            LogHelper.Log("Messaeg:" + msg);
+            if (e.Exception.Data != null)
+            {
+                foreach (var item in e.Exception.Data.Keys)
+                {
+                    LogHelper.Log("key:" + item);
+                    LogHelper.Log("val:" + e.Exception.Data[item]);
+                }
+            }
+            LogHelper.Log("HelpLink:" + e.Exception.HelpLink);
+            LogHelper.Log("TargetSite:" + e.Exception.TargetSite);
+            LogHelper.Log("StackTrace:" + e.Exception.StackTrace.Trim());
             MsgBox.Warning(msg);
             e.Handled = true;
         }
