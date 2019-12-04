@@ -75,13 +75,9 @@ namespace GZSpotGate.Core
                 LogHelper.Append(record);
                 return;
             }
-
             Stopwatch sw = Stopwatch.StartNew();
-            //var content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
-            var content = new FeedBack
-            {
-                code = 100
-            };
+            var content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
+            content.code = 100;
             sw.Stop();
 
             AndroidMessage am = new AndroidMessage();
@@ -105,7 +101,7 @@ namespace GZSpotGate.Core
             }
 
             record.Time = sw.ElapsedMilliseconds + "ms";
-
+            Debug.WriteLine("hz:step4");
             byte personCount = content?.personCount.ToByte() ?? 0;
             if (content?.code == 100)
             {
@@ -115,12 +111,15 @@ namespace GZSpotGate.Core
             if (intentType == IntentType.In && content?.code == 100)
             {
                 record.StatuCode = 0;
+                record.PostMessage = content?.message;
                 Channel.daycount = (Channel.daycount.ToInt32() + 1).ToString();
                 Channels.Save();
-                GateHelper.Open(Channel.comserver);
+                //GateHelper.Open(Channel.comserver);
 
                 am.DayCount = Channel.daycount.ToInt32();
-                PadHelper.SendToPad(Channel.pad, am);
+                //PadHelper.SendToPad(Channel.pad, am);
+
+                gateServer.EnterOpen(0);
             }
             if (intentType == IntentType.In && content?.code != 100)
             {
@@ -131,7 +130,7 @@ namespace GZSpotGate.Core
                 am.Status = 1;
                 am.DayCount = Channel.daycount.ToInt32();
 
-                PadHelper.SendToPad(Channel.pad, am);
+                //PadHelper.SendToPad(Channel.pad, am);
             }
 
             LogHelper.Append(record);

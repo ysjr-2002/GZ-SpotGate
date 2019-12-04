@@ -70,10 +70,12 @@ namespace GZSpotGate.Core
                 //{
                 //    return;
                 //}
-
                 var len = buffer.Length;
+                Debug.WriteLine("hz:step1 " + len);
+                Debug.WriteLine("hz:step2 " + buffer.ToHex());
                 var code = Encoding.UTF8.GetString(buffer);
                 code = code.Replace('\r', ' ').Replace('\n', ' ').Trim();
+                Debug.WriteLine("hz:step3 " + code);
                 var qr = true;
                 var ic = false;
                 var data = new DataEventArgs

@@ -25,7 +25,19 @@ namespace GZSpotGate.Core
             dict.Add("type", getTypeName(type));
             var postData = dict.LinkUrl();
             var content = await doRequest(url, postData);
-            var feedback = Newtonsoft.Json.JsonConvert.DeserializeObject<FeedBack>(content);
+            FeedBack feedback = null;
+            try
+            {
+                feedback = Newtonsoft.Json.JsonConvert.DeserializeObject<FeedBack>(content);
+            }
+            catch (Exception ex)
+            {
+                feedback = new FeedBack
+                {
+                    code = -1,
+                    message = ex.Message,
+                };
+            }
             return feedback;
         }
 

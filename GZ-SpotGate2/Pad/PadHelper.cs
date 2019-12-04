@@ -28,8 +28,14 @@ namespace GZSpotGate.Pad
 
             UdpClient udp = new UdpClient();
 
-            IPAddress ipAddress = IPAddress.Parse(padIp);
-            udp.Send(buffers, buffers.Length, new IPEndPoint(ipAddress, port));
+            try
+            {
+                IPAddress ipAddress = IPAddress.Parse(padIp);
+                udp.Send(buffers, buffers.Length, new IPEndPoint(ipAddress, port));
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

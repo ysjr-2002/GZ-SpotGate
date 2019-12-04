@@ -4,6 +4,7 @@ using LL.SenicSpot.Gate.Model;
 using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -93,6 +94,7 @@ namespace GZSpotGate.ViewModel
             {
                 return;
             }
+            Debug.WriteLine("hz:step4");
             if (e.QRData)
                 controller.OnQRCode(e.Data);
         }

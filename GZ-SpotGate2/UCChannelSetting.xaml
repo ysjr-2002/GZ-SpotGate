@@ -45,7 +45,7 @@
                 Orientation="Horizontal">
                 <Label Width="50" Content="通道" />
                 <Label Width="160" Content="名称" />
-                <Label Width="120" Content="虚拟IP" />
+                <Label Width="120" Content="道闸Ip" />
                 <Label Width="120" Content="人脸" />
                 <Label Width="120" Content="摄像机" />
                 <Label Width="120" Content="串口服务器" />
