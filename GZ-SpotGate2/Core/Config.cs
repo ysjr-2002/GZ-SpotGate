@@ -26,12 +26,21 @@ namespace GZSpotGate.Core
         public string FaceServer { get; internal set; }
         public int PadDelay { get; internal set; }
 
+        public string LocalIp { get; set; }
+        public string Account { get; set; }
+        public string Pwd { get; set; }
+        public int Interval { get; set; }
+
         public void Read()
         {
             Auto = GetKey("auto");
             PWServer = GetKey("pwserver");
             FaceServer = GetKey("faceserver");
             PadDelay = GetKey("paddelay").ToInt32();
+            LocalIp = GetKey("localIp");
+            Account = GetKey("account");
+            Pwd = GetKey("pwd");
+            Interval = GetKey("interval").ToInt32();
         }
 
         public void Save()
@@ -41,6 +50,10 @@ namespace GZSpotGate.Core
             cfg.AppSettings.Settings["pwserver"].Value = PWServer;
             cfg.AppSettings.Settings["faceserver"].Value = FaceServer;
             cfg.AppSettings.Settings["paddelay"].Value = PadDelay.ToString();
+            cfg.AppSettings.Settings["localIp"].Value = LocalIp;
+            cfg.AppSettings.Settings["account"].Value = Account;
+            cfg.AppSettings.Settings["pwd"].Value = Pwd;
+            cfg.AppSettings.Settings["interval"].Value = Interval.ToString();
             cfg.Save();
         }
 

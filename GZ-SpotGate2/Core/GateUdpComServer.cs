@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LL.SenicSpot.Gate.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -18,7 +19,6 @@ namespace GZSpotGate.Core
         private int pre_in_count = 0;
         private int pre_out_count = 0;
         private UdpClient udp = null;
-        private static readonly string TAG = "gate:";
 
         private readonly static Dictionary<int, string> gatestate = new Dictionary<int, string>()
         {
@@ -56,12 +56,12 @@ namespace GZSpotGate.Core
                 udp = new UdpClient(port);
                 gateRemotePoint = new IPEndPoint(IPAddress.Parse(channel.comserver), 1004);
                 bInit = true;
-                LogHelper.Log(TAG + channel.name + " start");
+                LogHelper.Log("通道号:" + channel.no + " " + channel.name + " start port:" + port);
             }
             catch (Exception ex)
             {
-                LogHelper.Log(TAG + "constructor error, deviceId:" + channel.no);
-                LogHelper.Log(TAG + "constructor error:" + ex.Message);
+                LogHelper.Log("constructor error, deviceId:" + channel.no);
+                LogHelper.Log("constructor error:" + ex.Message);
             }
         }
 
@@ -123,12 +123,12 @@ namespace GZSpotGate.Core
             if (buffer[7] == 0)
             {
                 //空闲
-                LogHelper.Log(TAG + gateRemotePoint + " 00 idle add:" + buffer[2]);
+                LogHelper.Log(gateRemotePoint + " 00 idle add:" + buffer[2]);
             }
             else
             {
                 //非空闲
-                LogHelper.Log(TAG + gateRemotePoint + " " + buffer[7].ToHex() + " recognize");
+                LogHelper.Log(gateRemotePoint + " " + buffer[7].ToHex() + " recognize");
             }
 
             var state = gatestate[buffer[7]];
@@ -142,31 +142,36 @@ namespace GZSpotGate.Core
             var incount = BitConverter.ToInt32(incountBytes, 0);
             var outcount = BitConverter.ToInt32(outcountBytes, 0);
 
-            LogHelper.Log(TAG + gateRemotePoint + $" prein:{pre_in_count} curin:{incount} preout:{pre_out_count} curout:{outcount}");
+            LogHelper.Log(gateRemotePoint + $" prein:{pre_in_count} curin:{incount} preout:{pre_out_count} curout:{outcount}");
 
             if ((pre_in_count != incount && incount > 0) && fire)
             {
                 pre_in_count = incount;
 
                 _ = new Request().Calc(this.Channel.ChannelVirualIp, "Z");
+
+                var record = new Record()
+                {
+                    StatuCode = 0,
+                    Channel = this.Channel.name,
+                    Status = "上报通行人次",
+                    PassTime = DateTime.Now.ToStandard()
+                };
+                LogHelper.Append(record);
             }
             if ((pre_out_count != outcount && outcount > 0) && fire)
             {
                 //离开
                 pre_out_count = outcount;
-
             }
         }
 
-        Stack<string> stackInId = new Stack<string>();
-        Stack<string> stackOutId = new Stack<string>();
         /// <summary>
         /// 进向开闸
         /// </summary>
         /// <param name="count">值为1时，进向保持</param>
         public bool EnterOpen(byte count)
         {
-            LogHelper.Log(TAG + gateRemotePoint + " In open");
             byte cid1 = 0x02;
             byte cid2 = 0x00;
             byte len = 0x08;
@@ -198,7 +203,7 @@ namespace GZSpotGate.Core
         /// <param name="openModel"></param>
         public bool ExitOpen(byte count)
         {
-            LogHelper.Log(TAG + gateRemotePoint + " Out open");
+            LogHelper.Log(gateRemotePoint + " Out open");
             byte cid1 = 0x02;
             byte cid2 = 0x00;
             byte len = 0x08;
@@ -258,7 +263,7 @@ namespace GZSpotGate.Core
             try
             {
                 udp.Send(buffer, buffer.Length, gateRemotePoint);
-                LogHelper.Log(TAG + gateRemotePoint.ToString() + " send:" + buffer.ToHex());
+                LogHelper.Log(gateRemotePoint.ToString() + " send:" + buffer.ToHex());
                 return true;
             }
             catch

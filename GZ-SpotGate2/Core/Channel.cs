@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KoalaCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,5 +62,6 @@ namespace GZSpotGate.Core
             get { return this.GetValue(s => s.wsok); }
             set { this.SetValue(s => s.wsok, value); }
         }
+
     }
 }

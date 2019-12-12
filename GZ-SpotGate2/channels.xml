@@ -9,7 +9,7 @@
     <comserver>172.21.5.17</comserver>
     <pad>192.168.31.254</pad>
     <faceserver>172.21.5.190</faceserver>
-    <camera>172.21.5.150</camera>
+    <camera>rtsp://172.21.5.1:8080/h264_ulaw.sdp</camera>
     <daycount>0</daycount>
   </channel>
   <channel>

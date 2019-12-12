@@ -36,6 +36,10 @@ namespace GZSpotGate
             txtpwServer.Text = Config.Instance.PWServer;
             txtfaceserver.Text = Config.Instance.FaceServer;
             txtdelay.Text = Config.Instance.PadDelay.ToString();
+            txtlocal.Text = Config.Instance.LocalIp;
+            txtaccount.Text = Config.Instance.Account;
+            txtpwd.Text = Config.Instance.Pwd;
+            txtinterval.Text = Config.Instance.Interval.ToString();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -44,6 +48,10 @@ namespace GZSpotGate
             Config.Instance.PWServer = txtpwServer.Text;
             Config.Instance.FaceServer = txtfaceserver.Text;
             Config.Instance.PadDelay = txtdelay.Text.ToInt32();
+            Config.Instance.LocalIp = txtlocal.Text;
+            Config.Instance.Account = txtaccount.Text;
+            Config.Instance.Pwd = txtpwd.Text;
+            Config.Instance.Interval = txtinterval.Text.ToInt32();
 
             Config.Instance.Save();
             MessageBox.Show("配置保存成功，重启生效！", "提示", MessageBoxButton.OK, MessageBoxImage.Information);

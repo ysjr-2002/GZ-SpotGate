@@ -23,6 +23,11 @@ namespace System
             log.Debug(content);
         }
 
+        public static void AppendWXLog(string content)
+        {
+            log.Debug(content);
+        }
+
         public static void Append(Record data)
         {
             Application.Current.Dispatcher.Invoke(() =>

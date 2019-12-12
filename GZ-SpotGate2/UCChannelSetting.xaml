@@ -44,12 +44,12 @@
                 Background="#d6dbe9"
                 Orientation="Horizontal">
                 <Label Width="50" Content="通道" />
-                <Label Width="160" Content="名称" />
-                <Label Width="120" Content="道闸Ip" />
-                <Label Width="120" Content="人脸" />
-                <Label Width="120" Content="摄像机" />
-                <Label Width="120" Content="串口服务器" />
-                <Label Width="120" Content="Pad" />
+                <Label Width="90" Content="名称" />
+                <Label Width="100" Content="道闸Ip" />
+                <Label Width="100" Content="人脸" />
+                <Label Width="240" Content="摄像机" />
+                <Label Width="100" Content="串口服务器" />
+                <Label Width="100" Content="Pad" />
                 <Label Width="50" Content="识别" />
                 <Label Width="60" Content="操作" />
             </StackPanel>
@@ -77,28 +77,31 @@
                                 <Setter Property="BorderBrush" Value="#cccccc" />
                                 <Setter Property="VerticalContentAlignment" Value="Center" />
                                 <Setter Property="Height" Value="24" />
-                                <Setter Property="Width" Value="110" />
+                                <Setter Property="Width" Value="96" />
                             </Style>
                         </Grid.Resources>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="160" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="240" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="60" />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="{Binding no}" />
                         <TextBox
                             Grid.Column="1"
-                            Width="160"
+                            Width="90"
                             Text="{Binding name}" />
                         <TextBox Grid.Column="2" Text="{Binding ChannelVirualIp}" />
                         <TextBox Grid.Column="3" Text="{Binding faceserver}" />
-                        <TextBox Grid.Column="4" Text="{Binding camera}" />
+                        <TextBox
+                            Grid.Column="4"
+                            Width="240"
+                            Text="{Binding camera}" />
                         <TextBox Grid.Column="5" Text="{Binding comserver}" />
                         <TextBox Grid.Column="6" Text="{Binding pad}" />
                         <TextBlock

@@ -40,7 +40,6 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbrtsp = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +50,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(158, 21);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "192.168.0.50";
+            this.textBox1.Text = "172.21.5.190";
             // 
             // button1
             // 
@@ -171,23 +170,11 @@
             this.cmbrtsp.Size = new System.Drawing.Size(415, 20);
             this.cmbrtsp.TabIndex = 12;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(214, 77);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(76, 22);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "connect";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 391);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.cmbrtsp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.radioButton3);
@@ -225,7 +212,6 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbrtsp;
-        private System.Windows.Forms.Button button2;
     }
 }
 

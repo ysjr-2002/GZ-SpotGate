@@ -18,6 +18,14 @@ namespace GZSpotGate.Core
         public IDReader idreader { get; private set; }
         private Request request = null;
         private GateUdpComServer gateServer = null;
+        private const string In_Ok = "欢迎光临";
+        private const string In_Failure = "请重新验证";
+
+        private const string Out_Ok = "谢谢光临";
+        private const string Out_Failure = "请重新验证";
+
+        private const string Line2_Ok_Tip = "验证成功";
+        private const string Line2_Failure_Tip = "验证失败";
         public ChannelController(Channel channel)
         {
             Channel = channel;
@@ -55,23 +63,24 @@ namespace GZSpotGate.Core
 
         internal async void OnFaceRecognize(FaceRecognized face)
         {
-            await Check(IntentType.In, IDType.Face, face.person.job_number, face.person.name, face.person.avatar);
+            LogHelper.Log("avatar:" + face.person.avatar);
+            await Check(IntentType.In, IDType.Face, face.person.description, face.person.name, face.person.avatar);
         }
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
             Record record = null;
-            var error = SecurityHelper.IsAuth();
-            if (!error.IsEmpty())
-            {
-                record = Record.GetError(Channel.name, error);
-                LogHelper.Append(record);
-                return;
-            }
+            //var error = SecurityHelper.IsAuth();
+            //if (!error.IsEmpty())
+            //{
+            //    record = Record.GetError(Channel.name, error);
+            //    LogHelper.Append(record);
+            //    return;
+            //}
 
             if (uniqueId.IsEmpty())
             {
-                record = Record.GetError(Channel.name, "编号为空");
+                record = Record.GetError(Channel.name, "票号为空");
                 LogHelper.Append(record);
                 return;
             }
@@ -80,22 +89,27 @@ namespace GZSpotGate.Core
             content.code = 100;
             sw.Stop();
 
-            AndroidMessage am = new AndroidMessage();
+            AndroidMessage am = new AndroidMessage
+            {
+                CheckInType = checkInType,
+                IntentType = InOutType.In,
+                Delay = Config.Instance.PadDelay * 1000,
+                Code = content.code,
+                Avatar = avatar
+            };
+
             if (checkInType == IDType.Face)
             {
-                am = AndroidMessage.GetFaceYes(avatar);
                 record = Record.GetFacRecord(Channel.name);
                 record.Code = $"姓名:{name} 号码:{uniqueId}";
             }
             if (checkInType == IDType.ID)
             {
-                am = AndroidMessage.GetIDYes(name);
                 record = Record.GetIDRecord(Channel.name);
                 record.Code = $"姓名:{name} 号码:{uniqueId}";
             }
             if (checkInType == IDType.BarCode)
             {
-                am = AndroidMessage.GetQRYes();
                 record = Record.GetQRRecord(Channel.name);
                 record.Code = uniqueId;
             }
@@ -116,8 +130,9 @@ namespace GZSpotGate.Core
                 Channels.Save();
                 //GateHelper.Open(Channel.comserver);
 
+                am.Line1 = In_Ok + " " + name;
+                am.Line2 = Line2_Ok_Tip;
                 am.DayCount = Channel.daycount.ToInt32();
-                //PadHelper.SendToPad(Channel.pad, am);
 
                 gateServer.EnterOpen(0);
             }
@@ -127,12 +142,11 @@ namespace GZSpotGate.Core
                 record.StatuCode = 1;
                 record.PostMessage = content.message;
 
-                am.Status = 1;
+                am.Line1 = In_Failure;
+                am.Line2 = Line2_Failure_Tip;
                 am.DayCount = Channel.daycount.ToInt32();
-
-                //PadHelper.SendToPad(Channel.pad, am);
             }
-
+            PadHelper.SendToPad(Channel.pad, am);
             LogHelper.Append(record);
         }
 

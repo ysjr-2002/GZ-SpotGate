@@ -1,5 +1,6 @@
 ﻿using GZSpotGate.Core;
 using GZSpotGate.IDCard;
+using HXMansion.Http;
 using LL.SenicSpot.Gate.Model;
 using Microsoft.Practices.Prism.Commands;
 using System;
@@ -29,7 +30,7 @@ namespace GZSpotGate.ViewModel
 
         QRUdpComServer udpServer = null;
 
-        private ResetThread resetThread;
+        private HttpServer httpServer;
 
         public MainWindowViewModel()
         {
@@ -41,6 +42,12 @@ namespace GZSpotGate.ViewModel
         {
             get { return this.GetValue(s => s.TabSelectedIndex); }
             set { this.SetValue(s => s.TabSelectedIndex, value); }
+        }
+
+        public string MyTitle
+        {
+            get { return this.GetValue(s => s.MyTitle); }
+            set { this.SetValue(s => s.MyTitle, value); }
         }
 
         public SettingViewModel SettingViewModel
@@ -67,12 +74,26 @@ namespace GZSpotGate.ViewModel
             TabSelectedIndex = tag.ToInt32();
         }
 
-        private void Onload()
+        private async void Onload()
         {
+            LogHelper.Log("start up...");
             Util.runWhenStart(Config.Instance.Auto == "1", "GZSpotGate", System.Windows.Forms.Application.ExecutablePath);
+            Config.Instance.Read();
+            KoalaCore.KoalaConstrant.Init(Config.Instance.FaceServer);
+            var login = await KoalaCore.KoalaHelper.Instance.Login(Config.Instance.Account, Config.Instance.Pwd);
+            MyTitle += (login ? "天河潭道闸控制软件-Koala登录成功" : "天河潭道闸控制软件-Koala登录失败");
+            if (login)
+            {
+                KoalaCore.KoalaHelper.Instance.GetScreenList();
+                foreach (var item in KoalaCore.KoalaHelper.Instance.ScreenList)
+                {
+                    Debug.WriteLine("hz:camera:" + item.camera + " token:" + item.screen_token);
+                }
+            }
+            Channels.Load();
 
-            resetThread = new ResetThread();
-            resetThread.Start();
+            httpServer = new HttpServer();
+            httpServer.Start();
 
             controllers = new List<ChannelController>();
             udpServer = new QRUdpComServer();
@@ -94,7 +115,6 @@ namespace GZSpotGate.ViewModel
             {
                 return;
             }
-            Debug.WriteLine("hz:step4");
             if (e.QRData)
                 controller.OnQRCode(e.Data);
         }
@@ -142,7 +162,7 @@ namespace GZSpotGate.ViewModel
         public new void Dispose()
         {
             udpServer?.Stop();
-            resetThread?.Stop();
+            httpServer?.Stop();
             foreach (var controller in controllers)
             {
                 controller.Dispose();

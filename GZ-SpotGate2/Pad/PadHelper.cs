@@ -12,7 +12,7 @@ namespace GZSpotGate.Pad
 {
     class PadHelper
     {
-        private const int port = 6000;
+        private const int port = 9872;
         /// <summary>
         /// 发送信息至pad
         /// </summary>
@@ -25,13 +25,12 @@ namespace GZSpotGate.Pad
 
             var json = JsonConvert.SerializeObject(message);
             var buffers = json.ToUtf8();
-
             UdpClient udp = new UdpClient();
-
             try
             {
                 IPAddress ipAddress = IPAddress.Parse(padIp);
-                udp.Send(buffers, buffers.Length, new IPEndPoint(ipAddress, port));
+                var remote = new IPEndPoint(ipAddress, port);
+                udp.Send(buffers, buffers.Length, remote);
             }
             catch (Exception ex)
             {

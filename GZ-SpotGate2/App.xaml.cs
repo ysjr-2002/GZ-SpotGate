@@ -25,8 +25,6 @@ namespace GZSpotGate
             if (bnew)
             {
                 System.Net.ServicePointManager.DefaultConnectionLimit = 64;
-                Config.Instance.Read();
-                Channels.Load();
                 var window = new MainWindow();
                 Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
                 System.Windows.Application.Current.MainWindow = window;

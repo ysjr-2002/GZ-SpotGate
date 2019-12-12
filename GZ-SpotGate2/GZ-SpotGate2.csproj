@@ -37,7 +37,13 @@
   <PropertyGroup>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KoalaCore">
+      <HintPath>..\..\Channels\KoalaCore\bin\Debug\KoalaCore.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -102,6 +108,7 @@
     <Compile Include="Core\Channels.cs" />
     <Compile Include="Core\Config.cs" />
     <Compile Include="Core\DataEventArgs.cs" />
+    <Compile Include="Core\FaceCache.cs" />
     <Compile Include="Core\GateHelper.cs" />
     <Compile Include="Core\GateUdpComServer.cs" />
     <Compile Include="Core\LogHelper.cs" />
@@ -112,6 +119,11 @@
     <Compile Include="Face\FaceRecognized.cs" />
     <Compile Include="Face\FaceSocket.cs" />
     <Compile Include="Face\RecognizeState.cs" />
+    <Compile Include="Http\FaceInfo.cs" />
+    <Compile Include="Http\HttpConstrant.cs" />
+    <Compile Include="Http\HttpHandler.cs" />
+    <Compile Include="Http\HttpResult.cs" />
+    <Compile Include="Http\HttpServer.cs" />
     <Compile Include="IDCard\IDModel.cs" />
     <Compile Include="IDCard\IDPackage.cs" />
     <Compile Include="IDCard\IDPhotoHelper.cs" />
@@ -122,6 +134,7 @@
     <Compile Include="Pad\AndroidMessage.cs" />
     <Compile Include="Pad\FeedBack.cs" />
     <Compile Include="Pad\IDType.cs" />
+    <Compile Include="Pad\InOutType.cs" />
     <Compile Include="Pad\IntentType.cs" />
     <Compile Include="Pad\PadHelper.cs" />
     <Compile Include="UCChannelSetting.xaml.cs">
@@ -179,6 +192,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

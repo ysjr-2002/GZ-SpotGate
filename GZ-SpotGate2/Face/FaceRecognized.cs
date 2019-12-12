@@ -69,6 +69,9 @@ namespace GZSpotGate.Face
 
         public int subject_type { get; set; }
 
+        /// <summary>
+        /// 签名字段(票号)
+        /// </summary>
         public string description { get; set; }
 
         public string title { get; set; }

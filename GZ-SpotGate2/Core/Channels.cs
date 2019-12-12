@@ -46,6 +46,8 @@ namespace GZSpotGate.Core
                     pad = item.Element("pad").Value,
                     daycount = item.Element("daycount").Value
                 };
+                //cm.SelectedScreen = KoalaCore.KoalaHelper.Instance.ScreenList.FirstOrDefault(s => s.screen_token == cm.token);
+                //cm.ScreenList = KoalaCore.KoalaHelper.Instance.ScreenList;
                 ChannelList.Add(cm);
             }
         }

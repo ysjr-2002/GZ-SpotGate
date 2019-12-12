@@ -110,13 +110,14 @@ namespace LL.SenicSpot.Gate.Model
             if (IDType == IDType.ID)
                 type = "身份证";
 
+            type = "方式:" + type;
             LogHelper.Log(name);
             LogHelper.Log(type);
             LogHelper.Log(code);
             LogHelper.Log(time);
             LogHelper.Log(verify);
             if (PostMessage.IsEmpty() == false)
-                LogHelper.Log(PostMessage);
+                LogHelper.Log("验票:" + PostMessage);
         }
     }
 }

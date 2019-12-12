@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:GZSpotGate.ViewModel"
     Name="window"
-    Title="道闸控制器"
+    Title="{Binding MyTitle}"
     Width="1000"
     Height="600"
     d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
