@@ -19,6 +19,7 @@ namespace GZSpotGate.Core
         private int pre_in_count = 0;
         private int pre_out_count = 0;
         private UdpClient udp = null;
+        private bool isfirst = false;
 
         private readonly static Dictionary<int, string> gatestate = new Dictionary<int, string>()
         {
@@ -144,20 +145,26 @@ namespace GZSpotGate.Core
 
             LogHelper.Log(gateRemotePoint + $" prein:{pre_in_count} curin:{incount} preout:{pre_out_count} curout:{outcount}");
 
-            if ((pre_in_count != incount && incount > 0) && fire)
+            if (!isfirst && incount > 0)
             {
+                //第一次
                 pre_in_count = incount;
+                isfirst = true;
+            }
 
+            if ((pre_in_count != incount && incount > 0 && pre_in_count > 0) && fire)
+            {
                 _ = new Request().Calc(this.Channel.ChannelVirualIp, "Z");
-
                 var record = new Record()
                 {
                     StatuCode = 0,
                     Channel = this.Channel.name,
-                    Status = "上报通行人次",
+                    Status = $"上报通行人次 prein:{pre_in_count} curin:{incount}",
                     PassTime = DateTime.Now.ToStandard()
                 };
                 LogHelper.Append(record);
+
+                pre_in_count = incount;
             }
             if ((pre_out_count != outcount && outcount > 0) && fire)
             {

@@ -81,6 +81,12 @@ namespace GZSpotGate.Core
             if (uniqueId.IsEmpty())
             {
                 record = Record.GetError(Channel.name, "票号为空");
+                if (checkInType == IDType.BarCode)
+                    record.TypeImageSource = Record.QR_ImageSource;
+                if (checkInType == IDType.ID)
+                    record.TypeImageSource = Record.ID_ImageSource;
+                if (checkInType == IDType.Face)
+                    record.TypeImageSource = Record.FACE_ImageSource;
                 LogHelper.Append(record);
                 return;
             }
