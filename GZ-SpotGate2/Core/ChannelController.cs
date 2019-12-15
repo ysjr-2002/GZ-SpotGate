@@ -63,8 +63,14 @@ namespace GZSpotGate.Core
 
         internal async void OnFaceRecognize(FaceRecognized face)
         {
-            LogHelper.Log("avatar:" + face.person.avatar);
-            await Check(IntentType.In, IDType.Face, face.person.description, face.person.name, face.person.avatar);
+            var avatar = "";
+            if (face.person.avatar.StartsWith("http") == false)
+                avatar = "http://" + Config.Instance.FaceServer + face.person.avatar;
+            else
+                avatar = face.person.avatar;
+
+            LogHelper.Log("avatar:" + avatar);
+            await Check(IntentType.In, IDType.Face, face.person.description, face.person.name, avatar);
         }
 
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
@@ -88,11 +94,21 @@ namespace GZSpotGate.Core
                 if (checkInType == IDType.Face)
                     record.TypeImageSource = Record.FACE_ImageSource;
                 LogHelper.Append(record);
+
+                var temp = new AndroidMessage()
+                {
+                    Line1 = "票号为空",
+                    //Line2 = "票号为空",
+                    CheckInType = checkInType,
+                    IntentType = InOutType.In,
+                    Delay = Config.Instance.PadDelay * 1000,
+                    Avatar = ""
+                };
+                PadHelper.SendToPad(Channel.pad, temp);
                 return;
             }
             Stopwatch sw = Stopwatch.StartNew();
             var content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
-            content.code = 100;
             sw.Stop();
 
             AndroidMessage am = new AndroidMessage
@@ -121,7 +137,6 @@ namespace GZSpotGate.Core
             }
 
             record.Time = sw.ElapsedMilliseconds + "ms";
-            Debug.WriteLine("hz:step4");
             byte personCount = content?.personCount.ToByte() ?? 0;
             if (content?.code == 100)
             {
@@ -148,8 +163,8 @@ namespace GZSpotGate.Core
                 record.StatuCode = 1;
                 record.PostMessage = content.message;
 
-                am.Line1 = In_Failure;
-                am.Line2 = Line2_Failure_Tip;
+                am.Line1 = Line2_Failure_Tip + " " + name;
+                am.Line2 = content.message;
                 am.DayCount = Channel.daycount.ToInt32();
             }
             PadHelper.SendToPad(Channel.pad, am);

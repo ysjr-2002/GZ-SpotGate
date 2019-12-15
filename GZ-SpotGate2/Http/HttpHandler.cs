@@ -104,11 +104,14 @@ namespace HXMansion.Http
                     var controller = MainWindowViewModel.Instance.controllers.First(s => s.Channel.camera == channel.camera);
                     if (controller != null)
                     {
+                        var avatar = "";
+                        if (subject.photos != null && subject.photos.Count > 0)
+                            avatar = subject.photos.First().url;
                         controller.OnFaceRecognize(new GZSpotGate.Face.FaceRecognized
                         {
                             person = new GZSpotGate.Face.Employee
                             {
-                                avatar = "",
+                                avatar = avatar,
                                 name = subject.name,
                                 description = subject.description
                             }
@@ -133,7 +136,7 @@ namespace HXMansion.Http
             }
         }
 
-        private KoalaCore.Subject GetSubject(int subjectId)
+        private KoalaCore.GetSubject GetSubject(int subjectId)
         {
             var index = 1;
             var flag = true;
@@ -153,7 +156,7 @@ namespace HXMansion.Http
             }
             if (flag)
             {
-                var response = JsonConvert.DeserializeObject<KoalaCore.KoalaResponse<KoalaCore.Subject>>(content);
+                var response = JsonConvert.DeserializeObject<KoalaCore.KoalaResponse<KoalaCore.GetSubject>>(content);
                 return response.data;
             }
             else

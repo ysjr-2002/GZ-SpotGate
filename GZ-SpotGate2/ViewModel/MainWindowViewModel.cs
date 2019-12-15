@@ -92,8 +92,8 @@ namespace GZSpotGate.ViewModel
             }
             Channels.Load();
 
-            httpServer = new HttpServer();
-            httpServer.Start();
+            //httpServer = new HttpServer();
+            //httpServer.Start();
 
             controllers = new List<ChannelController>();
             udpServer = new QRUdpComServer();

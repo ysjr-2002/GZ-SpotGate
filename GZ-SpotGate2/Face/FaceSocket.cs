@@ -1,4 +1,5 @@
 ﻿using GZSpotGate.Core;
+using LL.SenicSpot.Gate.Model;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -57,7 +58,16 @@ namespace GZSpotGate.Face
                 var entity = Newtonsoft.Json.JsonConvert.DeserializeObject<FaceRecognized>(e.Data);
                 if (entity.type == RecognizeState.recognized.ToString())
                 {
-                    _callback.Invoke(entity);
+                    var isOk = FaceCache.IsOutInterval(entity.person.id);
+                    if (isOk)
+                    {
+                        _callback.Invoke(entity);
+                    }
+                    else
+                    {
+                        var record = Record.GetError(channel.name, Config.Instance.Interval + "秒内同一人脸 姓名:" + entity.person.name);
+                        LogHelper.Append(record);
+                    }
                 }
             }
         }
