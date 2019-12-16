@@ -97,7 +97,7 @@ namespace GZSpotGate.Core
             else if (type == IDType.Face)
                 return "P";
             else if (type == IDType.ID)
-                return "I";
+                return "P";
 
             throw new ArgumentException("凭证类型参数异常");
         }

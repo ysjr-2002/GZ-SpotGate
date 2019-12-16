@@ -17,8 +17,6 @@ namespace GZSpotGate
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var str = "http://www.google.com.cn";
-
             var bnew = false;
             var appname = System.Windows.Forms.Application.ProductName;
             var mutex = new Mutex(true, appname, out bnew);

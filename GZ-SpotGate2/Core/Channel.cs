@@ -62,6 +62,5 @@ namespace GZSpotGate.Core
             get { return this.GetValue(s => s.wsok); }
             set { this.SetValue(s => s.wsok, value); }
         }
-
     }
 }

@@ -98,7 +98,7 @@ namespace GZSpotGate.Core
                 var temp = new AndroidMessage()
                 {
                     Line1 = "票号为空",
-                    //Line2 = "票号为空",
+                    Line2 = "",
                     CheckInType = checkInType,
                     IntentType = InOutType.In,
                     Delay = Config.Instance.PadDelay * 1000,
@@ -141,6 +141,11 @@ namespace GZSpotGate.Core
             if (content?.code == 100)
             {
                 //listlog.Add(string.Format("请通行->{0}人次", personCount));
+            }
+
+            if (name.Length > 0)
+            {
+                name = name.Substring(0, 1).PadRight(name.Length, '*');
             }
 
             if (intentType == IntentType.In && content?.code == 100)
