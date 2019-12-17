@@ -77,8 +77,8 @@ namespace GZSpotGate.ViewModel
         private async void Onload()
         {
             LogHelper.Log("start up...");
-            Util.runWhenStart(Config.Instance.Auto == "1", "GZSpotGate", System.Windows.Forms.Application.ExecutablePath);
             Config.Instance.Read();
+            Util.runWhenStart(Config.Instance.Auto == "1", "GZSpotGate", System.Windows.Forms.Application.ExecutablePath);
             KoalaCore.KoalaConstrant.Init(Config.Instance.FaceServer);
             var login = await KoalaCore.KoalaHelper.Instance.Login(Config.Instance.Account, Config.Instance.Pwd);
             MyTitle += (login ? "天河潭道闸控制软件-Koala登录成功" : "天河潭道闸控制软件-Koala登录失败");
