@@ -78,6 +78,7 @@ namespace GZSpotGate.ViewModel
         {
             LogHelper.Log("start up...");
             Config.Instance.Read();
+            Channels.Load();
             Util.runWhenStart(Config.Instance.Auto == "1", "GZSpotGate", System.Windows.Forms.Application.ExecutablePath);
             KoalaCore.KoalaConstrant.Init(Config.Instance.FaceServer);
             var login = await KoalaCore.KoalaHelper.Instance.Login(Config.Instance.Account, Config.Instance.Pwd);
@@ -90,7 +91,6 @@ namespace GZSpotGate.ViewModel
                     Debug.WriteLine("hz:camera:" + item.camera + " token:" + item.screen_token);
                 }
             }
-            Channels.Load();
 
             //httpServer = new HttpServer();
             //httpServer.Start();

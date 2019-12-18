@@ -1,126 +1,126 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <channels>
   <!--通道1-->
   <channel>
     <no>1</no>
-    <name>通道1</name>
+    <name>主入口左1</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver>172.21.5.17</comserver>
-    <pad>192.168.31.254</pad>
-    <faceserver>172.21.5.190</faceserver>
+    <channelvirtualip>172.21.4.110</channelvirtualip>
+    <comserver>172.21.5.13</comserver>
+    <pad>172.21.5.1</pad>
+    <faceserver>172.21.5.50</faceserver>
     <camera>rtsp://172.21.5.1:8080/h264_ulaw.sdp</camera>
-    <daycount>0</daycount>
+    <daycount>137</daycount>
   </channel>
   <channel>
     <no>2</no>
-    <name>通道2</name>
+    <name>主入口左2</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.108</channelvirtualip>
+    <comserver>172.21.5.14</comserver>
+    <pad>172.21.5.2</pad>
+    <faceserver>172.21.5.50</faceserver>
+    <camera>rtsp://172.21.5.2:8080/h264_ulaw.sdp</camera>
+    <daycount>187</daycount>
   </channel>
   <channel>
     <no>3</no>
-    <name>通道3</name>
+    <name>主入口左3</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.111</channelvirtualip>
+    <comserver>172.21.5.15</comserver>
+    <pad>172.21.5.3</pad>
+    <faceserver>172.21.5.50</faceserver>
+    <camera>rtsp://172.21.5.3:8080/h264_ulaw.sdp</camera>
+    <daycount>189</daycount>
   </channel>
   <channel>
     <no>4</no>
-    <name>通道4</name>
+    <name>主入口左4</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.104</channelvirtualip>
+    <comserver>172.21.5.16</comserver>
+    <pad>172.21.5.4</pad>
+    <faceserver>172.21.5.51</faceserver>
+    <camera>rtsp://172.21.5.4:8080/h264_ulaw.sdp</camera>
+    <daycount>103</daycount>
   </channel>
   <channel>
     <no>5</no>
-    <name>通道5</name>
+    <name>次入口左1</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.103</channelvirtualip>
+    <comserver>172.21.5.17</comserver>
+    <pad>172.21.5.5</pad>
+    <faceserver>172.21.5.51</faceserver>
+    <camera>rtsp://172.21.5.5:8080/h264_ulaw.sdp</camera>
+    <daycount>2</daycount>
   </channel>
   <channel>
     <no>6</no>
-    <name>通道6</name>
+    <name>次入口左2</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.102</channelvirtualip>
+    <comserver>172.21.5.18</comserver>
+    <pad>172.21.5.6</pad>
+    <faceserver>172.21.5.51</faceserver>
+    <camera>rtsp://172.21.5.6:8080/h264_ulaw.sdp</camera>
+    <daycount>3</daycount>
   </channel>
   <channel>
     <no>7</no>
-    <name>通道7</name>
+    <name>梦草原</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.105</channelvirtualip>
+    <comserver>172.21.5.19</comserver>
+    <pad>172.21.5.7</pad>
+    <faceserver>172.21.5.52</faceserver>
+    <camera>rtsp://172.21.5.7:8080/h264_ulaw.sdp</camera>
+    <daycount>3</daycount>
   </channel>
   <channel>
     <no>8</no>
-    <name>通道8</name>
+    <name>银河宫</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.107</channelvirtualip>
+    <comserver>172.21.5.20</comserver>
+    <pad>172.21.5.11</pad>
+    <faceserver>172.21.5.53</faceserver>
+    <camera>rtsp://172.21.5.11:8080/h264_ulaw.sdp</camera>
+    <daycount>1</daycount>
   </channel>
   <channel>
     <no>9</no>
-    <name>通道9</name>
+    <name>旱洞出口</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.109</channelvirtualip>
+    <comserver>172.21.5.21</comserver>
+    <pad>172.21.5.9</pad>
+    <faceserver>172.21.5.52</faceserver>
+    <camera>rtsp://172.21.5.9:8080/h264_ulaw.sdp</camera>
+    <daycount>2</daycount>
   </channel>
   <channel>
     <no>10</no>
-    <name>通道10</name>
+    <name>同心桥</name>
     <!--通道虚拟IP，因为验证需要-->
-    <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <channelvirtualip>172.21.4.106</channelvirtualip>
+    <comserver>172.21.5.22</comserver>
+    <pad>172.21.5.10</pad>
+    <faceserver>172.21.5.53</faceserver>
+    <camera>rtsp://172.21.5.10:8080/h264_ulaw.sdp</camera>
+    <daycount>60</daycount>
   </channel>
   <channel>
     <no>11</no>
-    <name>通道11</name>
+    <name>游船码头</name>
     <!--通道虚拟IP，因为验证需要-->
     <channelvirtualip>172.21.4.100</channelvirtualip>
-    <comserver></comserver>
-    <pad></pad>
-    <faceserver></faceserver>
-    <camera></camera>
-    <daycount>0</daycount>
+    <comserver>172.21.5.23</comserver>
+    <pad>172.21.5.8</pad>
+    <faceserver>172.21.5.52</faceserver>
+    <camera>rtsp://172.21.5.8:8080/h264_ulaw.sdp</camera>
+    <daycount>6</daycount>
   </channel>
   <channel>
     <no>12</no>
