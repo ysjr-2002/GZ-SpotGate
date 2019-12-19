@@ -151,7 +151,7 @@ namespace GZSpotGate.Core
             if (intentType == IntentType.In && content?.code == 100)
             {
                 record.StatuCode = 0;
-                record.PostMessage = content?.message;
+                record.Status = content?.message;
                 Channel.daycount = (Channel.daycount.ToInt32() + 1).ToString();
                 Channels.Save();
                 //GateHelper.Open(Channel.comserver);
@@ -166,7 +166,7 @@ namespace GZSpotGate.Core
             {
                 //禁止通行
                 record.StatuCode = 1;
-                record.PostMessage = content.message;
+                record.Status = content.message;
 
                 am.Line1 = Line2_Failure_Tip + " " + name;
                 am.Line2 = content.message;

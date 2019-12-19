@@ -28,6 +28,15 @@ namespace GZSpotGate.Core
             FeedBack feedback = null;
             try
             {
+                if (content.IsEmpty())
+                {
+                    feedback = new FeedBack
+                    {
+                        code = -2,
+                        message = "请求服务器失败"
+                    };
+                    return feedback;
+                }
                 feedback = Newtonsoft.Json.JsonConvert.DeserializeObject<FeedBack>(content);
             }
             catch (Exception ex)

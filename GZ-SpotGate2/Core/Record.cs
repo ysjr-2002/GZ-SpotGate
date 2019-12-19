@@ -48,8 +48,6 @@ namespace LL.SenicSpot.Gate.Model
         /// </summary>
         public string TypeImageSource { get; set; }
 
-        public string PostMessage { get; set; }
-
         public BitmapSource FaceImage { get; set; }
 
         public static Record GetQRRecord(string channelname)
@@ -116,8 +114,8 @@ namespace LL.SenicSpot.Gate.Model
             LogHelper.Log(code);
             LogHelper.Log(time);
             LogHelper.Log(verify);
-            if (PostMessage.IsEmpty() == false)
-                LogHelper.Log("验票:" + PostMessage);
+            if (Status.IsEmpty() == false)
+                LogHelper.Log("验票:" + Status);
         }
     }
 }
