@@ -106,6 +106,8 @@ namespace GZSpotGate.ViewModel
                 controller.Start();
                 controllers.Add(controller);
             }
+
+            controllers.First().OnReaderID(new IDModel { IDCard = "123", Name = "ysj" });
         }
 
         private void UdpServer_OnMessageInComming(object sender, DataEventArgs e)
