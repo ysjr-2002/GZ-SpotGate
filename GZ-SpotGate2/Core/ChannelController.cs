@@ -76,13 +76,13 @@ namespace GZSpotGate.Core
         private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
         {
             Record record = null;
-            var error = SecurityHelper.IsAuth();
-            if (!error.IsEmpty())
-            {
-                record = Record.GetError(Channel.name, error);
-                LogHelper.Append(record);
-                return;
-            }
+            //var error = SecurityHelper.IsAuth();
+            //if (!error.IsEmpty())
+            //{
+            //    record = Record.GetError(Channel.name, error);
+            //    LogHelper.Append(record);
+            //    return;
+            //}
 
             if (uniqueId.IsEmpty())
             {
