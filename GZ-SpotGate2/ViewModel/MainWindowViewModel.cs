@@ -165,9 +165,12 @@ namespace GZSpotGate.ViewModel
         {
             udpServer?.Stop();
             httpServer?.Stop();
-            foreach (var controller in controllers)
+            if (controllers != null)
             {
-                controller.Dispose();
+                foreach (var controller in controllers)
+                {
+                    controller.Dispose();
+                }
             }
         }
     }

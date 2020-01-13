@@ -53,12 +53,12 @@ namespace GZSpotGate.Core
 
         internal async void OnQRCode(string barCode)
         {
-            await Check(IntentType.In, IDType.BarCode, barCode);
+            await Check(IntentType.In, IDType.BarCode, barCode, 1);
         }
 
         internal async void OnReaderID(IDModel model)
         {
-            await Check(IntentType.In, IDType.ID, model.IDCard, model.Name);
+            await Check(IntentType.In, IDType.ID, model.IDCard, 1, model.Name);
         }
 
         internal async void OnFaceRecognize(FaceRecognized face)
@@ -69,20 +69,19 @@ namespace GZSpotGate.Core
             else
                 avatar = face.person.avatar;
 
-            LogHelper.Log("avatar:" + avatar);
-            await Check(IntentType.In, IDType.Face, face.person.description, face.person.name, avatar);
+            await Check(IntentType.In, IDType.Face, face.person.description, face.person.subject_type, face.person.name, avatar);
         }
 
-        private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, string name = "", string avatar = "")
+        private async Task Check(IntentType intentType, IDType checkInType, string uniqueId, int subjecttype, string name = "", string avatar = "")
         {
             Record record = null;
-            //var error = SecurityHelper.IsAuth();
-            //if (!error.IsEmpty())
-            //{
-            //    record = Record.GetError(Channel.name, error);
-            //    LogHelper.Append(record);
-            //    return;
-            //}
+            var error = SecurityHelper.IsAuth();
+            if (!error.IsEmpty())
+            {
+                record = Record.GetError(Channel.name, error);
+                LogHelper.Append(record);
+                return;
+            }
 
             if (uniqueId.IsEmpty())
             {
@@ -108,7 +107,19 @@ namespace GZSpotGate.Core
                 return;
             }
             Stopwatch sw = Stopwatch.StartNew();
-            var content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
+            FeedBack content = null;
+            if (checkInType == IDType.Face && (subjecttype == 0 || subjecttype == 2))
+            {
+                content = new FeedBack
+                {
+                    code = 100,
+                    message = "验票通过"
+                };
+            }
+            else
+            {
+                content = await request.CheckIn(this.Channel.ChannelVirualIp, checkInType, uniqueId);
+            }
             sw.Stop();
 
             AndroidMessage am = new AndroidMessage
