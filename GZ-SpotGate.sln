@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDemo", "FaceDemo\FaceDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZ-SpotGate2", "GZ-SpotGate2\GZ-SpotGate2.csproj", "{3E695528-FE9A-4C07-9FAB-C4707EE8C268}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WS", "WS\WS.csproj", "{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,14 @@ Global
 		{3E695528-FE9A-4C07-9FAB-C4707EE8C268}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E695528-FE9A-4C07-9FAB-C4707EE8C268}.Release|x86.ActiveCfg = Release|Any CPU
 		{3E695528-FE9A-4C07-9FAB-C4707EE8C268}.Release|x86.Build.0 = Release|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Debug|x86.Build.0 = Debug|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Release|x86.ActiveCfg = Release|Any CPU
+		{08E35E7E-65D7-4A3F-857F-5EDD326A8ECC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
