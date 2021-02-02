@@ -13,7 +13,8 @@ namespace WS
         static void Main(string[] args)
         {
             var lines = System.IO.File.ReadAllLines("cfg.txt");
-            var encode = System.Web.HttpUtility.UrlEncode(lines[1]);
+            var rtsp = lines[1];
+            var encode = System.Web.HttpUtility.UrlEncode(rtsp);
             var url = lines[0] + "?url=" + encode;
             ws = new WebSocket(url);
             ws.OnOpen += Ws_OnOpen;
